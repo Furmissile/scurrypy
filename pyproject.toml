@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pysquirrel"
+name = "scurrypy"
 version = "0.1.0"
 
 description = "Discord API Wrapper in Python"

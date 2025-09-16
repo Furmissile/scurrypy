@@ -1,4 +1,5 @@
-site_name: PySquirrel
+site_name: ScurryPy
+site_url: https://furmissile.github.io/scurrypy/
 
 theme: # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#changing-the-colors
   name: material
