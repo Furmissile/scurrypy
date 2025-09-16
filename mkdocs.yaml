@@ -1,0 +1,109 @@
+site_name: PySquirrel
+
+theme: # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#changing-the-colors
+  name: material
+  font:
+    text: Source Serif Pro
+  features:
+    - content.code.copy
+    - navigation.sections
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: green
+      accent: deep purple
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: deep purple # header, the sidebar, text links, etc.
+      accent: green # interactive components
+      toggle: # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#color-palette-toggle
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+extra:
+  generator: false
+
+markdown_extensions:
+  - pymdownx.superfences
+  - admonition
+  - toc:
+      permalink: true
+
+extra_css:
+  - css/custom_color.css
+
+copyright: Copyright &copy; 2025 Furmissile
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_section_style: list
+            inherited_members: true
+            merge_init_into_class: true
+            show_symbol_type_toc: true
+            show_inheritance_diagram: true
+            show_root_heading: true
+            show_root_full_path: false
+            show_signature_annotations: true
+            show_signature_type_parameters: true
+            show_source: false
+            show_symbol_type_heading: true
+            docstring_style: google
+            members_order: source
+            filters:
+              - "!from_dict"
+              - "!type"
+              - "!^_"
+
+watch:
+  - discord
+
+nav:
+  - Home: index.md
+  - Getting Started: getting_started.md
+  - Examples: examples.md
+  - API Reference:
+    - Overview: api/index.md
+    - Client: api/client.md
+    - Intents: api/intents.md
+    - Commands: api/commands.md
+    - UI Components: api/ui_components.md
+    - Components: api/components.md
+    - Message: api/message.md
+    - Models: api/models.md
+    - Role: api/role.md
+    - Embed (Legacy): api/embed.md
+  - Resources:
+    - Overview: resources/index.md
+    - Application: resources/application.md
+    - Bot Emojis: resources/bot_emojis.md
+    - Channel: resources/channel.md
+    - Guild: resources/guild.md
+    - Interaction: resources/interaction.md
+    - Message: resources/message.md
+    - User: resources/user.md
+  - Events:
+    - Overview: events/index.md
+    - Interaction: events/interaction.md
+    - Message: events/message.md
+    - Channel: events/channel.md
+    - Guild: events/guild.md
+    - Reactions: events/reaction.md
+    - Ready: events/ready.md
+  - Internals:
+    - Overview: internals/index.md
+    - Data Model: internals/model.md
+    - HTTP: internals/http.md
+    - Dispatcher: internals/dispatchers.md
+    - Gateway: internals/gateway.md
+    - Logger: internals/logger.md
+    - Discord Error: internals/error.md
+  - Legacy Examples: legacy_examples.md
