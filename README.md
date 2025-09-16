@@ -1,4 +1,7 @@
 # __Welcome to ScurryPy__
+
+[![PyPI version](https://badge.fury.io/py/scurrypy.svg)](https://badge.fury.io/py/scurrypy)
+
 Yet another Discord API wrapper in Python!
 
 While this wrapper is mainly used for various squirrel-related shenanigans, it can also be used for more generic bot purposes.

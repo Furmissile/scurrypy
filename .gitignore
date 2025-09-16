@@ -2,4 +2,6 @@ __pycache__/
 docs/
 misc/
 site/
+build/
+dist/
 *.egg-info
