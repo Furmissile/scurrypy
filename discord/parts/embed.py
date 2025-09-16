@@ -73,7 +73,7 @@ class EmbedBuilder(DataModel):
             hex (str): color as a hex code (format: #FFFFFF)
 
         Returns:
-            (Embed): self
+            (EmbedBuilder): self
         """
         self.color=int(hex.strip('#'), 16)
         return self
@@ -85,7 +85,7 @@ class EmbedBuilder(DataModel):
             user (UserModel): the user model
 
         Returns:
-            (Embed): self
+            (EmbedBuilder): self
         """
         self.author = _EmbedAuthor(
             name=user.username,
@@ -100,7 +100,7 @@ class EmbedBuilder(DataModel):
             url (str): attachment://<file> scheme or http(s) URL
 
         Returns:
-            (Embed): self
+            (EmbedBuilder): self
         """
         self.image = _EmbedImage(url=url)
         return self
@@ -112,7 +112,7 @@ class EmbedBuilder(DataModel):
             url (str): attachment://<file> scheme or http(s) URL
 
         Returns:
-            (Embed): self
+            (EmbedBuilder): self
         """
         self.thumbnail = _EmbedThumbnail(url=url)
         return self
@@ -125,7 +125,7 @@ class EmbedBuilder(DataModel):
             icon_url (str, optional): attachment://<file> scheme or http(s) URL.
 
         Returns:
-            (Embed): self
+            (EmbedBuilder): self
         """
         self.footer = _EmbedFooter(text=text, icon_url=icon_url)
         return self
@@ -139,7 +139,7 @@ class EmbedBuilder(DataModel):
             is_inline (bool): if this field should be inlined
 
         Returns:
-            (Embed): self
+            (EmbedBuilder): self
         """
         self.fields.append(_EmbedField(name=name, value=value, inline=is_inline))
         return self
@@ -148,7 +148,7 @@ class EmbedBuilder(DataModel):
         """Set this embed's timestamp.
 
         Returns:
-            (Embed): self
+            (EmbedBuilder): self
         """
         self.timestamp = datetime.now(timezone.utc).isoformat()
         return self
