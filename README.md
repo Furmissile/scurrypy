@@ -72,4 +72,4 @@ bot.run()
 ```
 
 ## Like what you see?
-See the docs for more!
+See the [docs](https://furmissile.github.io/scurrypy) for more!
