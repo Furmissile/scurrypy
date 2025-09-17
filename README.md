@@ -12,12 +12,19 @@ While this wrapper is mainly used for various squirrel-related shenanigans, it c
 * Supports both legacy and new features
 * Respects Discord's rate limits
 
-## Something to consider...
-This is an early version — feedback, ideas, and contributions are welcome!
-With that said, there will be bumps in the road so expect bugs and other flaws!
+## Something things to consider...
+* This is an early version — feedback, ideas, and contributions are welcome! With that said, there will be bumps in the road so expect bugs and other flaws!
+* Some features are not yet supported, such as sharding and automod, while others, like voice, will never be supported. While this library can handle many of your basic needs, common features such as sharding or auto-mod actions are not yet implemented. See the [license](LICENSE) for details on usage.
+
 
 ## Getting Started
 While this tab shows up in the docs, here are some complete examples where all you need to do is pop in your bot's credentials!
+
+## Installation
+To install the ScurryPy package, run:
+```bash
+pip install scurrypy
+```
 
 ## Minimal Slash Command
 The following demonstrates building and responding to a slash command.

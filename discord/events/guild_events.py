@@ -1,11 +1,10 @@
 from dataclasses import dataclass
-from typing import Optional
-from ..model import DataModel
+from .event_model import EventModel
 from ..models import MemberModel
 from ..resources.channel import Channel
 
 @dataclass
-class GuildEvent(DataModel):
+class GuildEvent(EventModel):
     """Base guild event."""
     joined_at: str
     """ISO8601 timestamp of when app joined the guild."""
@@ -21,9 +20,6 @@ class GuildEvent(DataModel):
 
     channels: list[Channel]
     """Channels in the guild."""
-
-    unavailable: Optional[bool]
-    """If the guild is unavailable due to an outage."""
 
 class GuildCreateEvent(GuildEvent):
     """Received when the bot has joined a guild."""

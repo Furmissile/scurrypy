@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from ..model import DataModel
+from ..config import BaseConfig
 
 from ..resources.interaction import Interaction
 
@@ -140,6 +141,9 @@ class InteractionEvent(DataModel):
 
     interaction: Interaction
     """Interaction resource object. See [`Interaction`][discord.resources.interaction.Interaction]."""
+
+    config: BaseConfig
+    """User-defined bot config for persistent data."""
 
     data: Optional[ApplicationCommandData | MessageComponentData | ModalData] = None
     """Interaction response data."""

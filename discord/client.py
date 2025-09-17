@@ -5,6 +5,7 @@ from .gateway import GatewayClient
 from .http import HTTPClient
 from .intents import Intents
 from .error import DiscordError
+from .config import BaseConfig
 
 from .resources.guild import Guild
 from .resources.channel import Channel
@@ -28,6 +29,7 @@ class Client:
         token: str,
         application_id: int,
         intents: int = Intents.DEFAULT,
+        config: BaseConfig = None,
         debug_mode: bool = False,
         prefix = None,
         quiet: bool = False
@@ -43,6 +45,7 @@ class Client:
         """
         self.token = token
         self.application_id = application_id
+        self.config = config
 
         self._logger = Logger(debug_mode, quiet)
         self._ws = GatewayClient(token, intents, self._logger)
@@ -51,15 +54,16 @@ class Client:
         if prefix and (intents & Intents.MESSAGE_CONTENT == 0):
             self._logger.log_warn('Prefix set without message content enabled.')
 
-        self.dispatcher = EventDispatcher(self.application_id, self._http, self._logger)
-        self.prefix_dispatcher = PrefixDispatcher(self._http, self._logger, prefix)
-        self.command_dispatcher = CommandDispatcher(self.application_id, self._http, self._logger)
+        self.dispatcher = EventDispatcher(self.application_id, self._http, self._logger, config)
+        self.prefix_dispatcher = PrefixDispatcher(self._http, self._logger, prefix, config)
+        self.command_dispatcher = CommandDispatcher(self.application_id, self._http, self._logger, config)
 
         self._global_commands = [] # SlashCommand
         self._guild_commands = {} # {guild_id : [commands], ...}
 
         self._is_set_up = False
         self._setup_hooks = []
+        self._shutdown_hooks = []
         
         self.emojis = BotEmojis(self._http, self.application_id)
 
@@ -124,6 +128,15 @@ class Client:
             func (callable): callback to the setup function
         """
         self._setup_hooks.append(func)
+
+    def shutdown_hook(self, func):
+        """Decorator registers a shutdown hook.
+            (Runs once before the bot exits the loop)
+
+        Args:
+            func (callable): callback to the shutdown function
+        """
+        self._shutdown_hooks.append(func)
 
     def application_from_id(self, application_id: int):
         """Creates an interactable application resource.
@@ -265,7 +278,7 @@ class Client:
                     if self._setup_hooks:
                         for hook in self._setup_hooks:
                             self._logger.log_info(f"Setting hook {hook.__name__}")
-                            await hook()
+                            await hook(self)
                         self._logger.log_high_priority("Hooks set up.")
 
                     # register GUILD commands
@@ -293,8 +306,25 @@ class Client:
                 self._logger.log_error(f"Unspecified Error Type {type(e).__name__} - {e}")
                 break
             finally:
-                await self._ws.close()
-                await self._http.close_session()
+                # Run hooks (with safe catching)
+                for hook in self._shutdown_hooks:
+                    try:
+                        self._logger.log_info(f"Executing shutdown hook {hook.__name__}")
+                        await hook(self)
+                    except Exception as e:
+                        self._logger.log_error(f"{type(e).__name__}: {e}")
+
+                # Always close resources
+                try:
+                    await self._ws.close()
+                except Exception as e:
+                    self._logger.log_warn(f"WebSocket close failed: {e}")
+
+                try:
+                    await self._http.close_session()
+                except Exception as e:
+                    self._logger.log_warn(f"HTTP session close failed: {e}")
+
 
     def run(self):
         """Starts the bot.

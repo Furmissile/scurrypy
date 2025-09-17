@@ -2,6 +2,7 @@ import asyncio
 
 from ..http import HTTPClient
 from ..logger import Logger
+from ..config import BaseConfig
 
 from ..events.interaction_events import ApplicationCommandData, MessageComponentData, ModalData, InteractionEvent
 from ..resources.interaction import Interaction, InteractionDataTypes
@@ -28,7 +29,7 @@ class CommandDispatcher:
     }
     """Maps [`InteractionTypes`][discord.dispatch.command_dispatcher.InteractionTypes] to their respective dataclass."""
 
-    def __init__(self, application_id: int, http: HTTPClient, logger: Logger):
+    def __init__(self, application_id: int, http: HTTPClient, logger: Logger, config: BaseConfig):
         self.application_id = application_id
         """Bot's application ID."""
 
@@ -37,6 +38,8 @@ class CommandDispatcher:
 
         self._logger = logger
         """Logger instance to log events."""
+
+        self.config = config
 
         self._component_handlers = {}
         """Mapping of component custom IDs to handler."""
@@ -114,7 +117,7 @@ class CommandDispatcher:
         Args:
             data (dict): interaction data
         """
-        event = InteractionEvent(interaction=Interaction.from_dict(data, self._http))
+        event = InteractionEvent(config=self.config, interaction=Interaction.from_dict(data, self._http))
 
         event_data_obj = self.RESOURCE_MAP.get(event.interaction.type)
 

@@ -71,6 +71,7 @@ nav:
   - Home: index.md
   - Getting Started: getting_started.md
   - Examples: examples.md
+  - Advanced Examples: advanced_examples.md
   - API Reference:
     - Overview: api/index.md
     - Client: api/client.md
@@ -108,3 +109,4 @@ nav:
     - Logger: internals/logger.md
     - Discord Error: internals/error.md
   - Legacy Examples: legacy_examples.md
+  - Migrations: migrations.md

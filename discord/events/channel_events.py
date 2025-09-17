@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 from typing import Optional
-from ..model import DataModel
+from .event_model import EventModel
 
 @dataclass
-class GuildChannelEvent(DataModel):
+class GuildChannelEvent(EventModel):
     """Base guild channel event."""
+
     id: int
     """ID of the guild channel."""
 
@@ -45,7 +46,7 @@ class GuildChannelDeleteEvent(GuildChannelEvent):
     pass
 
 @dataclass
-class ChannelPinsUpdateEvent(DataModel):
+class ChannelPinsUpdateEvent(EventModel):
     """Pin update event."""
     channel_id: int
     guild_id: Optional[int]

@@ -1,5 +1,6 @@
 from ..http import HTTPClient
 from ..logger import Logger
+from ..config import BaseConfig
 
 from ..events.message_events import MessageCreateEvent
 
@@ -8,7 +9,7 @@ from ..models.member import MemberModel
 
 class PrefixDispatcher:
     """Handles text-based command messages that start with a specific prefix."""
-    def __init__(self, http: HTTPClient, logger: Logger, prefix: str):
+    def __init__(self, http: HTTPClient, logger: Logger, prefix: str, config: BaseConfig):
         self._http = http
         """HTTP session for requests."""
 
@@ -17,6 +18,9 @@ class PrefixDispatcher:
 
         self.prefix = prefix
         """User-defined command prefix."""
+
+        self.config = config
+        """User-defined bot config for persistent data."""
 
         self._handlers = {}
         """Mapping of command prefix names to handler"""
@@ -37,6 +41,7 @@ class PrefixDispatcher:
             data (dict): Discord's raw event payload
         """
         event = MessageCreateEvent(
+            config=self.config,
             guild_id=data.get('guild_id'),
             message=Message.from_dict(data, self._http),
             member=MemberModel.from_dict(data.get('member'))
