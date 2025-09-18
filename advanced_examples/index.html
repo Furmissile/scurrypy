@@ -369,6 +369,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#bot-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bot Organization
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1401,6 +1410,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#bot-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bot Organization
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1432,6 +1450,7 @@ between setup and <code>bot.run()</code>.</p>
 <hr />
 <ul>
 <li><a href="#adding-persistent-data">Adding Persistent Data</a></li>
+<li><a href="#bot-organization">Bot Organization</a></li>
 </ul>
 <h2 id="adding-persistent-data">Adding Persistent Data<a class="headerlink" href="#adding-persistent-data" title="Permanent link">&para;</a></h2>
 <hr />
@@ -1461,6 +1480,33 @@ between setup and <code>bot.run()</code>.</p>
 <p>While <code>.config</code> can technically be anything, it is recommended to use <code>discord.BaseConfig</code> and the dataclass decorator.</p>
 <p>Dataclasses make accessing fields more object-like instead of dict-like.</p>
 </div>
+<h2 id="bot-organization">Bot Organization<a class="headerlink" href="#bot-organization" title="Permanent link">&para;</a></h2>
+<hr />
+<p>While these examples will always use the global namespace for demonstration purposes, there's nothing stopping you from integrating <strong>ScurryPy</strong> into other classes through either inheritance or composition!</p>
+<p>Demonstrates using <a href="../api/client/#discord.client.Client"><code>Client</code></a> through inheritance:
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MyBot</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="c1"># kwargs becomes Client args</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prefix_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Pong!&quot;</span><span class="p">)</span>
+
+<span class="n">bot</span> <span class="o">=</span> <span class="n">MyBot</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="n">bot</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+Demonstrates using <a href="../api/client/#discord.client.Client"><code>Client</code></a> through composition:
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MyBot</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="c1"># your client args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">prefix_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Pong!&quot;</span><span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">MyBot</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div></p>
 
 
 
