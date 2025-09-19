@@ -8,6 +8,9 @@ theme: # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#
   features:
     - content.code.copy
     - navigation.sections
+    - header.repo
+  icon:
+    repo: fontawesome/brands/github
   palette:
     # Palette toggle for light mode
     - scheme: default
@@ -24,6 +27,8 @@ theme: # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#
       toggle: # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#color-palette-toggle
         icon: material/weather-sunny
         name: Switch to light mode
+
+repo_url: https://github.com/Furmissile/scurrypy
 
 extra:
   generator: false
@@ -102,7 +107,7 @@ nav:
     - Ready: events/ready.md
   - Internals:
     - Overview: internals/index.md
-    - Data Model: internals/model.md
+    - Base Models: internals/model.md
     - HTTP: internals/http.md
     - Dispatcher: internals/dispatchers.md
     - Gateway: internals/gateway.md
