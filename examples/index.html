@@ -408,6 +408,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#responding-to-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Responding to an Event
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#adding-attachments" class="md-nav__link">
     <span class="md-ellipsis">
       Adding Attachments
@@ -1507,6 +1516,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#responding-to-an-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Responding to an Event
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#adding-attachments" class="md-nav__link">
     <span class="md-ellipsis">
       Adding Attachments
@@ -1553,6 +1571,7 @@ between setup and <code>bot.run()</code>.</p>
 <li><a href="#building-and-responding-to-components">Building and Responding to Components</a></li>
 <li><a href="#building-and-responding-to-select-components">Building and Responding to Select Components</a></li>
 <li><a href="#building-and-responding-to-a-modal">Building and responding to a Modal</a></li>
+<li><a href="#responding-to-an-event">Responding to an Event</a></li>
 <li><a href="#adding-attachments">Adding Attachments</a></li>
 </ul>
 <h2 id="minimal-slash-command">Minimal Slash Command<a class="headerlink" href="#minimal-slash-command" title="Permanent link">&para;</a></h2>
@@ -1563,7 +1582,7 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrate the minimal slash command!&#39;</span><span class="p">),</span>
     <span class="n">guild_id</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be a guild ID your bot is in!</span>
 <span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">member</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition tip">
@@ -1580,7 +1599,7 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Demonstrate using Discord&#39;s new component system!&quot;</span><span class="p">),</span>
     <span class="n">guild_id</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be a guild ID your bot is in!</span>
 <span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
         <span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">()</span>
             <span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
@@ -1597,13 +1616,13 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
 <p>Demonstrates building a button and responding to a user pressing it.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
-<span class="nd">@bot</span><span class="o">.</span><span class="n">component</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">route</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="nd">@bot</span><span class="o">.</span><span class="n">component</span><span class="p">(</span><span class="s1">&#39;best_custom_id&#39;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">route</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="n">adj</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;wonderous&#39;</span><span class="p">,</span> <span class="s1">&#39;beautiful&#39;</span><span class="p">,</span> <span class="s1">&#39;charming&#39;</span><span class="p">,</span> <span class="s1">&#39;vibrant&#39;</span><span class="p">,</span> <span class="s1">&#39;sinister&#39;</span><span class="p">])</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
         <span class="n">message</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Hello *</span><span class="si">{</span><span class="n">adj</span><span class="si">}</span><span class="s1">* world!&#39;</span><span class="p">)</span>
             <span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">ActionRow</span><span class="p">()</span>
-                <span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;Primary&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Press me again!&#39;</span><span class="p">,</span> <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;route&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;❤️‍🔥&#39;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;Primary&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Press me again!&#39;</span><span class="p">,</span> <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;best_custom_id&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;❤️‍🔥&#39;</span><span class="p">)</span>
             <span class="p">)</span>
     <span class="p">)</span>
 
@@ -1611,11 +1630,11 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrate using components!&#39;</span><span class="p">),</span> 
     <span class="n">guild_id</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be a guild ID your bot is in!</span>
 <span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
         <span class="n">message</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span>
             <span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">ActionRow</span><span class="p">()</span>
-                <span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;Primary&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Press me!&#39;</span><span class="p">,</span> <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;route&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;❤️&#39;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;Primary&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Press me!&#39;</span><span class="p">,</span> <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;best_custom_id&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;❤️&#39;</span><span class="p">)</span>
             <span class="p">)</span>
     <span class="p">)</span>
 </code></pre></div>
@@ -1626,7 +1645,7 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrate the select components!&#39;</span><span class="p">),</span> 
     <span class="n">guild_id</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be a guild ID your bot is in!</span>
 <span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
         <span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">(</span><span class="s2">&quot;Select an option:&quot;</span><span class="p">)</span>
             <span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">ActionRow</span><span class="p">()</span>
@@ -1640,14 +1659,14 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="p">)</span>
 
 <span class="nd">@bot</span><span class="o">.</span><span class="n">component</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_string_select</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_string_select</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;You selected option: **</span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">**!&#39;</span><span class="p">)</span>
 </code></pre></div></p>
 <h2 id="building-and-responding-to-a-modal">Building and responding to a Modal<a class="headerlink" href="#building-and-responding-to-a-modal" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Demonstrates using the modal feature and extracting the user's responses.
 <div class="highlight"><pre><span></span><code><span class="nd">@bot</span><span class="o">.</span><span class="n">component</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">modal_one</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">modal_one</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_modal_data</span><span class="p">(</span><span class="s1">&#39;bug_select&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">details</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_modal_data</span><span class="p">(</span><span class="s1">&#39;bug_explanation&#39;</span><span class="p">)</span>
 
@@ -1660,7 +1679,7 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrate the modal request/response!&#39;</span><span class="p">),</span>
     <span class="n">guild_id</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be a guild ID your bot is in!</span>
 <span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="n">select_label</span> <span class="o">=</span> <span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;What&#39;s your favorite bug?&quot;</span><span class="p">)</span>
         <span class="o">.</span><span class="n">string_select</span><span class="p">(</span>
             <span class="n">discord</span><span class="o">.</span><span class="n">StringSelect</span><span class="p">(</span><span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;bug_select&#39;</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Choose...&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1689,6 +1708,14 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
         <span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="n">inp_label</span><span class="p">)</span>
     <span class="p">)</span>
 </code></pre></div></p>
+<h2 id="responding-to-an-event">Responding to an Event<a class="headerlink" href="#responding-to-an-event" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Demonstrates responding to a reaction added to one of the bot's messages.
+<div class="highlight"><pre><span></span><code><span class="nd">@bot</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s2">&quot;MESSAGE_REACTION_ADD&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_reaction_add</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">ReactionAddEvent</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">message_author_id</span> <span class="o">==</span> <span class="n">bot</span><span class="o">.</span><span class="n">application_id</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">message_from_id</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">channel_id</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">message_id</span><span class="p">)</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;Love ya too!&#39;</span><span class="p">)</span>
+</code></pre></div></p>
 <h2 id="adding-attachments">Adding Attachments<a class="headerlink" href="#adding-attachments" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Demonstrates adding multiple attachments to a legacy embed. This example can be extended to <a href="../api/ui_components/#discord.parts.components_v2.Container"><code>Containers</code></a> and other fields that need an https or attachment scheme.
@@ -1696,7 +1723,7 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrate adding an attachment!&#39;</span><span class="p">),</span> 
     <span class="n">guild_id</span><span class="o">=</span><span class="n">GUILD_ID</span>
 <span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
         <span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">()</span>
             <span class="o">.</span><span class="n">add_attachment</span><span class="p">(</span><span class="s1">&#39;relative/path/to/file.png&#39;</span><span class="p">)</span>

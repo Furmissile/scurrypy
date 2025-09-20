@@ -1765,6 +1765,8 @@
 
 
     <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="discord.client_like.ClientLike">ClientLike</span></code></p>
 
 
         <p>Main entry point for Discord bots.
@@ -1803,6 +1805,16 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
           –
           <div class="doc-md-description">
             <p>gateway intents. Defaults to Intents.DEFAULT.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>config</code></b>
+              (<code><span title="discord.config.BaseConfig">BaseConfig</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>user-defined config data</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -1986,11 +1998,15 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-            <b><code>func</code></b>
-              (<code><span title="callable">callable</span></code>)
+            <b><code>custom_id</code></b>
+              (<code><span title="str">str</span></code>)
           –
           <div class="doc-md-description">
-            <p>callback handle for component response</p>
+            <p>Identifier of the component </p>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>Must match the <code>custom_id</code> set where the component was created.</p>
+</div>
           </div>
         </li>
     </ul>
