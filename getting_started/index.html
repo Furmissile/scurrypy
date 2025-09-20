@@ -1455,14 +1455,14 @@
 
 <span class="n">load_dotenv</span><span class="p">(</span><span class="n">dotenv_path</span><span class="o">=</span><span class="s1">&#39;./path/to/env&#39;</span><span class="p">)</span> <span class="c1"># omit argument if your env file is on the same level</span>
 
-<span class="n">bot</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
     <span class="n">token</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DISCORD_TOKEN&quot;</span><span class="p">),</span>
     <span class="n">application_id</span><span class="o">=</span><span class="mi">1234567890</span> <span class="c1"># replace with your bot&#39;s user ID</span>
 <span class="p">)</span>
 
 <span class="c1"># your code or example snippets here</span>
 
-<span class="n">bot</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div></p>
 <p>Place the following variables in your <code>.env</code> file:
 <div class="highlight"><pre><span></span><code><span class="err">DISCORD_TOKEN=</span><span class="s2">&quot;your-bot-token&quot;</span>

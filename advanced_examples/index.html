@@ -1483,6 +1483,7 @@ between setup and <code>bot.run()</code>.</p>
 <hr />
 <p>Demonstrates how to inject user-defined data to run alongside your bot. This example uses a PG database connection.
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncpg</span>
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MyState</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">BaseConfig</span><span class="p">):</span>
