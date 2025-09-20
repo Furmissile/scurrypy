@@ -1491,14 +1491,14 @@ Sends the message <code>Pong!</code> if <code>!ping</code> is sent.</p>
 <p class="admonition-title">Important</p>
 <p>Using message prefix commands requires the <strong>PRIVILEGED</strong> intent <code>MESSAGE_CONTENT</code>!</p>
 </div>
-<div class="highlight"><pre><span></span><code><span class="nd">@bot</span><span class="o">.</span><span class="n">prefix_command</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">prefix_command</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">ping</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">MessageCreateEvent</span><span class="p">):</span> <span class="c1"># the function name is the name of the command!</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pong!&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="building-an-embed">Building an Embed<a class="headerlink" href="#building-an-embed" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Demonstrate building an embed in response to a message prefix.
-<div class="highlight"><pre><span></span><code><span class="nd">@bot</span><span class="o">.</span><span class="n">prefix_command</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">prefix_command</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">MessageCreateEvent</span><span class="p">):</span> <span class="c1"># the function name is the name of the command!</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
         <span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">()</span>
