@@ -1641,7 +1641,11 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
 <h2 id="building-and-responding-to-select-components">Building and Responding to Select Components<a class="headerlink" href="#building-and-responding-to-select-components" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Demonstrates building a string select component and responding.
-<div class="highlight"><pre><span></span><code><span class="nd">@bot</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@bot</span><span class="o">.</span><span class="n">component</span><span class="p">(</span><span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;on_string_select&#39;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_string_select</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;You selected option: **</span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">**!&#39;</span><span class="p">)</span>
+
+<span class="nd">@bot</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrate the select components!&#39;</span><span class="p">),</span> 
     <span class="n">guild_id</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be a guild ID your bot is in!</span>
 <span class="p">)</span>
@@ -1657,15 +1661,11 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
                 <span class="p">)</span>
             <span class="p">)</span>
     <span class="p">)</span>
-
-<span class="nd">@bot</span><span class="o">.</span><span class="n">component</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_string_select</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
-    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;You selected option: **</span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">**!&#39;</span><span class="p">)</span>
 </code></pre></div></p>
 <h2 id="building-and-responding-to-a-modal">Building and responding to a Modal<a class="headerlink" href="#building-and-responding-to-a-modal" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Demonstrates using the modal feature and extracting the user's responses.
-<div class="highlight"><pre><span></span><code><span class="nd">@bot</span><span class="o">.</span><span class="n">component</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@bot</span><span class="o">.</span><span class="n">component</span><span class="p">(</span><span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;modal_one&#39;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">modal_one</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_modal_data</span><span class="p">(</span><span class="s1">&#39;bug_select&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">details</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_modal_data</span><span class="p">(</span><span class="s1">&#39;bug_explanation&#39;</span><span class="p">)</span>
