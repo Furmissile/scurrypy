@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from ..model import DataModel
-from ..config import BaseConfig
 
 from ..models.user import UserModel
 from ..models.guild import ReadyGuildModel
@@ -30,6 +29,3 @@ class ReadyEvent(DataModel):
 
     application: ApplicationModel
     """Partial application object. Contains ID and flags."""
-
-    config: BaseConfig
-    """User-defined bot config for persistent data."""

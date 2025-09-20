@@ -1,6 +1,4 @@
-from ..http import HTTPClient
-from ..logger import Logger
-from ..config import BaseConfig
+from ..client_like import ClientLike
 
 from ..events.ready_event import *
 from ..events.reaction_events import *
@@ -41,17 +39,20 @@ class EventDispatcher:
     }
     """Mapping of event names to respective dataclass."""
     
-    def __init__(self, application_id: int, http: HTTPClient, logger: Logger, config: BaseConfig):
-        self.application_id = application_id
+    def __init__(self, client: ClientLike):
+        self.application_id = client.application_id
         """Bot's ID."""
 
-        self._http = http
+        self.bot = client
+        """Top-level discord client."""
+
+        self._http = client._http
         """HTTP session for requests."""
 
-        self._logger = logger
+        self._logger = client._logger
         """HTTP session for requests"""
 
-        self.config = config
+        self.config = client.config
         """User-defined bot config for persistent data."""
 
         self._handlers = {}
@@ -86,5 +87,5 @@ class EventDispatcher:
         if handler:
             obj = cls.from_dict(data, self._http)
             obj.config = self.config
-            await handler(obj)
+            await handler(self.bot, obj)
             self._logger.log_info(f"Event {event_name} Acknowledged.")

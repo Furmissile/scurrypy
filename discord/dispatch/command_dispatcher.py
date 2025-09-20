@@ -1,8 +1,4 @@
-import asyncio
-
-from ..http import HTTPClient
-from ..logger import Logger
-from ..config import BaseConfig
+from ..client_like import ClientLike
 
 from ..events.interaction_events import ApplicationCommandData, MessageComponentData, ModalData, InteractionEvent
 from ..resources.interaction import Interaction, InteractionDataTypes
@@ -29,17 +25,20 @@ class CommandDispatcher:
     }
     """Maps [`InteractionTypes`][discord.dispatch.command_dispatcher.InteractionTypes] to their respective dataclass."""
 
-    def __init__(self, application_id: int, http: HTTPClient, logger: Logger, config: BaseConfig):
-        self.application_id = application_id
+    def __init__(self, client: ClientLike):
+        self.application_id = client.application_id
         """Bot's application ID."""
 
-        self._http = http
+        self.bot = client
+        """Bot session for user access to bot."""
+
+        self._http = client._http
         """HTTP session for requests."""
 
-        self._logger = logger
+        self._logger = client._logger
         """Logger instance to log events."""
 
-        self.config = config
+        self.config = client.config
 
         self._component_handlers = {}
         """Mapping of component custom IDs to handler."""
@@ -86,14 +85,16 @@ class CommandDispatcher:
             handler (callable): callback handle for command response
         """
         self._handlers[handler.__name__] = handler
-
-    def component(self, handler):
+    
+    def component(self, func, custom_id: str):
         """Decorator to register component interactions.
 
         Args:
-            handler (callable): callback handle for component response
+            custom_id (str): Identifier of the component 
+                !!! warning "Important"
+                    Must match the `custom_id` set where the component was created.
         """
-        self._component_handlers[handler.__name__] = handler
+        self._component_handlers[custom_id] = func
 
     def user_command(self, handler):
         """Decorator to register user commands.
@@ -117,7 +118,7 @@ class CommandDispatcher:
         Args:
             data (dict): interaction data
         """
-        event = InteractionEvent(config=self.config, interaction=Interaction.from_dict(data, self._http))
+        event = InteractionEvent(interaction=Interaction.from_dict(data, self._http))
 
         event_data_obj = self.RESOURCE_MAP.get(event.interaction.type)
 
@@ -153,7 +154,7 @@ class CommandDispatcher:
             return
 
         try:
-            await handler(event) # NOTE: treat command options as args!
+            await handler(self.bot, event) # NOTE: treat command options as args!
             self._logger.log_info(f"Interaction Event '{name}' Acknowledged.")
         except Exception as e:
             self._logger.log_error(f"Error in interaction '{name}': {e}")

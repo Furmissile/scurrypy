@@ -28,7 +28,6 @@ class _Button(DataModel, ActionRowChild, SectionAccessory):
 @dataclass
 class _SelectOption(DataModel):
     """Represents the Select Option component"""
-
     label: str
     value: str
     description: Optional[str] = None # appears below the label

@@ -1,6 +1,4 @@
-from ..http import HTTPClient
-from ..logger import Logger
-from ..config import BaseConfig
+from ..client_like import ClientLike
 
 from ..events.message_events import MessageCreateEvent
 
@@ -9,17 +7,21 @@ from ..models.member import MemberModel
 
 class PrefixDispatcher:
     """Handles text-based command messages that start with a specific prefix."""
-    def __init__(self, http: HTTPClient, logger: Logger, prefix: str, config: BaseConfig):
-        self._http = http
+    def __init__(self, client: ClientLike, prefix: str):
+
+        self.bot = client
+        """Bot session for user access to bot."""
+
+        self._http = client._http
         """HTTP session for requests."""
 
-        self._logger = logger
+        self._logger = client._logger
         """Logger instance to log events."""
 
         self.prefix = prefix
         """User-defined command prefix."""
 
-        self.config = config
+        self.config = client.config
         """User-defined bot config for persistent data."""
 
         self._handlers = {}
@@ -41,7 +43,6 @@ class PrefixDispatcher:
             data (dict): Discord's raw event payload
         """
         event = MessageCreateEvent(
-            config=self.config,
             guild_id=data.get('guild_id'),
             message=Message.from_dict(data, self._http),
             member=MemberModel.from_dict(data.get('member'))
@@ -52,7 +53,7 @@ class PrefixDispatcher:
             handler = self._handlers.get(command)
             if handler:
                 try:
-                    await handler(event, *args)
+                    await handler(self.bot, event, *args)
                     self._logger.log_info(f"Prefix Event '{command}' Acknowledged.")
                 except Exception as e:
                     self._logger.log_error(f"Error in prefix command '{command}': {e}")

@@ -81,6 +81,8 @@ class DataModel:
     
         result = {}
         for f in fields(self):
+            if f.name.startswith('_'): # ignore private fields
+                continue
             value = getattr(self, f.name)
             if value not in (None, [], {}, "", 0):
                 result[f.name] = serialize(value)

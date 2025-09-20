@@ -1,10 +1,9 @@
 from dataclasses import dataclass
-from .event_model import EventModel
 from ..models import MemberModel
 from ..resources.channel import Channel
 
 @dataclass
-class GuildEvent(EventModel):
+class GuildEvent:
     """Base guild event."""
     joined_at: str
     """ISO8601 timestamp of when app joined the guild."""

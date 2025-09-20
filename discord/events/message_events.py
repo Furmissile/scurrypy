@@ -1,12 +1,11 @@
 from dataclasses import dataclass
 from typing import Optional
-from .event_model import EventModel
 
 from ..resources.message import Message
 from ..models.member import MemberModel
 
 @dataclass
-class MessageCreateEvent(EventModel):
+class MessageCreateEvent:
     """Received when a message is created."""
     message: Message
     """Message resource object. See [`Resource.Message`][discord.resources.message.Message]."""
@@ -18,7 +17,7 @@ class MessageCreateEvent(EventModel):
     """Partial Member object of the author of the message. See [`MemberModel`][discord.models.member.MemberModel]."""
     
 @dataclass
-class MessageUpdateEvent(EventModel):
+class MessageUpdateEvent:
     """Received when a message is updated."""
     message: Message
     """Message resource object. See [`Resource.Message`][discord.resources.message.Message]."""
@@ -30,7 +29,7 @@ class MessageUpdateEvent(EventModel):
     """Partial Member object of the author of the message. See [`MemberModel`][discord.models.member.MemberModel]."""
 
 @dataclass
-class MessageDeleteEvent(EventModel):
+class MessageDeleteEvent:
     """Received when a message is deleted."""
 
     id: int

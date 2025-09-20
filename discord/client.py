@@ -6,6 +6,7 @@ from .http import HTTPClient
 from .intents import Intents
 from .error import DiscordError
 from .config import BaseConfig
+from .client_like import ClientLike
 
 from .resources.guild import Guild
 from .resources.channel import Channel
@@ -20,7 +21,7 @@ from .dispatch.event_dispatcher import EventDispatcher
 from .dispatch.prefix_dispatcher import PrefixDispatcher
 from .dispatch.command_dispatcher import CommandDispatcher
 
-class Client:
+class Client(ClientLike):
     """Main entry point for Discord bots.
         Ties together the moving parts: gateway, HTTP, event dispatching, command handling, and resource managers.
     """
@@ -39,6 +40,7 @@ class Client:
             token (str): the bot's token
             application_id (int): the bot's user ID
             intents (int, optional): gateway intents. Defaults to Intents.DEFAULT.
+            config (BaseConfig, optional): user-defined config data
             debug_mode (bool, optional): toggle debug messages. Defaults to False.
             prefix (str, optional): set message prefix if using command prefixes
             quiet (bool, optional): if INFO, DEBUG, and WARN should be logged
@@ -54,9 +56,9 @@ class Client:
         if prefix and (intents & Intents.MESSAGE_CONTENT == 0):
             self._logger.log_warn('Prefix set without message content enabled.')
 
-        self.dispatcher = EventDispatcher(self.application_id, self._http, self._logger, config)
-        self.prefix_dispatcher = PrefixDispatcher(self._http, self._logger, prefix, config)
-        self.command_dispatcher = CommandDispatcher(self.application_id, self._http, self._logger, config)
+        self.dispatcher = EventDispatcher(self)
+        self.prefix_dispatcher = PrefixDispatcher(self, prefix)
+        self.command_dispatcher = CommandDispatcher(self)
 
         self._global_commands = [] # SlashCommand
         self._guild_commands = {} # {guild_id : [commands], ...}
@@ -75,13 +77,18 @@ class Client:
         """
         self.prefix_dispatcher.register(func.__name__, func)
 
-    def component(self, func):
+    def component(self, custom_id: str):
         """Decorator registers a function for a component handler.
 
         Args:
-            func (callable): callback handle for component response
+            custom_id (str): Identifier of the component 
+                !!! warning "Important"
+                    Must match the `custom_id` set where the component was created.
         """
-        self.command_dispatcher.component(func)
+        def decorator(func):
+            self.command_dispatcher.component(func, custom_id)
+            return func
+        return decorator
 
     def command(self, command: SlashCommand | MessageCommand | UserCommand, guild_id: int = 0):
         """Decorator registers a function for a command handler.
