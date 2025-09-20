@@ -36,14 +36,14 @@ load_dotenv(dotenv_path='./path/to/env') # omit argument if your env file is on 
 
 bot = discord.Client(
     token=os.getenv("DISCORD_TOKEN"),
-    application_id=1234567890 # replace with your bot's user ID
+    application_id=APPLICATION_ID # replace with your bot's user ID
 )
 
 @bot.command(
     command=discord.SlashCommand(name='example', description='Demonstrate the minimal slash command!'),
     guild_id=GUILD_ID # must be a guild ID your bot is in!
 )
-async def example(event: discord.InteractionEvent):
+async def example(bot: discord.Client, event: discord.InteractionEvent):
     await event.interaction.respond(f'Hello, {event.interaction.member.user.username}!')
 
 bot.run()
@@ -59,13 +59,13 @@ load_dotenv(dotenv_path='./path/to/env') # omit argument if your env file is on 
 
 bot = discord.Client(
     token=os.getenv("DISCORD_TOKEN"),
-    application_id=1234567890, # replace with your bot's user ID
+    application_id=APPLICATION_ID, # replace with your bot's user ID
     intents=discord.set_intents(message_content=True),
     prefix='!' # your custom prefix
 )
 
 @bot.prefix_command
-async def ping(event: discord.MessageCreateEvent): # the function name is the name of the command!
+async def ping(bot: discord.Client, event: discord.MessageCreateEvent): # the function name is the name of the command!
     await event.message.send(f"Pong!")
 
 bot.run()
