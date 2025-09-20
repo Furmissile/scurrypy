@@ -1373,15 +1373,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.dispatch.command_dispatcher.CommandDispatcher.component" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;component
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#discord.dispatch.command_dispatcher.CommandDispatcher.user_command" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;user_command
@@ -1394,6 +1385,15 @@
   <a href="#discord.dispatch.command_dispatcher.CommandDispatcher.message_command" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;message_command
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.dispatch.command_dispatcher.CommandDispatcher.component" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;component
     </span>
   </a>
   
@@ -1948,15 +1948,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.dispatch.command_dispatcher.CommandDispatcher.component" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;component
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#discord.dispatch.command_dispatcher.CommandDispatcher.user_command" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;user_command
@@ -1969,6 +1960,15 @@
   <a href="#discord.dispatch.command_dispatcher.CommandDispatcher.message_command" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;message_command
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.dispatch.command_dispatcher.CommandDispatcher.component" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;component
     </span>
   </a>
   
@@ -2602,11 +2602,97 @@
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
         <li class="doc-section-item field-body">
+            <b><code>name</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>name of the command to register</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
             <b><code>handler</code></b>
               (<code><span title="callable">callable</span></code>)
           –
           <div class="doc-md-description">
             <p>callback handle for command response</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="discord.dispatch.command_dispatcher.CommandDispatcher.user_command" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">user_command</span></code>
+
+<a href="#discord.dispatch.command_dispatcher.CommandDispatcher.user_command" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Decorator to register user commands.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>name</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>name of the command to register</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>handler</code></b>
+              (<code><span title="callable">callable</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>callback handle for user command response</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="discord.dispatch.command_dispatcher.CommandDispatcher.message_command" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">message_command</span></code>
+
+<a href="#discord.dispatch.command_dispatcher.CommandDispatcher.message_command" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Decorator to register message commands.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>name</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>name of the command to register</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>handler</code></b>
+              (<code><span title="callable">callable</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>callback handle for message command response</p>
           </div>
         </li>
     </ul>
@@ -2642,68 +2728,6 @@
 <p class="admonition-title">Important</p>
 <p>Must match the <code>custom_id</code> set where the component was created.</p>
 </div>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="discord.dispatch.command_dispatcher.CommandDispatcher.user_command" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">user_command</span></code>
-
-<a href="#discord.dispatch.command_dispatcher.CommandDispatcher.user_command" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Decorator to register user commands.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>handler</code></b>
-              (<code><span title="callable">callable</span></code>)
-          –
-          <div class="doc-md-description">
-            <p>callback handle for user command response</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="discord.dispatch.command_dispatcher.CommandDispatcher.message_command" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">message_command</span></code>
-
-<a href="#discord.dispatch.command_dispatcher.CommandDispatcher.message_command" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Decorator to register message commands.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>handler</code></b>
-              (<code><span title="callable">callable</span></code>)
-          –
-          <div class="doc-md-description">
-            <p>callback handle for message command response</p>
           </div>
         </li>
     </ul>
