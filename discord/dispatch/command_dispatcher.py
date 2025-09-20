@@ -78,14 +78,33 @@ class CommandDispatcher:
 
         await self._http.request('PUT', f"applications/{self.application_id}/commands", global_commands)
 
-    def command(self, handler):
+    def command(self, name: str, handler):
         """Decorator to register slash commands.
 
         Args:
+            name (str): name of the command to register
             handler (callable): callback handle for command response
         """
-        self._handlers[handler.__name__] = handler
-    
+        self._handlers[name] = handler
+
+    def user_command(self, name: str, handler):
+        """Decorator to register user commands.
+
+        Args:
+            name (str): name of the command to register
+            handler (callable): callback handle for user command response
+        """
+        self._user_handlers[name] = handler
+
+    def message_command(self, name: str, handler):
+        """Decorator to register message commands.
+
+        Args:
+            name (str): name of the command to register
+            handler (callable): callback handle for message command response
+        """
+        self._message_handlers[name] = handler
+
     def component(self, func, custom_id: str):
         """Decorator to register component interactions.
 
@@ -95,22 +114,6 @@ class CommandDispatcher:
                     Must match the `custom_id` set where the component was created.
         """
         self._component_handlers[custom_id] = func
-
-    def user_command(self, handler):
-        """Decorator to register user commands.
-
-        Args:
-            handler (callable): callback handle for user command response
-        """
-        self._user_handlers[handler.__name__] = handler
-
-    def message_command(self, handler):
-        """Decorator to register message commands.
-
-        Args:
-            handler (callable): callback handle for message command response
-        """
-        self._message_handlers[handler.__name__] = handler
 
     async def dispatch(self, data: dict):
         """Dispatch a response to an `INTERACTION_CREATE` event

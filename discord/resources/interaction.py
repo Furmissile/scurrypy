@@ -11,6 +11,7 @@ from ..parts.component_types import *
 
 from ..models.guild import GuildModel
 from ..models.member import MemberModel
+from ..models.interaction import InteractionCallbackModel
 
 from .channel import Channel
 
@@ -98,11 +99,12 @@ class Interaction(DataModel):
     channel: Optional[Channel] = None
     """Partial channel object the interaction was invoked."""
 
-    async def respond(self, message: str | MessageBuilder, **flags: Unpack[MessageFlagParams]):
+    async def respond(self, message: str | MessageBuilder, with_response: bool = False, **flags: Unpack[MessageFlagParams]):
         """Create a message in response to an interaction.
 
         Args:
             message (str | MessageBuilder): content as a string or from MessageBuilder
+            with_response (bool, optional): if the interaction data should be returned. Defaults to False.
         """
         if isinstance(message, str):
             message = MessageBuilder(content=message).set_flags(**flags)
@@ -112,12 +114,18 @@ class Interaction(DataModel):
             'data': message._to_dict()
         }
 
-        await self._http.request(
+        params = {'with_response': with_response}
+
+        data = await self._http.request(
             'POST', 
             f'/interactions/{self.id}/{self.token}/callback', 
             content, 
-            files=[fp.path for fp in message.attachments])
+            files=[fp.path for fp in message.attachments],
+            params=params)
 
+        if with_response:
+            return InteractionCallbackModel.from_dict(data, self._http)
+        
     async def update(self, message: str | MessageBuilder, **flags: Unpack[MessageFlagParams]):
         """Update a message in response to an interaction.
 

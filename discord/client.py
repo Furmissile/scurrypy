@@ -100,13 +100,13 @@ class Client(ClientLike):
         def decorator(func):
             # hash out command type
             if isinstance(command, MessageCommand):
-                self.command_dispatcher.message_command(func)
+                self.command_dispatcher.message_command(command.name, func)
             elif isinstance(command, UserCommand):
-                self.command_dispatcher.user_command(func)
+                self.command_dispatcher.user_command(command.name, func)
             elif isinstance(command, SlashCommand):
-                self.command_dispatcher.command(func)
+                self.command_dispatcher.command(command.name, func)
             else:
-                raise ValueError(f'Command {func.__name__} expected to be of type SlashCommand, UserCommand, MessageCommand; \
+                raise ValueError(f'Command {command.name} expected to be of type SlashCommand, UserCommand, MessageCommand; \
                     got {type(command).__name__}.')
             
             # then hash out if this command should be guild or global level

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import TypedDict, Unpack, Optional
+from typing import TypedDict, Unpack, Optional, Literal
 
 from ..http import HTTPClient
 from ..model import DataModel
@@ -31,6 +31,15 @@ class PinsFetchParams(TypedDict, total=False):
 
     limit: int
     """Max number of pinned messages to return. Range 1 - 50. Default 50."""
+
+class ThreadFromMessageParams(TypedDict, total=False):
+    """Params when attaching a thread to a message."""
+
+    rate_limit_per_user: Literal[60, 1440, 4320, 10080]
+    """time (minutes) of inactivity before thread is archived."""
+
+    rate_limit_per_user: int
+    """time (seconds) user waits before sending another message."""
 
 @dataclass
 class PinnedMessage(DataModel):
@@ -159,6 +168,26 @@ class Channel(DataModel):
         self._update(data)
 
         return self
+    
+    async def create_thread_from_message(self, message_id: int, name: str, **kwargs: Unpack[ThreadFromMessageParams]):
+        """Create a thread from this message
+
+        Args:
+            message_id: ID of message to attach thread
+            name (str): thread name
+
+        Returns:
+            (Channel): The updated channel object
+        """
+
+        content = {
+            'name': name, 
+            **kwargs
+        }
+
+        data = await self._http.request('POST', f"channels/{self.id}/messages/{message_id}/threads", data=content)
+
+        return Channel.from_dict(data, self._http)
     
     async def fetch_pins(self, **kwargs: Unpack[PinsFetchParams]):
         """Get this channel's pinned messages.
