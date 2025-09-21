@@ -1,6 +1,3 @@
-from datetime import datetime
-import copy
-
 class Logger:
     """A utility class for logging messages, supporting log levels, color-coded console output, 
         optional file logging, and redaction of sensitive information. 
@@ -51,6 +48,8 @@ class Logger:
         Returns:
             (str): timestamp formatted in YYYY-MM-DD HH:MM:SS
         """
+        from datetime import datetime
+        
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     def _log(self, level: str, color: str, message: str):
@@ -139,6 +138,8 @@ class Logger:
             elif isinstance(obj, list):
                 return [_redact(item) for item in obj]
             return obj
+
+        import copy
 
         return _redact(copy.deepcopy(data))
     

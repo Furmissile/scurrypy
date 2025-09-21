@@ -1,42 +1,19 @@
+from importlib import import_module
 from ..client_like import ClientLike
-
-from ..events.ready_event import *
-from ..events.reaction_events import *
-from ..events.guild_events import *
-from ..events.message_events import *
-from ..events.channel_events import *
-from ..events.interaction_events import *
 
 from ..resources.message import Message
 
 class EventDispatcher:
     """Central hub for handling Discord Gateway events."""
-    RESOURCE_MAP = { # maps discord events to their respective dataclass
-        'READY': ReadyEvent,
+
+    RESOURCE_MAP = { # maps discord events to their respective dataclass (lazy loading)
+        'READY': ('discord.events.ready_event', 'ReadyEvent'),
+
+        'MESSAGE_CREATE': ('discord.events.message_events', 'MessageCreateEvent')
         
-        "MESSAGE_CREATE": MessageCreateEvent,
-        "MESSAGE_UPDATE": MessageUpdateEvent,
-        'MESSAGE_DELETE': MessageDeleteEvent,
-
-        'MESSAGE_REACTION_ADD': ReactionAddEvent,
-        'MESSAGE_REACTION_REMOVE': ReactionRemoveEvent,
-        'MESSAGE_REACTION_REMOVE_ALL': ReactionRemoveAllEvent,
-        'MESSAGE_REACTION_REMOVE_EMOJI': ReactionRemoveEmojiEvent,
-
-        'CHANNEL_CREATE': GuildChannelCreateEvent,
-        'CHANNEL_UPDATE': GuildChannelUpdateEvent,
-        'CHANNEL_DELETE': GuildChannelDeleteEvent,
-
-        'CHANNEL_PINS_UPDATE': ChannelPinsUpdateEvent,
-
-        'GUILD_CREATE': GuildCreateEvent,
-        'GUILD_UPDATE': GuildUpdateEvent,
-        'GUILD_DELETE': GuildDeleteEvent,
-
-        'INTERACTION_CREATE': InteractionEvent
-
         # and other events...
     }
+    
     """Mapping of event names to respective dataclass."""
     
     def __init__(self, client: ClientLike):
@@ -75,9 +52,21 @@ class EventDispatcher:
             event_name (str): name of the event
             data (dict): Discord's raw event payload
         """
-        cls = self.RESOURCE_MAP.get(event_name)
+        module_info = self.RESOURCE_MAP.get(event_name)
         
+        if not module_info:
+            return
+        
+        module_name, class_name = module_info
+
+        module = import_module(module_name)
+        if not module:
+            print(f"Cannot find module '{module_name}'!")
+            return
+
+        cls = getattr(module, class_name)
         if not cls:
+            print(f"Cannot find class '{class_name}'!")
             return
         
         if isinstance(cls, Message) and cls.author.id == self.application_id:

@@ -1,4 +1,3 @@
-import os
 from dataclasses import dataclass, field
 from typing import Optional, TypedDict, Unpack, Literal
 from discord.model import DataModel
@@ -114,6 +113,8 @@ class MessageBuilder(DataModel):
         Returns:
             (MessageBuilder): self
         """
+        import os
+        
         self.attachments.append(
             _Attachment(
                 id=len(self.attachments), 

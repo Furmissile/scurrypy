@@ -6,8 +6,6 @@ from ..model import DataModel
 
 from ..parts.modal import ModalBuilder
 from ..parts.message import *
-from ..parts.embed import *
-from ..parts.component_types import *
 
 from ..models.guild import GuildModel
 from ..models.member import MemberModel

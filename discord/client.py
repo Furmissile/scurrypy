@@ -1,25 +1,9 @@
-import asyncio
-
-from .logger import Logger
-from .gateway import GatewayClient
-from .http import HTTPClient
+from .config import BaseConfig
 from .intents import Intents
 from .error import DiscordError
-from .config import BaseConfig
 from .client_like import ClientLike
 
-from .resources.guild import Guild
-from .resources.channel import Channel
-from .resources.message import Message
-from .resources.bot_emojis import BotEmojis
-from .resources.user import User
-from .resources.application import Application
-
 from .parts.command import SlashCommand, MessageCommand, UserCommand
-
-from .dispatch.event_dispatcher import EventDispatcher
-from .dispatch.prefix_dispatcher import PrefixDispatcher
-from .dispatch.command_dispatcher import CommandDispatcher
 
 class Client(ClientLike):
     """Main entry point for Discord bots.
@@ -45,6 +29,14 @@ class Client(ClientLike):
             prefix (str, optional): set message prefix if using command prefixes
             quiet (bool, optional): if INFO, DEBUG, and WARN should be logged
         """
+        from .logger import Logger
+        from .gateway import GatewayClient
+        from .http import HTTPClient
+        from .resources.bot_emojis import BotEmojis
+        from .dispatch.event_dispatcher import EventDispatcher
+        from .dispatch.prefix_dispatcher import PrefixDispatcher
+        from .dispatch.command_dispatcher import CommandDispatcher
+
         self.token = token
         self.application_id = application_id
         self.config = config
@@ -154,6 +146,8 @@ class Client(ClientLike):
         Returns:
             (Application): the Application resource
         """
+        from .resources.application import Application
+
         return Application(application_id, self._http)
 
     def guild_from_id(self, guild_id: int):
@@ -165,6 +159,8 @@ class Client(ClientLike):
         Returns:
             (Guild): the Guild resource
         """
+        from .resources.guild import Guild
+
         return Guild(guild_id, self._http)
 
     def channel_from_id(self, channel_id: int):
@@ -176,6 +172,8 @@ class Client(ClientLike):
         Returns:
             (Channel): the Channel resource
         """
+        from .resources.channel import Channel
+
         return Channel(channel_id, self._http)
 
     def message_from_id(self, channel_id: int, message_id: int):
@@ -188,6 +186,8 @@ class Client(ClientLike):
         Returns:
             (Message): the Message resource
         """
+        from .resources.message import Message
+
         return Message(message_id, channel_id, self._http)
     
     def user_from_id(self, user_id: int):
@@ -199,6 +199,8 @@ class Client(ClientLike):
         Returns:
             (User): the User resource
         """
+        from .resources.user import User
+
         return User(user_id, self._http)
     
     async def clear_guild_commands(self, guild_id: int):
@@ -215,6 +217,8 @@ class Client(ClientLike):
 
     async def _listen(self):
         """Main event loop for incoming gateway requests."""
+        import asyncio
+
         while True:
             try:
                 message = await self._ws.receive()
@@ -270,6 +274,8 @@ class Client(ClientLike):
         """Runs the main lifecycle of the bot.
             Handles connection setup, heartbeat management, event loop, and automatic reconnects.
         """
+        import asyncio
+
         while True:
             try:
                 await self._http.start_session()
@@ -338,6 +344,8 @@ class Client(ClientLike):
             Handles starting the session, WS, and heartbeat, reconnection logic,
             setting up emojis and hooks, and then listens for gateway events.
         """
+        import asyncio
+        
         try:
             asyncio.run(self.start())
         except KeyboardInterrupt:
