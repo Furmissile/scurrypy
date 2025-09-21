@@ -1578,7 +1578,7 @@ between setup and <code>bot.run()</code>.</p>
 <hr />
 <p>Demonstrates responding to a slash command.
 Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent.</p>
-<div class="highlight"><pre><span></span><code><span class="nd">@bot</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrate the minimal slash command!&#39;</span><span class="p">),</span>
     <span class="n">guild_id</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be a guild ID your bot is in!</span>
 <span class="p">)</span>
