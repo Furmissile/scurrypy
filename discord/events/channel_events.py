@@ -1,8 +1,9 @@
 from dataclasses import dataclass
+from ..model import DataModel
 from typing import Optional
 
 @dataclass
-class GuildChannelEvent:
+class GuildChannelEvent(DataModel):
     """Base guild channel event."""
 
     id: int
@@ -48,5 +49,10 @@ class GuildChannelDeleteEvent(GuildChannelEvent):
 class ChannelPinsUpdateEvent:
     """Pin update event."""
     channel_id: int
+    """ID of channel where the pins were updated."""
+
     guild_id: Optional[int]
+    """ID of the guild where the pins were updated."""
+
     last_pin_timestamp: Optional[str]  # ISO8601 timestamp of last pinned message
+    """ISO8601 formatted timestamp of the last pinned message in the channel."""

@@ -269,24 +269,12 @@ class HTTPClient:
             if now < self.global_reset:
                 await asyncio.sleep(self.global_reset - now)
 
-    async def close_session(self):
-        """Gracefully shuts down all workes and closes aiohttp session."""
-        # Stop all bucket workers
+    async def close_session(self):  
+        """Gracefully shuts down all workes and closes aiohttp session."""      
+        # Stop workers
         for q in self.bucket_queues.values():
             await q.queue.put(self._sentinel)
-
-        # Stop pending worker
         await self.pending_queue.put(self._sentinel)
-
-        # Cancel all tasks except the current one
-        tasks = [t for t in asyncio.all_tasks() if t is not asyncio.current_task()]
-        for task in tasks:
-            task.cancel()
-
-        # Wait for tasks to acknowledge cancellation
-        await asyncio.gather(*tasks, return_exceptions=True)
-
-        # Close the aiohttp session
+        
         if self.session and not self.session.closed:
             await self.session.close()
-            self._logger.log_debug("Session closed successfully.")

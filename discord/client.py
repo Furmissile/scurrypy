@@ -1,3 +1,5 @@
+import asyncio
+
 from .config import BaseConfig
 from .intents import Intents
 from .error import DiscordError
@@ -29,6 +31,11 @@ class Client(ClientLike):
             prefix (str, optional): set message prefix if using command prefixes
             quiet (bool, optional): if INFO, DEBUG, and WARN should be logged
         """
+        if not token:
+            raise ValueError("Token is required")
+        if not application_id:
+            raise ValueError("Application ID is required")
+        
         from .logger import Logger
         from .gateway import GatewayClient
         from .http import HTTPClient
@@ -82,30 +89,41 @@ class Client(ClientLike):
             return func
         return decorator
 
-    def command(self, command: SlashCommand | MessageCommand | UserCommand, guild_id: int = 0):
-        """Decorator registers a function for a command handler.
+    def command(self, command: SlashCommand | MessageCommand | UserCommand, guild_ids: list[int] | None = None):
+        """Decorator to register a function as a command handler.
 
         Args:
-            command (SlashCommand | MessageCommand | UserCommand): command to register
-            guild_id (int): ID of guild in which to register command (if a guild command)
+            command (SlashCommand | MessageCommand | UserCommand): The command to register.
+            guild_ids (list[int] | None): Guild IDs for guild-specific commands. None for global commands.
         """
         def decorator(func):
-            # hash out command type
-            if isinstance(command, MessageCommand):
-                self.command_dispatcher.message_command(command.name, func)
-            elif isinstance(command, UserCommand):
-                self.command_dispatcher.user_command(command.name, func)
-            elif isinstance(command, SlashCommand):
-                self.command_dispatcher.command(command.name, func)
+            # Map command types to dispatcher registration functions
+            handler_map = {
+                MessageCommand: self.command_dispatcher.message_command,
+                UserCommand: self.command_dispatcher.user_command,
+                SlashCommand: self.command_dispatcher.command,
+            }
+
+            # Resolve dispatcher method based on command type
+            for cls, handler in handler_map.items():
+                if isinstance(command, cls):
+                    handler(command.name, func)
+                    break
             else:
-                raise ValueError(f'Command {command.name} expected to be of type SlashCommand, UserCommand, MessageCommand; \
-                    got {type(command).__name__}.')
-            
-            # then hash out if this command should be guild or global level
-            if guild_id != 0:
-                self._guild_commands.setdefault(guild_id, []).append(command)
+                raise ValueError(
+                    f"Command {getattr(command, 'name', '<unnamed>')} must be one of "
+                    f"SlashCommand, UserCommand, MessageCommand; got {type(command).__name__}."
+                )
+
+            # Queue command for later registration
+            if guild_ids:
+                gids = [guild_ids] if isinstance(guild_ids, int) else guild_ids
+                for gid in gids:
+                    self._guild_commands.setdefault(gid, []).append(command)
             else:
                 self._global_commands.append(command)
+
+            return func  # ensure original function is preserved
         return decorator
     
     def event(self, event_name: str):
@@ -137,7 +155,7 @@ class Client(ClientLike):
         """
         self._shutdown_hooks.append(func)
 
-    def application_from_id(self, application_id: int):
+    def fetch_application(self, application_id: int):
         """Creates an interactable application resource.
 
         Args:
@@ -150,7 +168,7 @@ class Client(ClientLike):
 
         return Application(application_id, self._http)
 
-    def guild_from_id(self, guild_id: int):
+    def fetch_guild(self, guild_id: int):
         """Creates an interactable guild resource.
 
         Args:
@@ -163,7 +181,7 @@ class Client(ClientLike):
 
         return Guild(guild_id, self._http)
 
-    def channel_from_id(self, channel_id: int):
+    def fetch_channel(self, channel_id: int):
         """Creates an interactable channel resource.
 
         Args:
@@ -176,7 +194,7 @@ class Client(ClientLike):
 
         return Channel(channel_id, self._http)
 
-    def message_from_id(self, channel_id: int, message_id: int):
+    def fetch_message(self, channel_id: int, message_id: int):
         """Creates an interactable message resource.
 
         Args:
@@ -190,7 +208,7 @@ class Client(ClientLike):
 
         return Message(message_id, channel_id, self._http)
     
-    def user_from_id(self, user_id: int):
+    def fetch_user(self, user_id: int):
         """Creates an interactable user resource.
 
         Args:
@@ -213,13 +231,11 @@ class Client(ClientLike):
             self._logger.log_info(f"Guild {guild_id} already queued, skipping clear.")
             return
 
-        await self.command_dispatcher._register_guild_commands({guild_id: []})
+        self._guild_commands[guild_id] = []
 
     async def _listen(self):
         """Main event loop for incoming gateway requests."""
-        import asyncio
-
-        while True:
+        while self._ws.is_connected():
             try:
                 message = await self._ws.receive()
                 if not message:
@@ -227,17 +243,17 @@ class Client(ClientLike):
 
                 op_code = message.get('op')
 
-                if op_code == 0:
-                    dispatch_type = message.get('t')
-                    self._logger.log_info(f"DISPATCH -> {dispatch_type}")
-                    event_data = message.get('d')
-                    self._ws.sequence = message.get('s') or self._ws.sequence
+                match op_code:
+                    case 0:
+                        dispatch_type = message.get('t')
+                        self._logger.log_info(f"DISPATCH -> {dispatch_type}")
+                        event_data = message.get('d')
+                        self._ws.sequence = message.get('s') or self._ws.sequence
 
-                    if dispatch_type == "READY":
-                        self._ws.session_id = event_data.get("session_id")
-                        self._ws.connect_url = event_data.get("resume_gateway_url", self._ws.connect_url)
+                        if dispatch_type == "READY":
+                            self._ws.session_id = event_data.get("session_id")
+                            self._ws.connect_url = event_data.get("resume_gateway_url", self._ws.connect_url)
 
-                    try:
                         if self.prefix_dispatcher.prefix and dispatch_type == 'MESSAGE_CREATE':
                             await self.prefix_dispatcher.dispatch(event_data)
                             
@@ -245,107 +261,97 @@ class Client(ClientLike):
                             await self.command_dispatcher.dispatch(event_data)
 
                         await self.dispatcher.dispatch(dispatch_type, event_data)
-                    except DiscordError as e:
-                        if e.fatal:
-                            raise  # let run() handle fatal errors
-                        else:
-                            self._logger.log_warn(f"Recoverable DiscordError: {e}")
-                            continue  # keep listening
+                    case 7:
+                        raise ConnectionError("Reconnect requested by server.")
+                    case 9:
+                        self._ws.session_id = None
+                        self._ws.sequence = None
+                        raise ConnectionError("Invalid session.")
+                    case 11:
+                        self._logger.log_debug("Heartbeat ACK received")
 
-                elif op_code == 7:
-                    raise ConnectionError("Reconnect requested by server.")
-                elif op_code == 9:
-                    self._ws.session_id = None
-                    self._ws.sequence = None
-                    raise ConnectionError("Invalid session.")
             except asyncio.CancelledError:
-                raise
+                break
             except DiscordError as e:
                 if e.fatal:
-                    raise  # propagate fatal errors
+                    self._logger.log_error(f"Fatal DiscordError: {e}")
+                    break
                 else:
                     self._logger.log_warn(f"Recoverable DiscordError: {e}")
             except ConnectionError as e:
                 self._logger.log_warn(f"Connection lost: {e}")
-                await self._ws.close()
-                await asyncio.sleep(2)
+                raise
 
     async def start(self):
         """Runs the main lifecycle of the bot.
             Handles connection setup, heartbeat management, event loop, and automatic reconnects.
         """
-        import asyncio
+        try:
+            await self._http.start_session()
+            await self._ws.connect()
+            await self._ws.start_heartbeat()
 
-        while True:
-            try:
-                await self._http.start_session()
-                await self._ws.connect()
-                await self._ws.start_heartbeat()
-
+            while self._ws.is_connected():
                 if self._ws.session_id and self._ws.sequence:
                     await self._ws.reconnect()
                 else:
                     await self._ws.identify()
 
                 if not self._is_set_up:
-                    if self._setup_hooks:
-                        for hook in self._setup_hooks:
-                            self._logger.log_info(f"Setting hook {hook.__name__}")
-                            await hook(self)
-                        self._logger.log_high_priority("Hooks set up.")
-
-                    # register GUILD commands
-                    await self.command_dispatcher._register_guild_commands(self._guild_commands)
-
-                    # register GLOBAL commands
-                    await self.command_dispatcher._register_global_commands(self._global_commands)
-
+                    await self.startup()
                     self._is_set_up = True
 
                 await self._listen()
+                
+                # If we get here, connection was lost - reconnect
+                await self._ws.close() 
+                await asyncio.sleep(5)
+                await self._ws.connect()
+                await self._ws.start_heartbeat()
 
-            except ConnectionError as e:
-                self._logger.log_warn("Connection lost. Attempting reconnect...")
-                await self._ws.close()
-                await asyncio.sleep(2)
-                continue
-            except asyncio.CancelledError:
-                self._logger.log_info("Cancelling connection...")
-                break
-            except DiscordError as e:
-                self._logger.log_error(f"Fatal DiscordError: {e}")
-                break
-            except Exception as e:
-                self._logger.log_error(f"Unspecified Error Type {type(e).__name__} - {e}")
-                break
-            finally:
-                # Run hooks (with safe catching)
-                for hook in self._shutdown_hooks:
-                    try:
-                        self._logger.log_info(f"Executing shutdown hook {hook.__name__}")
-                        await hook(self)
-                    except Exception as e:
-                        self._logger.log_error(f"{type(e).__name__}: {e}")
+        except asyncio.CancelledError:
+            self._logger.log_high_priority("Connection cancelled via KeyboardInterrupt.")
+        except Exception as e:
+            self._logger.log_error(f"{type(e).__name__} - {e}")
+        finally:
+            await self.close()
 
-                # Always close resources
-                try:
-                    await self._ws.close()
-                except Exception as e:
-                    self._logger.log_warn(f"WebSocket close failed: {e}")
+    async def startup(self):
+        try:
+            if self._setup_hooks:
+                for hook in self._setup_hooks:
+                    self._logger.log_info(f"Setting hook {hook.__name__}")
+                    await hook(self)
+                self._logger.log_high_priority("Hooks set up.")
 
-                try:
-                    await self._http.close_session()
-                except Exception as e:
-                    self._logger.log_warn(f"HTTP session close failed: {e}")
+            # register GUILD commands
+            await self.command_dispatcher._register_guild_commands(self._guild_commands)
 
+            # register GLOBAL commands
+            await self.command_dispatcher._register_global_commands(self._global_commands)
 
+            self._logger.log_high_priority("Commands set up.")
+        except Exception:
+            raise
+
+    async def close(self):    
+        """Gracefully close HTTP and websocket connections."""    
+        # Close HTTP first since it's more important
+        self._logger.log_debug("Closing HTTP session...")
+        await self._http.close_session()
+
+        # Then try websocket with short timeout
+        try:
+            self._logger.log_debug("Closing websocket connection...")
+            await asyncio.wait_for(self._ws.close(), timeout=1.0)
+        except:
+            pass  # Don't care if websocket won't close
+        
     def run(self):
         """Starts the bot.
             Handles starting the session, WS, and heartbeat, reconnection logic,
             setting up emojis and hooks, and then listens for gateway events.
-        """
-        import asyncio
-        
+        """        
         try:
             asyncio.run(self.start())
         except KeyboardInterrupt:

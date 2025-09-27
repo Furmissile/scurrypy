@@ -53,57 +53,46 @@ class GatewayClient:
 
     async def connect(self):
         """Established websocket connection to Discord."""
-        try:
-            self.ws = await websockets.connect(self.connect_url + self.url_params)
-            self._logger.log_high_priority("Connected to Discord.")
-        except Exception as e:
-            self._logger.log_error(f"Websocket Connection Error {type(e).__name__} - {e}")
-    
+        self.ws = await websockets.connect(self.connect_url + self.url_params)
+        self._logger.log_high_priority("Connected to Discord.")
+
     async def receive(self):
         """Receives and logs messages from the gateway.
 
         Returns:
             (dict): parsed JSON data
         """
-        try:
-            message = await self.ws.recv()
-            if message:
-                data: dict = json.loads(message)
-                self._logger.log_debug(f"Received: {DISCORD_OP_CODES.get(data.get('op'))} - {json.dumps(data, indent=4)}")
-                self._logger.log_info(f"Received: {DISCORD_OP_CODES.get(data.get('op'))}")
-                return data
-            else:
-                return None
-        except Exception as e:
-            self._logger.log_error(f"Error on receive: {type(e).__name__} - {e}")
-    
+
+        message = await asyncio.wait_for(self.ws.recv(), timeout=60)
+
+        if message:
+            data: dict = json.loads(message)
+            self._logger.log_debug(f"Received: {DISCORD_OP_CODES.get(data.get('op'))} - {json.dumps(data, indent=4)}")
+            self._logger.log_info(f"Received: {DISCORD_OP_CODES.get(data.get('op'))}")
+            return data
+
+        return None
+
     async def send(self, message: dict):
         """Sends a JSON-encoded message to the gateway.
 
         Args:
             message (dict): the message to send
         """
-        try:
-            await self.ws.send(json.dumps(message))
-        except Exception as e:
-            self._logger.log_error(f"Error on send: {type(e).__name__} - {e}")
-        
+        self._logger.log_debug(f"Sending payload: {message}")
+        await self.ws.send(json.dumps(message))
+
     async def send_heartbeat_loop(self):
         """Background task that sends heartbeat payloads in regular intervals.
             Retries until cancelled.
         """
-        try:
-            while True:
-                await asyncio.sleep(self.heartbeat_interval / 1000)
-                hb_data = {"op": 1, "d": self.sequence}
-                await self.send(hb_data)
-                self._logger.log_debug(f"Sending: {hb_data}")
-                self._logger.log_info("Heartbeat sent.")
-        except asyncio.CancelledError:
-            self._logger.log_debug("Heartbeat task cancelled")
-        except Exception as e:
-            self._logger.log_error(f"Error on heartbeat send: {type(e).__name__} - {e}")
-        
+        while self.ws:
+            await asyncio.sleep(self.heartbeat_interval / 1000)
+            hb_data = {"op": 1, "d": self.sequence}
+            await self.send(hb_data)
+            self._logger.log_debug(f"Sending: {hb_data}")
+            self._logger.log_info("Heartbeat sent.")
+
     async def identify(self):
         """Sends the IDENIFY payload (token, intents, connection properties).
             Must be sent after connecting to the WS.
@@ -127,15 +116,12 @@ class GatewayClient:
     
     async def start_heartbeat(self):
         """Waits for initial HELLO event, hydrates the HelloEvent class, and begins the heartbeat."""
-        try:
-            data = await self.receive()
-            hello = HelloEvent.from_dict(data.get('d'))
-            self.heartbeat_interval = hello.heartbeat_interval
-            self.heartbeat = asyncio.create_task(self.send_heartbeat_loop())
-            self._logger.log_high_priority("Heartbeat started.")
-        except Exception as e:
-            self._logger.log_error(f"Heartbeat Task Error: {type(e).__name__} - {e}")
-    
+        data = await self.receive()
+        hello = HelloEvent.from_dict(data.get('d'))
+        self.heartbeat_interval = hello.heartbeat_interval
+        self.heartbeat = asyncio.create_task(self.send_heartbeat_loop())
+        self._logger.log_high_priority("Heartbeat started.")
+
     async def reconnect(self):
         """Sends RESUME payload to reconnect with the same session ID and sequence number
             as provided by Discord.
@@ -156,20 +142,14 @@ class GatewayClient:
         if self.heartbeat:
             self._logger.log_high_priority(f"Cancelling heartbeat...")
             self.heartbeat.cancel()
-            try:
-                await asyncio.wait_for(self.heartbeat, timeout=3)  # Add timeout to avoid hanging
-            except asyncio.CancelledError:
-                self._logger.log_debug("Heartbeat cancelled by CancelledError.")
-            except asyncio.TimeoutError:
-                self._logger.log_error("Heartbeat cancel timed out.")
-            except Exception as e:
-                self._logger.log_error(f"Unexpected error cancelling heartbeat: {type(e).__name__} - {e}")
+            await asyncio.wait_for(self.heartbeat, timeout=3)  # Add timeout to avoid hanging
             self.heartbeat = None
 
         if self.ws:
-            try:
-                await self.ws.close()
-                self._logger.log_high_priority("WebSocket closed.")
-            except Exception as e:
-                self._logger.log_error(f"Error while closing websocket: {type(e).__name__} - {e}")
+            await self.ws.close()
+            self._logger.log_high_priority("WebSocket closed.")
             self.ws = None
+
+    def is_connected(self):
+        """Helper function to tell whether the websocket is still active."""
+        return self.ws is not None
