@@ -566,45 +566,45 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.application_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_application" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;application_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_application
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.guild_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_guild" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;guild_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_guild
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.channel_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_channel" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;channel_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_channel
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.message_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_message" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;message_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_message
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.user_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_user" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;user_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_user
     </span>
   </a>
   
@@ -614,6 +614,15 @@
   <a href="#discord.client.Client.clear_guild_commands" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;clear_guild_commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.client.Client.close" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;close
     </span>
   </a>
   
@@ -1660,45 +1669,45 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.application_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_application" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;application_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_application
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.guild_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_guild" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;guild_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_guild
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.channel_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_channel" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;channel_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_channel
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.message_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_message" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;message_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_message
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.client.Client.user_from_id" class="md-nav__link">
+  <a href="#discord.client.Client.fetch_user" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;user_from_id
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;fetch_user
     </span>
   </a>
   
@@ -1708,6 +1717,15 @@
   <a href="#discord.client.Client.clear_guild_commands" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;clear_guild_commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.client.Client.close" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;close
     </span>
   </a>
   
@@ -2027,7 +2045,7 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
 
     <div class="doc doc-contents ">
 
-        <p>Decorator registers a function for a command handler.</p>
+        <p>Decorator to register a function as a command handler.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2049,17 +2067,17 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
    (discord.parts.command.UserCommand)" href="../commands/#discord.parts.command.UserCommand">UserCommand</a></code>)
           –
           <div class="doc-md-description">
-            <p>command to register</p>
+            <p>The command to register.</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
-            <b><code>guild_id</code></b>
-              (<code><span title="int">int</span></code>, default:
-                  <code>0</code>
+            <b><code>guild_ids</code></b>
+              (<code><span title="list">list</span>[<span title="int">int</span>] | None</code>, default:
+                  <code>None</code>
 )
           –
           <div class="doc-md-description">
-            <p>ID of guild in which to register command (if a guild command)</p>
+            <p>Guild IDs for guild-specific commands. None for global commands.</p>
           </div>
         </li>
     </ul>
@@ -2167,10 +2185,10 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
 <div class="doc doc-object doc-function">
 
 
-<h3 id="discord.client.Client.application_from_id" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">application_from_id</span></code>
+<h3 id="discord.client.Client.fetch_application" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">fetch_application</span></code>
 
-<a href="#discord.client.Client.application_from_id" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.client.Client.fetch_application" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2214,10 +2232,10 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
 <div class="doc doc-object doc-function">
 
 
-<h3 id="discord.client.Client.guild_from_id" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">guild_from_id</span></code>
+<h3 id="discord.client.Client.fetch_guild" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">fetch_guild</span></code>
 
-<a href="#discord.client.Client.guild_from_id" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.client.Client.fetch_guild" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2261,10 +2279,10 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
 <div class="doc doc-object doc-function">
 
 
-<h3 id="discord.client.Client.channel_from_id" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">channel_from_id</span></code>
+<h3 id="discord.client.Client.fetch_channel" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">fetch_channel</span></code>
 
-<a href="#discord.client.Client.channel_from_id" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.client.Client.fetch_channel" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2308,10 +2326,10 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
 <div class="doc doc-object doc-function">
 
 
-<h3 id="discord.client.Client.message_from_id" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">message_from_id</span></code>
+<h3 id="discord.client.Client.fetch_message" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">fetch_message</span></code>
 
-<a href="#discord.client.Client.message_from_id" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.client.Client.fetch_message" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2363,10 +2381,10 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
 <div class="doc doc-object doc-function">
 
 
-<h3 id="discord.client.Client.user_from_id" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">user_from_id</span></code>
+<h3 id="discord.client.Client.fetch_user" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">fetch_user</span></code>
 
-<a href="#discord.client.Client.user_from_id" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.client.Client.fetch_user" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2436,6 +2454,28 @@ Ties together the moving parts: gateway, HTTP, event dispatching, command handli
           </div>
         </li>
     </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="discord.client.Client.close" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">close</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+<a href="#discord.client.Client.close" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Gracefully close HTTP and websocket connections.</p>
 
 
     </div>
