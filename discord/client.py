@@ -337,7 +337,15 @@ class Client(ClientLike):
 
     async def _close(self):    
         """Gracefully close HTTP and websocket connections."""    
-        # Close HTTP first since it's more important
+        # Run shutdown hooks first
+        for hook in self._shutdown_hooks:
+            try:
+                self._logger.log_info(f"Executing shutdown hook {hook.__name__}")
+                await hook(self)
+            except Exception as e:
+                self._logger.log_error(f"Shutdown hook failed: {type(e).__name__}: {e}")
+
+        # Close HTTP before gateway since it's more important
         self._logger.log_debug("Closing HTTP session...")
         await self._http.close_session()
 
