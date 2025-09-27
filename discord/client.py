@@ -298,7 +298,7 @@ class Client(ClientLike):
                     await self._ws.identify()
 
                 if not self._is_set_up:
-                    await self.startup()
+                    await self._startup()
                     self._is_set_up = True
 
                 await self._listen()
@@ -314,9 +314,10 @@ class Client(ClientLike):
         except Exception as e:
             self._logger.log_error(f"{type(e).__name__} - {e}")
         finally:
-            await self.close()
+            await self._close()
 
-    async def startup(self):
+    async def _startup(self):
+        """Start up bot by registering user-defined hooks and commands."""
         try:
             if self._setup_hooks:
                 for hook in self._setup_hooks:
@@ -334,7 +335,7 @@ class Client(ClientLike):
         except Exception:
             raise
 
-    async def close(self):    
+    async def _close(self):    
         """Gracefully close HTTP and websocket connections."""    
         # Close HTTP first since it's more important
         self._logger.log_debug("Closing HTTP session...")
