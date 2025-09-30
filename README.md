@@ -46,7 +46,7 @@ client = discord.Client(
         name='example',
         description='Demonstrate the minimal slash command!'
     ),
-    guild_id=GUILD_ID  # must be a guild ID your bot is in
+    guild_ids=GUILD_ID  # must be a guild ID your bot is in
 )
 async def example(bot: discord.Client, event: discord.InteractionEvent):
     await event.interaction.respond(f'Hello, {event.interaction.member.user.username}!')
