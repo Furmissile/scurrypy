@@ -4,5 +4,6 @@ misc/
 site/
 build/
 dist/
+tests/
 *.egg-info
 *.bash

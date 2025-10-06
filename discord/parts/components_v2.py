@@ -3,7 +3,18 @@ from typing import Literal, Optional
 from ..model import DataModel
 
 from .component_types import *
-from .action_row import StringSelect, ActionRow
+from ..models.emoji import EmojiModel
+
+from .action_row import (
+    StringSelect, 
+    ActionRow, 
+    ChannelSelect, 
+    MentionableSelect, 
+    RoleSelect, 
+    UserSelect, 
+    _Button, 
+    _ButtonStyles
+)
 
 class _TextInputStyles:
     """Represents the types of Text Inputs."""
@@ -26,8 +37,79 @@ class _TextInput(DataModel, LabelChild):
 class Section(DataModel, ContainerChild):
     """Represents the Section component."""
     type: Literal[9] = field(init=False, default=9)
+
     accessory: Optional[SectionAccessory] = None
+    """A component that is contextually associated to the content of the section."""
+
     components: list[SectionChild] = field(default_factory=list)
+    """Component(s) representing the content of the section that is contextually associated to the accessory"""
+
+    def set_thumbnail(self, media: str, description: str = None, has_spoiler: bool = False):
+        """Set the thumbnail for this section.
+
+        Args:
+            media (str): Image data. http or attachment://<filename> scheme.
+            description (str, optional): Alt text for the media
+            has_spoiler (bool, optional): If the media should be blurred out. Defaults to False.
+
+        Returns:
+            (Section): self
+        """
+        self.accessory = _Thumbnail(media, description, has_spoiler)
+        return self
+
+    def add_text_display(self, content: str):
+        """Add a text display to this section.
+
+        Args:
+            content (str): the content to display
+        
+        Returns:
+            (Section): self
+        """
+        self.components.append(_TextDisplay(content))
+        return self
+
+    def set_button(self, 
+        *,
+        style: Literal['Primary', 'Secondary', 'Success', 'Danger', 'Link'],
+        label: str, 
+        custom_id: str,
+        emoji: str | EmojiModel = None,
+        disable: bool = False
+    ):
+        """Set this section's accessory as a button.
+        
+        Args:
+            style (Literal['Primary', 'Secondary', 'Success', 'Danger', 'Link']): 
+                button style as a string
+            label (str): button text
+            custom_id (str): developer-defined button ID
+            emoji (str | EmojiModel, Optional): str if unicode emoji, EmojiModal if custom
+            disable (bool, Optional): if this button should be pressable. Defaults to False.
+
+        Returns:
+            (Section): self
+        """
+        _styles = {
+            'PRIMARY': _ButtonStyles.PRIMARY,
+            'SECONDARY': _ButtonStyles.SECONDARY,
+            'SUCCESS': _ButtonStyles.SUCCESS,
+            'DANGER': _ButtonStyles.DANGER,
+            'LINK': _ButtonStyles.LINK
+        }
+
+        if isinstance(emoji, str):
+            emoji = EmojiModel(name=emoji)
+
+        self.accessory = _Button(
+            style=_styles.get(style.upper()),
+            label=label,
+            custom_id=custom_id,
+            emoji=emoji,
+            disabled=disable
+        )
+        return self
 
 @dataclass
 class _TextDisplay(DataModel, ContainerChild, SectionChild):
@@ -87,6 +169,7 @@ class _Separator(DataModel, ContainerChild):
 @dataclass
 class Label(DataModel):
     """Represents the Discord Label component."""
+
     label: str
     """Label text."""
 
@@ -98,11 +181,11 @@ class Label(DataModel):
 
     type: Literal[18] = field(init=False, default=18)
 
-    def string_select(self, select: StringSelect):
-        """Set this label to be a string select component.
+    def set_select_menu(self, select: StringSelect | UserSelect | RoleSelect | ChannelSelect | MentionableSelect):
+        """Set this label to be a select menu component.
 
         Args:
-            select (StringSelect): the string select component
+            select (StringSelect | UserSelect | RoleSelect | ChannelSelect | MentionableSelect): the select menu component
 
         Returns:
             (Label): self
@@ -110,7 +193,7 @@ class Label(DataModel):
         self.component = select
         return self
 
-    def text_input(self,
+    def set_text_input(self,
         *,
         custom_id: str,
         min_length: int,

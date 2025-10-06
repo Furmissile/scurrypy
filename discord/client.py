@@ -281,6 +281,9 @@ class Client(ClientLike):
             except ConnectionError as e:
                 self._logger.log_warn(f"Connection lost: {e}")
                 raise
+            except Exception as e:
+                self._logger.log_error(f"{type(e).__name__} - {e}")
+                continue
 
     async def start(self):
         """Runs the main lifecycle of the bot.

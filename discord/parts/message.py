@@ -4,7 +4,6 @@ from discord.model import DataModel
 from .embed import EmbedBuilder
 from .action_row import ActionRow
 from .components_v2 import Container
-from .attachment import _Attachment
 
 class MessageFlags:
     """Flags that can be applied to a message."""
@@ -40,6 +39,21 @@ class _MessageReference(DataModel):
     message_id: int
     channel_id: int
     type: int = 0
+
+@dataclass
+class _Attachment(DataModel):
+    """Represents an attachment."""
+    id: int
+    path: str
+    filename: str
+    description: str
+
+    def _to_dict(self):
+        return {
+            'id': self.id,
+            'filename': self.filename,
+            'description': self.description
+        }
 
 @dataclass
 class MessageBuilder(DataModel):

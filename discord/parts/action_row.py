@@ -83,12 +83,11 @@ class StringSelect(DataModel, ActionRowChild, LabelChild):
 @dataclass
 class _DefaultValue(DataModel):
     """Represents the Default Value for Select components."""
-
     id: int   # ID of role, user, or channel
     type: Literal["role", "user", "channel"]
 
 @dataclass
-class UserSelect(DataModel, ActionRowChild):
+class UserSelect(DataModel, ActionRowChild, LabelChild):
     """Represents the User Select component."""
     custom_id: str
     placeholder: Optional[str] = None
@@ -103,7 +102,7 @@ class UserSelect(DataModel, ActionRowChild):
         return self
 
 @dataclass
-class RoleSelect(DataModel, ActionRowChild):
+class RoleSelect(DataModel, ActionRowChild, LabelChild):
     """Represents the Role Select component."""
     custom_id: str
     placeholder: Optional[str] = None
@@ -118,7 +117,7 @@ class RoleSelect(DataModel, ActionRowChild):
         return self
 
 @dataclass
-class MentionableSelect(DataModel, ActionRowChild):
+class MentionableSelect(DataModel, ActionRowChild, LabelChild):
     """Represents the Mentionable Select component."""
     custom_id: str
     placeholder: Optional[str] = None
@@ -133,7 +132,7 @@ class MentionableSelect(DataModel, ActionRowChild):
         return self
 
 @dataclass
-class ChannelSelect(DataModel, ActionRowChild):
+class ChannelSelect(DataModel, ActionRowChild, LabelChild):
     """Represents the Channel Select component."""
     custom_id: str
     placeholder: Optional[str] = None
@@ -196,59 +195,11 @@ class ActionRow(DataModel, ContainerChild):
         )
         return self
 
-    def string_select(self, select: StringSelect):
-        """Add a string select to this action row. (1 per row)
+    def set_select_menu(self, select: StringSelect | UserSelect | RoleSelect | ChannelSelect | MentionableSelect):
+        """Add a select menu component to this action row. (1 per row)
 
         Args:
-            select (StringSelect): the StringSelect option object
-
-        Returns:
-            (ActionRow): self
-        """
-        self.components.append(select)
-        return self
-    
-    def user_select(self, select: UserSelect):
-        """Add a user select to this action row. (1 per row)
-
-        Args:
-            select (UserSelect): the UserSelect option object
-
-        Returns:
-            (ActionRow): self
-        """
-        self.components.append(select)
-        return self
-    
-    def role_select(self, select: RoleSelect):
-        """Add a role select to this action row. (1 per row)
-
-        Args:
-            select (RoleSelect): the RoleSelect option object
-
-        Returns:
-            (ActionRow): self
-        """
-        self.components.append(select)
-        return self
-    
-    def channel_select(self, select: ChannelSelect):
-        """Add a channel select to this action row. (1 per row)
-
-        Args:
-            select (ChannelSelect): the ChannelSelect option object
-
-        Returns:
-            (ActionRow): self
-        """
-        self.components.append(select)
-        return self
-    
-    def mentionable_select(self, select: MentionableSelect):
-        """Add a mentionable select to this action row. (1 per row)
-
-        Args:
-            select (MentionableSelect): the MentionableSelect option object
+            select (StringSelect | UserSelect | RoleSelect | ChannelSelect | MentionableSelect): the select menu component
 
         Returns:
             (ActionRow): self

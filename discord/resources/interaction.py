@@ -103,9 +103,14 @@ class Interaction(DataModel):
         Args:
             message (str | MessageBuilder): content as a string or from MessageBuilder
             with_response (bool, optional): if the interaction data should be returned. Defaults to False.
+
+        Raises:
+            TypeError: invalid type
         """
         if isinstance(message, str):
             message = MessageBuilder(content=message).set_flags(**flags)
+        elif not isinstance(message, MessageBuilder):
+            raise TypeError(f"Interaction.respond expects type str or MessageBuilder, got {type(message).__name__}")
 
         content = {
             'type': InteractionCallbackTypes.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -129,9 +134,14 @@ class Interaction(DataModel):
 
         Args:
             message (str | MessageBuilder): content as a string or from MessageBuilder
+
+        Raises:
+            TypeError: invalid type
         """
         if isinstance(message, str):
             message = MessageBuilder(content=message).set_flags(**flags)
+        elif not isinstance(message, MessageBuilder):
+            raise TypeError(f"Interaction.update expects type str or MessageBuilder, got {type(message).__name__}")
 
         content = {
             'type': InteractionCallbackTypes.UPDATE_MESSAGE,
@@ -149,7 +159,13 @@ class Interaction(DataModel):
 
         Args:
             modal (ModalBuilder): modal data
+
+        Raises:
+            TypeError: invalid type
         """
+        if not isinstance(modal, ModalBuilder):
+            raise TypeError(f"Interaction.respond_modal expects type ModalBuilder, got {type(modal).__name__}")
+        
         content = {
             'type': InteractionCallbackTypes.MODAL,
             'data': modal._to_dict()

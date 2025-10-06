@@ -2,19 +2,29 @@
 
 [![PyPI version](https://badge.fury.io/py/scurrypy.svg)](https://badge.fury.io/py/scurrypy)
 
-Yet another Discord API wrapper in Python!  
+> **Official Repository**  
+> This is the original and official repository of **ScurryPy**, maintained by [Furmissile](https://github.com/Furmissile).  
+> Forks and community extensions are welcome under the project’s license and attribution guidelines.
+
+A dataclass-driven Discord API wrapper in Python!
 
 While this wrapper is mainly used for various squirrel-related shenanigans, it can also be used for more generic bot purposes.
 
-## Features
-* Command and event handling
-* Declarative style using decorators
-* Supports both legacy and new features
-* Respects Discord's rate limits
+---
 
-## Some things to consider...
-* This is an early version — feedback, ideas, and contributions are very welcome! That said, there may be bumps along the way, so expect occasional bugs and quirks.
-* Certain features are not yet supported, while others are intentionally omitted. See the [docs](https://furmissile.github.io/scurrypy) for full details.
+## Features
+* Command and event handling  
+* Declarative style using decorators  
+* Supports both legacy and new features  
+* Respects Discord’s rate limits  
+
+---
+
+## Some Things to Consider...
+* This is an early version — feedback, ideas, and contributions are very welcome! That said, there may be bumps along the way, so expect occasional bugs and quirks.  
+* Certain features are not yet supported, while others are intentionally omitted. See the [docs](https://furmissile.github.io/scurrypy) for full details.  
+
+---
 
 ## Getting Started
 *Note: This section also appears in the documentation, but here are complete examples ready to use with your bot credentials.*
@@ -25,12 +35,12 @@ To install the ScurryPy package, run:
 pip install scurrypy
 ```
 
-### Minimal Slash Command
+## Minimal Slash Command
 The following demonstrates building and responding to a slash command.
 
 *Note: Adjust `dotenv_path` if your `.env` file is not in the same directory as this script.*
 
-```python
+```py
 import discord, os
 from dotenv import load_dotenv
 
@@ -54,10 +64,9 @@ async def example(bot: discord.Client, event: discord.InteractionEvent):
 client.run()
 ```
 
-### Minimal Prefix Command (Legacy)
+## Minimal Prefix Command (Legacy)
 The following demonstrates building and responding to a message prefix command.
-
-```python
+```py
 import discord, os
 from dotenv import load_dotenv
 
@@ -78,5 +87,34 @@ async def ping(bot: discord.Client, event: discord.MessageCreateEvent):
 client.run()
 ```
 
-## Like what you see?
-Check out the full [documentation](https://furmissile.github.io/scurrypy) for more examples, guides, and API reference!
+## Contribution and Fork Policy
+ScurryPy follows a simple philosophy: **clarity, simplicity, and direct interaction with the Discord API**.
+It favors explicit, dataclass-driven design over heavy abstraction — and contributions should stay true to that style.
+
+This is a community-supported project guided by the design and principles of **Furmissile**.
+You are welcome to explore, modify, and extend the codebase under the terms of its license — but please follow these guidelines to ensure proper attribution and clarity.
+
+### You May
+* Fork this repository for personal or collaborative development.
+* Submit pull requests for bug fixes or new features that align with ScurryPy’s goals.
+* Reuse parts of the code in your own projects, provided attribution is preserved.
+
+### You May NOT
+* Remove or alter existing copyright notices or attributions.
+* Present a fork as the official ScurryPy project.
+* Use the name “ScurryPy” or its documentation to promote a fork without permission.
+
+If you plan to make substantial changes or release your own variant:
+* Rename the fork to avoid confusion (e.g., `scurrypy-plus` or `scurrypy-extended`).
+* Add a note in your README acknowledging the original project:
+> "This project is a fork of [ScurryPy](https://github.com/Furmissile/scurrypy)
+ by Furmissile."
+
+ ## License
+ This project is licensed under the Furmissile License, which allows viewing, modification, and redistribution with proper attribution.
+
+See the [License](./LICENSE) for details.
+
+## Like What You See?
+Check out the full [documentation](https://furmissile.github.io/scurrypy)
+ for more examples, guides, and API reference!

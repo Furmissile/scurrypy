@@ -126,11 +126,13 @@ class ModalData(DataModel):
             if custom_id != component.component.custom_id:
                 continue
 
-            match component.component.type:
-                case 3: # string select -> values
-                    return component.component.values
-                case 4: # text input -> value
-                    return component.component.value
+            t = component.component.type
+
+            if t in [3,5,6,7,8]: # select menus (w. possibly many option selects!)
+                return component.component.values
+            
+            # text input
+            return component.component.value
 
         raise ValueError(f"Component custom id '{custom_id}' not found.")
 
