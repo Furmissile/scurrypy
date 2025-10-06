@@ -676,6 +676,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#discord.parts.components_v2.Section.set_thumbnail" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_thumbnail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.components_v2.Section.add_text_display" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_text_display
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.components_v2.Section.set_button" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_button
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -761,18 +788,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.components_v2.Label.string_select" class="md-nav__link">
+  <a href="#discord.parts.components_v2.Label.set_select_menu" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;string_select
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_select_menu
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.components_v2.Label.text_input" class="md-nav__link">
+  <a href="#discord.parts.components_v2.Label.set_text_input" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;text_input
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_text_input
     </span>
   </a>
   
@@ -1782,6 +1809,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#discord.parts.components_v2.Section.set_thumbnail" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_thumbnail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.components_v2.Section.add_text_display" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_text_display
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.components_v2.Section.set_button" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_button
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1867,18 +1921,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.components_v2.Label.string_select" class="md-nav__link">
+  <a href="#discord.parts.components_v2.Label.set_select_menu" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;string_select
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_select_menu
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.components_v2.Label.text_input" class="md-nav__link">
+  <a href="#discord.parts.components_v2.Label.set_text_input" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;text_input
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_text_input
     </span>
   </a>
   
@@ -2534,6 +2588,8 @@
 
     <div class="doc doc-contents ">
 
+        <p>A component that is contextually associated to the content of the section.</p>
+
     </div>
 
 </div>
@@ -2555,12 +2611,215 @@
 
     <div class="doc doc-contents ">
 
+        <p>Component(s) representing the content of the section that is contextually associated to the accessory</p>
+
     </div>
 
 </div>
 
 
 
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="discord.parts.components_v2.Section.set_thumbnail" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">set_thumbnail</span></code>
+
+<a href="#discord.parts.components_v2.Section.set_thumbnail" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Set the thumbnail for this section.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>media</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>Image data. http or attachment://<filename> scheme.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>description</code></b>
+              (<code><span title="str">str</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Alt text for the media</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>has_spoiler</code></b>
+              (<code><span title="bool">bool</span></code>, default:
+                  <code>False</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>If the media should be blurred out. Defaults to False.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-internal" title="              Section
+
+  
+      dataclass
+   (discord.parts.components_v2.Section)" href="#discord.parts.components_v2.Section">Section</a></code>
+          –
+          <div class="doc-md-description">
+            <p>self</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="discord.parts.components_v2.Section.add_text_display" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">add_text_display</span></code>
+
+<a href="#discord.parts.components_v2.Section.add_text_display" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Add a text display to this section.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>content</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>the content to display</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-internal" title="              Section
+
+  
+      dataclass
+   (discord.parts.components_v2.Section)" href="#discord.parts.components_v2.Section">Section</a></code>
+          –
+          <div class="doc-md-description">
+            <p>self</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="discord.parts.components_v2.Section.set_button" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">set_button</span></code>
+
+<a href="#discord.parts.components_v2.Section.set_button" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Set this section's accessory as a button.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>style</code></b>
+              (<code><span title="typing.Literal">Literal</span>[&#39;Primary&#39;, &#39;Secondary&#39;, &#39;Success&#39;, &#39;Danger&#39;, &#39;Link&#39;]</code>)
+          –
+          <div class="doc-md-description">
+            <p>button style as a string</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>label</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>button text</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>custom_id</code></b>
+              (<code><span title="str">str</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>developer-defined button ID</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>emoji</code></b>
+              (<code>(<span title="str">str</span> | <a class="autorefs autorefs-internal" title="              EmojiModel
+
+  
+      dataclass
+   (discord.models.emoji.EmojiModel)" href="../models/#discord.models.emoji.EmojiModel">EmojiModel</a>, <span title="typing.Optional">Optional</span>)</code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>str if unicode emoji, EmojiModal if custom</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>disable</code></b>
+              (<code>(<span title="bool">bool</span>, <span title="typing.Optional">Optional</span>)</code>, default:
+                  <code>False</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>if this button should be pressable. Defaults to False.</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-internal" title="              Section
+
+  
+      dataclass
+   (discord.parts.components_v2.Section)" href="#discord.parts.components_v2.Section">Section</a></code>
+          –
+          <div class="doc-md-description">
+            <p>self</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
 
 
 
@@ -2811,15 +3070,15 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="discord.parts.components_v2.Label.string_select" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">string_select</span></code>
+<h3 id="discord.parts.components_v2.Label.set_select_menu" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">set_select_menu</span></code>
 
-<a href="#discord.parts.components_v2.Label.string_select" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.parts.components_v2.Label.set_select_menu" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Set this label to be a string select component.</p>
+        <p>Set this label to be a select menu component.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2830,10 +3089,26 @@
 
   
       dataclass
-   (discord.parts.action_row.StringSelect)" href="../components/#discord.parts.action_row.StringSelect">StringSelect</a></code>)
+   (discord.parts.action_row.StringSelect)" href="../components/#discord.parts.action_row.StringSelect">StringSelect</a> | <a class="autorefs autorefs-internal" title="              UserSelect
+
+  
+      dataclass
+   (discord.parts.action_row.UserSelect)" href="../components/#discord.parts.action_row.UserSelect">UserSelect</a> | <a class="autorefs autorefs-internal" title="              RoleSelect
+
+  
+      dataclass
+   (discord.parts.action_row.RoleSelect)" href="../components/#discord.parts.action_row.RoleSelect">RoleSelect</a> | <a class="autorefs autorefs-internal" title="              ChannelSelect
+
+  
+      dataclass
+   (discord.parts.action_row.ChannelSelect)" href="../components/#discord.parts.action_row.ChannelSelect">ChannelSelect</a> | <a class="autorefs autorefs-internal" title="              MentionableSelect
+
+  
+      dataclass
+   (discord.parts.action_row.MentionableSelect)" href="../components/#discord.parts.action_row.MentionableSelect">MentionableSelect</a></code>)
           –
           <div class="doc-md-description">
-            <p>the string select component</p>
+            <p>the select menu component</p>
           </div>
         </li>
     </ul>
@@ -2862,10 +3137,10 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="discord.parts.components_v2.Label.text_input" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">text_input</span></code>
+<h3 id="discord.parts.components_v2.Label.set_text_input" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">set_text_input</span></code>
 
-<a href="#discord.parts.components_v2.Label.text_input" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.parts.components_v2.Label.set_text_input" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
