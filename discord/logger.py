@@ -35,6 +35,7 @@ class Logger:
             """Log file for writing."""
         except Exception as e:
             self.log_error(f"Error {type(e)}: {e}")
+            self.log_traceback()
 
         self.dev_mode = dev_mode
         """If debug logs should be printed."""
@@ -51,6 +52,11 @@ class Logger:
         from datetime import datetime
         
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    def log_traceback(self):
+        if self.dev_mode == True:
+            import traceback
+            self._log("DEBUG", self.DEBUG, traceback.format_exc())
     
     def _log(self, level: str, color: str, message: str):
         """Internal helper that writes formatted log to both file and console.

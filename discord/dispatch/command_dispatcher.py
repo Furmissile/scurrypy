@@ -64,7 +64,7 @@ class CommandDispatcher:
             await self._http.request(
                 'PUT', 
                 f"applications/{self.application_id}/guilds/{guild_id}/commands", 
-                [command._to_dict() for command in cmds]
+                data=[command._to_dict() for command in cmds]
             )
     
     async def _register_global_commands(self, commands: list):
@@ -76,7 +76,7 @@ class CommandDispatcher:
 
         global_commands = [command._to_dict() for command in commands]
 
-        await self._http.request('PUT', f"applications/{self.application_id}/commands", global_commands)
+        await self._http.request('PUT', f"applications/{self.application_id}/commands", data=global_commands)
 
     def command(self, name: str, handler):
         """Decorator to register slash commands.
@@ -161,3 +161,4 @@ class CommandDispatcher:
             self._logger.log_info(f"Interaction Event '{name}' Acknowledged.")
         except Exception as e:
             self._logger.log_error(f"Error in interaction '{name}': {e}")
+            self._logger.log_traceback()

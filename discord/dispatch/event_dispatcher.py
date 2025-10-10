@@ -43,7 +43,7 @@ class EventDispatcher:
         """HTTP session for requests."""
 
         self._logger = client._logger
-        """HTTP session for requests"""
+        """Logger instance to log events."""
 
         self.config = client.config
         """User-defined bot config for persistent data."""

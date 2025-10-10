@@ -228,9 +228,9 @@ class Client(ClientLike):
             guild_id (int): id of the target guild
         """
         if self._guild_commands.get(guild_id):
-            self._logger.log_info(f"Guild {guild_id} already queued, skipping clear.")
+            self._logger.log_warn(f"Guild {guild_id} already queued, skipping clear.")
             return
-
+        
         self._guild_commands[guild_id] = []
 
     async def _listen(self):
@@ -268,7 +268,7 @@ class Client(ClientLike):
                         self._ws.sequence = None
                         raise ConnectionError("Invalid session.")
                     case 11:
-                        self._logger.log_debug("Heartbeat ACK received")
+                        self._logger.log_info("Heartbeat ACK received")
 
             except asyncio.CancelledError:
                 break
@@ -283,14 +283,15 @@ class Client(ClientLike):
                 raise
             except Exception as e:
                 self._logger.log_error(f"{type(e).__name__} - {e}")
+                self._logger.log_traceback()
                 continue
 
-    async def start(self):
+    async def _start(self):
         """Runs the main lifecycle of the bot.
             Handles connection setup, heartbeat management, event loop, and automatic reconnects.
         """
         try:
-            await self._http.start_session()
+            await self._http.start()
             await self._ws.connect()
             await self._ws.start_heartbeat()
 
@@ -350,7 +351,7 @@ class Client(ClientLike):
 
         # Close HTTP before gateway since it's more important
         self._logger.log_debug("Closing HTTP session...")
-        await self._http.close_session()
+        await self._http.close()
 
         # Then try websocket with short timeout
         try:
@@ -365,11 +366,12 @@ class Client(ClientLike):
             setting up emojis and hooks, and then listens for gateway events.
         """        
         try:
-            asyncio.run(self.start())
+            asyncio.run(self._start())
         except KeyboardInterrupt:
             self._logger.log_debug("Shutdown requested via KeyboardInterrupt.")
         except Exception as e:
             self._logger.log_error(f"{type(e).__name__} {e}")
+            self._logger.log_traceback()
         finally:
             self._logger.log_high_priority("Bot shutting down.")
             self._logger.close()

@@ -68,7 +68,7 @@ class Message(DataModel):
         data = await self._http.request(
             "POST",
             f"/channels/{self.channel_id}/messages",
-            message._to_dict(),
+            data=message._to_dict(),
             files=[fp.path for fp in message.attachments] if message.attachments else None
         )
         return Message.from_dict(data, self._http)
@@ -88,7 +88,7 @@ class Message(DataModel):
         data = await self._http.request(
             "PATCH", 
             f"/channels/{self.channel_id}/messages/{self.id}", 
-            message._to_dict(),
+            data=message._to_dict(),
             files=[fp.path for fp in message.attachments] if message.attachments else None)
 
         self._update(data)
@@ -110,7 +110,7 @@ class Message(DataModel):
         await self._http.request(
             'POST', 
             f"/channels/{self.channel_id}/messages",
-            message._to_dict(),
+            data=message._to_dict(),
             files=[fp.path for fp in message.attachments] if message.attachments else None)
 
     async def crosspost(self):

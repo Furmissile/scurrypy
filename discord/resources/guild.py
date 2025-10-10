@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import Optional, TypedDict, Unpack
+from urllib.parse import urlencode
 
 from ..http import HTTPClient
 from ..model import DataModel
@@ -136,7 +137,7 @@ class Guild(DataModel):
         Returns:
             (Channel): the created channel
         """
-        data = await self._http.request('POST', f'/guilds/{self.id}/channels', channel._to_dict())
+        data = await self._http.request('POST', f'/guilds/{self.id}/channels', data=channel._to_dict())
 
         return Channel.from_dict(data, self._http)
 
@@ -233,7 +234,7 @@ class Guild(DataModel):
         Returns:
             (RoleModel): new role data
         """
-        data = await self._http.request('POST', f'/guilds/{self.id}/roles', role._to_dict())
+        data = await self._http.request('POST', f'/guilds/{self.id}/roles', data=role._to_dict())
 
         return RoleModel.from_dict(data)
 
@@ -249,7 +250,7 @@ class Guild(DataModel):
         Returns:
             (RoleModel): role with changes
         """
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', role._to_dict())
+        data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=role._to_dict())
 
         return RoleModel.from_dict(data)
     

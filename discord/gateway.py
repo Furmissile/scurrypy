@@ -67,7 +67,6 @@ class GatewayClient:
 
         if message:
             data: dict = json.loads(message)
-            self._logger.log_debug(f"Received: {DISCORD_OP_CODES.get(data.get('op'))} - {json.dumps(data, indent=4)}")
             self._logger.log_info(f"Received: {DISCORD_OP_CODES.get(data.get('op'))}")
             return data
 
@@ -79,7 +78,6 @@ class GatewayClient:
         Args:
             message (dict): the message to send
         """
-        self._logger.log_debug(f"Sending payload: {message}")
         await self.ws.send(json.dumps(message))
 
     async def send_heartbeat_loop(self):
@@ -90,8 +88,7 @@ class GatewayClient:
             await asyncio.sleep(self.heartbeat_interval / 1000)
             hb_data = {"op": 1, "d": self.sequence}
             await self.send(hb_data)
-            self._logger.log_debug(f"Sending: {hb_data}")
-            self._logger.log_info("Heartbeat sent.")
+            self._logger.log_debug(f"Sent HEARTBEAT: {hb_data}")
 
     async def identify(self):
         """Sends the IDENIFY payload (token, intents, connection properties).
@@ -111,7 +108,7 @@ class GatewayClient:
         }
         await self.send(i)
         log_i = self._logger.redact(i)
-        self._logger.log_debug(f"Sending: {log_i}")
+        self._logger.log_debug(f"Sent IDENTIFY: {log_i}")
         self._logger.log_high_priority("Identify sent.")
     
     async def start_heartbeat(self):

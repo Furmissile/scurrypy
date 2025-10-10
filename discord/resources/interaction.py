@@ -122,7 +122,7 @@ class Interaction(DataModel):
         data = await self._http.request(
             'POST', 
             f'/interactions/{self.id}/{self.token}/callback', 
-            content, 
+            data=content, 
             files=[fp.path for fp in message.attachments],
             params=params)
 
@@ -151,7 +151,7 @@ class Interaction(DataModel):
         await self._http.request(
             'POST', 
             f'/interactions/{self.id}/{self.token}/callback', 
-            content, 
+            data=content, 
             files=[fp.path for fp in message.attachments])
 
     async def respond_modal(self, modal: ModalBuilder):
@@ -174,4 +174,4 @@ class Interaction(DataModel):
         await self._http.request(
             'POST', 
             f'/interactions/{self.id}/{self.token}/callback', 
-            content)
+            data=content)

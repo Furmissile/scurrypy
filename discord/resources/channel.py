@@ -148,7 +148,7 @@ class Channel(DataModel):
         if isinstance(message, str):
             message = MessageBuilder(content=message)
 
-        data = await self._http.request("POST", f"/channels/{self.id}/messages", message._to_dict())
+        data = await self._http.request("POST", f"/channels/{self.id}/messages", data=message._to_dict())
 
         return Message.from_dict(data, self._http)
 
