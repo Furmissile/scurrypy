@@ -6,6 +6,7 @@ import json
 from typing import Any, Optional
 
 from .logger import Logger
+from .error import DiscordError
 
 class HTTPException(Exception):
     """Represents an HTTP error response from Discord."""
@@ -163,6 +164,9 @@ class HTTPClient:
                             return await resp.json()
                         except aiohttp.ContentTypeError:
                             return await resp.text()
+                        
+                    if resp.status == 400:
+                        raise DiscordError(resp.status, await resp.json())
 
                     text = await resp.text()
                     raise HTTPException(resp, text)
