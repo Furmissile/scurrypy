@@ -13,7 +13,7 @@ class EmojiModel(DataModel):
     """ID of the emoji (if custom)."""
 
     animated: bool = False
-    """If the emoji is animated. Defaults to `False`."""
+    """If the emoji is animated. Defaults to False."""
 
     @property
     def mention(self) -> str:

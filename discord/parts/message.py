@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Optional, TypedDict, Unpack, Literal
-from discord.model import DataModel
-from .embed import EmbedBuilder
-from .action_row import ActionRow
-from .components_v2 import Container
+from typing import Optional, TypedDict, Unpack
+from ..model import DataModel
+from .embed import EmbedPart
+from .components import ActionRowPart
+from .components_v2 import ContainerPart
 
 class MessageFlags:
     """Flags that can be applied to a message."""
+
     CROSSPOSTED = 1 << 0
     """Message has been published."""
 
@@ -26,7 +27,7 @@ class MessageFlags:
     """This message includes Discord's V2 Components."""
 
 class MessageFlagParams(TypedDict, total=False):
-    """Parameters for setting message flags."""
+    """Parameters for setting message flags. See [`MessageFlags`][discord.parts.message.MessageFlags]."""
     crossposted: bool
     is_crosspost: bool
     suppress_embeds: bool
@@ -34,19 +35,47 @@ class MessageFlagParams(TypedDict, total=False):
     loading: bool
     is_components_v2: bool
 
-@dataclass
-class _MessageReference(DataModel):
-    message_id: int
-    channel_id: int
-    type: int = 0
+class MessageReferenceTypes:
+    """Constants associated with how reference data is populated."""
+
+    DEFAULT = 0
+    """Standard reference used by replies."""
+
+    FORWARD = 1
+    """Reference used to point to a message at a point in time."""
 
 @dataclass
-class _Attachment(DataModel):
+class MessageReference(DataModel):
+    """Represents the Message Reference object."""
+
+    message_id: int
+    """ID of the originating message."""
+
+    channel_id: int
+    """
+        Channel ID of the originating message.
+        !!! note
+            Optional for default type, but REQUIRED for forwards.
+    """
+
+    type: int = MessageReferenceTypes.DEFAULT
+    """Type of reference. Defaults to `DEFAULT`. See [`MessageReferenceTypes`][discord.parts.message.MessageReferenceTypes]."""
+
+@dataclass
+class Attachment(DataModel):
     """Represents an attachment."""
+
     id: int
+    """User-defined ID for the attachment."""
+
     path: str
+    """Relative path to the file."""
+
     filename: str
+    """Name of the file."""
+
     description: str
+    """Description of the file."""
 
     def _to_dict(self):
         return {
@@ -56,89 +85,27 @@ class _Attachment(DataModel):
         }
 
 @dataclass
-class MessageBuilder(DataModel):
+class MessagePart(DataModel):
     """Describes expected params when editing/creating a message."""
 
     content: Optional[str] = None
     """Message text content."""
 
     flags: Optional[int] = 0
-    """Message flags. See [`MessageFlags`][discord.parts.message.MessageFlags] for details."""
+    """Message flags. See [`MessageFlags`][discord.parts.message.MessageFlags]."""
 
-    components: Optional[list[ActionRow | Container]] = field(default_factory=list)
+    components: Optional[list[ActionRowPart | ContainerPart]] = field(default_factory=list)
     """Components to be attached to this message."""
 
-    attachments: Optional[list[_Attachment]] = field(default_factory=list)
+    attachments: Optional[list[Attachment]] = field(default_factory=list)
     """Attachments to be attached to this message."""
 
-    embeds: Optional[list[EmbedBuilder]] = field(default_factory=list)
+    embeds: Optional[list[EmbedPart]] = field(default_factory=list)
     """Embeds to be attached to this message."""
 
-    message_reference: Optional[_MessageReference] = None
+    message_reference: Optional[MessageReference] = None
     """Message reference if reply."""
 
-    def add_row(self, row: ActionRow):
-        """Add an action row to this message.
-
-        Args:
-            row (ActionRow): the ActionRow object
-
-        Returns:
-            (MessageBuilder): self
-        """
-        self.components.append(row)
-        return self
-    
-    def add_container(self, container: Container, *, has_container_boarder: bool = False):
-        """Add a container to this message.
-
-        Args:
-            container (Container): the Container object.
-            has_container_boarder (bool, optional): If message should be contained in an Embed-like container. Defaults to False.
-
-        Returns:
-            (MessageBuilder): self
-        """
-        if has_container_boarder:
-            self.components.append(container)
-        else:
-            self.components.extend(container.components)
-        return self
-    
-    def add_embed(self, embed: EmbedBuilder):
-        """Add an embed to this message.
-
-        Args:
-            embed (EmbedBuilder): The EmbedBuilder object.
-
-        Returns:
-            (MessageBuilder): self
-        """
-        self.embeds.append(embed)
-        return self
-
-    def add_attachment(self, file_path: str, description: str = None):
-        """Add an attachment to this message
-
-        Args:
-            file_path (str): full qualifying path to file
-            description (str, optional): file descriptor. Defaults to None.
-
-        Returns:
-            (MessageBuilder): self
-        """
-        import os
-        
-        self.attachments.append(
-            _Attachment(
-                id=len(self.attachments), 
-                filename=os.path.basename(file_path), 
-                path=file_path,
-                description=description
-            )
-        )
-        return self
-    
     def set_flags(self, **flags: Unpack[MessageFlagParams]):
         """Set this message's flags using MessageFlagParams.
 
@@ -149,7 +116,7 @@ class MessageBuilder(DataModel):
             (ValueError): invalid flag
 
         Returns:
-            (MessageBuilder): self
+            (MessagePart): self
         """
         _flag_map = {
             'crossposted': MessageFlags.CROSSPOSTED,
@@ -167,28 +134,4 @@ class MessageBuilder(DataModel):
             if value:
                 self.flags |= _flag_map[name]
                 
-        return self
-
-    def _set_reference(self, 
-        message_id: int, 
-        channel_id: int,
-        ref_type: Literal['Default', 'Forward'] = 'Default'
-    ):
-        """Internal helper for setting this message's reference message. Used in replies.
-
-        Args:
-            message_id (int): message to reference
-
-        Returns:
-            (MessageBuilder): self
-        """
-        _ref_types = {
-            'DEFAULT': 0,
-            'FORWARD': 1
-        }
-        self.message_reference = _MessageReference(
-            type=_ref_types.get(ref_type.upper()), 
-            channel_id=channel_id,
-            message_id=message_id
-        )
         return self

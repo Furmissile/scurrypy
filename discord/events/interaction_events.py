@@ -3,12 +3,14 @@ from typing import Optional
 from ..model import DataModel
 
 from ..resources.interaction import Interaction
+from ..parts.components import ComponentTypes
 
 # ----- Command Interaction -----
 
 @dataclass
 class ApplicationCommandOptionData(DataModel):
     """Represents the response options from a slash command."""
+    
     name: str
     """Name of the command option."""
 
@@ -21,6 +23,7 @@ class ApplicationCommandOptionData(DataModel):
 @dataclass
 class ApplicationCommandData(DataModel):
     """Represents the response from a command."""
+
     id: int
     """ID of the command."""
 
@@ -39,7 +42,7 @@ class ApplicationCommandData(DataModel):
     options: Optional[list[ApplicationCommandOptionData]] = field(default_factory=list)
     """Options of the command (slash command only)."""
 
-    def get_command_option_value(self, option_name: str):
+    def get_command_option_value(self, option_name: str, default = None):
         """Get the input for a command option by name.
 
         Args:
@@ -52,12 +55,13 @@ class ApplicationCommandData(DataModel):
             (str | int | float | bool): input data of specified option
         """
         for option in self.options:
-            if option_name != option.name:
-                continue
-
-            return option.value
+            if option.name == option_name:
+                return option.value
         
-        raise ValueError(f"Option name '{option_name}' could not be found.")
+        if default is not None:
+            return default
+        
+        raise ValueError(f"Option '{option_name}' not found")
 
 # ----- Component Interaction -----
 
@@ -79,6 +83,7 @@ class MessageComponentData(DataModel):
 @dataclass
 class ModalComponentData(DataModel):
     """Represents the modal field response from a modal."""
+
     type: int
     """Type of component."""
     
@@ -94,6 +99,7 @@ class ModalComponentData(DataModel):
 @dataclass
 class ModalComponent(DataModel):
     """Represents the modal component response from a modal."""
+
     type: int
     """Type of component."""
 
@@ -128,7 +134,13 @@ class ModalData(DataModel):
 
             t = component.component.type
 
-            if t in [3,5,6,7,8]: # select menus (w. possibly many option selects!)
+            if t in [
+                ComponentTypes.STRING_SELECT, 
+                ComponentTypes.USER_SELECT, 
+                ComponentTypes.ROLE_SELECT, 
+                ComponentTypes.MENTIONABLE_SELECT, 
+                ComponentTypes.CHANNEL_SELECT      # select menus (w. possibly many option selects!)
+            ]:
                 return component.component.values
             
             # text input

@@ -1,3 +1,5 @@
+import fnmatch
+
 from ..client_like import ClientLike
 
 from ..events.interaction_events import ApplicationCommandData, MessageComponentData, ModalData, InteractionEvent
@@ -146,11 +148,17 @@ class CommandDispatcher:
 
             case InteractionTypes.MESSAGE_COMPONENT:
                 name = event.data.custom_id
-                handler = self._component_handlers.get(name)
+                for k, v in self._component_handlers.items():
+                    if fnmatch.fnmatch(name, k) == True:
+                        handler = v
+                # handler = self._component_handlers.get(name)
 
             case InteractionTypes.MODAL_SUBMIT:
                 name = event.data.custom_id
-                handler = self._component_handlers.get(name)
+                for k, v in self._component_handlers.items():
+                    if fnmatch.fnmatch(name, k) == True:
+                        handler = v
+                # handler = self._component_handlers.get(name)
 
         if not handler:
             self._logger.log_warn(f"No handler registered for interaction '{name}'")

@@ -152,7 +152,7 @@ class HTTPClient:
                         if data.get("global"):
                             self.global_reset = asyncio.get_event_loop().time() + retry
                         self.logger.log_warn(
-                            f"Rate limited {retry}s ({'global' if data.get('global') else 'bucket'})"
+                            f"Rate limited {retry}s ({endpoint})"
                         )
                         await asyncio.sleep(retry + 0.5)
                         continue

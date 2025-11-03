@@ -1,7 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Literal
 
 from ..model import DataModel
+
+class CommandTypes:
+    CHAT_INPUT = 1
+    USER_COMMAND = 2
+    MESSAGE_COMMAND = 3
 
 class CommandOptionTypes:
     """Slash command option input types."""
@@ -34,69 +38,53 @@ class CommandOptionTypes:
     """file upload"""
 
 @dataclass
-class MessageCommand(DataModel):
-    """Represents the message command object."""
-    type: Literal[3] = field(init=False, default=3) # MESSAGE
+class CommandOption(DataModel):
+    """Option for a slash command."""
+
+    type: int
+    """Type of option. See [`CommandOptionTypes`][discord.parts.command.CommandOptionTypes]."""
+
     name: str
+    """Name of option."""
+
+    description: str
+    """Description of option."""
+
+    required: bool = False
+    """Whether this option is required. Defaults to False."""
+
+@dataclass
+class SlashCommand(DataModel):
+    """Represents the slash command object."""
+
+    name: str
+    """Name of the command."""
+
+    description: str
+    """Description of the command."""
+
+    options: list[CommandOption] = field(default_factory=list)
+    """Parameters or options for the command."""
+
+    type: int = field(init=False, default=CommandTypes.CHAT_INPUT)
+    """Command type. Always `CommandTypes.CHAT_INPUT` for this class. See [`CommandTypes`][discord.parts.command.CommandTypes]."""
 
 @dataclass
 class UserCommand(DataModel):
     """Represents the user command object"""
-    type: Literal[2] = field(init=False, default=2) # USER
+
     name: str
+    """Name of the command."""
+
+    type: int = field(init=False, default=CommandTypes.USER_COMMAND)
+    """Command type. Always `CommandTypes.USER_COMMAND` for this class. See [`CommandTypes`][discord.parts.command.CommandTypes]."""
 
 @dataclass
-class _CommandOption(DataModel):
-    """Option for a slash command."""
-    type: int   # refer to CommandOptionTypes
+class MessageCommand(DataModel):
+    """Represents the message command object."""
+    
     name: str
-    description: str
-    required: bool = True
+    """Name of the command."""
 
-@dataclass
-class SlashCommand(DataModel):
-    type: Literal[1] = field(init=False, default=1) # CHAT_INPUT
-    name: str
-    description: str
-    options: list[_CommandOption] = field(default_factory=list)
-
-    def add_option(
-        self,
-        command_type: Literal['String', 'Integer', 'Boolean', 'User', 'Channel', 'Role', 'Mentionable', 'Number', 'Attachment'],
-        name: str,
-        description: str,
-        required: bool = False
-    ):
-        """Add an option to this slash command.
-
-        Args:
-            command_type (Literal['String', 'Integer', 'Boolean', 'User', 'Channel', 'Role', 'Mentionable', 'Number', 'Attachment']): 
-                input type for the option
-            name (str): name of the option
-            description (str): description for the option
-            required (bool, optional): if the option is required. Defaults to False.
-
-        Returns:
-            (SlashCommand): self
-        """
-        _command_types = {
-            'STRING': CommandOptionTypes.STRING,
-            'INTEGER': CommandOptionTypes.INTEGER,
-            'BOOLEAN': CommandOptionTypes.BOOLEAN,
-            'USER': CommandOptionTypes.BOOLEAN,
-            'CHANNEL': CommandOptionTypes.CHANNEL,
-            'ROLE': CommandOptionTypes.ROLE,
-            'MENTIONABLE': CommandOptionTypes.MENTIONABLE,
-            'NUMBER': CommandOptionTypes.NUMBER,
-            'ATTACHMENT': CommandOptionTypes.ATTACHMENT
-        }
-
-        self.options.append(
-            _CommandOption(
-                type=_command_types.get(command_type.upper()), 
-                name=name, 
-                description=description, 
-                required=required
-            )
-        )
-        return self
+    type: int = field(init=False, default=CommandTypes.MESSAGE_COMMAND)
+    """Command type. Always `CommandTypes.MESSAGE_COMMAND` for this class. See [`CommandTypes`][discord.parts.command.CommandTypes]."""

@@ -1,4 +1,4 @@
-# __Welcome to ScurryPy__
+# __ScurryPy__
 
 [![PyPI version](https://badge.fury.io/py/scurrypy.svg)](https://badge.fury.io/py/scurrypy)
 
@@ -10,21 +10,15 @@ A dataclass-driven Discord API wrapper in Python!
 
 While this wrapper is mainly used for various squirrel-related shenanigans, it can also be used for more generic bot purposes.
 
----
-
 ## Features
 * Command and event handling  
 * Declarative style using decorators  
 * Supports both legacy and new features  
 * Respects Discord’s rate limits  
 
----
-
-## Some Things to Consider...
+## Notes & Early Status
 * This is an early version — feedback, ideas, and contributions are very welcome! That said, there may be bumps along the way, so expect occasional bugs and quirks.  
 * Certain features are not yet supported, while others are intentionally omitted. See the [docs](https://furmissile.github.io/scurrypy) for full details.  
-
----
 
 ## Getting Started
 *Note: This section also appears in the documentation, but here are complete examples ready to use with your bot credentials.*
@@ -48,7 +42,7 @@ load_dotenv(dotenv_path='./path/to/env')
 
 client = discord.Client(
     token=os.getenv("DISCORD_TOKEN"),
-    application_id=APPLICATION_ID  # replace with your bot's user ID
+    application_id=APPLICATION_ID  # your bot’s application ID
 )
 
 @client.command(
@@ -74,7 +68,7 @@ load_dotenv(dotenv_path='./path/to/env')
 
 client = discord.Client(
     token=os.getenv("DISCORD_TOKEN"),
-    application_id=APPLICATION_ID,  # replace with your bot's user ID
+    application_id=APPLICATION_ID  # your bot’s application ID
     intents=discord.set_intents(message_content=True),
     prefix='!'  # your custom prefix
 )
@@ -116,5 +110,4 @@ If you plan to make substantial changes or release your own variant:
 See the [License](./LICENSE) for details.
 
 ## Like What You See?
-Check out the full [documentation](https://furmissile.github.io/scurrypy)
- for more examples, guides, and API reference!
+Explore the full [documentation](https://furmissile.github.io/scurrypy) for more examples, guides, and API reference.

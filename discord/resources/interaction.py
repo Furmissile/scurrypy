@@ -4,8 +4,8 @@ from typing import Optional, Unpack
 from ..http import HTTPClient
 from ..model import DataModel
 
-from ..parts.modal import ModalBuilder
-from ..parts.message import *
+from ..parts.modal import ModalPart
+from ..parts.message import MessagePart, MessageFlagParams
 
 from ..models.guild import GuildModel
 from ..models.member import MemberModel
@@ -38,8 +38,9 @@ class InteractionCallbackTypes:
     """Acknowledge an interaction and edit a response later. User sees a loading state."""
 
     DEFERRED_UPDATE_MESSAGE = 6
-    """Acknowledge an interaction and edit the original message later. 
-    The user does NOT see a loading state. (Components only)
+    """
+        Acknowledge an interaction and edit the original message later. 
+        The user does NOT see a loading state. (Components only)
     """
 
     UPDATE_MESSAGE = 7
@@ -68,7 +69,7 @@ class Interaction(DataModel):
     """HTTP session for requests."""
 
     type: int
-    """Type of interaction."""
+    """Type of interaction. See [`InteractionTypes`][discord.dispatch.command_dispatcher.InteractionTypes]."""
 
     channel_id: int
     """ID of the channel where the interaction was sent."""
@@ -97,20 +98,20 @@ class Interaction(DataModel):
     channel: Optional[Channel] = None
     """Partial channel object the interaction was invoked."""
 
-    async def respond(self, message: str | MessageBuilder, with_response: bool = False, **flags: Unpack[MessageFlagParams]):
+    async def respond(self, message: str | MessagePart, with_response: bool = False, **flags: Unpack[MessageFlagParams]):
         """Create a message in response to an interaction.
 
         Args:
-            message (str | MessageBuilder): content as a string or from MessageBuilder
+            message (str | MessagePart): content as a string or from MessagePart
             with_response (bool, optional): if the interaction data should be returned. Defaults to False.
 
         Raises:
             TypeError: invalid type
         """
         if isinstance(message, str):
-            message = MessageBuilder(content=message).set_flags(**flags)
-        elif not isinstance(message, MessageBuilder):
-            raise TypeError(f"Interaction.respond expects type str or MessageBuilder, got {type(message).__name__}")
+            message = MessagePart(content=message).set_flags(**flags)
+        elif not isinstance(message, MessagePart):
+            raise TypeError(f"Interaction.respond expects type str or MessagePart, got {type(message).__name__}")
 
         content = {
             'type': InteractionCallbackTypes.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -129,19 +130,19 @@ class Interaction(DataModel):
         if with_response:
             return InteractionCallbackModel.from_dict(data, self._http)
         
-    async def update(self, message: str | MessageBuilder, **flags: Unpack[MessageFlagParams]):
+    async def update(self, message: str | MessagePart, **flags: Unpack[MessageFlagParams]):
         """Update a message in response to an interaction.
 
         Args:
-            message (str | MessageBuilder): content as a string or from MessageBuilder
+            message (str | MessagePart): content as a string or from MessagePart
 
         Raises:
             TypeError: invalid type
         """
         if isinstance(message, str):
-            message = MessageBuilder(content=message).set_flags(**flags)
-        elif not isinstance(message, MessageBuilder):
-            raise TypeError(f"Interaction.update expects type str or MessageBuilder, got {type(message).__name__}")
+            message = MessagePart(content=message).set_flags(**flags)
+        elif not isinstance(message, MessagePart):
+            raise TypeError(f"Interaction.update expects type str or MessagePart, got {type(message).__name__}")
 
         content = {
             'type': InteractionCallbackTypes.UPDATE_MESSAGE,
@@ -154,17 +155,17 @@ class Interaction(DataModel):
             data=content, 
             files=[fp.path for fp in message.attachments])
 
-    async def respond_modal(self, modal: ModalBuilder):
+    async def respond_modal(self, modal: ModalPart):
         """Create a modal in response to an interaction.
 
         Args:
-            modal (ModalBuilder): modal data
+            modal (ModalPart): modal data
 
         Raises:
             TypeError: invalid type
         """
-        if not isinstance(modal, ModalBuilder):
-            raise TypeError(f"Interaction.respond_modal expects type ModalBuilder, got {type(modal).__name__}")
+        if not isinstance(modal, ModalPart):
+            raise TypeError(f"Interaction.respond_modal expects type ModalPart, got {type(modal).__name__}")
         
         content = {
             'type': InteractionCallbackTypes.MODAL,

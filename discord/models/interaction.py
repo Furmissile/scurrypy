@@ -3,6 +3,8 @@ from ..model import DataModel
 
 @dataclass
 class InteractionCallbackDataModel(DataModel):
+    """Represents the interaction callback object."""
+
     id: int
     """ID of the interaction."""
 
@@ -23,4 +25,7 @@ class InteractionCallbackDataModel(DataModel):
 
 @dataclass
 class InteractionCallbackModel(DataModel):
+    """Represents the interaction callback response object."""
+
     interaction: InteractionCallbackDataModel
+    """The interaction object associated with the interaction response."""

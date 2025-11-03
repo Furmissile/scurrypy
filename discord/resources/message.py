@@ -6,7 +6,7 @@ from ..model import DataModel
 
 from ..models.user import UserModel
 from ..models.emoji import EmojiModel
-from ..parts.message import MessageBuilder
+from ..parts.message import MessagePart
 
 @dataclass
 class Message(DataModel):
@@ -50,20 +50,20 @@ class Message(DataModel):
 
         return Message.from_dict(data, self._http)
 
-    async def send(self, message: str | MessageBuilder):
+    async def send(self, message: str | MessagePart):
         """Sends a new message to the current channel.
 
         Permissions:
             * SEND_MESSAGES → required to senf your own messages
 
         Args:
-            message (str | MessageBuilder): can be just text or the MessageBuilder for dynamic messages
+            message (str | MessagePart): can be just text or the MessagePart for dynamic messages
 
         Returns:
             (Message): the new Message object with all fields populated
         """
         if isinstance(message, str):
-            message = MessageBuilder(content=message)
+            message = MessagePart(content=message)
 
         data = await self._http.request(
             "POST",
@@ -73,17 +73,17 @@ class Message(DataModel):
         )
         return Message.from_dict(data, self._http)
 
-    async def edit(self, message: str | MessageBuilder):
+    async def edit(self, message: str | MessagePart):
         """Edits this message.
 
         Permissions:
             * MANAGE_MESSAGES → ONLY if editing another user's message
 
         Args:
-            message (str | MessageBuilder): can be just text or the MessageBuilder for dynamic messages
+            message (str | MessagePart): can be just text or the MessagePart for dynamic messages
         """
         if isinstance(message, str):
-            message = MessageBuilder(content=message)
+            message = MessagePart(content=message)
 
         data = await self._http.request(
             "PATCH", 
@@ -93,17 +93,17 @@ class Message(DataModel):
 
         self._update(data)
 
-    async def reply(self, message: str | MessageBuilder):
+    async def reply(self, message: str | MessagePart):
         """Reply to this message with a new message.
 
         Permissions:
             * SEND_MESSAGES → required to send the message
 
         Args:
-            message (str | MessageBuilder): the new message
+            message (str | MessagePart): the new message
         """
         if isinstance(message, str):
-            message = MessageBuilder(content=message)
+            message = MessagePart(content=message)
 
         message = message._set_reference(self.id, self.channel_id)
 

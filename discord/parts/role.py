@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import Optional
-from discord.model import DataModel
+from ..model import DataModel
 
 from ..models.role import RoleColors
 
@@ -25,15 +25,3 @@ class Role(DataModel):
 
     unicode_emoji: Optional[str] = None
     """Unicode emoji of the role."""
-
-    def set_color(self, hex: str):
-        """Set this role's color with a hex. (format: #FFFFFF)
-
-        Args:
-            hex (str): color as a hex code
-
-        Returns:
-            (Role): self
-        """
-        self.color=int(hex.strip('#'), 16)
-        return self

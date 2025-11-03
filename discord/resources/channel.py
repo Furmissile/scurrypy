@@ -6,7 +6,7 @@ from ..model import DataModel
 from .message import Message
 
 from ..parts.channel import GuildChannel
-from ..parts.message import MessageBuilder
+from ..parts.message import MessagePart
 
 class MessagesFetchParams(TypedDict, total=False):
     """Params when fetching guild channel messages."""
@@ -132,7 +132,7 @@ class Channel(DataModel):
 
         return [Message.from_dict(msg, self._http) for msg in data]
     
-    async def send(self, message: str | MessageBuilder):
+    async def send(self, message: str | MessagePart):
         """
         Send a message to this channel.
 
@@ -140,13 +140,13 @@ class Channel(DataModel):
             * SEND_MESSAGES → required to create a message in this channel
 
         Args:
-            message (str | MessageBuilder): can be just text or the MessageBuilder for dynamic messages
+            message (str | MessagePart): can be just text or the MessagePart for dynamic messages
 
         Returns:
             (Message): The created Message object
         """
         if isinstance(message, str):
-            message = MessageBuilder(content=message)
+            message = MessagePart(content=message)
 
         data = await self._http.request("POST", f"/channels/{self.id}/messages", data=message._to_dict())
 

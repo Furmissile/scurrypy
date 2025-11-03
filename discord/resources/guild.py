@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from typing import Optional, TypedDict, Unpack
-from urllib.parse import urlencode
 
 from ..http import HTTPClient
 from ..model import DataModel
