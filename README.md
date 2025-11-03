@@ -11,10 +11,11 @@ A dataclass-driven Discord API wrapper in Python!
 While this wrapper is mainly used for various squirrel-related shenanigans, it can also be used for more generic bot purposes.
 
 ## Features
-* Command and event handling  
-* Declarative style using decorators  
-* Supports both legacy and new features  
-* Respects Discord’s rate limits  
+* Command, and event handling
+* Unix shell-style wildcards for component routing
+* Declarative style using decorators
+* Supports both legacy and new features
+* Respects Discord’s rate limits
 
 ## Notes & Early Status
 * This is an early version — feedback, ideas, and contributions are very welcome! That said, there may be bumps along the way, so expect occasional bugs and quirks.  
