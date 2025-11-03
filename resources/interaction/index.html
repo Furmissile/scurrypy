@@ -529,6 +529,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../api/channel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Channel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../api/message/" class="md-nav__link">
         
   
@@ -860,6 +883,15 @@
   <a href="#discord.resources.interaction.Interaction.token" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;token
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.resources.interaction.Interaction.type" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;type
     </span>
   </a>
   
@@ -1690,6 +1722,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#discord.resources.interaction.Interaction.type" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#discord.resources.interaction.Interaction.channel_id" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;channel_id
@@ -1978,7 +2019,7 @@
 
   
       dataclass
-   (discord.parts.message.DataModel)" href="../../internals/model/#discord.model.DataModel">DataModel</a></code></p>
+   (discord.model.DataModel)" href="../../internals/model/#discord.model.DataModel">DataModel</a></code></p>
 
 
         <p>Represents a Discord Interaction object.</p>
@@ -2040,6 +2081,28 @@
     <div class="doc doc-contents ">
 
         <p>Continuation token for responding to the interaction.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.resources.interaction.Interaction.type" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="nb">type</span><span class="p">:</span> <span class="nb">int</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.resources.interaction.Interaction.type" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Type of interaction. See <a class="autorefs autorefs-internal" title="            InteractionTypes" href="../../internals/dispatchers/#discord.dispatch.command_dispatcher.InteractionTypes"><code>InteractionTypes</code></a>.</p>
 
     </div>
 
@@ -2274,14 +2337,14 @@
     <ul>
         <li class="doc-section-item field-body">
             <b><code>message</code></b>
-              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessageBuilder
+              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessagePart
 
   
       dataclass
-   (discord.parts.message.MessageBuilder)" href="../../api/message/#discord.parts.message.MessageBuilder">MessageBuilder</a></code>)
+   (discord.parts.message.MessagePart)" href="../../api/message/#discord.parts.message.MessagePart">MessagePart</a></code>)
           –
           <div class="doc-md-description">
-            <p>content as a string or from MessageBuilder</p>
+            <p>content as a string or from MessagePart</p>
           </div>
         </li>
         <li class="doc-section-item field-body">
@@ -2335,14 +2398,14 @@
     <ul>
         <li class="doc-section-item field-body">
             <b><code>message</code></b>
-              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessageBuilder
+              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessagePart
 
   
       dataclass
-   (discord.parts.message.MessageBuilder)" href="../../api/message/#discord.parts.message.MessageBuilder">MessageBuilder</a></code>)
+   (discord.parts.message.MessagePart)" href="../../api/message/#discord.parts.message.MessagePart">MessagePart</a></code>)
           –
           <div class="doc-md-description">
-            <p>content as a string or from MessageBuilder</p>
+            <p>content as a string or from MessagePart</p>
           </div>
         </li>
     </ul>
@@ -2386,7 +2449,7 @@
     <ul>
         <li class="doc-section-item field-body">
             <b><code>modal</code></b>
-              (<code><span title="discord.parts.modal.ModalBuilder">ModalBuilder</span></code>)
+              (<code><span title="discord.parts.modal.ModalPart">ModalPart</span></code>)
           –
           <div class="doc-md-description">
             <p>modal data</p>

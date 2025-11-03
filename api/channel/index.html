@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://furmissile.github.io/scurrypy/migrations/">
+        <link rel="canonical" href="https://furmissile.github.io/scurrypy/api/channel/">
       
       
-        <link rel="prev" href="../legacy_examples/">
+        <link rel="prev" href="../components/">
       
       
+        <link rel="next" href="../message/">
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>Migrations - ScurryPy</title>
+        <title>Channel - ScurryPy</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,11 +48,11 @@
       
     
     
-      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../css/custom_color.css">
+      <link rel="stylesheet" href="../../css/custom_color.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#migrations" class="md-skip">
+        <a href="#channel-api" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="ScurryPy" class="md-header__button md-logo" aria-label="ScurryPy" data-md-component="logo">
+    <a href="../.." title="ScurryPy" class="md-header__button md-logo" aria-label="ScurryPy" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Migrations
+              Channel
             
           </span>
         </div>
@@ -228,7 +230,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="ScurryPy" class="md-nav__button md-logo" aria-label="ScurryPy" data-md-component="logo">
+    <a href="../.." title="ScurryPy" class="md-nav__button md-logo" aria-label="ScurryPy" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -258,7 +260,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -280,7 +282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/" class="md-nav__link">
+      <a href="../../getting_started/" class="md-nav__link">
         
   
   
@@ -302,7 +304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/" class="md-nav__link">
+      <a href="../../examples/" class="md-nav__link">
         
   
   
@@ -324,7 +326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../advanced_examples/" class="md-nav__link">
+      <a href="../../advanced_examples/" class="md-nav__link">
         
   
   
@@ -343,8 +345,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -355,11 +359,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -375,7 +379,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             API Reference
@@ -389,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -412,7 +416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/client/" class="md-nav__link">
+      <a href="../client/" class="md-nav__link">
         
   
   
@@ -435,7 +439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/intents/" class="md-nav__link">
+      <a href="../intents/" class="md-nav__link">
         
   
   
@@ -458,7 +462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/commands/" class="md-nav__link">
+      <a href="../commands/" class="md-nav__link">
         
   
   
@@ -481,7 +485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/ui_components/" class="md-nav__link">
+      <a href="../ui_components/" class="md-nav__link">
         
   
   
@@ -504,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/components/" class="md-nav__link">
+      <a href="../components/" class="md-nav__link">
         
   
   
@@ -524,10 +528,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../api/channel/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Channel
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -538,6 +564,137 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GuildChannel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" GuildChannel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.name" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;name
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.type" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;topic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.position" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.parent_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;parent_id
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.nsfw" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;nsfw
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discord.parts.channel.ChannelTypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ChannelTypes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" ChannelTypes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.ChannelTypes.GUILD_TEXT" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;GUILD_TEXT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.ChannelTypes.GUILD_CATEGORY" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;GUILD_CATEGORY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.ChannelTypes.GUILD_ANNOUNCEMENT" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;GUILD_ANNOUNCEMENT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -550,7 +707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/message/" class="md-nav__link">
+      <a href="../message/" class="md-nav__link">
         
   
   
@@ -573,7 +730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/models/" class="md-nav__link">
+      <a href="../models/" class="md-nav__link">
         
   
   
@@ -596,7 +753,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/role/" class="md-nav__link">
+      <a href="../role/" class="md-nav__link">
         
   
   
@@ -619,7 +776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/embed/" class="md-nav__link">
+      <a href="../embed/" class="md-nav__link">
         
   
   
@@ -692,7 +849,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resources/" class="md-nav__link">
+      <a href="../../resources/" class="md-nav__link">
         
   
   
@@ -715,7 +872,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resources/application/" class="md-nav__link">
+      <a href="../../resources/application/" class="md-nav__link">
         
   
   
@@ -738,7 +895,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resources/bot_emojis/" class="md-nav__link">
+      <a href="../../resources/bot_emojis/" class="md-nav__link">
         
   
   
@@ -761,7 +918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resources/channel/" class="md-nav__link">
+      <a href="../../resources/channel/" class="md-nav__link">
         
   
   
@@ -784,7 +941,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resources/guild/" class="md-nav__link">
+      <a href="../../resources/guild/" class="md-nav__link">
         
   
   
@@ -807,7 +964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resources/interaction/" class="md-nav__link">
+      <a href="../../resources/interaction/" class="md-nav__link">
         
   
   
@@ -830,7 +987,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resources/message/" class="md-nav__link">
+      <a href="../../resources/message/" class="md-nav__link">
         
   
   
@@ -853,7 +1010,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../resources/user/" class="md-nav__link">
+      <a href="../../resources/user/" class="md-nav__link">
         
   
   
@@ -926,7 +1083,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../events/" class="md-nav__link">
+      <a href="../../events/" class="md-nav__link">
         
   
   
@@ -949,7 +1106,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../events/interaction/" class="md-nav__link">
+      <a href="../../events/interaction/" class="md-nav__link">
         
   
   
@@ -972,7 +1129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../events/message/" class="md-nav__link">
+      <a href="../../events/message/" class="md-nav__link">
         
   
   
@@ -995,7 +1152,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../events/channel/" class="md-nav__link">
+      <a href="../../events/channel/" class="md-nav__link">
         
   
   
@@ -1018,7 +1175,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../events/guild/" class="md-nav__link">
+      <a href="../../events/guild/" class="md-nav__link">
         
   
   
@@ -1041,7 +1198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../events/reaction/" class="md-nav__link">
+      <a href="../../events/reaction/" class="md-nav__link">
         
   
   
@@ -1064,7 +1221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../events/ready/" class="md-nav__link">
+      <a href="../../events/ready/" class="md-nav__link">
         
   
   
@@ -1137,7 +1294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internals/" class="md-nav__link">
+      <a href="../../internals/" class="md-nav__link">
         
   
   
@@ -1160,7 +1317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internals/model/" class="md-nav__link">
+      <a href="../../internals/model/" class="md-nav__link">
         
   
   
@@ -1183,7 +1340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internals/http/" class="md-nav__link">
+      <a href="../../internals/http/" class="md-nav__link">
         
   
   
@@ -1206,7 +1363,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internals/dispatchers/" class="md-nav__link">
+      <a href="../../internals/dispatchers/" class="md-nav__link">
         
   
   
@@ -1229,7 +1386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internals/gateway/" class="md-nav__link">
+      <a href="../../internals/gateway/" class="md-nav__link">
         
   
   
@@ -1252,7 +1409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internals/logger/" class="md-nav__link">
+      <a href="../../internals/logger/" class="md-nav__link">
         
   
   
@@ -1275,7 +1432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../internals/error/" class="md-nav__link">
+      <a href="../../internals/error/" class="md-nav__link">
         
   
   
@@ -1305,7 +1462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../legacy_examples/" class="md-nav__link">
+      <a href="../../legacy_examples/" class="md-nav__link">
         
   
   
@@ -1324,32 +1481,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Migrations
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../migrations/" class="md-nav__link">
         
   
   
@@ -1360,53 +1495,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
-    <span class="md-ellipsis">
-      Table of Contents
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prefix-to-application-command" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prefix to Application Command
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#embed-to-container" class="md-nav__link">
-    <span class="md-ellipsis">
-      Embed to Container
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1438,29 +1526,113 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
+  <a href="#discord.parts.channel.GuildChannel" class="md-nav__link">
     <span class="md-ellipsis">
-      Table of Contents
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;GuildChannel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" GuildChannel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.name" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;name
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#prefix-to-application-command" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.type" class="md-nav__link">
     <span class="md-ellipsis">
-      Prefix to Application Command
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;type
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#embed-to-container" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.topic" class="md-nav__link">
     <span class="md-ellipsis">
-      Embed to Container
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;topic
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.position" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.parent_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;parent_id
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.GuildChannel.nsfw" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;nsfw
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discord.parts.channel.ChannelTypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ChannelTypes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" ChannelTypes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.ChannelTypes.GUILD_TEXT" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;GUILD_TEXT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.ChannelTypes.GUILD_CATEGORY" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;GUILD_CATEGORY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.channel.ChannelTypes.GUILD_ANNOUNCEMENT" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;GUILD_ANNOUNCEMENT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1483,47 +1655,323 @@
   
 
 
-<h1 id="migrations"><strong>Migrations</strong><a class="headerlink" href="#migrations" title="Permanent link">&para;</a></h1>
-<hr />
-<p>Discord updates its features frequently, which can affect how legacy code works. This migration guide helps you transition from older examples to their updated equivalents, with a brief explanation of the changes and how to use them in the new API.</p>
-<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="#embed-to-container">Embed to Container</a></li>
-<li><a href="#prefix-to-application-command">Prefix to Application Command</a></li>
-</ul>
-<h2 id="prefix-to-application-command">Prefix to Application Command<a class="headerlink" href="#prefix-to-application-command" title="Permanent link">&para;</a></h2>
-<hr />
-<p>Application commands are a newer, feature-rich, and less cumbersome replacement for message prefix commands. There are three types:</p>
-<ul>
-<li><a href="../api/commands/#discord.parts.command.SlashCommand"><strong>Slash commands</strong></a> (e.g., <code>/example</code>)</li>
-<li><a href="../api/commands/#discord.parts.command.MessageCommand"><strong>Message commands</strong></a> (message option under <code>Apps</code>)</li>
-<li><a href="../api/commands/#discord.parts.command.UserCommand"><strong>User commands</strong></a> (user option under <code>Apps</code>)  </li>
-</ul>
-<p>Why is this less cumbersome? You no longer need to listen to and parse message content (which is now a privileged intent). Instead, you just listen for <code>InteractionCreate</code> events — and that’s where <strong>ScurryPy</strong> comes in!  </p>
-<div class="admonition example">
-<p class="admonition-title">Old vs New</p>
-<ul>
-<li><a href="../legacy_examples/#setting-and-responding-to-a-command-prefix">Prefix command example</a></li>
-<li><a href="../examples/#minimal-slash-command">Slash command example</a></li>
-</ul>
+<h1 id="channel-api">Channel API<a class="headerlink" href="#channel-api" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following classes come from the <code>discord.parts.channel</code> module.</p>
 </div>
-<h2 id="embed-to-container">Embed to Container<a class="headerlink" href="#embed-to-container" title="Permanent link">&para;</a></h2>
 <hr />
-<p>Containers display and format much like traditional embeds, but with added flexibility for arranging components and customizing message layout.</p>
-<p>Some new features of containers introduces:</p>
-<ul>
-<li>Media Gallery</li>
-<li>Section</li>
-<li>Separators</li>
-<li>and more!</li>
-</ul>
-<p>Check out <a href="../api/ui_components/#discord.parts.components_v2.ContainerPart">Containers</a> for more!</p>
-<div class="admonition example">
-<p class="admonition-title">Old vs New</p>
-<ul>
-<li><a href="../legacy_examples/#building-an-embed">Embed example</a>  </li>
-<li><a href="../examples/#building-with-discords-v2-components">Container example</a></li>
-</ul>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="discord.parts.channel.GuildChannel" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">GuildChannel</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#discord.parts.channel.GuildChannel" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (discord.model.DataModel)" href="../../internals/model/#discord.model.DataModel">DataModel</a></code></p>
+
+
+        <p>Parameters for creating/editing a guild channel.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.channel.GuildChannel.name" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.channel.GuildChannel.name" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Name of the channel.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.channel.GuildChannel.type" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="nb">type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.channel.GuildChannel.type" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Type of channel. See <a class="autorefs autorefs-internal" title="            ChannelTypes" href="#discord.parts.channel.ChannelTypes"><code>ChannelTypes</code></a>.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.channel.GuildChannel.topic" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">topic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.channel.GuildChannel.topic" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Topic of channel.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.channel.GuildChannel.position" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">position</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.channel.GuildChannel.position" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Sorting position of the channel (channels with the same position are sorted by id).</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.channel.GuildChannel.parent_id" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">parent_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.channel.GuildChannel.parent_id" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>ID of the parent category for a channel.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.channel.GuildChannel.nsfw" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">nsfw</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.channel.GuildChannel.nsfw" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Whether the channel is NSFW.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><hr />
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="discord.parts.channel.ChannelTypes" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>ChannelTypes</code>
+
+
+<a href="#discord.parts.channel.ChannelTypes" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents first">
+
+
+        <p>Constants for channel types.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only supported Channel Types listed here</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.channel.ChannelTypes.GUILD_TEXT" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">GUILD_TEXT</span> <span class="o">=</span> <span class="mi">0</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.channel.ChannelTypes.GUILD_TEXT" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Text channel within a server.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.channel.ChannelTypes.GUILD_CATEGORY" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">GUILD_CATEGORY</span> <span class="o">=</span> <span class="mi">4</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.channel.ChannelTypes.GUILD_CATEGORY" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Organizational category that contains up to 50 channels.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.channel.ChannelTypes.GUILD_ANNOUNCEMENT" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">GUILD_ANNOUNCEMENT</span> <span class="o">=</span> <span class="mi">5</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.channel.ChannelTypes.GUILD_ANNOUNCEMENT" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Channel that users can follow and crosspost into their own server (formerly news channels).</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
 </div>
 
 
@@ -1572,10 +2020,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "navigation.sections", "header.repo"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.sections", "header.repo"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>

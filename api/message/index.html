@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://furmissile.github.io/scurrypy/api/message/">
       
       
-        <link rel="prev" href="../components/">
+        <link rel="prev" href="../channel/">
       
       
         <link rel="next" href="../models/">
@@ -528,6 +528,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../channel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Channel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -581,17 +604,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageBuilder
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessagePart
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" MessageBuilder">
+    <nav class="md-nav" aria-label=" MessagePart">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.content" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.content" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;content
     </span>
@@ -600,7 +623,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.flags" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.flags" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;flags
     </span>
@@ -609,7 +632,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.components" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.components" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;components
     </span>
@@ -618,7 +641,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.attachments" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.attachments" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;attachments
     </span>
@@ -627,7 +650,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.embeds" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.embeds" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;embeds
     </span>
@@ -636,7 +659,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.message_reference" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.message_reference" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;message_reference
     </span>
@@ -645,45 +668,78 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.add_row" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_row
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.add_container" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_container
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.add_embed" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_embed
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.add_attachment" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_attachment
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.set_flags" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.set_flags" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_flags
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageFlags
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" MessageFlags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.CROSSPOSTED" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;CROSSPOSTED
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.IS_CROSSPOST" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IS_CROSSPOST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.SUPPRESS_EMBEDS" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;SUPPRESS_EMBEDS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.EPHEMERAL" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;EPHEMERAL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.LOADING" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;LOADING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.IS_COMPONENTS_V2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IS_COMPONENTS_V2
     </span>
   </a>
   
@@ -764,64 +820,121 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReference" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageFlags
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageReference
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" MessageFlags">
+    <nav class="md-nav" aria-label=" MessageReference">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.CROSSPOSTED" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReference.message_id" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;CROSSPOSTED
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;message_id
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.IS_CROSSPOST" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReference.channel_id" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IS_CROSSPOST
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;channel_id
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.SUPPRESS_EMBEDS" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReference.type" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;SUPPRESS_EMBEDS
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageReferenceTypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageReferenceTypes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" MessageReferenceTypes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageReferenceTypes.DEFAULT" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;DEFAULT
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.EPHEMERAL" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReferenceTypes.FORWARD" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;EPHEMERAL
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;FORWARD
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discord.parts.message.Attachment" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Attachment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" Attachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.Attachment.id" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;id
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.LOADING" class="md-nav__link">
+  <a href="#discord.parts.message.Attachment.path" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;LOADING
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;path
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.IS_COMPONENTS_V2" class="md-nav__link">
+  <a href="#discord.parts.message.Attachment.filename" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IS_COMPONENTS_V2
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;filename
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.Attachment.description" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;description
     </span>
   </a>
   
@@ -1644,17 +1757,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageBuilder
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessagePart
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" MessageBuilder">
+    <nav class="md-nav" aria-label=" MessagePart">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.content" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.content" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;content
     </span>
@@ -1663,7 +1776,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.flags" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.flags" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;flags
     </span>
@@ -1672,7 +1785,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.components" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.components" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;components
     </span>
@@ -1681,7 +1794,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.attachments" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.attachments" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;attachments
     </span>
@@ -1690,7 +1803,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.embeds" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.embeds" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;embeds
     </span>
@@ -1699,7 +1812,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.message_reference" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.message_reference" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;message_reference
     </span>
@@ -1708,45 +1821,78 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.add_row" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_row
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.add_container" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_container
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.add_embed" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_embed
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.add_attachment" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;add_attachment
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageBuilder.set_flags" class="md-nav__link">
+  <a href="#discord.parts.message.MessagePart.set_flags" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;set_flags
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageFlags
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" MessageFlags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.CROSSPOSTED" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;CROSSPOSTED
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.IS_CROSSPOST" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IS_CROSSPOST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.SUPPRESS_EMBEDS" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;SUPPRESS_EMBEDS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.EPHEMERAL" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;EPHEMERAL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.LOADING" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;LOADING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageFlags.IS_COMPONENTS_V2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IS_COMPONENTS_V2
     </span>
   </a>
   
@@ -1827,64 +1973,121 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReference" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageFlags
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageReference
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" MessageFlags">
+    <nav class="md-nav" aria-label=" MessageReference">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.CROSSPOSTED" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReference.message_id" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;CROSSPOSTED
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;message_id
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.IS_CROSSPOST" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReference.channel_id" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IS_CROSSPOST
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;channel_id
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.SUPPRESS_EMBEDS" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReference.type" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;SUPPRESS_EMBEDS
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageReferenceTypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageReferenceTypes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" MessageReferenceTypes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.MessageReferenceTypes.DEFAULT" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;DEFAULT
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.EPHEMERAL" class="md-nav__link">
+  <a href="#discord.parts.message.MessageReferenceTypes.FORWARD" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;EPHEMERAL
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;FORWARD
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discord.parts.message.Attachment" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Attachment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" Attachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.Attachment.id" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;id
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.LOADING" class="md-nav__link">
+  <a href="#discord.parts.message.Attachment.path" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;LOADING
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;path
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#discord.parts.message.MessageFlags.IS_COMPONENTS_V2" class="md-nav__link">
+  <a href="#discord.parts.message.Attachment.filename" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IS_COMPONENTS_V2
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;filename
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.parts.message.Attachment.description" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;description
     </span>
   </a>
   
@@ -1926,14 +2129,14 @@
 
 
 
-<h2 id="discord.parts.message.MessageBuilder" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">MessageBuilder</span></code>
+<h2 id="discord.parts.message.MessagePart" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">MessagePart</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
   </span>
 
-<a href="#discord.parts.message.MessageBuilder" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#discord.parts.message.MessagePart" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
     <div class="doc doc-contents first">
@@ -1969,7 +2172,7 @@
 
 
 
-<h3 id="discord.parts.message.MessageBuilder.content" class="doc doc-heading">
+<h3 id="discord.parts.message.MessagePart.content" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
 
   <span class="doc doc-labels">
@@ -1977,7 +2180,7 @@
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
-<a href="#discord.parts.message.MessageBuilder.content" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.parts.message.MessagePart.content" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -1992,7 +2195,7 @@
 
 
 
-<h3 id="discord.parts.message.MessageBuilder.flags" class="doc doc-heading">
+<h3 id="discord.parts.message.MessagePart.flags" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">flags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></code>
 
   <span class="doc doc-labels">
@@ -2000,12 +2203,12 @@
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
-<a href="#discord.parts.message.MessageBuilder.flags" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.parts.message.MessagePart.flags" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Message flags. See <a class="autorefs autorefs-internal" title="            MessageFlags" href="#discord.parts.message.MessageFlags"><code>MessageFlags</code></a> for details.</p>
+        <p>Message flags. See <a class="autorefs autorefs-internal" title="            MessageFlags" href="#discord.parts.message.MessageFlags"><code>MessageFlags</code></a>.</p>
 
     </div>
 
@@ -2015,15 +2218,15 @@
 
 
 
-<h3 id="discord.parts.message.MessageBuilder.components" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">components</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">ActionRow</span> <span class="o">|</span> <span class="n">Container</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span></code>
+<h3 id="discord.parts.message.MessagePart.components" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">components</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">ActionRowPart</span> <span class="o">|</span> <span class="n">ContainerPart</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
-<a href="#discord.parts.message.MessageBuilder.components" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.parts.message.MessagePart.components" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2038,15 +2241,15 @@
 
 
 
-<h3 id="discord.parts.message.MessageBuilder.attachments" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">attachments</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">_Attachment</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span></code>
+<h3 id="discord.parts.message.MessagePart.attachments" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">attachments</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Attachment</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
-<a href="#discord.parts.message.MessageBuilder.attachments" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.parts.message.MessagePart.attachments" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2061,15 +2264,15 @@
 
 
 
-<h3 id="discord.parts.message.MessageBuilder.embeds" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">embeds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">EmbedBuilder</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span></code>
+<h3 id="discord.parts.message.MessagePart.embeds" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">embeds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">EmbedPart</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
-<a href="#discord.parts.message.MessageBuilder.embeds" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.parts.message.MessagePart.embeds" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2084,15 +2287,15 @@
 
 
 
-<h3 id="discord.parts.message.MessageBuilder.message_reference" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">message_reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_MessageReference</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
+<h3 id="discord.parts.message.MessagePart.message_reference" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">message_reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MessageReference</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
-<a href="#discord.parts.message.MessageBuilder.message_reference" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.parts.message.MessagePart.message_reference" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2109,230 +2312,10 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="discord.parts.message.MessageBuilder.add_row" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">add_row</span></code>
-
-<a href="#discord.parts.message.MessageBuilder.add_row" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Add an action row to this message.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>row</code></b>
-              (<code><a class="autorefs autorefs-internal" title="              ActionRow
-
-  
-      dataclass
-   (discord.parts.action_row.ActionRow)" href="../components/#discord.parts.action_row.ActionRow">ActionRow</a></code>)
-          –
-          <div class="doc-md-description">
-            <p>the ActionRow object</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-internal" title="              MessageBuilder
-
-  
-      dataclass
-   (discord.parts.message.MessageBuilder)" href="#discord.parts.message.MessageBuilder">MessageBuilder</a></code>
-          –
-          <div class="doc-md-description">
-            <p>self</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="discord.parts.message.MessageBuilder.add_container" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">add_container</span></code>
-
-<a href="#discord.parts.message.MessageBuilder.add_container" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Add a container to this message.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>container</code></b>
-              (<code><a class="autorefs autorefs-internal" title="              Container
-
-  
-      dataclass
-   (discord.parts.components_v2.Container)" href="../ui_components/#discord.parts.components_v2.Container">Container</a></code>)
-          –
-          <div class="doc-md-description">
-            <p>the Container object.</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>has_container_boarder</code></b>
-              (<code><span title="bool">bool</span></code>, default:
-                  <code>False</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>If message should be contained in an Embed-like container. Defaults to False.</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-internal" title="              MessageBuilder
-
-  
-      dataclass
-   (discord.parts.message.MessageBuilder)" href="#discord.parts.message.MessageBuilder">MessageBuilder</a></code>
-          –
-          <div class="doc-md-description">
-            <p>self</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="discord.parts.message.MessageBuilder.add_embed" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">add_embed</span></code>
-
-<a href="#discord.parts.message.MessageBuilder.add_embed" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Add an embed to this message.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>embed</code></b>
-              (<code><a class="autorefs autorefs-internal" title="              EmbedBuilder
-
-  
-      dataclass
-   (discord.parts.embed.EmbedBuilder)" href="../embed/#discord.parts.embed.EmbedBuilder">EmbedBuilder</a></code>)
-          –
-          <div class="doc-md-description">
-            <p>The EmbedBuilder object.</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-internal" title="              MessageBuilder
-
-  
-      dataclass
-   (discord.parts.message.MessageBuilder)" href="#discord.parts.message.MessageBuilder">MessageBuilder</a></code>
-          –
-          <div class="doc-md-description">
-            <p>self</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="discord.parts.message.MessageBuilder.add_attachment" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">add_attachment</span></code>
-
-<a href="#discord.parts.message.MessageBuilder.add_attachment" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Add an attachment to this message</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>file_path</code></b>
-              (<code><span title="str">str</span></code>)
-          –
-          <div class="doc-md-description">
-            <p>full qualifying path to file</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>description</code></b>
-              (<code><span title="str">str</span></code>, default:
-                  <code>None</code>
-)
-          –
-          <div class="doc-md-description">
-            <p>file descriptor. Defaults to None.</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-internal" title="              MessageBuilder
-
-  
-      dataclass
-   (discord.parts.message.MessageBuilder)" href="#discord.parts.message.MessageBuilder">MessageBuilder</a></code>
-          –
-          <div class="doc-md-description">
-            <p>self</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="discord.parts.message.MessageBuilder.set_flags" class="doc doc-heading">
+<h3 id="discord.parts.message.MessagePart.set_flags" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">set_flags</span></code>
 
-<a href="#discord.parts.message.MessageBuilder.set_flags" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#discord.parts.message.MessagePart.set_flags" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2370,11 +2353,11 @@
 <p><span class="doc-section-title">Returns:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-              <code><a class="autorefs autorefs-internal" title="              MessageBuilder
+              <code><a class="autorefs autorefs-internal" title="              MessagePart
 
   
       dataclass
-   (discord.parts.message.MessageBuilder)" href="#discord.parts.message.MessageBuilder">MessageBuilder</a></code>
+   (discord.parts.message.MessagePart)" href="#discord.parts.message.MessagePart">MessagePart</a></code>
           –
           <div class="doc-md-description">
             <p>self</p>
@@ -2394,178 +2377,6 @@
     </div>
 
 </div><hr />
-
-
-<div class="doc doc-object doc-class">
-
-
-
-<h2 id="discord.parts.message.MessageFlagParams" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>MessageFlagParams</code>
-
-
-<a href="#discord.parts.message.MessageFlagParams" class="headerlink" title="Permanent link">&para;</a></h2>
-
-
-    <div class="doc doc-contents first">
-            <p class="doc doc-class-bases">
-              Bases: <code><span title="typing.TypedDict">TypedDict</span></code></p>
-
-
-        <p>Parameters for setting message flags.</p>
-
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="discord.parts.message.MessageFlagParams.crossposted" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">crossposted</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#discord.parts.message.MessageFlagParams.crossposted" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="discord.parts.message.MessageFlagParams.is_crosspost" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">is_crosspost</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#discord.parts.message.MessageFlagParams.is_crosspost" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="discord.parts.message.MessageFlagParams.suppress_embeds" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">suppress_embeds</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#discord.parts.message.MessageFlagParams.suppress_embeds" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="discord.parts.message.MessageFlagParams.ephemeral" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">ephemeral</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#discord.parts.message.MessageFlagParams.ephemeral" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="discord.parts.message.MessageFlagParams.loading" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">loading</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#discord.parts.message.MessageFlagParams.loading" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="discord.parts.message.MessageFlagParams.is_components_v2" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">is_components_v2</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#discord.parts.message.MessageFlagParams.is_components_v2" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-</div>
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-</div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Each parameter maps directly to a constant in <a href="#discord.parts.message.MessageFlags"><code>MessageFlags</code></a>.</p>
-</div>
-<hr />
 
 
 <div class="doc doc-object doc-class">
@@ -2735,6 +2546,533 @@
     <div class="doc doc-contents ">
 
         <p>This message includes Discord's V2 Components.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="discord.parts.message.MessageFlagParams" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>MessageFlagParams</code>
+
+
+<a href="#discord.parts.message.MessageFlagParams" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="typing.TypedDict">TypedDict</span></code></p>
+
+
+        <p>Parameters for setting message flags. See <a class="autorefs autorefs-internal" title="            MessageFlags" href="#discord.parts.message.MessageFlags"><code>MessageFlags</code></a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageFlagParams.crossposted" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">crossposted</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageFlagParams.crossposted" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageFlagParams.is_crosspost" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">is_crosspost</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageFlagParams.is_crosspost" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageFlagParams.suppress_embeds" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">suppress_embeds</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageFlagParams.suppress_embeds" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageFlagParams.ephemeral" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">ephemeral</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageFlagParams.ephemeral" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageFlagParams.loading" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">loading</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageFlagParams.loading" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageFlagParams.is_components_v2" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">is_components_v2</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageFlagParams.is_components_v2" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><hr />
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="discord.parts.message.MessageReference" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">MessageReference</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageReference" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (discord.model.DataModel)" href="../../internals/model/#discord.model.DataModel">DataModel</a></code></p>
+
+
+        <p>Represents the Message Reference object.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageReference.message_id" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">message_id</span><span class="p">:</span> <span class="nb">int</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageReference.message_id" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>ID of the originating message.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageReference.channel_id" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageReference.channel_id" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Channel ID of the originating message.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Optional for default type, but REQUIRED for forwards.</p>
+</div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageReference.type" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">MessageReferenceTypes</span><span class="o">.</span><span class="n">DEFAULT</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageReference.type" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Type of reference. Defaults to <code>DEFAULT</code>. See <a class="autorefs autorefs-internal" title="            MessageReferenceTypes" href="#discord.parts.message.MessageReferenceTypes"><code>MessageReferenceTypes</code></a>.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="discord.parts.message.MessageReferenceTypes" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>MessageReferenceTypes</code>
+
+
+<a href="#discord.parts.message.MessageReferenceTypes" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents first">
+
+
+        <p>Constants associated with how reference data is populated.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageReferenceTypes.DEFAULT" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">DEFAULT</span> <span class="o">=</span> <span class="mi">0</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageReferenceTypes.DEFAULT" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Standard reference used by replies.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.MessageReferenceTypes.FORWARD" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">FORWARD</span> <span class="o">=</span> <span class="mi">1</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.MessageReferenceTypes.FORWARD" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Reference used to point to a message at a point in time.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><hr />
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="discord.parts.message.Attachment" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">Attachment</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#discord.parts.message.Attachment" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (discord.model.DataModel)" href="../../internals/model/#discord.model.DataModel">DataModel</a></code></p>
+
+
+        <p>Represents an attachment.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.Attachment.id" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="nb">id</span><span class="p">:</span> <span class="nb">int</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.Attachment.id" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>User-defined ID for the attachment.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.Attachment.path" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">path</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.Attachment.path" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Relative path to the file.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.Attachment.filename" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.Attachment.filename" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Name of the file.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="discord.parts.message.Attachment.description" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">description</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.parts.message.Attachment.description" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Description of the file.</p>
 
     </div>
 

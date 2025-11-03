@@ -643,6 +643,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../api/channel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Channel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../api/message/" class="md-nav__link">
         
   
@@ -1577,14 +1600,13 @@ between setup and <code>bot.run()</code>.</p>
 <h2 id="minimal-slash-command">Minimal Slash Command<a class="headerlink" href="#minimal-slash-command" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Demonstrates responding to a slash command.
-Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent.</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrate the minimal slash command!&#39;</span><span class="p">),</span>
     <span class="n">guild_ids</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be guild ID your bot is in!</span>
 <span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">member</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
-</code></pre></div>
+</code></pre></div></p>
 <div class="admonition tip">
 <p class="admonition-title">Guild vs Global</p>
 <ul>
@@ -1596,34 +1618,59 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
 <hr />
 <p>Demonstrates building the V2 component: a container.
 <div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
-    <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Demonstrate using Discord&#39;s new component system!&quot;</span><span class="p">),</span>
+    <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example2&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Demonstrate using Discord&#39;s new component system!&quot;</span><span class="p">),</span>
     <span class="n">guild_ids</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be guild ID your bot is in!</span>
 <span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
-        <span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">()</span>
-            <span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">Container</span><span class="p">()</span>
-                <span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;#d4af37&#39;</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">add_text_display</span><span class="p">(</span><span class="s2">&quot;It&#39;s dangerous to go alone!&quot;</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
-                <span class="o">.</span><span class="n">add_text_display</span><span class="p">(</span><span class="s1">&#39;Take this.&#39;</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="o">.</span><span class="n">set_flags</span><span class="p">(</span><span class="n">is_components_v2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># THIS IS A NECESSITY!</span>
-    <span class="p">)</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">MessagePart</span><span class="p">(</span>
+            <span class="n">components</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">discord</span><span class="o">.</span><span class="n">ContainerPart</span><span class="p">(</span>
+                    <span class="n">accent_color</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="s1">&#39;d4af37&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+                    <span class="n">components</span><span class="o">=</span><span class="p">[</span>
+                        <span class="n">discord</span><span class="o">.</span><span class="n">TextDisplay</span><span class="p">(</span><span class="s2">&quot;It&#39;s dangerous to go alone!&quot;</span><span class="p">),</span>
+                        <span class="n">discord</span><span class="o">.</span><span class="n">Separator</span><span class="p">(),</span>
+                        <span class="n">discord</span><span class="o">.</span><span class="n">TextDisplay</span><span class="p">(</span><span class="s2">&quot;Take this.&quot;</span><span class="p">)</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">flags</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">MessageFlags</span><span class="o">.</span><span class="n">IS_COMPONENTS_V2</span>
+        <span class="p">)</span>
+    <span class="p">)</span> 
 </code></pre></div></p>
 <h2 id="building-and-responding-to-components">Building and Responding to Components<a class="headerlink" href="#building-and-responding-to-components" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Demonstrates building a button and responding to a user pressing it.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
+<span class="k">def</span><span class="w"> </span><span class="nf">create_row</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Functionalize button creation.&quot;&quot;&quot;</span>
+
+    <span class="n">emoji</span> <span class="o">=</span> <span class="s1">&#39;❤️&#39;</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionTypes</span><span class="o">.</span><span class="n">APPLICATION_COMMAND</span> <span class="k">else</span> <span class="s1">&#39;❤️‍🔥&#39;</span>
+
+    <span class="k">return</span> <span class="n">discord</span><span class="o">.</span><span class="n">ActionRowPart</span><span class="p">(</span>
+        <span class="n">components</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">discord</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                <span class="n">style</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">ButtonStyles</span><span class="o">.</span><span class="n">PRIMARY</span><span class="p">,</span> 
+                <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;best_custom_id&#39;</span><span class="p">,</span> 
+                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Press me!&#39;</span><span class="p">,</span> 
+                <span class="n">emoji</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">EmojiModel</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">emoji</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
 <span class="nd">@client</span><span class="o">.</span><span class="n">component</span><span class="p">(</span><span class="s1">&#39;best_custom_id&#39;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">route</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
     <span class="n">adj</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;wonderous&#39;</span><span class="p">,</span> <span class="s1">&#39;beautiful&#39;</span><span class="p">,</span> <span class="s1">&#39;charming&#39;</span><span class="p">,</span> <span class="s1">&#39;vibrant&#39;</span><span class="p">,</span> <span class="s1">&#39;sinister&#39;</span><span class="p">])</span>
+
+    <span class="n">row</span> <span class="o">=</span> <span class="n">create_row</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-        <span class="n">message</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Hello *</span><span class="si">{</span><span class="n">adj</span><span class="si">}</span><span class="s1">* world!&#39;</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">ActionRow</span><span class="p">()</span>
-                <span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;Primary&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Press me again!&#39;</span><span class="p">,</span> <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;best_custom_id&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;❤️‍🔥&#39;</span><span class="p">)</span>
-            <span class="p">)</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">MessagePart</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Hello *</span><span class="si">{</span><span class="n">adj</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s1">* world!&#39;</span><span class="p">,</span>
+            <span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="p">)</span>
     <span class="p">)</span>
 
 <span class="nd">@client</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
@@ -1631,11 +1678,16 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="n">guild_ids</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be guild ID your bot is in!</span>
 <span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+    <span class="n">adj</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;wonderous&#39;</span><span class="p">,</span> <span class="s1">&#39;beautiful&#39;</span><span class="p">,</span> <span class="s1">&#39;charming&#39;</span><span class="p">,</span> <span class="s1">&#39;vibrant&#39;</span><span class="p">,</span> <span class="s1">&#39;sinister&#39;</span><span class="p">])</span>
+
+    <span class="n">row</span> <span class="o">=</span> <span class="n">create_row</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
-        <span class="n">message</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">ActionRow</span><span class="p">()</span>
-                <span class="o">.</span><span class="n">add_button</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;Primary&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Press me!&#39;</span><span class="p">,</span> <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;best_custom_id&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;❤️&#39;</span><span class="p">)</span>
-            <span class="p">)</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">MessagePart</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Hello *</span><span class="si">{</span><span class="n">adj</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s1">* world!&#39;</span><span class="p">,</span>
+            <span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="p">)</span>
     <span class="p">)</span>
 </code></pre></div>
 <h2 id="building-and-responding-to-select-components">Building and Responding to Select Components<a class="headerlink" href="#building-and-responding-to-select-components" title="Permanent link">&para;</a></h2>
@@ -1650,16 +1702,40 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="n">guild_ids</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be guild ID your bot is in!</span>
 <span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
-    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
-        <span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">(</span><span class="s2">&quot;Select an option:&quot;</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">ActionRow</span><span class="p">()</span>
-                <span class="o">.</span><span class="n">set_select_menu</span><span class="p">(</span>
-                    <span class="n">discord</span><span class="o">.</span><span class="n">StringSelect</span><span class="p">(</span><span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;on_string_select&#39;</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Choose an option...&#39;</span><span class="p">)</span>
-                        <span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Caterpillar&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;🐛&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Caterpillar&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;(best option)&#39;</span><span class="p">)</span>
-                        <span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Butterfly&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;🦋&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Butterfly&#39;</span><span class="p">)</span>
-                        <span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ant&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;🐜&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Ant&#39;</span><span class="p">)</span>
-                <span class="p">)</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">SelectOption</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Caterpillar&#39;</span><span class="p">,</span>
+            <span class="n">emoji</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">EmojiModel</span><span class="p">(</span><span class="s1">&#39;🐛&#39;</span><span class="p">),</span>
+            <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Caterpillar&#39;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;(best option)&#39;</span>
+        <span class="p">),</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">SelectOption</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Butterfly&#39;</span><span class="p">,</span>
+            <span class="n">emoji</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">EmojiModel</span><span class="p">(</span><span class="s1">&#39;🦋&#39;</span><span class="p">),</span>
+            <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Butterfly&#39;</span>
+        <span class="p">),</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">SelectOption</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ant&#39;</span><span class="p">,</span>
+            <span class="n">emoji</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">EmojiModel</span><span class="p">(</span><span class="s1">&#39;🐜&#39;</span><span class="p">),</span>
+            <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Ant&#39;</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">row</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">ActionRowPart</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">discord</span><span class="o">.</span><span class="n">StringSelect</span><span class="p">(</span>
+                <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;on_string_select&#39;</span><span class="p">,</span>
+                <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Choose an option...&#39;</span><span class="p">,</span>
+                <span class="n">options</span><span class="o">=</span><span class="n">options</span>
             <span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">MessagePart</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="s1">&#39;Select an option:&#39;</span><span class="p">,</span>
+            <span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="p">)</span>
     <span class="p">)</span>
 </code></pre></div></p>
 <h2 id="building-and-responding-to-a-modal">Building and responding to a Modal<a class="headerlink" href="#building-and-responding-to-a-modal" title="Permanent link">&para;</a></h2>
@@ -1680,32 +1756,53 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
     <span class="n">guild_ids</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be guild ID your bot is in!</span>
 <span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
-    <span class="n">select_label</span> <span class="o">=</span> <span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;What&#39;s your favorite bug?&quot;</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">set_select_menu</span><span class="p">(</span>
-            <span class="n">discord</span><span class="o">.</span><span class="n">StringSelect</span><span class="p">(</span><span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;bug_select&#39;</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Choose...&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ant&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Ant&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;(best option)&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;🐜&#39;</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Butterfly&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Butterfly&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;🦋&#39;</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Caterpillar&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Caterpillar&#39;</span><span class="p">,</span> <span class="n">emoji</span><span class="o">=</span><span class="s1">&#39;🐛&#39;</span><span class="p">)</span>
+    <span class="n">select_options</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">SelectOption</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Caterpillar&#39;</span><span class="p">,</span>
+            <span class="n">emoji</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">EmojiModel</span><span class="p">(</span><span class="s1">&#39;🐛&#39;</span><span class="p">),</span>
+            <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Caterpillar&#39;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;(best option)&#39;</span>
+        <span class="p">),</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">SelectOption</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Butterfly&#39;</span><span class="p">,</span>
+            <span class="n">emoji</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">EmojiModel</span><span class="p">(</span><span class="s1">&#39;🦋&#39;</span><span class="p">),</span>
+            <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Butterfly&#39;</span>
+        <span class="p">),</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">SelectOption</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ant&#39;</span><span class="p">,</span>
+            <span class="n">emoji</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">EmojiModel</span><span class="p">(</span><span class="s1">&#39;🐜&#39;</span><span class="p">),</span>
+            <span class="n">value</span><span class="o">=</span><span class="s1">&#39;Ant&#39;</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">select_label</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;What&#39;s your favorite bug?&quot;</span><span class="p">,</span>
+        <span class="n">component</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">StringSelect</span><span class="p">(</span>
+            <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;bug_select&#39;</span><span class="p">,</span>
+            <span class="n">options</span><span class="o">=</span><span class="n">select_options</span><span class="p">,</span>
+            <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Choose...&#39;</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="n">inp_label</span> <span class="o">=</span> <span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Why is it your favorite?&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Provide as much detail as possible!&#39;</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">set_text_input</span><span class="p">(</span>
-            <span class="n">style</span><span class="o">=</span><span class="s1">&#39;Paragraph&#39;</span><span class="p">,</span>
-            <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Write your explanation here...&#39;</span><span class="p">,</span>
+    <span class="n">input_label</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Why is it your favorite?&#39;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Provide as much detail as possible!&#39;</span><span class="p">,</span>
+        <span class="n">component</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">TextInput</span><span class="p">(</span>
             <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;bug_explanation&#39;</span><span class="p">,</span>
+            <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Write your explanation here...&#39;</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">TextInputStyles</span><span class="o">.</span><span class="n">PARAGRAPH</span><span class="p">,</span>
             <span class="n">min_length</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
             <span class="n">max_length</span><span class="o">=</span><span class="mi">250</span>
         <span class="p">)</span>
     <span class="p">)</span>
 
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond_modal</span><span class="p">(</span>
-        <span class="n">discord</span><span class="o">.</span><span class="n">ModalBuilder</span><span class="p">(</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">ModalPart</span><span class="p">(</span>
             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Bug Report&#39;</span><span class="p">,</span>
-            <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;modal_one&#39;</span>
+            <span class="n">custom_id</span><span class="o">=</span><span class="s1">&#39;modal_one&#39;</span><span class="p">,</span>
+            <span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="n">select_label</span><span class="p">,</span> <span class="n">input_label</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="n">select_label</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="n">inp_label</span><span class="p">)</span>
     <span class="p">)</span>
 </code></pre></div></p>
 <h2 id="responding-to-an-event">Responding to an Event<a class="headerlink" href="#responding-to-an-event" title="Permanent link">&para;</a></h2>
@@ -1718,23 +1815,43 @@ Sends the message <code>Hello, {user}!</code> when <code>/example</code> is sent
 </code></pre></div></p>
 <h2 id="adding-attachments">Adding Attachments<a class="headerlink" href="#adding-attachments" title="Permanent link">&para;</a></h2>
 <hr />
-<p>Demonstrates adding multiple attachments to a legacy embed. This example can be extended to <a href="../api/ui_components/#discord.parts.components_v2.Container"><code>Containers</code></a> and other fields that need an https or attachment scheme.
-<div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
+<p>Demonstrates adding multiple attachments to a legacy embed. This example can be extended to <a href="../api/ui_components/#discord.parts.components_v2.ContainerPart"><code>Containers</code></a> and other fields that need an https or attachment scheme.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">set_user_author</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">UserModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the embed author to the user invoking the command.&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">discord</span><span class="o">.</span><span class="n">EmbedAuthor</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
+        <span class="n">icon_url</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;https://cdn.discordapp.com/avatars/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">avatar</span><span class="si">}</span><span class="s2">.png&quot;</span>
+    <span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">set_timestamp</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Format time per Discord&#39;s docs.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+
+<span class="nd">@client</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
     <span class="n">command</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrate adding an attachment!&#39;</span><span class="p">),</span> 
-    <span class="n">guild_ids</span><span class="o">=</span><span class="n">GUILD_ID</span>
+    <span class="n">guild_ids</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be guild ID your bot is in!</span>
 <span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
-        <span class="n">discord</span><span class="o">.</span><span class="n">MessageBuilder</span><span class="p">()</span>
-            <span class="o">.</span><span class="n">add_attachment</span><span class="p">(</span><span class="s1">&#39;relative/path/to/file.png&#39;</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">add_attachment</span><span class="p">(</span><span class="s1">&#39;relative/path/to/animation.gif&#39;</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">add_embed</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">EmbedBuilder</span><span class="p">(</span><span class="s1">&#39;Example Embed&#39;</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">set_user_author</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">member</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;#d4af37&#39;</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">set_thumbnail</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;attachment://file.png&#39;</span><span class="p">)</span> <span class="c1"># attachment://&lt;filename&gt;</span>
-                <span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;attachment://animation.gif&#39;</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">set_timestamp</span><span class="p">()</span>
-            <span class="p">)</span>
+        <span class="n">discord</span><span class="o">.</span><span class="n">MessagePart</span><span class="p">(</span>
+            <span class="n">attachments</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">discord</span><span class="o">.</span><span class="n">Attachment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;relative/path/to/file.png&quot;</span><span class="p">,</span> <span class="s2">&quot;file.png&quot;</span><span class="p">,</span> <span class="s1">&#39;my description.&#39;</span><span class="p">),</span>
+                <span class="n">discord</span><span class="o">.</span><span class="n">Attachment</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;relative/path/to/animation.gif&quot;</span><span class="p">,</span> <span class="s2">&quot;animation.gif&quot;</span><span class="p">,</span> <span class="s1">&#39;amazing animation!&#39;</span><span class="p">)</span>
+            <span class="p">],</span>
+            <span class="n">embeds</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">discord</span><span class="o">.</span><span class="n">EmbedPart</span><span class="p">(</span>
+                    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Example Embed&#39;</span><span class="p">,</span>
+                    <span class="n">author</span><span class="o">=</span><span class="n">set_user_author</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">member</span><span class="o">.</span><span class="n">user</span><span class="p">),</span>
+                    <span class="n">color</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="s1">&#39;d4af37&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+                    <span class="n">thumbnail</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">EmbedThumbnail</span><span class="p">(</span><span class="s1">&#39;attachment://file.png&#39;</span><span class="p">),</span>
+                    <span class="n">image</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">EmbedImage</span><span class="p">(</span><span class="s1">&#39;attachment://animation.gif&#39;</span><span class="p">),</span>
+                    <span class="n">timestamp</span><span class="o">=</span><span class="n">set_timestamp</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
     <span class="p">)</span>
 </code></pre></div></p>
 

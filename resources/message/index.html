@@ -529,6 +529,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../api/channel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Channel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../api/message/" class="md-nav__link">
         
   
@@ -910,6 +933,15 @@
   <a href="#discord.resources.message.Message.pinned" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;pinned
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discord.resources.message.Message.type" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;type
     </span>
   </a>
   
@@ -1624,6 +1656,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#discord.resources.message.Message.type" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#discord.resources.message.Message.webhook_id" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;webhook_id
@@ -1932,6 +1973,29 @@
 
 
 
+<h3 id="discord.resources.message.Message.type" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#discord.resources.message.Message.type" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Type of message.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
 <h3 id="discord.resources.message.Message.webhook_id" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">webhook_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></code>
 
@@ -2021,14 +2085,14 @@
     <ul>
         <li class="doc-section-item field-body">
             <b><code>message</code></b>
-              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessageBuilder
+              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessagePart
 
   
       dataclass
-   (discord.parts.message.MessageBuilder)" href="../../api/message/#discord.parts.message.MessageBuilder">MessageBuilder</a></code>)
+   (discord.parts.message.MessagePart)" href="../../api/message/#discord.parts.message.MessagePart">MessagePart</a></code>)
           –
           <div class="doc-md-description">
-            <p>can be just text or the MessageBuilder for dynamic messages</p>
+            <p>can be just text or the MessagePart for dynamic messages</p>
           </div>
         </li>
     </ul>
@@ -2083,14 +2147,14 @@
     <ul>
         <li class="doc-section-item field-body">
             <b><code>message</code></b>
-              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessageBuilder
+              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessagePart
 
   
       dataclass
-   (discord.parts.message.MessageBuilder)" href="../../api/message/#discord.parts.message.MessageBuilder">MessageBuilder</a></code>)
+   (discord.parts.message.MessagePart)" href="../../api/message/#discord.parts.message.MessagePart">MessagePart</a></code>)
           –
           <div class="doc-md-description">
-            <p>can be just text or the MessageBuilder for dynamic messages</p>
+            <p>can be just text or the MessagePart for dynamic messages</p>
           </div>
         </li>
     </ul>
@@ -2129,11 +2193,11 @@
     <ul>
         <li class="doc-section-item field-body">
             <b><code>message</code></b>
-              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessageBuilder
+              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessagePart
 
   
       dataclass
-   (discord.parts.message.MessageBuilder)" href="../../api/message/#discord.parts.message.MessageBuilder">MessageBuilder</a></code>)
+   (discord.parts.message.MessagePart)" href="../../api/message/#discord.parts.message.MessagePart">MessagePart</a></code>)
           –
           <div class="doc-md-description">
             <p>the new message</p>
