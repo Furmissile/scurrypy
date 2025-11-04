@@ -25,7 +25,7 @@ class CommandDispatcher:
         InteractionTypes.MESSAGE_COMPONENT: MessageComponentData,
         InteractionTypes.MODAL_SUBMIT: ModalData
     }
-    """Maps [`InteractionTypes`][discord.dispatch.command_dispatcher.InteractionTypes] to their respective dataclass."""
+    """Maps [`InteractionTypes`][scurrypy.dispatch.command_dispatcher.InteractionTypes] to their respective dataclass."""
 
     def __init__(self, client: ClientLike):
         self.application_id = client.application_id
@@ -66,7 +66,7 @@ class CommandDispatcher:
             await self._http.request(
                 'PUT', 
                 f"applications/{self.application_id}/guilds/{guild_id}/commands", 
-                data=[command._to_dict() for command in cmds]
+                data=[command.to_dict() for command in cmds]
             )
     
     async def _register_global_commands(self, commands: list):
@@ -76,7 +76,7 @@ class CommandDispatcher:
             commands (list): list of serialized commands
         """
 
-        global_commands = [command._to_dict() for command in commands]
+        global_commands = [command.to_dict() for command in commands]
 
         await self._http.request('PUT', f"applications/{self.application_id}/commands", data=global_commands)
 

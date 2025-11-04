@@ -42,7 +42,7 @@ class CommandOption(DataModel):
     """Option for a slash command."""
 
     type: int
-    """Type of option. See [`CommandOptionTypes`][discord.parts.command.CommandOptionTypes]."""
+    """Type of option. See [`CommandOptionTypes`][scurrypy.parts.command.CommandOptionTypes]."""
 
     name: str
     """Name of option."""
@@ -67,7 +67,7 @@ class SlashCommand(DataModel):
     """Parameters or options for the command."""
 
     type: int = field(init=False, default=CommandTypes.CHAT_INPUT)
-    """Command type. Always `CommandTypes.CHAT_INPUT` for this class. See [`CommandTypes`][discord.parts.command.CommandTypes]."""
+    """Command type. Always `CommandTypes.CHAT_INPUT` for this class. See [`CommandTypes`][scurrypy.parts.command.CommandTypes]."""
 
 @dataclass
 class UserCommand(DataModel):
@@ -77,7 +77,7 @@ class UserCommand(DataModel):
     """Name of the command."""
 
     type: int = field(init=False, default=CommandTypes.USER_COMMAND)
-    """Command type. Always `CommandTypes.USER_COMMAND` for this class. See [`CommandTypes`][discord.parts.command.CommandTypes]."""
+    """Command type. Always `CommandTypes.USER_COMMAND` for this class. See [`CommandTypes`][scurrypy.parts.command.CommandTypes]."""
 
 @dataclass
 class MessageCommand(DataModel):
@@ -87,4 +87,4 @@ class MessageCommand(DataModel):
     """Name of the command."""
 
     type: int = field(init=False, default=CommandTypes.MESSAGE_COMMAND)
-    """Command type. Always `CommandTypes.MESSAGE_COMMAND` for this class. See [`CommandTypes`][discord.parts.command.CommandTypes]."""
+    """Command type. Always `CommandTypes.MESSAGE_COMMAND` for this class. See [`CommandTypes`][scurrypy.parts.command.CommandTypes]."""

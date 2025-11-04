@@ -69,7 +69,7 @@ class Interaction(DataModel):
     """HTTP session for requests."""
 
     type: int
-    """Type of interaction. See [`InteractionTypes`][discord.dispatch.command_dispatcher.InteractionTypes]."""
+    """Type of interaction. See [`InteractionTypes`][scurrypy.dispatch.command_dispatcher.InteractionTypes]."""
 
     channel_id: int
     """ID of the channel where the interaction was sent."""
@@ -115,7 +115,7 @@ class Interaction(DataModel):
 
         content = {
             'type': InteractionCallbackTypes.CHANNEL_MESSAGE_WITH_SOURCE,
-            'data': message._to_dict()
+            'data': message.to_dict()
         }
 
         params = {'with_response': with_response}
@@ -146,7 +146,7 @@ class Interaction(DataModel):
 
         content = {
             'type': InteractionCallbackTypes.UPDATE_MESSAGE,
-            'data': message._to_dict()
+            'data': message.to_dict()
         }
 
         await self._http.request(
@@ -169,7 +169,7 @@ class Interaction(DataModel):
         
         content = {
             'type': InteractionCallbackTypes.MODAL,
-            'data': modal._to_dict()
+            'data': modal.to_dict()
         }
 
         await self._http.request(

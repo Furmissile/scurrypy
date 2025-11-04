@@ -25,7 +25,7 @@ class SectionPart(DataModel, ContainerChild):
     """Component(s) representing the content of the section that is contextually associated to the accessory."""
 
     type: int = field(init=False, default=ComponentV2Types.SECTION)
-    """Component type. Always `ComponentV2Types.SECTION` for this class. See [`ComponentV2Types`][discord.parts.components_v2.ComponentV2Types]."""
+    """Component type. Always `ComponentV2Types.SECTION` for this class. See [`ComponentV2Types`][scurrypy.parts.components_v2.ComponentV2Types]."""
 
 @dataclass
 class TextDisplay(DataModel, ContainerChild, SectionChild):
@@ -35,7 +35,7 @@ class TextDisplay(DataModel, ContainerChild, SectionChild):
     """Text that will be displayed similar to a message."""
 
     type: int = field(init=False, default=ComponentV2Types.TEXT_DISPLAY)
-    """Component type. Always `ComponentV2Types.TEXT_DISPLAY` for this class. See [`ComponentV2Types`][discord.parts.components_v2.ComponentV2Types]."""
+    """Component type. Always `ComponentV2Types.TEXT_DISPLAY` for this class. See [`ComponentV2Types`][scurrypy.parts.components_v2.ComponentV2Types]."""
 
 @dataclass
 class Thumbnail(DataModel, SectionAccessory):
@@ -51,7 +51,7 @@ class Thumbnail(DataModel, SectionAccessory):
     """Whether the thumbnail should be a spoiler (or blurred out)."""
 
     type: int = field(init=False, default=ComponentV2Types.THUMBNAIL)
-    """Component type. Always `ComponentV2Types.THUMBNAIL` for this class. See [`ComponentV2Types`][discord.parts.components_v2.ComponentV2Types]."""
+    """Component type. Always `ComponentV2Types.THUMBNAIL` for this class. See [`ComponentV2Types`][scurrypy.parts.components_v2.ComponentV2Types]."""
 
 @dataclass
 class MediaGalleryItem(DataModel):
@@ -71,10 +71,10 @@ class MediaGallery(DataModel, ContainerChild):
     """Represents the Media Gallery component."""
 
     items: list[MediaGalleryItem] = field(default_factory=list)
-    """1 to 10 nedia gallery items. See [`MediaGalleryItem`][discord.parts.components_v2.MediaGalleryItem]."""
+    """1 to 10 nedia gallery items. See [`MediaGalleryItem`][scurrypy.parts.components_v2.MediaGalleryItem]."""
 
     type: int = field(init=False, default=ComponentV2Types.MEDIA_GALLERY)
-    """Component type. Always `ComponentV2Types.MEDIA_GALLERY` for this class. See [`ComponentV2Types`][discord.parts.components_v2.ComponentV2Types]."""
+    """Component type. Always `ComponentV2Types.MEDIA_GALLERY` for this class. See [`ComponentV2Types`][scurrypy.parts.components_v2.ComponentV2Types]."""
 
 @dataclass
 class File(DataModel, ContainerChild):
@@ -87,7 +87,7 @@ class File(DataModel, ContainerChild):
     """Whether the thumbnail should be a spoiler (or blurred out)."""
 
     type: int = field(init=False, default=ComponentV2Types.FILE)
-    """Component type. Always `ComponentV2Types.File` for this class. See [`ComponentV2Types`][discord.parts.components_v2.ComponentV2Types]."""
+    """Component type. Always `ComponentV2Types.File` for this class. See [`ComponentV2Types`][scurrypy.parts.components_v2.ComponentV2Types]."""
 
 class SeparatorTypes:
     """Represents separator types constants."""
@@ -106,10 +106,10 @@ class Separator(DataModel, ContainerChild):
     """Whether a visual divider should be displayed in the component. Defaults to True."""
 
     spacing: Optional[int] = SeparatorTypes.SMALL_PADDING
-    """Size of separator padding. Defaults to `SMALL_PADDING`. See [`SeparatorTypes`][discord.parts.components_v2.SeparatorTypes]."""
+    """Size of separator padding. Defaults to `SMALL_PADDING`. See [`SeparatorTypes`][scurrypy.parts.components_v2.SeparatorTypes]."""
 
     type: int = field(init=False, default=ComponentV2Types.SEPARATOR)
-    """Component type. Always `ComponentV2Types.SEPARATOR` for this class. See [`ComponentV2Types`][discord.parts.components_v2.ComponentV2Types]."""
+    """Component type. Always `ComponentV2Types.SEPARATOR` for this class. See [`ComponentV2Types`][scurrypy.parts.components_v2.ComponentV2Types]."""
 
 @dataclass
 class ContainerPart(DataModel):
@@ -125,7 +125,7 @@ class ContainerPart(DataModel):
     """If the container should be blurred out. Defaults to False."""
 
     type: int = field(init=False, default=ComponentV2Types.CONTAINER)
-    """Component type. Always `ComponentV2Types.CONTAINER` for this class. See [`ComponentV2Types`][discord.parts.components_v2.ComponentV2Types]."""
+    """Component type. Always `ComponentV2Types.CONTAINER` for this class. See [`ComponentV2Types`][scurrypy.parts.components_v2.ComponentV2Types]."""
 
 @dataclass
 class Label(DataModel):
@@ -141,4 +141,4 @@ class Label(DataModel):
     """An optional description text for the label."""
 
     type: int = field(init=False, default=ComponentV2Types.LABEL)
-    """Component type. Always `ComponentV2Types.LABEL` for this class. See [`ComponentV2Types`][discord.parts.components_v2.ComponentV2Types]."""
+    """Component type. Always `ComponentV2Types.LABEL` for this class. See [`ComponentV2Types`][scurrypy.parts.components_v2.ComponentV2Types]."""

@@ -148,7 +148,7 @@ class Channel(DataModel):
         if isinstance(message, str):
             message = MessagePart(content=message)
 
-        data = await self._http.request("POST", f"/channels/{self.id}/messages", data=message._to_dict())
+        data = await self._http.request("POST", f"/channels/{self.id}/messages", data=message.to_dict())
 
         return Message.from_dict(data, self._http)
 
@@ -164,7 +164,7 @@ class Channel(DataModel):
         Returns:
             (Channel): The updated channel object
         """
-        data = await self._http.request("PATCH", f"/channels/{self.id}", data=channel._to_dict())
+        data = await self._http.request("PATCH", f"/channels/{self.id}", data=channel.to_dict())
         self._update(data)
 
         return self

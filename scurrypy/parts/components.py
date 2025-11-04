@@ -24,7 +24,7 @@ class ActionRowPart(DataModel, ContainerChild):
     """Up to 5 interactive button components or a single select component."""
 
     type: int = field(init=False, default=ComponentTypes.ACTION_ROW)
-    """Component type. Always `ComponentTypes.ACTION_ROW` for this class. See [`ComponentTypes`][discord.parts.components.ComponentTypes]."""
+    """Component type. Always `ComponentTypes.ACTION_ROW` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 class ButtonStyles:
     """Represents button styles for a Button component."""
@@ -49,7 +49,7 @@ class Button(DataModel, ActionRowChild, SectionAccessory):
     """Represents the Button component."""
 
     style: int
-    """A button style. See [`ButtonStyles`][discord.parts.components.ButtonStyles]."""
+    """A button style. See [`ButtonStyles`][scurrypy.parts.components.ButtonStyles]."""
 
     custom_id: str
     """ID for the button."""
@@ -67,7 +67,7 @@ class Button(DataModel, ActionRowChild, SectionAccessory):
     """Whether the button is disabled. Defaults to False."""
 
     type: int = field(init=False, default=ComponentTypes.BUTTON)
-    """Component type. Always `ComponentTypes.BUTTON` for this class. See [`ComponentTypes`][discord.parts.components.ComponentTypes]."""
+    """Component type. Always `ComponentTypes.BUTTON` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
 class SelectOption(DataModel):
@@ -96,7 +96,7 @@ class StringSelect(DataModel, ActionRowChild, LabelChild):
     """ID for the select menu."""
 
     options: list[SelectOption] = field(default_factory=list)
-    """Specified choices in a select menu. See [`SelectOption`][discord.parts.components.SelectOption]."""
+    """Specified choices in a select menu. See [`SelectOption`][scurrypy.parts.components.SelectOption]."""
 
     placeholder: Optional[str] = None
     """Placeholder text if nothing is selected or default."""
@@ -114,7 +114,7 @@ class StringSelect(DataModel, ActionRowChild, LabelChild):
     """Whether select menu is disabled in a message. Defaults to False."""
 
     type: int = field(init=False, default=ComponentTypes.STRING_SELECT)
-    """Component type. Always `ComponentTypes.STRING_SELECT` for this class. See [`ComponentTypes`][discord.parts.components.ComponentTypes]."""
+    """Component type. Always `ComponentTypes.STRING_SELECT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 class TextInputStyles:
     """Represents the types of Text Inputs."""
@@ -130,7 +130,7 @@ class TextInput(DataModel, LabelChild):
     """Represents the Text Input component."""
 
     style: TextInputStyles = TextInputStyles.SHORT
-    """Text input style. See [`TextInputStyles`][discord.parts.components.TextInputStyles]."""
+    """Text input style. See [`TextInputStyles`][scurrypy.parts.components.TextInputStyles]."""
 
     custom_id: str = None
     """ID for the input."""
@@ -154,7 +154,7 @@ class TextInput(DataModel, LabelChild):
     """Custom placeholder text if the input is empty."""
 
     type: int = field(init=False, default=ComponentTypes.TEXT_INPUT)
-    """Component type. Always `ComponentTypes.TEXT_INPUT` for this class. See [`ComponentTypes`][discord.parts.components.ComponentTypes]."""
+    """Component type. Always `ComponentTypes.TEXT_INPUT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
 class DefaultValue(DataModel):
@@ -178,7 +178,7 @@ class SelectMenu(DataModel):
 
     default_values: list[DefaultValue] = field(default_factory=list)
     """
-        List of default values for auto-populated select menu components. See [`DefaultValue`][discord.parts.components.DefaultValue].
+        List of default values for auto-populated select menu components. See [`DefaultValue`][scurrypy.parts.components.DefaultValue].
         Number of default values must be in the range of `min_values` to `max_values`.
     """
 
@@ -200,25 +200,25 @@ class UserSelect(SelectMenu, ActionRowChild, LabelChild):
     """Represents the User Select component."""
 
     type: int = field(init=False, default=ComponentTypes.USER_SELECT)
-    """Component type. Always `ComponentTypes.USER_SELECT` for this class. See [`ComponentTypes`][discord.parts.components.ComponentTypes]."""
+    """Component type. Always `ComponentTypes.USER_SELECT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
 class RoleSelect(SelectMenu, ActionRowChild, LabelChild):
     """Represents the Role Select component."""
 
     type: int = field(init=False, default=ComponentTypes.ROLE_SELECT)
-    """Component type. Always `ComponentTypes.ROLE_SELECT` for this class. See [`ComponentTypes`][discord.parts.components.ComponentTypes]."""
+    """Component type. Always `ComponentTypes.ROLE_SELECT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
 class MentionableSelect(SelectMenu, ActionRowChild, LabelChild):
     """Represents the Mentionable Select component."""
 
     type: int = field(init=False, default=ComponentTypes.MENTIONABLE_SELECT)
-    """Component type. Always `ComponentTypes.MENTIONABLE_SELECT` for this class. See [`ComponentTypes`][discord.parts.components.ComponentTypes]."""
+    """Component type. Always `ComponentTypes.MENTIONABLE_SELECT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
 class ChannelSelect(SelectMenu, ActionRowChild, LabelChild):
     """Represents the Channel Select component."""
 
     type: int = field(init=False, default=ComponentTypes.CHANNEL_SELECT)
-    """Component type. Always `ComponentTypes.CHANNEL_SELECT` for this class. See [`ComponentTypes`][discord.parts.components.ComponentTypes]."""
+    """Component type. Always `ComponentTypes.CHANNEL_SELECT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""

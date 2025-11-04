@@ -7,25 +7,25 @@ class EventDispatcher:
     """Central hub for handling Discord Gateway events."""
 
     RESOURCE_MAP = { # maps discord events to their respective dataclass (lazy loading)
-        'READY': ('discord.events.ready_event', 'ReadyEvent'),
+        'READY': ('scurrypy.events.ready_event', 'ReadyEvent'),
 
-        'GUILD_CREATE': ('discord.events.guild_events', 'GuildCreateEvent'),
-        'GUILD_UPDATE': ('discord.events.guild_events', 'GuildUpdateEvent'),
-        'GUILD_DELETE': ('discord.events.guild_events', 'GuildDeleteEvent'),
+        'GUILD_CREATE': ('scurrypy.events.guild_events', 'GuildCreateEvent'),
+        'GUILD_UPDATE': ('scurrypy.events.guild_events', 'GuildUpdateEvent'),
+        'GUILD_DELETE': ('scurrypy.events.guild_events', 'GuildDeleteEvent'),
 
-        'CHANNEL_CREATE': ('discord.events.channel_events', 'GuildChannelCreateEvent'),
-        'CHANNEL_UPDATE': ('discord.events.channel_events', 'GuildChannelUpdateEvent'),
-        'CHANNEL_DELETE': ('discord.events.channel_events', 'GuildChannelDeleteEvent'),
-        'CHANNEL_PINS_UPDATE': ('discord.events.channel_events', 'ChannelPinsUpdateEvent'),
+        'CHANNEL_CREATE': ('scurrypy.events.channel_events', 'GuildChannelCreateEvent'),
+        'CHANNEL_UPDATE': ('scurrypy.events.channel_events', 'GuildChannelUpdateEvent'),
+        'CHANNEL_DELETE': ('scurrypy.events.channel_events', 'GuildChannelDeleteEvent'),
+        'CHANNEL_PINS_UPDATE': ('scurrypy.events.channel_events', 'ChannelPinsUpdateEvent'),
 
-        'MESSAGE_CREATE': ('discord.events.message_events', 'MessageCreateEvent'),
-        'MESSAGE_UPDATE': ('discord.events.message_events', 'MessageUpdateEvent'),
-        'MESSAGE_DELETE': ('discord.events.message_events', 'MessageDeleteEvent'),
+        'MESSAGE_CREATE': ('scurrypy.events.message_events', 'MessageCreateEvent'),
+        'MESSAGE_UPDATE': ('scurrypy.events.message_events', 'MessageUpdateEvent'),
+        'MESSAGE_DELETE': ('scurrypy.events.message_events', 'MessageDeleteEvent'),
         
-        'MESSAGE_REACTION_ADD': ('discord.events.reaction_events', 'ReactionAddEvent'),
-        'MESSAGE_REACTION_REMOVE': ('discord.events.reaction_events', 'ReactionRemoveEvent'),
-        'MESSAGE_REACTION_REMOVE_ALL': ('discord.events.reaction_events', 'ReactionRemoveAllEvent'),
-        'MESSAGE_REACTION_REMOVE_EMOJI': ('discord.events.reaction_events', 'ReactionRemoveEmojiEvent'),
+        'MESSAGE_REACTION_ADD': ('scurrypy.events.reaction_events', 'ReactionAddEvent'),
+        'MESSAGE_REACTION_REMOVE': ('scurrypy.events.reaction_events', 'ReactionRemoveEvent'),
+        'MESSAGE_REACTION_REMOVE_ALL': ('scurrypy.events.reaction_events', 'ReactionRemoveAllEvent'),
+        'MESSAGE_REACTION_REMOVE_EMOJI': ('scurrypy.events.reaction_events', 'ReactionRemoveEmojiEvent'),
 
         # and other events...
     }

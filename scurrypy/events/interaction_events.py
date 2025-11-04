@@ -15,7 +15,7 @@ class ApplicationCommandOptionData(DataModel):
     """Name of the command option."""
 
     type: int
-    """Type of command option. See [`CommandOptionTypes`][discord.parts.command.CommandOptionTypes]."""
+    """Type of command option. See [`CommandOptionTypes`][scurrypy.parts.command.CommandOptionTypes]."""
 
     value: str | int | float | bool
     """Input value for option."""
@@ -153,7 +153,7 @@ class InteractionEvent(DataModel):
     """Represents the interaction response."""
 
     interaction: Interaction
-    """Interaction resource object. See [`Interaction`][discord.resources.interaction.Interaction]."""
+    """Interaction resource object. See [`Interaction`][scurrypy.resources.interaction.Interaction]."""
 
     data: Optional[ApplicationCommandData | MessageComponentData | ModalData] = None
     """Interaction response data."""

@@ -27,7 +27,7 @@ class MessageFlags:
     """This message includes Discord's V2 Components."""
 
 class MessageFlagParams(TypedDict, total=False):
-    """Parameters for setting message flags. See [`MessageFlags`][discord.parts.message.MessageFlags]."""
+    """Parameters for setting message flags. See [`MessageFlags`][scurrypy.parts.message.MessageFlags]."""
     crossposted: bool
     is_crosspost: bool
     suppress_embeds: bool
@@ -59,7 +59,7 @@ class MessageReference(DataModel):
     """
 
     type: int = MessageReferenceTypes.DEFAULT
-    """Type of reference. Defaults to `DEFAULT`. See [`MessageReferenceTypes`][discord.parts.message.MessageReferenceTypes]."""
+    """Type of reference. Defaults to `DEFAULT`. See [`MessageReferenceTypes`][scurrypy.parts.message.MessageReferenceTypes]."""
 
 @dataclass
 class Attachment(DataModel):
@@ -77,7 +77,7 @@ class Attachment(DataModel):
     description: str
     """Description of the file."""
 
-    def _to_dict(self):
+    def to_dict(self):
         return {
             'id': self.id,
             'filename': self.filename,
@@ -92,7 +92,7 @@ class MessagePart(DataModel):
     """Message text content."""
 
     flags: Optional[int] = 0
-    """Message flags. See [`MessageFlags`][discord.parts.message.MessageFlags]."""
+    """Message flags. See [`MessageFlags`][scurrypy.parts.message.MessageFlags]."""
 
     components: Optional[list[ActionRowPart | ContainerPart]] = field(default_factory=list)
     """Components to be attached to this message."""

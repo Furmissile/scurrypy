@@ -69,7 +69,7 @@ plugins:
               - "!^_"
 
 watch:
-  - discord
+  - scurrypy
 
 nav:
   - Home: index.md

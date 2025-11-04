@@ -27,7 +27,7 @@ class GuildChannel(DataModel):
     """Name of the channel."""
 
     type: Optional[int] = None
-    """Type of channel. See [`ChannelTypes`][discord.parts.channel.ChannelTypes]."""
+    """Type of channel. See [`ChannelTypes`][scurrypy.parts.channel.ChannelTypes]."""
 
     topic: Optional[str] = None
     """Topic of channel."""

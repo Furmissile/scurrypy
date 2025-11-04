@@ -5,7 +5,7 @@ from .http import HTTPClient
 from .logger import Logger
 
 class ClientLike(Protocol):
-    """Exposes a common interface for [`Client`][discord.client.Client]."""
+    """Exposes a common interface for [`Client`][scurrypy.client.Client]."""
     application_id: int
     """Bot's application ID."""
 
