@@ -32,3 +32,19 @@ class EmojiModel(DataModel):
             return quote(f"a:{self.name}:{self.id}")
         
         return quote(f"{self.name}:{self.id}")
+
+    @property
+    def url(self) -> str:
+        """
+            Return the full qualifying link for this emoji.
+
+            !!! important
+                This only works for custom Discord emojis (those with an ID). 
+                Unicode emojis will return `None`.
+        """
+        if not self.id:
+            return None
+        
+        ext = 'gif' if self.animated else 'png'
+
+        return f"https://cdn.discordapp.com/emojis/{self.id}.{ext}"
