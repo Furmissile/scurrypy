@@ -1509,11 +1509,11 @@ between setup and <code>bot.run()</code>.</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">asyncpg</span>
 
 <span class="nd">@dataclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">MyState</span><span class="p">(</span><span class="n">discord</span><span class="o">.</span><span class="n">BaseConfig</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyState</span><span class="p">(</span><span class="n">scurrypy</span><span class="o">.</span><span class="n">BaseConfig</span><span class="p">):</span>
     <span class="n">pg_conn</span><span class="p">:</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">Pool</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># pool of connections</span>
 
 <span class="nd">@client</span><span class="o">.</span><span class="n">setup_hook</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">init_db</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">init_db</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">scurrypy</span><span class="o">.</span><span class="n">Client</span><span class="p">):</span>
     <span class="n">bot</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">pg_conn</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">create_pool</span><span class="p">(</span>
         <span class="n">host</span><span class="o">=</span><span class="s2">&quot;your-host&quot;</span><span class="p">,</span>
         <span class="n">user</span><span class="o">=</span><span class="s2">&quot;your-username&quot;</span><span class="p">,</span>
@@ -1522,13 +1522,13 @@ between setup and <code>bot.run()</code>.</p>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DB pool initialized&quot;</span><span class="p">)</span>
 
 <span class="nd">@client</span><span class="o">.</span><span class="n">shutdown_hook</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">close_db</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">close_db</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">scurrypy</span><span class="o">.</span><span class="n">Client</span><span class="p">):</span>
     <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">pg_conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DB pool closed&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 <div class="admonition tip">
 <p class="admonition-title">Note on <code>.config</code> type</p>
-<p>While <code>.config</code> can technically be anything, it is recommended to use <code>discord.BaseConfig</code> and the dataclass decorator.</p>
+<p>While <code>.config</code> can technically be anything, it is recommended to use <code>scurrypy.BaseConfig</code> and the dataclass decorator.</p>
 <p>Dataclasses make accessing fields more object-like instead of dict-like.</p>
 </div>
 <h2 id="requesting-a-resource">Requesting a Resource<a class="headerlink" href="#requesting-a-resource" title="Permanent link">&para;</a></h2>
@@ -1536,10 +1536,10 @@ between setup and <code>bot.run()</code>.</p>
 <p>Resources (like a channel or a message) can be requested for through client.</p>
 <p>Demonstrates requesting a message to attach a thread.
 <div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
-    <span class="n">discord</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="s1">&#39;Demonstrates creating a thread from a resource!&#39;</span><span class="p">),</span> 
+    <span class="n">scurrypy</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">,</span> <span class="s1">&#39;Demonstrates creating a thread from a resource!&#39;</span><span class="p">),</span> 
     <span class="n">guild_ids</span><span class="o">=</span><span class="n">GUILD_ID</span> <span class="c1"># must be guild ID your bot is in!</span>
 <span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_example</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">scurrypy</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">scurrypy</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s1">&#39;You got it!&#39;</span><span class="p">,</span> <span class="n">with_response</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">fetch_channel</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">channel_id</span><span class="p">)</span><span class="o">.</span><span class="n">create_thread_from_message</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">response_message_id</span><span class="p">,</span> <span class="s1">&#39;Thread name&#39;</span><span class="p">)</span>
 </code></pre></div></p>
