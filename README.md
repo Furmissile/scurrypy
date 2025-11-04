@@ -36,24 +36,24 @@ The following demonstrates building and responding to a slash command.
 *Note: Adjust `dotenv_path` if your `.env` file is not in the same directory as this script.*
 
 ```py
-import discord, os
+import scurrypy, os
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path='./path/to/env')
 
-client = discord.Client(
+client = scurrypy.Client(
     token=os.getenv("DISCORD_TOKEN"),
     application_id=APPLICATION_ID  # your bot’s application ID
 )
 
 @client.command(
-    command=discord.SlashCommand(
+    command=scurrypy.SlashCommand(
         name='example',
         description='Demonstrate the minimal slash command!'
     ),
     guild_ids=GUILD_ID  # must be a guild ID your bot is in
 )
-async def example(bot: discord.Client, event: discord.InteractionEvent):
+async def example(bot: scurrypy.Client, event: scurrypy.InteractionEvent):
     await event.interaction.respond(f'Hello, {event.interaction.member.user.username}!')
 
 client.run()
@@ -62,20 +62,20 @@ client.run()
 ## Minimal Prefix Command (Legacy)
 The following demonstrates building and responding to a message prefix command.
 ```py
-import discord, os
+import scurrypy, os
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path='./path/to/env')
 
-client = discord.Client(
+client = scurrypy.Client(
     token=os.getenv("DISCORD_TOKEN"),
     application_id=APPLICATION_ID  # your bot’s application ID
-    intents=discord.set_intents(message_content=True),
+    intents=scurrypy.set_intents(message_content=True),
     prefix='!'  # your custom prefix
 )
 
 @client.prefix_command
-async def ping(bot: discord.Client, event: discord.MessageCreateEvent):
+async def ping(bot: scurrypy.Client, event: scurrypy.MessageCreateEvent):
     # The function name is the name of the command
     await event.message.send("Pong!")
 
