@@ -2,7 +2,7 @@ import asyncio
 
 from .config import BaseConfig
 from .intents import Intents
-from .error import DiscordError
+from .gateway import GatewayClient
 from .client_like import ClientLike
 
 from .parts.command import SlashCommand, MessageCommand, UserCommand
@@ -37,7 +37,6 @@ class Client(ClientLike):
             raise ValueError("Application ID is required")
         
         from .logger import Logger
-        from .gateway import GatewayClient
         from .http import HTTPClient
         from .resources.bot_emojis import BotEmojis
         from .dispatch.event_dispatcher import EventDispatcher
@@ -45,16 +44,15 @@ class Client(ClientLike):
         from .dispatch.command_dispatcher import CommandDispatcher
 
         self.token = token
+        self.intents = intents
         self.application_id = application_id
         self.config = config
 
         self._logger = Logger(debug_mode, quiet)
-        self._ws = GatewayClient(token, intents, self._logger)
-        self._http = HTTPClient(token, self._logger)
+        
+        self._http = HTTPClient(self._logger)
 
-        if prefix and (intents & Intents.MESSAGE_CONTENT == 0):
-            self._logger.log_warn('Prefix set without message content enabled.')
-
+        self.shards: list[GatewayClient] = []
         self.dispatcher = EventDispatcher(self)
         self.prefix_dispatcher = PrefixDispatcher(self, prefix)
         self.command_dispatcher = CommandDispatcher(self)
@@ -62,7 +60,6 @@ class Client(ClientLike):
         self._global_commands = [] # SlashCommand
         self._guild_commands = {} # {guild_id : [commands], ...}
 
-        self._is_set_up = False
         self._setup_hooks = []
         self._shutdown_hooks = []
         
@@ -227,102 +224,72 @@ class Client(ClientLike):
         Args:
             guild_id (int): id of the target guild
         """
+        # if guild is queued to register commands, this was a mistake!
         if self._guild_commands.get(guild_id):
             self._logger.log_warn(f"Guild {guild_id} already queued, skipping clear.")
             return
         
         self._guild_commands[guild_id] = []
 
-    async def _listen(self):
-        """Main event loop for incoming gateway requests."""
-        while self._ws.is_connected():
+    async def _start_shards(self):
+        """Starts all shards batching by max_concurrency."""
+
+        from .events.gateway_events import GatewayEvent
+
+        # request gateway info
+        data = await self._http.request('GET', '/gateway/bot')
+
+        # translate it to a dataclass
+        gateway = GatewayEvent.from_dict(data)
+
+        # pull important values for easier access
+        total_shards = gateway.shards
+        batch_size = gateway.session_start_limit.max_concurrency
+
+        tasks = []
+        
+        for batch_start in range(0, total_shards, batch_size):
+            batch_end = min(batch_start + batch_size, total_shards)
+
+            self._logger.log_info(f"Starting shards {batch_start}-{batch_end - 1} of {total_shards}")
+
+            for shard_id in range(batch_start, batch_end):
+                shard = GatewayClient(self, gateway.url, shard_id, total_shards)
+                self.shards.append(shard)
+
+                # Fire and forget
+                tasks.append(asyncio.create_task(shard.start()))
+                tasks.append(asyncio.create_task(self._listen_shard(shard)))
+
+            # wait before next batch to respect identify rate limit
+            await asyncio.sleep(5)
+
+        return tasks
+
+    async def _listen_shard(self, shard: GatewayClient):
+        """Listen to websocket queue for events. Only OP code 0 passes!"""
+
+        while True:
             try:
-                message = await self._ws.receive()
-                if not message:
-                    raise ConnectionError("No message received.")
+                dispatch_type, event_data = await shard.event_queue.get()
+                
+                if self.prefix_dispatcher.prefix and dispatch_type == 'MESSAGE_CREATE':
+                    await self.prefix_dispatcher.dispatch(event_data)
+                    
+                elif dispatch_type == 'INTERACTION_CREATE':
+                    await self.command_dispatcher.dispatch(event_data)
 
-                op_code = message.get('op')
-
-                match op_code:
-                    case 0:
-                        dispatch_type = message.get('t')
-                        self._logger.log_info(f"DISPATCH -> {dispatch_type}")
-                        event_data = message.get('d')
-                        self._ws.sequence = message.get('s') or self._ws.sequence
-
-                        if dispatch_type == "READY":
-                            self._ws.session_id = event_data.get("session_id")
-                            self._ws.connect_url = event_data.get("resume_gateway_url", self._ws.connect_url)
-
-                        if self.prefix_dispatcher.prefix and dispatch_type == 'MESSAGE_CREATE':
-                            await self.prefix_dispatcher.dispatch(event_data)
-                            
-                        elif dispatch_type == 'INTERACTION_CREATE':
-                            await self.command_dispatcher.dispatch(event_data)
-
-                        await self.dispatcher.dispatch(dispatch_type, event_data)
-                    case 7:
-                        raise ConnectionError("Reconnect requested by server.")
-                    case 9:
-                        self._ws.session_id = None
-                        self._ws.sequence = None
-                        raise ConnectionError("Invalid session.")
-                    case 11:
-                        self._logger.log_info("Heartbeat ACK received")
-
-            except asyncio.CancelledError:
-                break
-            except DiscordError as e:
-                if e.fatal:
-                    self._logger.log_error(f"Fatal DiscordError: {e}")
-                    break
-                else:
-                    self._logger.log_warn(f"Recoverable DiscordError: {e}")
-            except ConnectionError as e:
-                self._logger.log_warn(f"Connection lost: {e}")
-                raise
-            except Exception as e:
-                self._logger.log_error(f"{type(e).__name__} - {e}")
-                self._logger.log_traceback()
-                continue
+                await self.dispatcher.dispatch(dispatch_type, event_data)
+            except:
+                break # stop task if an error occurred
 
     async def _start(self):
-        """Runs the main lifecycle of the bot.
-            Handles connection setup, heartbeat management, event loop, and automatic reconnects.
-        """
+        """Starts the HTTP/Websocket client, run startup hooks, and registers commands."""
+
         try:
-            await self._http.start()
-            await self._ws.connect()
-            await self._ws.start_heartbeat()
-
-            while self._ws.is_connected():
-                if self._ws.session_id and self._ws.sequence:
-                    await self._ws.reconnect()
-                else:
-                    await self._ws.identify()
-
-                if not self._is_set_up:
-                    await self._startup()
-                    self._is_set_up = True
-
-                await self._listen()
-                
-                # If we get here, connection was lost - reconnect
-                await self._ws.close() 
-                await asyncio.sleep(5)
-                await self._ws.connect()
-                await self._ws.start_heartbeat()
-
-        except asyncio.CancelledError:
-            self._logger.log_high_priority("Connection cancelled via KeyboardInterrupt.")
-        except Exception as e:
-            self._logger.log_error(f"{type(e).__name__} - {e}")
-        finally:
-            await self._close()
-
-    async def _startup(self):
-        """Start up bot by registering user-defined hooks and commands."""
-        try:
+            await self._http.start(self.token)
+            
+            # setup hooks if hooks were set
             if self._setup_hooks:
                 for hook in self._setup_hooks:
                     self._logger.log_info(f"Setting hook {hook.__name__}")
@@ -336,11 +303,22 @@ class Client(ClientLike):
             await self.command_dispatcher._register_global_commands(self._global_commands)
 
             self._logger.log_high_priority("Commands set up.")
-        except Exception:
-            raise
+
+            # run websocket indefinitely
+            tasks = await asyncio.create_task(self._start_shards())
+
+            await asyncio.gather(*tasks)
+                
+        except asyncio.CancelledError:
+            self._logger.log_high_priority("Connection cancelled via KeyboardInterrupt.")
+        except Exception as e:
+            self._logger.log_error(f"{type(e).__name__} - {e}")
+        finally:
+            await self._close()
 
     async def _close(self):    
-        """Gracefully close HTTP and websocket connections."""    
+        """Gracefully close HTTP session, websocket connections, and run shutdown hooks."""   
+
         # Run shutdown hooks first
         for hook in self._shutdown_hooks:
             try:
@@ -349,29 +327,21 @@ class Client(ClientLike):
             except Exception as e:
                 self._logger.log_error(f"Shutdown hook failed: {type(e).__name__}: {e}")
 
-        # Close HTTP before gateway since it's more important
-        self._logger.log_debug("Closing HTTP session...")
+        self._logger.log_info("Closing HTTP session...")
         await self._http.close()
 
-        # Then try websocket with short timeout
-        try:
-            self._logger.log_debug("Closing websocket connection...")
-            await asyncio.wait_for(self._ws.close(), timeout=1.0)
-        except:
-            pass  # Don't care if websocket won't close
-        
+        for shard in self.shards:
+            await shard.close_ws()
+
     def run(self):
-        """Starts the bot.
-            Handles starting the session, WS, and heartbeat, reconnection logic,
-            setting up emojis and hooks, and then listens for gateway events.
-        """        
+        """User-facing entry point for starting the client."""  
+
         try:
             asyncio.run(self._start())
         except KeyboardInterrupt:
-            self._logger.log_debug("Shutdown requested via KeyboardInterrupt.")
+            self._logger.log_info("Shutdown requested via KeyboardInterrupt.")
         except Exception as e:
             self._logger.log_error(f"{type(e).__name__} {e}")
-            self._logger.log_traceback()
         finally:
             self._logger.log_high_priority("Bot shutting down.")
             self._logger.close()

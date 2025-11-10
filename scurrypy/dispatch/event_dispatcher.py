@@ -77,12 +77,12 @@ class EventDispatcher:
 
         module = importlib.import_module(module_name)
         if not module:
-            print(f"Cannot find module '{module_name}'!")
+            self._logger.log_error(f"Cannot find module '{module_name}'!")
             return
 
         cls = getattr(module, class_name)
         if not cls:
-            print(f"Cannot find class '{class_name}'!")
+            self._logger.log_error(f"Cannot find class '{class_name}'!")
             return
         
         if isinstance(cls, Message) and cls.author.id == self.application_id:

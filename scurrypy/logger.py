@@ -23,11 +23,11 @@ class Logger:
     RESET = '\033[0m'
     """Reset color: DEFAULT"""
     
-    def __init__(self, dev_mode: bool = False, quiet: bool = False):
+    def __init__(self, debug_mode: bool = False, quiet: bool = False):
         """Initializes logger. Opens log file 'bot.log' for writing.
 
         Args:
-            dev_mode (bool, optional): toggle debug messages. Defaults to False.
+            debug_mode (bool, optional): toggle debug messages. Defaults to False.
             quiet: (bool, optional): supress low-priority logs (INFO, DEBUG, WARN). Defaults to False.
         """
         try:
@@ -35,9 +35,8 @@ class Logger:
             """Log file for writing."""
         except Exception as e:
             self.log_error(f"Error {type(e)}: {e}")
-            self.log_traceback()
 
-        self.dev_mode = dev_mode
+        self.debug_mode = debug_mode
         """If debug logs should be printed."""
 
         self.quiet = quiet
@@ -54,9 +53,8 @@ class Logger:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     def log_traceback(self):
-        if self.dev_mode == True:
-            import traceback
-            self._log("DEBUG", self.DEBUG, traceback.format_exc())
+        import traceback
+        self._log("DEBUG", self.DEBUG, traceback.format_exc())
     
     def _log(self, level: str, color: str, message: str):
         """Internal helper that writes formatted log to both file and console.
@@ -73,15 +71,6 @@ class Logger:
         self.fp.write(f"[{date}] {level}: {message}\n")
         self.fp.flush()
         print(f"{self.TIME}[{date}]{self.RESET} {color}{level}:{self.RESET} {message}\n")
-    
-    def log_debug(self, message: str):
-        """Logs a debug-level message.
-
-        Args:
-            message (str): descriptive message to log
-        """
-        if self.dev_mode == True:
-            self._log("DEBUG", self.DEBUG, message)
     
     def log_info(self, message: str):
         """Logs a info-level message.
@@ -106,6 +95,9 @@ class Logger:
             message (str): descriptive message to log
         """
         self._log("ERROR", self.ERROR, message)
+
+        if self.debug_mode == True:
+            self.log_traceback()
     
     def log_critical(self, message: str):
         """Logs a critical-level message.
@@ -116,7 +108,7 @@ class Logger:
         self._log("CRITICAL", self.CRITICAL, message)
 
     def log_high_priority(self, message: str):
-        """Always log this, regardless of quiet/dev_mode.
+        """Always log this, regardless of quiet/debug_mode.
 
         Args:
             message (str): descriptive message to log
@@ -127,7 +119,7 @@ class Logger:
         """Recusively redact sensitive fields (token, password, authorization, api_key) from data.
 
         Args:
-            data (_type_): JSON to sanitize
+            data (dict): JSON to sanitize
             replacement (str, optional): what sensitive data is replaced with. Defaults to '*** REDACTED ***'.
 
         Returns:

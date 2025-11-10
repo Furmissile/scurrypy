@@ -57,4 +57,3 @@ class PrefixDispatcher:
                     self._logger.log_info(f"Prefix Event '{command}' Acknowledged.")
                 except Exception as e:
                     self._logger.log_error(f"Error in prefix command '{command}': {e}")
-                    self._logger.log_traceback()

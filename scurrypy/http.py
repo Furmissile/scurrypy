@@ -1,48 +1,101 @@
+"""
+R = request
+EP = endpoint
+L = Lock
+Q = Queue
+H = header
+B = Bucket
+A + B = {A:B}
+
+[R + EP]--|L|-->[Q + EP]--|send R|-->[add/update H + B]
+    1. request by endpoint
+    2. push request to queue with lock
+    3. add/update header by bucket id with send request
+
+    * Queue by ENDPOINT/REQUEST
+    * Bucket by HEADER
+"""
+
+import asyncio
 import aiohttp
 import aiofiles
-import asyncio
 import json
+from typing import Any
 
-from typing import Any, Optional
+from dataclasses import dataclass
 
-from .logger import Logger
-from .error import DiscordError
+from scurrypy.error import DiscordError
+from scurrypy.logger import Logger
 
-class HTTPException(Exception):
-    """Represents an HTTP error response from Discord."""
-    def __init__(self, response: aiohttp.ClientResponse, message: str):
-        self.response = response
-        self.status = response.status
-        self.text = message
-        super().__init__(f"{response.status}: {message}")
+@dataclass
+class RequestItem:
+    method: str
+    endpoint: str
+    data: Any = None
+    params: dict = None
+    files: dict = None
+    future: asyncio.Future = None
+
+@dataclass
+class Bucket:
+    remaining: int
+    reset_after: float
+    reset_on: float
+    sleep_task: asyncio.Task = None
 
 class HTTPClient:
     BASE = "https://discord.com/api/v10"
     MAX_RETRIES = 3
 
-    def __init__(self, token: str, logger: Logger):
-        self.token = token
-        self.session: Optional[aiohttp.ClientSession] = None
+    def __init__(self, logger: Logger):
+        self.session = None
         self.logger = logger
-        self.global_reset = 0.0
-        self.global_lock = asyncio.Lock()
-        self.endpoint_to_bucket: dict[str, str] = {}
-        self.queues: dict[str, asyncio.Queue] = {}
-        self.workers: dict[str, asyncio.Task] = {}
 
-    async def start(self):
+        # PRE-REQUEST
+        self.queues: dict[str, asyncio.Queue] = {}  # maps EP -> Q
+        self.queues_lock = asyncio.Lock() # locks queues dict for editing
+
+        self.workers: dict[str, asyncio.Task] = {}  # maps EP -> worker
+
+        # POST-REQUEST
+        self.buckets: dict[str, Bucket] = {}  # maps B -> Bucket
+        self.bucket_lock: dict[str, asyncio.Lock] = {} # maps B to Lock
+        self.buckets_lock = asyncio.Lock() # locks buckets dict for editing
+
+        self.global_lock = asyncio.Lock()
+        self.global_reset = 0.0
+
+    async def start(self, token: str):
         """Start the HTTP session."""
+
         if not self.session:
+            self.logger.log_info("HTTP session starting.")
             self.session = aiohttp.ClientSession(
-                headers={"Authorization": f"Bot {self.token}"}
+                headers={"Authorization": f"Bot {token}"}
             )
+        else:
+            self.logger.log_warn("HTTP session already initialized.")
 
     async def close(self):
-        """Close the HTTP session."""
-        for task in self.workers.values():
-            task.cancel()
-        if self.session and not self.session.closed:
-            await self.session.close()
+        """Gracefully stop all workers and close the HTTP session."""
+
+        async with self.queues_lock:
+            # Signal all workers to stop
+            for queue in self.queues.values():
+                await queue.put(None)  # Send sentinel
+
+            # Wait until all queues are empty
+            for queue in self.queues.values():
+                await queue.join()
+
+            # Wait for all worker tasks to finish
+            for worker in self.workers.values():
+                await worker
+
+            # Close HTTP session if it exists
+            if self.session:
+                await self.session.close()
+                self.logger.log_info("Session closed.")
 
     async def request(
         self,
@@ -53,7 +106,7 @@ class HTTPClient:
         params: dict | None = None,
         files: Any | None = None,
     ):
-        """Enqueues request WRT rate-limit buckets.
+        """Queue a request for the given endpoint.
 
         Args:
             method (str): HTTP method (e.g., POST, GET, DELETE, PATCH, etc.)
@@ -63,128 +116,146 @@ class HTTPClient:
             files (list[str], optional): relevant files
 
         Returns:
-            (Future): future with response
+            (Future): result or promise of request
         """
-        if not self.session:
-            await self.start()
 
-        bucket = self.endpoint_to_bucket.get(endpoint, endpoint)
-        queue = self.queues.setdefault(bucket, asyncio.Queue())
+        # ensure a queue is in place for the requested endpoint
+        async with self.queues_lock:
+            queue = self.queues.setdefault(endpoint, asyncio.Queue())
+
+        # Create a worker if it doesn’t exist
+        if endpoint not in self.workers:
+            self.workers[endpoint] = asyncio.create_task(self._worker(endpoint))
+
+        # set promise
         future = asyncio.get_event_loop().create_future()
 
-        await queue.put((method, endpoint, data, params, files, future))
-        if bucket not in self.workers:
-            self.workers[bucket] = asyncio.create_task(self._worker(bucket))
+        # Put the request in the queue
+        await queue.put(RequestItem(method, endpoint, data, params, files, future))
 
+        # return promise
         return await future
 
-    async def _worker(self, bucket: str):
-        """Processes request from specific rate-limit bucket."""
+    async def _worker(self, endpoint: str):
+        """Background worker that processes requests for this endpoint.
 
-        q = self.queues[bucket]
-        while self.session:
-            method, endpoint, data, params, files, future = await q.get()
+        Args:
+            endpoint (str): the endpoint to receive requests
+        """
+
+        # fetch the queue by endpoint
+        queue = self.queues[endpoint]
+
+        while True:
+            # get the next item in the queue
+            item: RequestItem = await queue.get()
+
+            if item is None:  # sentinel = time to stop
+                queue.task_done()
+                break
+
             try:
-                result = await self._send(method, endpoint, data, params, files)
-                if not future.done():
-                    future.set_result(result)
+                result = await self._send(item)
             except Exception as e:
-                if not future.done():
-                    future.set_exception(e)
+                item.future.set_exception(e)
+            else:
+                item.future.set_result(result)
             finally:
-                q.task_done()
+                queue.task_done()
 
-    async def _send(
-        self,
-        method: str,
-        endpoint: str,
-        data: Any | None,
-        params: dict | None,
-        files: Any | None,
-    ):
+    async def _sleep_endpoint(self, endpoint: str, bucket: Bucket):
+        """Let an endpoint sleep for the designated reset_after seconds.
+
+        Args:
+            endpoint (str): endpoint to sleep
+            bucket (Bucket): endpoint's bucket info
+        """
+        await asyncio.sleep(bucket.reset_after)
+        bucket.remaining = 1  # allow one request again; actual value doesn’t matter much
+        bucket.sleep_task = None
+        self.logger.log_info(f"Bucket {endpoint} reset after {bucket.reset_after}s")
+
+    async def _send(self, item: RequestItem):
         """Core HTTP request executor.
 
         Sends a request to Discord, handling JSON payloads, files, query parameters,
-        rate limits, and retries.
+        and rate limits.
 
         Args:
-            method (str): HTTP method (e.g., 'POST', 'GET', 'DELETE', 'PATCH').
-            endpoint (str): Discord API endpoint (e.g., '/channels/123/messages').
-            data (dict | None, optional): JSON payload to include in the request body.
-            params (dict | None, optional): Query parameters to append to the URL.
-            files (list[str] | None, optional): Files to send with the request.
+            item (RequestItem): request object
 
         Raises:
-            (HTTPException): If the request fails after the maximum number of retries
-                        or receives an error response.
+            (DiscordError): If the request fails after the maximum number of retries
+                or receives an error response.
 
         Returns:
             (dict | str | None): Parsed JSON response if available, raw text if the
-                            response is not JSON, or None for HTTP 204 responses.
+                response is not JSON, or None for HTTP 204 responses.
         """
+        url = f"{self.BASE.rstrip('/')}/{item.endpoint.lstrip('/')}"
 
-        url = f"{self.BASE.rstrip('/')}/{endpoint.lstrip('/')}"
+        kwargs = {}
+        if item.files and any(item.files):
+            payload, headers = await self._make_payload(item.data, item.files)
+            kwargs = {"data": payload, "headers": headers}
+        else:
+            kwargs = {"json": item.data}
 
-        def sanitize_query_params(params: dict | None) -> dict | None:
-            if not params:
-                return None
-            return {k: ('true' if v is True else 'false' if v is False else v)
-                    for k, v in params.items() if v is not None}
-
-        for attempt in range(self.MAX_RETRIES):
-            await self._check_global_limit()
-
-            kwargs = {}
-
-            if files and any(files):
-                payload, headers = await self._make_payload(data, files)
-                kwargs = {"data": payload, "headers": headers}
-            else:
-                kwargs = {"json": data}
-
-            try:
-                async with self.session.request(
-                    method, url, params=sanitize_query_params(params), timeout=15, **kwargs
-                ) as resp:
-                    if resp.status == 429:
-                        data = await resp.json()
-                        retry = float(data.get("retry_after", 1))
-                        if data.get("global"):
-                            self.global_reset = asyncio.get_event_loop().time() + retry
-                        self.logger.log_warn(
-                            f"Rate limited {retry}s ({endpoint})"
-                        )
-                        await asyncio.sleep(retry + 0.5)
-                        continue
-
-                    if 200 <= resp.status < 300:
-                        if resp.status == 204:
-                            return None
-                        try:
-                            return await resp.json()
-                        except aiohttp.ContentTypeError:
-                            return await resp.text()
-                        
-                    if resp.status == 400:
-                        raise DiscordError(resp.status, await resp.json())
-
-                    text = await resp.text()
-                    raise HTTPException(resp, text)
-
-            except asyncio.TimeoutError:
-                self.logger.log_warn(f"Timeout on {method} {endpoint}, retrying...")
-                continue
-
-        raise HTTPException(resp, f"Failed after {self.MAX_RETRIES} retries")
-
-    async def _check_global_limit(self):
-        """Waits if the global rate-limit is in effect."""
-
+        # --- GLOBAL RATE LIMIT CHECK ---
         now = asyncio.get_event_loop().time()
-        if now < self.global_reset:
-            delay = self.global_reset - now
-            self.logger.log_warn(f"Global rate limit active, sleeping {delay:.2f}s")
-            await asyncio.sleep(delay)
+        if self.global_reset > now:
+            async with self.global_lock:
+                await asyncio.sleep(self.global_reset - now)
+
+        # --- SEND REQUEST ---
+        async with self.session.request(
+            method=item.method, url=url, timeout=15, **kwargs
+        ) as resp:
+
+            # Update global rate limit if triggered
+            if resp.headers.get("X-RateLimit-Global") == "true":
+                retry_after = float(resp.headers.get("Retry-After", 0))
+                self.global_reset = asyncio.get_event_loop().time() + retry_after
+
+            # Bucket handling (endpoint-specific rate limits)
+            bucket_id = resp.headers.get('x-ratelimit-bucket')
+            if bucket_id:
+                async with self.buckets_lock:
+                    lock = self.bucket_lock.setdefault(bucket_id, asyncio.Lock())
+                async with lock:
+                    remaining = int(resp.headers.get('x-ratelimit-remaining', 1))
+                    reset_after = float(resp.headers.get('x-ratelimit-reset-after', 0))
+                    reset_on = float(resp.headers.get('x-ratelimit-reset', 0))
+
+                    bucket = self.buckets.get(bucket_id)
+                    if not bucket:
+                        bucket = Bucket(remaining, reset_after, reset_on)
+                        self.buckets[bucket_id] = bucket
+                    else:
+                        bucket.remaining = remaining
+                        bucket.reset_after = reset_after
+                        bucket.reset_on = reset_on
+
+                    if bucket.remaining == 0 and not bucket.sleep_task:
+                        bucket.sleep_task = asyncio.create_task(
+                            self._sleep_endpoint(item.endpoint, bucket)
+                        )
+
+            # Handle response
+            match resp.status:
+                case 204:
+                    return None
+                case 200 | 201 | 202:
+                    try:
+                        return await resp.json()
+                    except aiohttp.ContentTypeError:
+                        return await resp.text()
+                case _:
+                    try:
+                        body = await resp.json()
+                    except aiohttp.ContentTypeError:
+                        body = await resp.text()
+                    raise DiscordError(resp.status, body)
 
     async def _make_payload(self, data: dict, files: list):
         """Return (data, headers) for aiohttp request — supports multipart.

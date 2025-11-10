@@ -16,6 +16,8 @@ While this wrapper is mainly used for various squirrel-related shenanigans, it c
 * Declarative style using decorators
 * Supports both legacy and new features
 * Respects Discord’s rate limits
+* No `__future__` hacks to avoid circular import
+* Capable of sharding
 
 ## Notes & Early Status
 * This is an early version — feedback, ideas, and contributions are very welcome! That said, there may be bumps along the way, so expect occasional bugs and quirks.  

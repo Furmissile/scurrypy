@@ -169,4 +169,3 @@ class CommandDispatcher:
             self._logger.log_info(f"Interaction Event '{name}' Acknowledged.")
         except Exception as e:
             self._logger.log_error(f"Error in interaction '{name}': {e}")
-            self._logger.log_traceback()

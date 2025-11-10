@@ -30,9 +30,6 @@ theme: # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#
 
 repo_url: https://github.com/Furmissile/scurrypy
 
-extra:
-  generator: false
-
 markdown_extensions:
   - pymdownx.superfences
   - admonition
