@@ -1388,9 +1388,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scurrypy.logger.Logger.dev_mode" class="md-nav__link">
+  <a href="#scurrypy.logger.Logger.debug_mode" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;dev_mode
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;debug_mode
     </span>
   </a>
   
@@ -1427,15 +1427,6 @@
   <a href="#scurrypy.logger.Logger._log" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_log
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.logger.Logger.log_debug" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;log_debug
     </span>
   </a>
   
@@ -1701,9 +1692,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scurrypy.logger.Logger.dev_mode" class="md-nav__link">
+  <a href="#scurrypy.logger.Logger.debug_mode" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;dev_mode
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;debug_mode
     </span>
   </a>
   
@@ -1740,15 +1731,6 @@
   <a href="#scurrypy.logger.Logger._log" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_log
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.logger.Logger.log_debug" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;log_debug
     </span>
   </a>
   
@@ -1877,7 +1859,7 @@ optional file logging, and redaction of sensitive information.</p>
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-            <b><code>dev_mode</code></b>
+            <b><code>debug_mode</code></b>
               (<code><span title="bool">bool</span></code>, default:
                   <code>False</code>
 )
@@ -2103,14 +2085,14 @@ optional file logging, and redaction of sensitive information.</p>
 
 
 
-<h3 id="scurrypy.logger.Logger.dev_mode" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">dev_mode</span> <span class="o">=</span> <span class="n">dev_mode</span></code>
+<h3 id="scurrypy.logger.Logger.debug_mode" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">debug_mode</span> <span class="o">=</span> <span class="n">debug_mode</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
-<a href="#scurrypy.logger.Logger.dev_mode" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#scurrypy.logger.Logger.debug_mode" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -2224,37 +2206,6 @@ optional file logging, and redaction of sensitive information.</p>
             <p>color specified by Logger properties</p>
           </div>
         </li>
-        <li class="doc-section-item field-body">
-            <b><code>message</code></b>
-              (<code><span title="str">str</span></code>)
-          –
-          <div class="doc-md-description">
-            <p>descriptive message to log</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="scurrypy.logger.Logger.log_debug" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">log_debug</span></code>
-
-<a href="#scurrypy.logger.Logger.log_debug" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Logs a debug-level message.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
         <li class="doc-section-item field-body">
             <b><code>message</code></b>
               (<code><span title="str">str</span></code>)
@@ -2405,7 +2356,7 @@ optional file logging, and redaction of sensitive information.</p>
 
     <div class="doc doc-contents ">
 
-        <p>Always log this, regardless of quiet/dev_mode.</p>
+        <p>Always log this, regardless of quiet/debug_mode.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2443,7 +2394,7 @@ optional file logging, and redaction of sensitive information.</p>
     <ul>
         <li class="doc-section-item field-body">
             <b><code>data</code></b>
-              (<code><span title="_type_">_type_</span></code>)
+              (<code><span title="dict">dict</span></code>)
           –
           <div class="doc-md-description">
             <p>JSON to sanitize</p>

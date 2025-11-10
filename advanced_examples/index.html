@@ -402,6 +402,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#requesting-bot-emojis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requesting Bot Emojis
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1466,6 +1475,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#requesting-bot-emojis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requesting Bot Emojis
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1501,6 +1519,7 @@ between setup and <code>bot.run()</code>.</p>
 <ul>
 <li><a href="#adding-persistent-data">Adding Persistent Data</a></li>
 <li><a href="#requesting-a-resource">Requesting a Resource</a></li>
+<li><a href="#requesting-bot-emojis">Using Bot Emojis</a></li>
 </ul>
 <h2 id="adding-persistent-data">Adding Persistent Data<a class="headerlink" href="#adding-persistent-data" title="Permanent link">&para;</a></h2>
 <hr />
@@ -1543,6 +1562,18 @@ between setup and <code>bot.run()</code>.</p>
     <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s1">&#39;You got it!&#39;</span><span class="p">,</span> <span class="n">with_response</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">fetch_channel</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">channel_id</span><span class="p">)</span><span class="o">.</span><span class="n">create_thread_from_message</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">response_message_id</span><span class="p">,</span> <span class="s1">&#39;Thread name&#39;</span><span class="p">)</span>
 </code></pre></div></p>
+<h2 id="requesting-bot-emojis">Requesting Bot Emojis<a class="headerlink" href="#requesting-bot-emojis" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Requesting bot emojis is like fetching any other resource except it's part of the client.</p>
+<p>Demonstrates requesting bot emojis.
+<div class="highlight"><pre><span></span><code><span class="nd">@client</span><span class="o">.</span><span class="n">setup_hook</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_bot_emojis</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">scurrypy</span><span class="o">.</span><span class="n">Client</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">emojis</span><span class="o">.</span><span class="n">fetch_all</span><span class="p">()</span>
+</code></pre></div></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is passed to the user so that the client only loads what is needed.</p>
+</div>
 
 
 

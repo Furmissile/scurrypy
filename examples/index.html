@@ -1636,7 +1636,7 @@ between setup and <code>bot.run()</code>.</p>
             <span class="p">],</span>
             <span class="n">flags</span><span class="o">=</span><span class="n">scurrypy</span><span class="o">.</span><span class="n">MessageFlags</span><span class="o">.</span><span class="n">IS_COMPONENTS_V2</span>
         <span class="p">)</span>
-    <span class="p">)</span> 
+    <span class="p">)</span>
 </code></pre></div></p>
 <h2 id="building-and-responding-to-components">Building and Responding to Components<a class="headerlink" href="#building-and-responding-to-components" title="Permanent link">&para;</a></h2>
 <hr />
@@ -1661,7 +1661,6 @@ between setup and <code>bot.run()</code>.</p>
 
 <span class="nd">@client</span><span class="o">.</span><span class="n">component</span><span class="p">(</span><span class="s1">&#39;best_custom_id&#39;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">route</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">scurrypy</span><span class="o">.</span><span class="n">Client</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">scurrypy</span><span class="o">.</span><span class="n">InteractionEvent</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
     <span class="n">adj</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;wonderous&#39;</span><span class="p">,</span> <span class="s1">&#39;beautiful&#39;</span><span class="p">,</span> <span class="s1">&#39;charming&#39;</span><span class="p">,</span> <span class="s1">&#39;vibrant&#39;</span><span class="p">,</span> <span class="s1">&#39;sinister&#39;</span><span class="p">])</span>
 
     <span class="n">row</span> <span class="o">=</span> <span class="n">create_row</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
