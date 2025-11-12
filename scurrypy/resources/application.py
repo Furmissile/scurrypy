@@ -4,8 +4,7 @@ from typing import Optional
 from ..http import HTTPClient
 from ..model import DataModel
 
-from ..models.user import UserModel
-from ..models.guild import GuildModel
+from ..models import UserModel, GuildModel
 
 class ApplicationFlags:
     """Application flags (bitwise constants)."""

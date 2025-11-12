@@ -1,9 +1,7 @@
 from dataclasses import dataclass
 from ..model import DataModel
 
-from ..models.user import UserModel
-from ..models.guild import ReadyGuildModel
-from ..models.application import ApplicationModel
+from ..models import UserModel, ReadyGuildModel, ApplicationModel
 
 @dataclass
 class ReadyEvent(DataModel):

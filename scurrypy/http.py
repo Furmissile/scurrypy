@@ -10,7 +10,7 @@ A + B = {A:B}
 [R + EP]--|L|-->[Q + EP]--|send R|-->[add/update H + B]
     1. request by endpoint
     2. push request to queue with lock
-    3. add/update header by bucket id with send request
+    3. add/update header by bucket ID with send request
 
     * Queue by ENDPOINT/REQUEST
     * Bucket by HEADER
@@ -24,8 +24,8 @@ from typing import Any
 
 from dataclasses import dataclass
 
-from scurrypy.error import DiscordError
-from scurrypy.logger import Logger
+from .error import DiscordError
+from .logger import Logger
 
 @dataclass
 class RequestItem:
@@ -170,92 +170,10 @@ class HTTPClient:
             endpoint (str): endpoint to sleep
             bucket (Bucket): endpoint's bucket info
         """
+        self.logger.log_warn(f"Bucket {endpoint} rate limit is active. Sleeping for {bucket.reset_after}s...")
         await asyncio.sleep(bucket.reset_after)
-        bucket.remaining = 1  # allow one request again; actual value doesn’t matter much
         bucket.sleep_task = None
-        self.logger.log_info(f"Bucket {endpoint} reset after {bucket.reset_after}s")
-
-    async def _send(self, item: RequestItem):
-        """Core HTTP request executor.
-
-        Sends a request to Discord, handling JSON payloads, files, query parameters,
-        and rate limits.
-
-        Args:
-            item (RequestItem): request object
-
-        Raises:
-            (DiscordError): If the request fails after the maximum number of retries
-                or receives an error response.
-
-        Returns:
-            (dict | str | None): Parsed JSON response if available, raw text if the
-                response is not JSON, or None for HTTP 204 responses.
-        """
-        url = f"{self.BASE.rstrip('/')}/{item.endpoint.lstrip('/')}"
-
-        kwargs = {}
-        if item.files and any(item.files):
-            payload, headers = await self._make_payload(item.data, item.files)
-            kwargs = {"data": payload, "headers": headers}
-        else:
-            kwargs = {"json": item.data}
-
-        # --- GLOBAL RATE LIMIT CHECK ---
-        now = asyncio.get_event_loop().time()
-        if self.global_reset > now:
-            async with self.global_lock:
-                await asyncio.sleep(self.global_reset - now)
-
-        # --- SEND REQUEST ---
-        async with self.session.request(
-            method=item.method, url=url, timeout=15, **kwargs
-        ) as resp:
-
-            # Update global rate limit if triggered
-            if resp.headers.get("X-RateLimit-Global") == "true":
-                retry_after = float(resp.headers.get("Retry-After", 0))
-                self.global_reset = asyncio.get_event_loop().time() + retry_after
-
-            # Bucket handling (endpoint-specific rate limits)
-            bucket_id = resp.headers.get('x-ratelimit-bucket')
-            if bucket_id:
-                async with self.buckets_lock:
-                    lock = self.bucket_lock.setdefault(bucket_id, asyncio.Lock())
-                async with lock:
-                    remaining = int(resp.headers.get('x-ratelimit-remaining', 1))
-                    reset_after = float(resp.headers.get('x-ratelimit-reset-after', 0))
-                    reset_on = float(resp.headers.get('x-ratelimit-reset', 0))
-
-                    bucket = self.buckets.get(bucket_id)
-                    if not bucket:
-                        bucket = Bucket(remaining, reset_after, reset_on)
-                        self.buckets[bucket_id] = bucket
-                    else:
-                        bucket.remaining = remaining
-                        bucket.reset_after = reset_after
-                        bucket.reset_on = reset_on
-
-                    if bucket.remaining == 0 and not bucket.sleep_task:
-                        bucket.sleep_task = asyncio.create_task(
-                            self._sleep_endpoint(item.endpoint, bucket)
-                        )
-
-            # Handle response
-            match resp.status:
-                case 204:
-                    return None
-                case 200 | 201 | 202:
-                    try:
-                        return await resp.json()
-                    except aiohttp.ContentTypeError:
-                        return await resp.text()
-                case _:
-                    try:
-                        body = await resp.json()
-                    except aiohttp.ContentTypeError:
-                        body = await resp.text()
-                    raise DiscordError(resp.status, body)
+        self.logger.log_high_priority(f"Bucket {endpoint} reset after {bucket.reset_after}s")
 
     async def _make_payload(self, data: dict, files: list):
         """Return (data, headers) for aiohttp request — supports multipart.
@@ -286,3 +204,151 @@ class HTTPClient:
             )
 
         return form, headers
+
+    async def _prepare_payload(self, item: RequestItem):
+        """Prepares the payload based on `RequestItem`.
+
+        Args:
+            item (RequestItem): the request object
+
+        Returns:
+            (dict): kwargs to pass to session.request
+        """
+        kwargs = {}
+        if item.files and any(item.files):
+            payload, headers = await self._make_payload(item.data, item.files)
+            kwargs = {"data": payload, "headers": headers}
+        else:
+            kwargs = {"json": item.data}
+    
+        return kwargs
+    
+    async def _check_global_rate_limit(self):
+        """Checks if the global rate limit is after now (active)."""
+        now = asyncio.get_event_loop().time()
+        if self.global_reset > now:
+            async with self.global_lock:
+                self.logger.log_warn(f"Global reset is active. Sleeping for {self.global_reset - now}s...")
+                await asyncio.sleep(self.global_reset - now)
+                self.logger.log_high_priority(f"Global has reset after {self.global_reset - now}s...")
+
+    def _sanitize_query_params(self, params: dict | None) -> dict | None:
+        """Sanitize a request's params for session.request
+
+        Args:
+            params (dict | None): query params (if any)
+
+        Returns:
+            (dict | None): the session.request-friendly version of params
+        """
+        if not params:
+            return None
+        return {k: ('true' if v is True else 'false' if v is False else v)
+            for k, v in params.items() if v is not None}
+
+    async def _parse_response(self, resp: aiohttp.ClientResponse):
+        """Parse the request's response for response details.
+
+        Args:
+            resp (aiohttp.ClientResponse): the response object
+
+        Raises:
+            DiscordError: Error object for pretty printing if an error is returned.
+
+        Returns:
+            (str | dict | None): request info (if any)
+        """
+        match resp.status:
+            case 204:
+                return None
+            case 200 | 201 | 202:
+                try:
+                    return await resp.json()
+                except aiohttp.ContentTypeError:
+                    return await resp.text()
+            case _:
+                try:
+                    body = await resp.json()
+                except aiohttp.ContentTypeError:
+                    body = await resp.text()
+                raise DiscordError(resp.status, body)
+            
+    async def _update_bucket_rate_limit(self, resp: aiohttp.ClientResponse, bucket_id: str, endpoint: str):
+        """Update the bucket for this endpoint and sleep if necessary.
+
+        Args:
+            resp (aiohttp.ClientResponse): the response object
+            bucket_id (str): bucket ID provided by Discord's headers
+            endpoint (str): endpoint in which request was sent
+        """
+        # grab lock from dict of bucket locks with a lock on dict access
+        async with self.buckets_lock:
+            lock = self.bucket_lock.setdefault(bucket_id, asyncio.Lock())
+
+        # update/add the bucket with Bucket lock
+        async with lock:
+            remaining = int(resp.headers.get('x-ratelimit-remaining', 1))
+            reset_after = float(resp.headers.get('x-ratelimit-reset-after', 0))
+            reset_on = float(resp.headers.get('x-ratelimit-reset', 0))
+
+            bucket = self.buckets.get(bucket_id)
+
+            if not bucket:
+                bucket = Bucket(remaining, reset_after, reset_on)
+                self.buckets[bucket_id] = bucket
+            else:
+                bucket.remaining = remaining
+                bucket.reset_after = reset_after
+                bucket.reset_on = reset_on
+
+            if bucket.remaining == 0 and not bucket.sleep_task:
+                bucket.sleep_task = asyncio.create_task(
+                    self._sleep_endpoint(endpoint, bucket)
+                )
+
+            elif bucket.sleep_task and not bucket.sleep_task.done():
+                await bucket.sleep_task
+
+    async def _send(self, item: RequestItem):
+        """Core HTTP request executor.
+
+        Sends a request to Discord, handling JSON payloads, files, query parameters,
+        and rate limits.
+
+        Args:
+            item (RequestItem): request object
+
+        Raises:
+            (DiscordError): If the request fails after the maximum number of retries
+                or receives an error response.
+
+        Returns:
+            (dict | str | None): Parsed JSON response if available, raw text if the
+                response is not JSON, or None for HTTP 204 responses.
+        """
+        await self._check_global_rate_limit()
+
+        kwargs = await self._prepare_payload(item)
+
+        # --- SEND REQUEST ---
+
+        url = f"{self.BASE.rstrip('/')}/{item.endpoint.lstrip('/')}"
+        
+        async with self.session.request(
+            method=item.method, url=url, params=self._sanitize_query_params(item.params), timeout=15, **kwargs
+        ) as resp:
+
+            # Update global rate limit if triggered
+            if resp.headers.get("X-RateLimit-Global") == "true":
+                retry_after = float(resp.headers.get("Retry-After", 0))
+                self.global_reset = asyncio.get_event_loop().time() + retry_after
+
+            # Bucket handling (endpoint-specific rate limits)
+            bucket_id = resp.headers.get('x-ratelimit-bucket')
+
+            if bucket_id:
+                # grab lock from dict of bucket locks with a lock on dict access
+                await self._update_bucket_rate_limit(resp, bucket_id, item.endpoint)
+
+            # Handle response
+            return await self._parse_response(resp)

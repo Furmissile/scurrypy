@@ -161,8 +161,10 @@ class GatewayClient:
                     case 11:
                         self.logger.log_info(f"SHARD ID {self.shard_id}: Heartbeat ACK")
 
+            except websockets.exceptions.ConnectionClosedOK:
+                break
             except Exception as e:
-                self.logger.log_error(f"SHARD ID {self.shard_id} Listen Error: {e}")
+                self.logger.log_error(f"SHARD ID {self.shard_id}: Listen Error - {e}")
                 break
     
     async def close_ws(self):

@@ -6,7 +6,7 @@ from ..resources.message import Message
 class EventDispatcher:
     """Central hub for handling Discord Gateway events."""
 
-    RESOURCE_MAP = { # maps discord events to their respective dataclass (lazy loading)
+    RESOURCE_MAP = {
         'READY': ('scurrypy.events.ready_event', 'ReadyEvent'),
 
         'GUILD_CREATE': ('scurrypy.events.guild_events', 'GuildCreateEvent'),
@@ -29,10 +29,10 @@ class EventDispatcher:
 
         # and other events...
     }
-    
-    """Mapping of event names to respective dataclass."""
+    """Mapping of event names to respective dataclass. (lazy loading)"""
     
     def __init__(self, client: ClientLike):
+        
         self.application_id = client.application_id
         """Bot's ID."""
 

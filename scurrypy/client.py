@@ -57,70 +57,58 @@ class Client(ClientLike):
         self.prefix_dispatcher = PrefixDispatcher(self, prefix)
         self.command_dispatcher = CommandDispatcher(self)
 
-        self._global_commands = [] # SlashCommand
-        self._guild_commands = {} # {guild_id : [commands], ...}
-
         self._setup_hooks = []
         self._shutdown_hooks = []
         
         self.emojis = BotEmojis(self._http, self.application_id)
 
-    def prefix_command(self, func):
+    def prefix_command(self, name: str):
         """Decorator registers prefix commands by the name of the function.
 
         Args:
-            func (callable): callback handle for command response
+            name (str): name of the command
+                !!! warning "Important"
+                    Prefix commands are CASE-INSENSITIVE.
         """
-        self.prefix_dispatcher.register(func.__name__, func)
+        def decorator(func):
+            self.prefix_dispatcher.register(name.lower(), func)
+            return func
+        return decorator
 
     def component(self, custom_id: str):
         """Decorator registers a function for a component handler.
 
         Args:
-            custom_id (str): Identifier of the component 
-                !!! warning "Important"
-                    Must match the `custom_id` set where the component was created.
+            custom_id (str): Identifier of the component. Must match the `custom_id` set where the component was created.
         """
         def decorator(func):
             self.command_dispatcher.component(func, custom_id)
             return func
         return decorator
-
-    def command(self, command: SlashCommand | MessageCommand | UserCommand, guild_ids: list[int] | None = None):
-        """Decorator to register a function as a command handler.
+    
+    def command(self, command: SlashCommand | MessageCommand | UserCommand, guild_ids: list[int] = None):
+        """Decorator registers a function to a command handler.
 
         Args:
-            command (SlashCommand | MessageCommand | UserCommand): The command to register.
-            guild_ids (list[int] | None): Guild IDs for guild-specific commands. None for global commands.
+            command (SlashCommand | MessageCommand | UserCommand): the command object
+            guild_ids (list[int], optional): Guild IDs to register command to (if any). If omitted, the command is **global**.
         """
         def decorator(func):
-            # Map command types to dispatcher registration functions
+            if not isinstance(command, (SlashCommand, MessageCommand, UserCommand)):
+                raise ValueError(f"Expected SlashCommand, MessageCommand, or UserCommand; got {type(command).__name__}")
+            
+            # maps command type -> command registry
             handler_map = {
-                MessageCommand: self.command_dispatcher.message_command,
-                UserCommand: self.command_dispatcher.user_command,
-                SlashCommand: self.command_dispatcher.command,
+                SlashCommand: self.command_dispatcher.add_slash_command,
+                MessageCommand: self.command_dispatcher.add_message_command,
+                UserCommand: self.command_dispatcher.add_user_command
             }
 
-            # Resolve dispatcher method based on command type
-            for cls, handler in handler_map.items():
-                if isinstance(command, cls):
-                    handler(command.name, func)
-                    break
-            else:
-                raise ValueError(
-                    f"Command {getattr(command, 'name', '<unnamed>')} must be one of "
-                    f"SlashCommand, UserCommand, MessageCommand; got {type(command).__name__}."
-                )
+            # can guarantee at this point command is one of SlashCommand | MessageCommand | UserCommand
+            handler = handler_map[type(command)]
 
-            # Queue command for later registration
-            if guild_ids:
-                gids = [guild_ids] if isinstance(guild_ids, int) else guild_ids
-                for gid in gids:
-                    self._guild_commands.setdefault(gid, []).append(command)
-            else:
-                self._global_commands.append(command)
-
-            return func  # ensure original function is preserved
+            handler(command, func, guild_ids)
+            return func
         return decorator
     
     def event(self, event_name: str):
@@ -156,7 +144,7 @@ class Client(ClientLike):
         """Creates an interactable application resource.
 
         Args:
-            application_id (int): id of target application
+            application_id (int): ID of target application
 
         Returns:
             (Application): the Application resource
@@ -169,7 +157,7 @@ class Client(ClientLike):
         """Creates an interactable guild resource.
 
         Args:
-            guild_id (int): id of target guild
+            guild_id (int): ID of target guild
 
         Returns:
             (Guild): the Guild resource
@@ -182,7 +170,7 @@ class Client(ClientLike):
         """Creates an interactable channel resource.
 
         Args:
-            channel_id (int): id of target channel
+            channel_id (int): ID of target channel
 
         Returns:
             (Channel): the Channel resource
@@ -195,8 +183,8 @@ class Client(ClientLike):
         """Creates an interactable message resource.
 
         Args:
-            message_id (int): id of target message
-            channel_id (int): channel id of target message
+            message_id (int): ID of target message
+            channel_id (int): channel ID of target message
 
         Returns:
             (Message): the Message resource
@@ -209,7 +197,7 @@ class Client(ClientLike):
         """Creates an interactable user resource.
 
         Args:
-            user_id (int): id of target user
+            user_id (int): ID of target user
 
         Returns:
             (User): the User resource
@@ -218,18 +206,13 @@ class Client(ClientLike):
 
         return User(user_id, self._http)
     
-    async def clear_guild_commands(self, guild_id: int):
-        """Clear a guild's slash commands.
+    async def clear_commands(self, guild_ids: list[int] = None):
+        """Clear a guild's or global commands (all types).
 
         Args:
-            guild_id (int): id of the target guild
+            guild_ids (list[int]): ID of the target guild. If omitted, **global** commands will be cleared.
         """
-        # if guild is queued to register commands, this was a mistake!
-        if self._guild_commands.get(guild_id):
-            self._logger.log_warn(f"Guild {guild_id} already queued, skipping clear.")
-            return
-        
-        self._guild_commands[guild_id] = []
+        self.command_dispatcher.clear_commands(guild_ids)
 
     async def _start_shards(self):
         """Starts all shards batching by max_concurrency."""
@@ -267,8 +250,11 @@ class Client(ClientLike):
         return tasks
 
     async def _listen_shard(self, shard: GatewayClient):
-        """Listen to websocket queue for events. Only OP code 0 passes!"""
+        """Listen to websocket queue for events. Only OP code 0 passes!
 
+        Args:
+            shard (GatewayClient): the shard or gateway to listen on
+        """
         while True:
             try:
                 dispatch_type, event_data = await shard.event_queue.get()
@@ -297,10 +283,10 @@ class Client(ClientLike):
                 self._logger.log_high_priority("Hooks set up.")
 
             # register GUILD commands
-            await self.command_dispatcher._register_guild_commands(self._guild_commands)
+            await self.command_dispatcher.register_guild_commands()
 
             # register GLOBAL commands
-            await self.command_dispatcher._register_global_commands(self._global_commands)
+            await self.command_dispatcher.register_global_commands()
 
             self._logger.log_high_priority("Commands set up.")
 

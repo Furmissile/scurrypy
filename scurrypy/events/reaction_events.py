@@ -2,8 +2,7 @@ from dataclasses import dataclass
 from typing import Optional
 from ..model import DataModel
 
-from ..models.member import MemberModel
-from ..models.emoji import EmojiModel
+from ..models import MemberModel, EmojiModel
 
 class ReactionType:
     """Reaction types."""

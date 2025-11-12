@@ -14,9 +14,6 @@ class Logger:
     ERROR = '\033[31m'
     """Error color: RED"""
 
-    CRITICAL = '\033[41m'
-    """Critical color: RED HIGHLIGHT"""
-
     TIME = '\033[90m'
     """Timestamp color: GRAY"""
 
@@ -42,16 +39,6 @@ class Logger:
         self.quiet = quiet
         """If only high-level logs should be printed."""
     
-    def now(self):
-        """Returns current timestamp
-
-        Returns:
-            (str): timestamp formatted in YYYY-MM-DD HH:MM:SS
-        """
-        from datetime import datetime
-        
-        return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
     def log_traceback(self):
         import traceback
         self._log("DEBUG", self.DEBUG, traceback.format_exc())
@@ -64,10 +51,12 @@ class Logger:
             color (str): color specified by Logger properties
             message (str): descriptive message to log
         """
-        if self.quiet and level not in ('ERROR', 'CRITICAL', 'HIGH'):
+        if self.quiet and level not in ('ERROR', 'WARN', 'HIGH'):
             return # suppress lower-level logs in quiet mode
         
-        date = self.now()
+        from datetime import datetime
+        date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
         self.fp.write(f"[{date}] {level}: {message}\n")
         self.fp.flush()
         print(f"{self.TIME}[{date}]{self.RESET} {color}{level}:{self.RESET} {message}\n")
@@ -99,14 +88,6 @@ class Logger:
         if self.debug_mode == True:
             self.log_traceback()
     
-    def log_critical(self, message: str):
-        """Logs a critical-level message.
-
-        Args:
-            message (str): descriptive message to log
-        """
-        self._log("CRITICAL", self.CRITICAL, message)
-
     def log_high_priority(self, message: str):
         """Always log this, regardless of quiet/debug_mode.
 
@@ -114,32 +95,6 @@ class Logger:
             message (str): descriptive message to log
         """
         self._log("HIGH", self.INFO, message)
-        
-    def redact(self, data: dict, replacement: str ='*** REDACTED ***'):
-        """Recusively redact sensitive fields (token, password, authorization, api_key) from data.
-
-        Args:
-            data (dict): JSON to sanitize
-            replacement (str, optional): what sensitive data is replaced with. Defaults to '*** REDACTED ***'.
-
-        Returns:
-            (dict): sanitized JSON
-        """
-        keys_to_redact = ['token', 'password', 'authorization', 'api_key']
-        
-        def _redact(obj):
-            if isinstance(obj, dict):
-                return {
-                    k: (replacement if k.lower() in keys_to_redact else _redact(v))
-                    for k, v in obj.items()
-                }
-            elif isinstance(obj, list):
-                return [_redact(item) for item in obj]
-            return obj
-
-        import copy
-
-        return _redact(copy.deepcopy(data))
     
     def close(self):
         """Closes the log file."""

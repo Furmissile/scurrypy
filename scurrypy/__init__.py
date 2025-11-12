@@ -4,109 +4,39 @@ import importlib
 from typing import TYPE_CHECKING
 
 __all__ = [
-    "Logger",
-    "Client",
-    "Intents",
-    "set_intents",
-    "BaseConfig",
+    # top-level modules
+    "Logger", "Client", "Intents", "set_intents", "BaseConfig",
 
-    "InteractionTypes",  
-
-    "ReadyEvent",
-
-    "ReactionAddEvent",
-    "ReactionRemoveEvent",
-    "ReactionRemoveEmojiEvent",
-    "ReactionRemoveAllEvent",
-
-    "GuildCreateEvent",
-    "GuildUpdateEvent",
-    "GuildDeleteEvent",
-
-    "MessageCreateEvent",
-    "MessageUpdateEvent",
-    "MessageDeleteEvent",
-
-    "GuildChannelCreateEvent",
-    "GuildChannelUpdateEvent",
-    "GuildChannelDeleteEvent",
-    "ChannelPinsUpdateEvent",
-
+    # events
+    "InteractionTypes", "ReadyEvent",
+    "ReactionAddEvent", "ReactionRemoveEvent", "ReactionRemoveEmojiEvent", "ReactionRemoveAllEvent",
+    "GuildCreateEvent", "GuildUpdateEvent", "GuildDeleteEvent",
+    "MessageCreateEvent", "MessageUpdateEvent", "MessageDeleteEvent",
+    "GuildChannelCreateEvent", "GuildChannelUpdateEvent", "GuildChannelDeleteEvent", "ChannelPinsUpdateEvent",
     "InteractionEvent",
 
-    "ApplicationModel",
-    "EmojiModel",
-    "GuildModel",
-    "MemberModel",
-    "UserModel",
-    "RoleModel",
+    # models
+    "UserModel", "EmojiModel", "GuildModel", "ApplicationModel", "ReadyGuildModel", "IntegrationModel", 
+    "InteractionCallbackDataModel", "InteractionCallbackModel", "MemberModel", "RoleColors", "RoleModel",
 
-    "ChannelTypes",
-    "GuildChannel",
-
-    "CommandTypes",
-    "CommandOptionTypes",
-    "SlashCommand",
-    "UserCommand",
-    "MessageCommand",
-
-    "ComponentV2Types",
-    "SectionPart",
-    "TextDisplay",
-    "Thumbnail",
-    "MediaGalleryItem",
-    "MediaGallery",
-    "File",
-    "SeparatorTypes",
-    "Separator",
-    "ContainerPart",
-    "Label",
-
-    "ComponentTypes",
-    "ActionRowPart",
-    "ButtonStyles",
-    "Button",
-    "SelectOption",
-    "StringSelect",
-    "TextInputStyles",
-    "TextInput",
-    "DefaultValue",
-    "UserSelect",
-    "RoleSelect",
-    "MentionableSelect",
+    # parts
+    "ChannelTypes", "GuildChannel",
+    "CommandTypes", "CommandOptionTypes", "SlashCommand", "UserCommand", "MessageCommand",
+    "ComponentV2Types", "SectionPart", "TextDisplay", "Thumbnail", "MediaGalleryItem", "MediaGallery",
+    "File", "SeparatorTypes", "Separator", "ContainerPart", "Label",
+    "ComponentTypes", "ActionRowPart", "ButtonStyles", "Button", "SelectOption", "StringSelect",
+    "TextInputStyles", "TextInput", "DefaultValue", "UserSelect", "RoleSelect", "MentionableSelect",
     "ChannelSelect",
+    "EmbedAuthor", "EmbedThumbnail", "EmbedField", "EmbedImage", "EmbedFooter", "EmbedPart",
+    "MessageFlags", "MessageReferenceTypes", "MessageReference", "Attachment", "MessagePart", "Role", "ModalPart", 
 
-    "EmbedAuthor",
-    "EmbedThumbnail",
-    "EmbedField",
-    "EmbedImage",
-    "EmbedFooter",
-    "EmbedPart",
-    
-    "MessageFlags",
-    "MessageReferenceTypes",
-    "MessageReference",
-    "Attachment",
-    "MessagePart",
-
-    "ModalPart",
-    "Role",
-
-    "ApplicationFlags",
-    "Application",
-
+    # resources
+    "ApplicationFlags", "Application",
     "BotEmojis",
-
-    "PinnedMessage",
-    "Channel",
-
+    "PinnedMessage", "Channel",
     "Guild",
-
-    "InteractionCallbackTypes",
-    "Interaction",
-    
+    "InteractionCallbackTypes", "Interaction",
     "Message",
-    
     "User",
 ]
 
@@ -146,12 +76,19 @@ if TYPE_CHECKING:
     from .events.interaction_events import InteractionEvent
 
     # models
-    from .models.application import ApplicationModel
-    from .models.emoji import EmojiModel
-    from .models.guild import GuildModel
-    from .models.member import MemberModel
-    from .models.user import UserModel
-    from .models.role import RoleModel
+    from .models import (
+        UserModel,
+        EmojiModel,
+        GuildModel,
+        ApplicationModel,
+        ReadyGuildModel,
+        IntegrationModel,
+        InteractionCallbackDataModel,
+        InteractionCallbackModel,
+        MemberModel,
+        RoleColors,
+        RoleModel
+    )
 
     # parts
     from .parts.channel import (
@@ -254,120 +191,236 @@ if TYPE_CHECKING:
         User
     )
 
-# Lazy loader
+_lazy_modules = [
+    # top-level modules
+    (
+        "scurrypy.logger",
+        [
+            "Logger"
+        ]
+    ),
+    (
+        "scurrypy.client",
+        [
+            "Client"
+        ]
+    ),
+    (
+        "scurrypy.intents",
+        [
+            "Intents", 
+            "set_intents"
+        ]
+    ),
+    (
+        "scurrypy.config",
+        [
+            "BaseConfig"
+        ]
+    ),
+    (
+        "scurrypy.models",
+        [
+            "UserModel",
+            "EmojiModel",
+            "GuildModel",
+            "ApplicationModel",
+            "ReadyGuildModel",
+            "IntegrationModel",
+            "InteractionCallbackDataModel",
+            "InteractionCallbackModel",
+            "MemberModel",
+            "RoleColors",
+            "RoleModel"
+        ]
+    ),
+    
+    # Events
+    (
+        "scurrypy.events.ready_event",
+        [
+            "ReadyEvent"
+        ]
+    ),
+    (
+        "scurrypy.events.reaction_events",
+        [
+            "ReactionAddEvent", 
+            "ReactionRemoveEvent", 
+            "ReactionRemoveEmojiEvent", 
+            "ReactionRemoveAllEvent"
+        ]
+    ),
+    (
+        "scurrypy.events.guild_events",
+        [
+            "GuildCreateEvent", 
+            "GuildUpdateEvent", 
+            "GuildDeleteEvent"
+        ]
+    ),
+    (
+        "scurrypy.events.message_events",
+        [
+            "MessageCreateEvent", 
+            "MessageUpdateEvent", 
+            "MessageDeleteEvent"
+        ]
+    ),
+    (
+        "scurrypy.events.channel_events",
+        [
+            "GuildChannelCreateEvent", 
+            "GuildChannelUpdateEvent", 
+            "GuildChannelDeleteEvent", 
+            "ChannelPinsUpdateEvent"
+        ]
+    ),
+    (
+        "scurrypy.events.interaction_events",
+        [
+            "InteractionEvent"
+        ]
+    ),
+
+    # Parts
+    (
+        "scurrypy.parts.channel",
+        [
+            "ChannelTypes", 
+            "GuildChannel"
+        ]
+    ),
+    (
+        "scurrypy.parts.command",
+        [
+            "CommandTypes", 
+            "CommandOptionTypes", 
+            "SlashCommand", 
+            "UserCommand", 
+            "MessageCommand"
+        ]
+    ),
+    (
+        "scurrypy.parts.components_v2",
+        [
+            "ComponentV2Types", 
+            "SectionPart", 
+            "TextDisplay", 
+            "Thumbnail", 
+            "MediaGalleryItem", 
+            "MediaGallery", 
+            "File", 
+            "SeparatorTypes", 
+            "Separator", 
+            "ContainerPart", 
+            "Label"
+        ]
+    ),
+    (
+        "scurrypy.parts.components",
+        [
+            "ComponentTypes", 
+            "ActionRowPart", 
+            "ButtonStyles", 
+            "Button", 
+            "SelectOption",
+            "StringSelect", 
+            "TextInputStyles", 
+            "TextInput", 
+            "DefaultValue", 
+            "UserSelect", 
+            "RoleSelect", 
+            "MentionableSelect",
+            "ChannelSelect"
+        ]
+    ),
+    (
+        "scurrypy.parts.embed",
+        [
+            "EmbedAuthor",
+            "EmbedThumbnail",
+            "EmbedField",
+            "EmbedImage",
+            "EmbedFooter",
+            "EmbedPart"
+        ]
+    ),
+    (
+        "scurrypy.parts.message",
+        [
+            "MessageFlags",
+            "MessageReferenceTypes",
+            "MessageReference",
+            "Attachment",
+            "MessagePart"
+        ]
+    ),
+    (
+        "scurrypy.parts.modal",
+        [
+            "ModalPart"
+        ]
+    ),
+
+    # resources
+    (
+        "scurrypy.resources.application",
+        [
+            "ApplicationFlags",
+            "Application"
+        ]
+    ),
+    (
+        "scurrypy.resources.bot_emojis",
+        [
+            "BotEmojis"
+        ]
+    ),
+    (
+        "scurrypy.resources.channel",
+        [
+            "PinnedMessage",
+            "Channel"
+        ]
+    ),
+    (
+        "scurrypy.resources.guild",
+        [
+            "Guild"
+        ]
+    ),
+    (
+        "scurrypy.resources.interaction",
+        [
+            "InteractionCallbackTypes",
+            "Interaction"
+        ]
+    ),
+    (
+        "scurrypy.resources.message",
+        [
+            "Message"
+        ]
+    ),
+    (
+        "scurrypy.resources.user",
+        [
+            "User"
+        ]
+    )
+]
+
+_mapping = {name: module_path 
+    for module_path, names in _lazy_modules 
+    for name in names
+}
+
 def __getattr__(name: str):
-    if name not in __all__:
+    if name not in _mapping:
         raise AttributeError(f"module {__name__} has no attribute {name}")
 
-    mapping = {
-        # top-level
-        "Logger": "scurrypy.logger",
-        "Client": "scurrypy.client",
-        "Intents": "scurrypy.intents",
-        "set_intents": "scurrypy.intents",
-        "BaseConfig": "scurrypy.config",
-
-        'InteractionTypes': "scurrypy.dispatch.command_dispatcher",
-
-        "ReadyEvent": "scurrypy.events.ready_event",
-        
-        "ReactionAddEvent": "scurrypy.events.reaction_events",
-        "ReactionRemoveEvent": "scurrypy.events.reaction_events",
-        "ReactionRemoveEmojiEvent": "scurrypy.events.reaction_events",
-        "ReactionRemoveAllEvent": "scurrypy.events.reaction_events",
-
-        "GuildCreateEvent": "scurrypy.events.guild_events",
-        "GuildUpdateEvent": "scurrypy.events.guild_events",
-        "GuildDeleteEvent": "scurrypy.events.guild_events",
-
-        "MessageCreateEvent": "scurrypy.events.message_events",
-        "MessageUpdateEvent": "scurrypy.events.message_events",
-        "MessageDeleteEvent": "scurrypy.events.message_events",
-
-        "GuildChannelCreateEvent": "scurrypy.events.channel_events",
-        "GuildChannelUpdateEvent": "scurrypy.events.channel_events",
-        "GuildChannelDeleteEvent": "scurrypy.events.channel_events",
-        "ChannelPinsUpdateEvent": "scurrypy.events.channel_events",
-
-        "InteractionEvent": "scurrypy.events.interaction_events",
-
-        'ApplicationModel': "scurrypy.models.application",
-        'EmojiModel': "scurrypy.models.emoji",
-        'GuildModel': "scurrypy.models.guild",
-        'MemberModel': "scurrypy.models.member",
-        'UserModel': "scurrypy.models.user",
-        'RoleModel': "scurrypy.models.role",
-
-        'ChannelTypes': "scurrypy.parts.channel",
-        'GuildChannel': "scurrypy.parts.channel",
-
-        'CommandTypes': "scurrypy.parts.command",
-        'CommandOptionTypes': "scurrypy.parts.command",
-        'SlashCommand': "scurrypy.parts.command",
-        'UserCommand': "scurrypy.parts.command",
-        'MessageCommand': "scurrypy.parts.command",
-
-        'ComponentV2Types': "scurrypy.parts.components_v2",
-        'SectionPart': "scurrypy.parts.components_v2",
-        'TextDisplay': "scurrypy.parts.components_v2",
-        'Thumbnail': "scurrypy.parts.components_v2",
-        'MediaGalleryItem': "scurrypy.parts.components_v2",
-        'MediaGallery': "scurrypy.parts.components_v2",
-        'File': "scurrypy.parts.components_v2",
-        'SeparatorTypes': "scurrypy.parts.components_v2",
-        'Separator': "scurrypy.parts.components_v2",
-        'ContainerPart': "scurrypy.parts.components_v2",
-        'Label': "scurrypy.parts.components_v2",
-
-        'ComponentTypes': "scurrypy.parts.components",
-        'ActionRowPart': "scurrypy.parts.components",
-        'ButtonStyles': "scurrypy.parts.components",
-        'Button': "scurrypy.parts.components",
-        'SelectOption': "scurrypy.parts.components",
-        'StringSelect': "scurrypy.parts.components",
-        'TextInputStyles': 'scurrypy.parts.components',
-        'TextInput': "scurrypy.parts.components",
-        'DefaultValue': "scurrypy.parts.components",
-        'UserSelect': "scurrypy.parts.components",
-        'RoleSelect': "scurrypy.parts.components",
-        'MentionableSelect': "scurrypy.parts.components",
-        'ChannelSelect': "scurrypy.parts.components",
-        
-        'EmbedAuthor': "scurrypy.parts.embed",
-        'EmbedThumbnail': "scurrypy.parts.embed",
-        'EmbedField': "scurrypy.parts.embed",
-        'EmbedImage': "scurrypy.parts.embed",
-        'EmbedFooter': "scurrypy.parts.embed",
-        'EmbedPart': "scurrypy.parts.embed",
-
-        'MessageFlags': "scurrypy.parts.message",
-        'MessageReferenceTypes': "scurrypy.parts.message",
-        'MessageReference': "scurrypy.parts.message",
-        'Attachment': "scurrypy.parts.message",
-        'MessagePart': "scurrypy.parts.message",
-
-        'ModalPart': "scurrypy.parts.modal",
-        'Role': "scurrypy.parts.role",
-
-        'ApplicationFlags': "scurrypy.resources.application",
-        'Application': "scurrypy.resources.application",
-
-        'BotEmojis': "scurrypy.resources.bot_emojis",
-
-        'PinnedMessage': "scurrypy.resources.channel",
-        'Channel': "scurrypy.resources.channel",
-
-        'Guild': "scurrypy.resources.guild",
-
-        'InteractionCallbackTypes': "scurrypy.resources.interaction",
-        'Interaction': "scurrypy.resources.interaction",
-
-        'Message': "scurrypy.resources.message",
-        
-        'User': "scurrypy.resources.user"
-    }
-
-    module = importlib.import_module(mapping[name])
+    module = importlib.import_module(_mapping[name])
     attr = getattr(module, name)
     globals()[name] = attr  # cache it for future lookups
     return attr

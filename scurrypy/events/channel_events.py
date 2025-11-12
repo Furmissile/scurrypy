@@ -48,6 +48,7 @@ class GuildChannelDeleteEvent(GuildChannelEvent):
 @dataclass
 class ChannelPinsUpdateEvent(DataModel):
     """Pin update event."""
+    
     channel_id: int
     """ID of channel where the pins were updated."""
 

@@ -9,9 +9,7 @@ from .channel import Channel
 from ..parts.channel import GuildChannel
 from ..parts.role import Role
 
-from ..models.emoji import EmojiModel
-from ..models.member import MemberModel
-from ..models.role import RoleModel
+from ..models import EmojiModel, MemberModel, RoleModel
 
 class FetchGuildMembersParams(TypedDict, total=False):
     """Params when fetching guild members."""
@@ -20,7 +18,7 @@ class FetchGuildMembersParams(TypedDict, total=False):
     """Max number of members to return Range 1 - 1000. Default 1."""
 
     after: int
-    """Highest user id in previous page."""
+    """Highest user ID in previous page."""
 
 class FetchGuildParams(TypedDict, total=False):
     """Params when fetching a guild."""
@@ -146,7 +144,7 @@ class Guild(DataModel):
             Requires the GUILD_MEMBERS privileged intent!
 
         Args:
-            user_id (int): user id of the member to fetch
+            user_id (int): user ID of the member to fetch
 
         Returns:
             (MemberModel): member's data
@@ -181,8 +179,8 @@ class Guild(DataModel):
             * MANAGE_ROLES → required to add a role to the user
         
         Args:
-            user_id (int): id of the member for the role
-            role_id (int): id of the role to append
+            user_id (int): ID of the member for the role
+            role_id (int): ID of the role to append
         """
         await self._http.request('PUT', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
     
@@ -193,8 +191,8 @@ class Guild(DataModel):
             * MANAGE_ROLES → required to remove a role from the user
 
         Args:
-            user_id (int): id of the member with the role
-            role_id (int): id of the role to remove
+            user_id (int): ID of the member with the role
+            role_id (int): ID of the role to remove
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
 
@@ -202,7 +200,7 @@ class Guild(DataModel):
         """Fetch a role in this guild.
 
         Args:
-            role_id (int): id of the role to fetch
+            role_id (int): ID of the role to fetch
 
         Returns:
             (RoleModel): fetched role's data
@@ -260,6 +258,6 @@ class Guild(DataModel):
             * MANAGE_ROLES → required to delete a role in the guild
 
         Args:
-            role_id (int): id of role to delete
+            role_id (int): ID of role to delete
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/roles/{role_id}')

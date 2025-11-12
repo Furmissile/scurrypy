@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Optional
 from ..model import DataModel
 
-from ..models.role import RoleColors
+from ..models import RoleColors
 
 @dataclass
 class Role(DataModel):

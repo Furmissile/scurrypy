@@ -78,10 +78,8 @@ def set_intents(**flags: Unpack[IntentFlagParams]):
     }
 
     intents = Intents.DEFAULT
-    for name, value in flags.items():
-        if name not in _flag_map:
-            raise ValueError(f"Invalid flag: {name}")
-        if value:
-            intents |= _flag_map[name]
+    for k, v in flags.items():
+        if v:
+            intents |= _flag_map.get(k)
     
     return intents

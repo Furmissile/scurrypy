@@ -1,10 +1,3 @@
-METHOD_SUCCESS_CODES = {
-    "GET": (200),
-    "POST": (200, 201),
-    "PATCH": (200, 201),
-    "DELETE": (200, 204)
-}
-
 class DiscordError(Exception):
     """Represents a Discord API error."""
     def __init__(self, status: int, data: dict):
@@ -17,10 +10,13 @@ class DiscordError(Exception):
         self.data = data
         """Raw error data."""
 
+        self.status = status
+        """Status of the error."""
+
         self.reason = data.get('message', 'Unknown Error')
         """Discord-generated reason for error."""
 
-        self.code = data.get('code', '???')
+        self.code = data.get('code', 'Unknown Code')
         """Discord-generated code of error."""
 
         self.error_data = data.get('errors', {})

@@ -4,7 +4,7 @@ from ..model import DataModel
 
 from .component_types import *
 
-from ..models.emoji import EmojiModel
+from ..models import EmojiModel
 
 class ComponentTypes:
     ACTION_ROW = 1

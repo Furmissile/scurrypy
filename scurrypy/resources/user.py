@@ -4,8 +4,7 @@ from typing import Optional, TypedDict, Unpack
 from ..http import HTTPClient
 from ..model import DataModel
 
-from ..models.guild import GuildModel
-from ..models.member import MemberModel
+from ..models import GuildModel, MemberModel
 
 class FetchUserGuildsParams(TypedDict, total=False):
     before: int
@@ -101,7 +100,7 @@ class User(DataModel):
             Requires the OAuth2 guilds.members.read scope!
 
         Args:
-            guild_id (int): id of guild to fetch data from
+            guild_id (int): ID of guild to fetch data from
 
         Returns:
             (MemberModel): member data from guild

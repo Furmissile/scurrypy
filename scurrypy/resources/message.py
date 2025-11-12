@@ -4,8 +4,7 @@ from typing import Optional
 from ..http import HTTPClient
 from ..model import DataModel
 
-from ..models.user import UserModel
-from ..models.emoji import EmojiModel
+from ..models import UserModel, EmojiModel
 from ..parts.message import MessagePart
 
 @dataclass
@@ -41,7 +40,7 @@ class Message(DataModel):
         self.__dict__.update(Message.from_dict(data, self._http).__dict__)
 
     async def fetch(self):
-        """Fetches the message data based on the given channel id and message id.
+        """Fetches the message data based on the given channel ID and message id.
 
         Returns:
             (Message): the message object

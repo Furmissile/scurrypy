@@ -5,6 +5,7 @@ from ..model import DataModel
 from ..resources.interaction import Interaction
 from ..parts.components import ComponentTypes
 
+
 # ----- Command Interaction -----
 
 @dataclass
@@ -63,6 +64,7 @@ class ApplicationCommandData(DataModel):
         
         raise ValueError(f"Option '{option_name}' not found")
 
+
 # ----- Component Interaction -----
 
 @dataclass
@@ -78,6 +80,7 @@ class MessageComponentData(DataModel):
     values: Optional[list[str]] = field(default_factory=list)
     """Select values (if any)."""
 
+
 # ----- Modal Interaction -----
 
 @dataclass
@@ -90,11 +93,11 @@ class ModalComponentData(DataModel):
     value: Optional[str]
     """Text input value (Text Input component only)."""
 
-    values: Optional[list[str]]
-    """String select values (String Select component only)."""
-
     custom_id: str
     """Unique ID associated with the component."""
+
+    values: Optional[list[str]] = field(default_factory=list)
+    """String select values (String Select component only)."""
 
 @dataclass
 class ModalComponent(DataModel):
@@ -146,7 +149,7 @@ class ModalData(DataModel):
             # text input
             return component.component.value
 
-        raise ValueError(f"Component custom id '{custom_id}' not found.")
+        raise ValueError(f"Component custom ID '{custom_id}' not found.")
 
 @dataclass
 class InteractionEvent(DataModel):

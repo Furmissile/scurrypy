@@ -7,9 +7,7 @@ from ..model import DataModel
 from ..parts.modal import ModalPart
 from ..parts.message import MessagePart, MessageFlagParams
 
-from ..models.guild import GuildModel
-from ..models.member import MemberModel
-from ..models.interaction import InteractionCallbackModel
+from ..models import GuildModel, MemberModel, InteractionCallbackModel
 
 from .channel import Channel
 
