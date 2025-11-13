@@ -16,19 +16,44 @@ While this wrapper is mainly used for various squirrel-related shenanigans, it c
 * No `__future__` hacks to avoid circular import
 * Capable of sharding
 
+## Benchmarks
+Not convinced ScurryPy has a place among top libraries? See the benchmarks below!
+
+### Test Environment
+
+- **Python**: 3.11.6
+- **OS**: Windows 11
+- **Method**: New Python process per measurement
+- **Tool**: See benchmarks folder
+
+### Results Summary
+
+```
+Library         Time (ms)    Memory Δ (MB)      Objects
+--------------------------------------------------------
+scurrypy              8.9             0.44         1417
+hikari             1710.3            27.67        53658
+discord             252.5             7.64        14099
+disnake             185.9             6.31        12111
+```
+
+*(See `benchmark.py` for how this test was done.)*
+
 ## Getting Started
+
 *Note: This section also appears in the documentation, but here are complete examples ready to use with your bot credentials.*
 
 ### Installation
+
 To install the ScurryPy package, run:
+
 ```bash
 pip install scurrypy
 ```
 
 ## Minimal Slash Command
-The following demonstrates building and responding to a slash command.
 
-*Note: Adjust `dotenv_path` if your `.env` file is not in the same directory as this script.*
+The following demonstrates building and responding to a slash command.
 
 ```py
 import scurrypy
@@ -49,7 +74,9 @@ client.run()
 ```
 
 ## Minimal Prefix Command (Legacy)
+
 The following demonstrates building and responding to a message prefix command.
+
 ```py
 import scurrypy
 
