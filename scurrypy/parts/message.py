@@ -65,14 +65,11 @@ class MessageReference(DataModel):
 class Attachment(DataModel):
     """Represents an attachment."""
 
-    id: int
-    """User-defined ID for the attachment."""
+    id: int = field(init=False)
+    """ID of the attachment (internally set)."""
 
     path: str
     """Relative path to the file."""
-
-    filename: str
-    """Name of the file."""
 
     description: str
     """Description of the file."""
@@ -80,7 +77,7 @@ class Attachment(DataModel):
     def to_dict(self):
         return {
             'id': self.id,
-            'filename': self.filename,
+            'filename': self.path.split('/')[-1],
             'description': self.description
         }
 
@@ -110,7 +107,7 @@ class MessagePart(DataModel):
         """Set this message's flags using MessageFlagParams.
 
         Args:
-            flags (Unpack[MessageFlagParams]): message flags to set. (set respective flag to True to toggle.)
+            **flags (Unpack[MessageFlagParams]): message flags to set. (set respective flag to True to toggle.)
 
         Raises:
             (ValueError): invalid flag
@@ -127,7 +124,7 @@ class MessagePart(DataModel):
             'is_components_v2': MessageFlags.IS_COMPONENTS_V2,
         }
 
-        # each flag maps to a specific combined bit!
+        # each flag maps to a specific bit position!
         for name, value in flags.items():
             if name not in _flag_map:
                 raise ValueError(f"Invalid flag: {name}")

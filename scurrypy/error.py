@@ -1,5 +1,6 @@
 class DiscordError(Exception):
     """Represents a Discord API error."""
+
     def __init__(self, status: int, data: dict):
         """Initialize the error with Discord's response.
             Extracts reason, code, and walks the nested errors.
@@ -8,25 +9,14 @@ class DiscordError(Exception):
             data (dict): Discord's error JSON
         """
         self.data = data
-        """Raw error data."""
-
         self.status = status
-        """Status of the error."""
-
         self.reason = data.get('message', 'Unknown Error')
-        """Discord-generated reason for error."""
-
         self.code = data.get('code', 'Unknown Code')
-        """Discord-generated code of error."""
 
         self.error_data = data.get('errors', {})
-        """Error-specific data."""
-
         self.details = self.walk(self.error_data)
-        """Error details."""
 
-        self.fatal = status in (401, 403)
-        """If this error is considered fatal."""
+        self.is_fatal = status in (401, 403)
 
         errors = [f"→ {path}: {reason}" for path, reason in self.details]
         full_message = f"{self.reason} ({self.code})"
@@ -54,6 +44,8 @@ class DiscordError(Exception):
                 if key == '_errors' and isinstance(value, list):
                     msg = value[0].get('message', 'Unknown error')
                     result.append(('.'.join(path), msg))
+
+                # the value should not be a dict -- keep going
                 elif isinstance(value, dict):
                     result.extend(self.walk(value, path + [key]))
         return result

@@ -118,7 +118,7 @@ class Channel(DataModel):
             * READ_MESSAGE_HISTORY → required for user, otherwise no messages are returned
 
         Args:
-            **kwargs: field-specific data
+            **kwargs: message fetch params
                 !!! note
                     if no kwargs are provided, default to 50 fetched messages limit.
 
@@ -175,6 +175,7 @@ class Channel(DataModel):
         Args:
             message_id: ID of message to attach thread
             name (str): thread name
+            **kwargs (Unpack[ThreadFromMessageParams]): thread create params
 
         Returns:
             (Channel): The updated channel object
@@ -197,7 +198,7 @@ class Channel(DataModel):
             * READ_MESSAGE_HISTORY → required for reading pinned messages
 
         Args:
-            kwargs: field-specific data
+            **kwargs: pinned message fetch params
                 !!! note
                     If no kwargs are provided, default to 50 fetched messages limit.
             

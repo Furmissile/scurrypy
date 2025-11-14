@@ -69,33 +69,17 @@ class HTTPClient:
         """Start the HTTP session."""
 
         if not self.session:
-            self.logger.log_info("HTTP session starting.")
-            self.session = aiohttp.ClientSession(
-                headers={"Authorization": f"Bot {token}"}
-            )
+            self.session = aiohttp.ClientSession(headers={"Authorization": f"Bot {token}"})
+            self.logger.log_info("HTTP session started.")
         else:
             self.logger.log_warn("HTTP session already initialized.")
 
     async def close(self):
         """Gracefully stop all workers and close the HTTP session."""
 
-        async with self.queues_lock:
-            # Signal all workers to stop
-            for queue in self.queues.values():
-                await queue.put(None)  # Send sentinel
-
-            # Wait until all queues are empty
-            for queue in self.queues.values():
-                await queue.join()
-
-            # Wait for all worker tasks to finish
-            for worker in self.workers.values():
-                await worker
-
-            # Close HTTP session if it exists
-            if self.session:
-                await self.session.close()
-                self.logger.log_info("Session closed.")
+        if self.session: # just the session that needs to close!
+            await self.session.close()
+            self.logger.log_info("Session closed.")
 
     async def request(
         self,
@@ -123,15 +107,27 @@ class HTTPClient:
         async with self.queues_lock:
             queue = self.queues.setdefault(endpoint, asyncio.Queue())
 
-        # Create a worker if it doesn’t exist
         if endpoint not in self.workers:
             self.workers[endpoint] = asyncio.create_task(self._worker(endpoint))
 
         # set promise
         future = asyncio.get_event_loop().create_future()
 
-        # Put the request in the queue
-        await queue.put(RequestItem(method, endpoint, data, params, files, future))
+        def sanitize_query_params(params: dict | None) -> dict | None:
+            """Sanitize a request's params for session.request
+
+            Args:
+                params (dict | None): query params (if any)
+
+            Returns:
+                (dict | None): the session.request-friendly version of params
+            """
+            if not params:
+                return None
+            return {k: ('true' if v is True else 'false' if v is False else v)
+                for k, v in params.items() if v is not None}
+
+        await queue.put(RequestItem(method, endpoint, data, sanitize_query_params(params), files, future))
 
         # return promise
         return await future
@@ -150,7 +146,7 @@ class HTTPClient:
             # get the next item in the queue
             item: RequestItem = await queue.get()
 
-            if item is None:  # sentinel = time to stop
+            if item is None: # sentinel = time to stop
                 queue.task_done()
                 break
 
@@ -196,12 +192,12 @@ class HTTPClient:
         for idx, file_path in enumerate(files):
             async with aiofiles.open(file_path, 'rb') as f:
                 data = await f.read()
-            form.add_field(
-                f'files[{idx}]',
-                data,
-                filename=file_path.split('/')[-1],
-                content_type='application/octet-stream'
-            )
+                form.add_field(
+                    f'files[{idx}]',
+                    data,
+                    filename=file_path.split('/')[-1],
+                    content_type='application/octet-stream'
+                )
 
         return form, headers
 
@@ -231,20 +227,6 @@ class HTTPClient:
                 self.logger.log_warn(f"Global reset is active. Sleeping for {self.global_reset - now}s...")
                 await asyncio.sleep(self.global_reset - now)
                 self.logger.log_high_priority(f"Global has reset after {self.global_reset - now}s...")
-
-    def _sanitize_query_params(self, params: dict | None) -> dict | None:
-        """Sanitize a request's params for session.request
-
-        Args:
-            params (dict | None): query params (if any)
-
-        Returns:
-            (dict | None): the session.request-friendly version of params
-        """
-        if not params:
-            return None
-        return {k: ('true' if v is True else 'false' if v is False else v)
-            for k, v in params.items() if v is not None}
 
     async def _parse_response(self, resp: aiohttp.ClientResponse):
         """Parse the request's response for response details.
@@ -335,7 +317,7 @@ class HTTPClient:
         url = f"{self.BASE.rstrip('/')}/{item.endpoint.lstrip('/')}"
         
         async with self.session.request(
-            method=item.method, url=url, params=self._sanitize_query_params(item.params), timeout=15, **kwargs
+            method=item.method, url=url, params=item.params, timeout=15, **kwargs
         ) as resp:
 
             # Update global rate limit if triggered

@@ -54,11 +54,11 @@ class IntentFlagParams(TypedDict, total=False):
     message_content: bool
 
 def set_intents(**flags: Unpack[IntentFlagParams]):
-    """Set bot intents using [`IntentFlagParams`][scurrypy.intents.IntentFlagParams].  
+    """Set bot intents. See [`Intents`][scurrypy.intents.Intents]  
     `Intents.DEFAULT` = (GUILDS | GUILD_MESSAGES) will also be set.
 
     Args:
-        flags (Unpack[IntentFlagParams]): intents to set. (set respective flag to True to toggle.)
+        **flags (Unpack[IntentFlagParams]): intents to set
 
     Raises:
         (ValueError): invalid flag

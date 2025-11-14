@@ -12,7 +12,7 @@ While this wrapper is mainly used for various squirrel-related shenanigans, it c
 * Unix shell-style wildcards for component routing
 * Declarative style using decorators
 * Supports both legacy and new features
-* Respects Discord’s rate limits
+* Respects Discord's rate limits
 * No `__future__` hacks to avoid circular import
 * Capable of sharding
 
@@ -60,7 +60,7 @@ import scurrypy
 
 client = scurrypy.Client(
     token='your-token',
-    application_id=APPLICATION_ID  # your bot’s application ID
+    application_id=APPLICATION_ID  # your bot's application ID
 )
 
 @client.command(
@@ -82,7 +82,7 @@ import scurrypy
 
 client = scurrypy.Client(
     token='your-token',
-    application_id=APPLICATION_ID,  # your bot’s application ID
+    application_id=APPLICATION_ID,  # your bot's application ID
     intents=scurrypy.set_intents(message_content=True),
     prefix='!'  # your custom prefix
 )

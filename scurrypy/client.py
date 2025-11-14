@@ -219,10 +219,8 @@ class Client(ClientLike):
 
         from .events.gateway_events import GatewayEvent
 
-        # request gateway info
         data = await self._http.request('GET', '/gateway/bot')
 
-        # translate it to a dataclass
         gateway = GatewayEvent.from_dict(data)
 
         # pull important values for easier access
@@ -240,7 +238,7 @@ class Client(ClientLike):
                 shard = GatewayClient(self, gateway.url, shard_id, total_shards)
                 self.shards.append(shard)
 
-                # Fire and forget
+                # fire and forget
                 tasks.append(asyncio.create_task(shard.start()))
                 tasks.append(asyncio.create_task(self._listen_shard(shard)))
 
@@ -259,12 +257,15 @@ class Client(ClientLike):
             try:
                 dispatch_type, event_data = await shard.event_queue.get()
                 
+                # check prefix first (only if a prefix is set)
                 if self.prefix_dispatcher.prefix and dispatch_type == 'MESSAGE_CREATE':
                     await self.prefix_dispatcher.dispatch(event_data)
                     
+                # then try interaction
                 elif dispatch_type == 'INTERACTION_CREATE':
                     await self.command_dispatcher.dispatch(event_data)
 
+                # otherwise this must be an event!
                 await self.dispatcher.dispatch(dispatch_type, event_data)
             except:
                 break # stop task if an error occurred
@@ -275,26 +276,23 @@ class Client(ClientLike):
         try:
             await self._http.start(self.token)
             
-            # setup hooks if hooks were set
             if self._setup_hooks:
                 for hook in self._setup_hooks:
                     self._logger.log_info(f"Setting hook {hook.__name__}")
                     await hook(self)
                 self._logger.log_high_priority("Hooks set up.")
 
-            # register GUILD commands
             await self.command_dispatcher.register_guild_commands()
 
-            # register GLOBAL commands
             await self.command_dispatcher.register_global_commands()
 
             self._logger.log_high_priority("Commands set up.")
 
-            # run websocket indefinitely
             tasks = await asyncio.create_task(self._start_shards())
 
+            # end all ongoing tasks
             await asyncio.gather(*tasks)
-                
+            
         except asyncio.CancelledError:
             self._logger.log_high_priority("Connection cancelled via KeyboardInterrupt.")
         except Exception as e:
@@ -305,7 +303,6 @@ class Client(ClientLike):
     async def _close(self):    
         """Gracefully close HTTP session, websocket connections, and run shutdown hooks."""   
 
-        # Run shutdown hooks first
         for hook in self._shutdown_hooks:
             try:
                 self._logger.log_info(f"Executing shutdown hook {hook.__name__}")
@@ -316,6 +313,7 @@ class Client(ClientLike):
         self._logger.log_info("Closing HTTP session...")
         await self._http.close()
 
+        # close each connection or shard
         for shard in self.shards:
             await shard.close_ws()
 

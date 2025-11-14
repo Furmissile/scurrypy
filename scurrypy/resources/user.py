@@ -77,7 +77,7 @@ class User(DataModel):
             Requires the OAuth2 guilds scope!
 
         Args:
-            kwargs: Field-specific data
+            **kwargs: user guilds fetch params
                 !!! note
                     If no kwargs are provided, default to 200 guilds limit.
 

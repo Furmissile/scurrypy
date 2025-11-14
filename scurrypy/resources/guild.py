@@ -99,7 +99,7 @@ class Guild(DataModel):
         """Fetch the Guild object by the given ID.
 
         Args:
-            kwargs: field-specific data
+            **kwargs: guild fetch params
                 !!! note
                     If no kwargs are provided, default to with_counts = False
             
@@ -159,7 +159,7 @@ class Guild(DataModel):
             Requires the GUILD_MEMBERS privileged intent!
 
         Args:
-            **kwargs: field-specific data
+            **kwargs: guild members fetch params
                 !!! note
                     If no kwargs are provided, default to 1 guild member limit.
 
