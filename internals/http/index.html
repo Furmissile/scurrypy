@@ -1422,24 +1422,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scurrypy.http.HTTPClient._make_payload" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_make_payload
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.http.HTTPClient._prepare_payload" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_prepare_payload
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#scurrypy.http.HTTPClient._check_global_rate_limit" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_check_global_rate_limit
@@ -1461,6 +1443,15 @@
   <a href="#scurrypy.http.HTTPClient._update_bucket_rate_limit" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_update_bucket_rate_limit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.http.HTTPClient._prepare_payload" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_prepare_payload
     </span>
   </a>
   
@@ -1800,24 +1791,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scurrypy.http.HTTPClient._make_payload" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_make_payload
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.http.HTTPClient._prepare_payload" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_prepare_payload
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#scurrypy.http.HTTPClient._check_global_rate_limit" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_check_global_rate_limit
@@ -1839,6 +1812,15 @@
   <a href="#scurrypy.http.HTTPClient._update_bucket_rate_limit" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_update_bucket_rate_limit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.http.HTTPClient._prepare_payload" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_prepare_payload
     </span>
   </a>
   
@@ -2372,108 +2354,6 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="scurrypy.http.HTTPClient._make_payload" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">_make_payload</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-async"><code>async</code></small>
-  </span>
-
-<a href="#scurrypy.http.HTTPClient._make_payload" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Return (data, headers) for aiohttp request — supports multipart.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>data</code></b>
-              (<code><span title="dict">dict</span></code>)
-          –
-          <div class="doc-md-description">
-            <p>request data</p>
-          </div>
-        </li>
-        <li class="doc-section-item field-body">
-            <b><code>files</code></b>
-              (<code><span title="list">list</span></code>)
-          –
-          <div class="doc-md-description">
-            <p>relevant files</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="tuple">tuple</span>[<span title="aiohttp.FormData">FormData</span>, <span title="dict">dict</span>]</code>
-          –
-          <div class="doc-md-description">
-            <p>form data and headers</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="scurrypy.http.HTTPClient._prepare_payload" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">_prepare_payload</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-async"><code>async</code></small>
-  </span>
-
-<a href="#scurrypy.http.HTTPClient._prepare_payload" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Prepares the payload based on <code>RequestItem</code>.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-            <b><code>item</code></b>
-              (<code><span title="scurrypy.http.RequestItem">RequestItem</span></code>)
-          –
-          <div class="doc-md-description">
-            <p>the request object</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="dict">dict</span></code>
-          –
-          <div class="doc-md-description">
-            <p>kwargs to pass to session.request</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
 <h3 id="scurrypy.http.HTTPClient._check_global_rate_limit" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">_check_global_rate_limit</span></code>
 
@@ -2594,6 +2474,53 @@
           –
           <div class="doc-md-description">
             <p>endpoint in which request was sent</p>
+          </div>
+        </li>
+    </ul>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="scurrypy.http.HTTPClient._prepare_payload" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">_prepare_payload</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+<a href="#scurrypy.http.HTTPClient._prepare_payload" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Prepares the payload based on <code>RequestItem</code>.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+            <b><code>item</code></b>
+              (<code><span title="scurrypy.http.RequestItem">RequestItem</span></code>)
+          –
+          <div class="doc-md-description">
+            <p>the request object</p>
+          </div>
+        </li>
+    </ul>
+
+
+<p><span class="doc-section-title">Returns:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><span title="dict">dict</span></code>
+          –
+          <div class="doc-md-description">
+            <p>kwargs to pass to session.request</p>
           </div>
         </li>
     </ul>
