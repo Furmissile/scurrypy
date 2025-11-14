@@ -1148,6 +1148,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#scurrypy.resources.channel.ThreadFromMessageParams" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ThreadFromMessageParams
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" ThreadFromMessageParams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.resources.channel.ThreadFromMessageParams.rate_limit_per_user" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;rate_limit_per_user
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2038,6 +2062,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#scurrypy.resources.channel.ThreadFromMessageParams" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ThreadFromMessageParams
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=" ThreadFromMessageParams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.resources.channel.ThreadFromMessageParams.rate_limit_per_user" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;rate_limit_per_user
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2436,7 +2484,7 @@
 )
           –
           <div class="doc-md-description">
-            <p>field-specific data</p>
+            <p>message fetch params</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>if no kwargs are provided, default to 50 fetched messages limit.</p>
@@ -2626,6 +2674,16 @@
             <p>thread name</p>
           </div>
         </li>
+        <li class="doc-section-item field-body">
+            <b><code>**kwargs</code></b>
+              (<code><span title="typing.Unpack">Unpack</span>[<a class="autorefs autorefs-internal" title="            ThreadFromMessageParams (scurrypy.resources.channel.ThreadFromMessageParams)" href="#scurrypy.resources.channel.ThreadFromMessageParams">ThreadFromMessageParams</a>]</code>, default:
+                  <code>{}</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>thread create params</p>
+          </div>
+        </li>
     </ul>
 
 
@@ -2678,13 +2736,13 @@
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-            <b><code>kwargs</code></b>
+            <b><code>**kwargs</code></b>
               (<code><span title="typing.Unpack">Unpack</span>[<a class="autorefs autorefs-internal" title="            PinsFetchParams (scurrypy.resources.channel.PinsFetchParams)" href="#scurrypy.resources.channel.PinsFetchParams">PinsFetchParams</a>]</code>, default:
                   <code>{}</code>
 )
           –
           <div class="doc-md-description">
-            <p>field-specific data</p>
+            <p>pinned message fetch params</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If no kwargs are provided, default to 50 fetched messages limit.</p>
@@ -3123,6 +3181,76 @@
     <div class="doc doc-contents ">
 
         <p>Get messages around this message ID.</p>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><hr />
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="scurrypy.resources.channel.ThreadFromMessageParams" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>ThreadFromMessageParams</code>
+
+
+<a href="#scurrypy.resources.channel.ThreadFromMessageParams" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="typing.TypedDict">TypedDict</span></code></p>
+
+
+        <p>Params when attaching a thread to a message.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="scurrypy.resources.channel.ThreadFromMessageParams.rate_limit_per_user" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">rate_limit_per_user</span><span class="p">:</span> <span class="nb">int</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#scurrypy.resources.channel.ThreadFromMessageParams.rate_limit_per_user" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>time (seconds) user waits before sending another message.</p>
 
     </div>
 

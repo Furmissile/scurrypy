@@ -963,15 +963,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scurrypy.parts.message.Attachment.filename" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;filename
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#scurrypy.parts.message.Attachment.description" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;description
@@ -2121,15 +2112,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scurrypy.parts.message.Attachment.filename" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;filename
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#scurrypy.parts.message.Attachment.description" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;description
@@ -2380,7 +2362,7 @@
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-            <b><code>flags</code></b>
+            <b><code>**flags</code></b>
               (<code><span title="typing.Unpack">Unpack</span>[<a class="autorefs autorefs-internal" title="            MessageFlagParams (scurrypy.parts.message.MessageFlagParams)" href="#scurrypy.parts.message.MessageFlagParams">MessageFlagParams</a>]</code>, default:
                   <code>{}</code>
 )
@@ -3109,9 +3091,10 @@
 
 
 <h3 id="scurrypy.parts.message.Attachment.id" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="nb">id</span><span class="p">:</span> <span class="nb">int</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="nb">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
   </span>
 
@@ -3120,7 +3103,7 @@
 
     <div class="doc doc-contents ">
 
-        <p>User-defined ID for the attachment.</p>
+        <p>ID of the attachment (internally set).</p>
 
     </div>
 
@@ -3143,28 +3126,6 @@
     <div class="doc doc-contents ">
 
         <p>Relative path to the file.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.parts.message.Attachment.filename" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.parts.message.Attachment.filename" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Name of the file.</p>
 
     </div>
 

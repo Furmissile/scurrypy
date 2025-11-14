@@ -1565,7 +1565,7 @@
 <div class="admonition tip">
 <p class="admonition-title">About these examples</p>
 <p>Each example is self-contained and can be copied directly into your bot
-between setup and <code>bot.run()</code>.</p>
+between setup and <code>client.run()</code>.</p>
 <p>Beware of similar command names!</p>
 </div>
 <h2 id="minimal-slash-command">Minimal Slash Command<a class="headerlink" href="#minimal-slash-command" title="Permanent link">&para;</a></h2>
@@ -1811,8 +1811,8 @@ between setup and <code>bot.run()</code>.</p>
     <span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">interaction</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span>
         <span class="n">scurrypy</span><span class="o">.</span><span class="n">MessagePart</span><span class="p">(</span>
             <span class="n">attachments</span><span class="o">=</span><span class="p">[</span>
-                <span class="n">scurrypy</span><span class="o">.</span><span class="n">Attachment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;relative/path/to/file.png&quot;</span><span class="p">,</span> <span class="s2">&quot;file.png&quot;</span><span class="p">,</span> <span class="s1">&#39;my description.&#39;</span><span class="p">),</span>
-                <span class="n">scurrypy</span><span class="o">.</span><span class="n">Attachment</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;relative/path/to/animation.gif&quot;</span><span class="p">,</span> <span class="s2">&quot;animation.gif&quot;</span><span class="p">,</span> <span class="s1">&#39;amazing animation!&#39;</span><span class="p">)</span>
+                <span class="n">scurrypy</span><span class="o">.</span><span class="n">Attachment</span><span class="p">(</span><span class="s2">&quot;relative/path/to/file.png&quot;</span><span class="p">,</span> <span class="s1">&#39;my description.&#39;</span><span class="p">),</span>
+                <span class="n">scurrypy</span><span class="o">.</span><span class="n">Attachment</span><span class="p">(</span><span class="s2">&quot;relative/path/to/animation.gif&quot;</span><span class="p">,</span> <span class="s1">&#39;amazing animation!&#39;</span><span class="p">)</span>
             <span class="p">],</span>
             <span class="n">embeds</span><span class="o">=</span><span class="p">[</span>
                 <span class="n">scurrypy</span><span class="o">.</span><span class="n">EmbedPart</span><span class="p">(</span>
