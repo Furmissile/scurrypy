@@ -171,54 +171,6 @@ class HTTPClient:
         bucket.sleep_task = None
         self.logger.log_high_priority(f"Bucket {endpoint} reset after {bucket.reset_after}s")
 
-    async def _make_payload(self, data: dict, files: list):
-        """Return (data, headers) for aiohttp request — supports multipart.
-
-        Args:
-            data (dict): request data
-            files (list): relevant files
-
-        Returns:
-            (tuple[aiohttp.FormData, dict]): form data and headers
-        """
-        headers = {}
-        if not files:
-            return data, headers
-
-        form = aiohttp.FormData()
-        if data:
-            form.add_field("payload_json", json.dumps(data))
-
-        for idx, file_path in enumerate(files):
-            async with aiofiles.open(file_path, 'rb') as f:
-                data = await f.read()
-                form.add_field(
-                    f'files[{idx}]',
-                    data,
-                    filename=file_path.split('/')[-1],
-                    content_type='application/octet-stream'
-                )
-
-        return form, headers
-
-    async def _prepare_payload(self, item: RequestItem):
-        """Prepares the payload based on `RequestItem`.
-
-        Args:
-            item (RequestItem): the request object
-
-        Returns:
-            (dict): kwargs to pass to session.request
-        """
-        kwargs = {}
-        if item.files and any(item.files):
-            payload, headers = await self._make_payload(item.data, item.files)
-            kwargs = {"data": payload, "headers": headers}
-        else:
-            kwargs = {"json": item.data}
-    
-        return kwargs
-    
     async def _check_global_rate_limit(self):
         """Checks if the global rate limit is after now (active)."""
         now = asyncio.get_event_loop().time()
@@ -291,6 +243,34 @@ class HTTPClient:
             elif bucket.sleep_task and not bucket.sleep_task.done():
                 await bucket.sleep_task
 
+    async def _prepare_payload(self, item: RequestItem):
+        """Prepares the payload based on `RequestItem`.
+
+        Args:
+            item (RequestItem): the request object
+
+        Returns:
+            (dict): kwargs to pass to session.request
+        """
+        if item.files and any(item.files):
+            # payload = await self._make_payload(item.data, item.files)
+            form = aiohttp.FormData()
+            form.add_field("payload_json", json.dumps(item.data))
+
+            for idx, file_path in enumerate(item.files):
+                async with aiofiles.open(file_path, 'rb') as f:
+                    f_data = await f.read()
+                    form.add_field(
+                        f'files[{idx}]',
+                        f_data,
+                        filename=file_path.split('/')[-1],
+                        content_type='application/octet-stream'
+                    )
+
+            return {"data": form}
+
+        return {"json": item.data}
+
     async def _send(self, item: RequestItem):
         """Core HTTP request executor.
 
@@ -312,25 +292,19 @@ class HTTPClient:
 
         kwargs = await self._prepare_payload(item)
 
-        # --- SEND REQUEST ---
-
         url = f"{self.BASE.rstrip('/')}/{item.endpoint.lstrip('/')}"
         
         async with self.session.request(
             method=item.method, url=url, params=item.params, timeout=15, **kwargs
         ) as resp:
 
-            # Update global rate limit if triggered
             if resp.headers.get("X-RateLimit-Global") == "true":
                 retry_after = float(resp.headers.get("Retry-After", 0))
                 self.global_reset = asyncio.get_event_loop().time() + retry_after
 
-            # Bucket handling (endpoint-specific rate limits)
             bucket_id = resp.headers.get('x-ratelimit-bucket')
 
             if bucket_id:
-                # grab lock from dict of bucket locks with a lock on dict access
                 await self._update_bucket_rate_limit(resp, bucket_id, item.endpoint)
 
-            # Handle response
             return await self._parse_response(resp)

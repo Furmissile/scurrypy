@@ -18,6 +18,7 @@ class Client(ClientLike):
         intents: int = Intents.DEFAULT,
         config: BaseConfig = None,
         debug_mode: bool = False,
+        sync_commands: bool = True,
         prefix = None,
         quiet: bool = False
     ):
@@ -27,6 +28,7 @@ class Client(ClientLike):
             application_id (int): the bot's user ID
             intents (int, optional): gateway intents. Defaults to Intents.DEFAULT.
             config (BaseConfig, optional): user-defined config data
+            sync_commands (bool, optional): toggle registering commands. Defaults to True.
             debug_mode (bool, optional): toggle debug messages. Defaults to False.
             prefix (str, optional): set message prefix if using command prefixes
             quiet (bool, optional): if INFO, DEBUG, and WARN should be logged
@@ -47,6 +49,7 @@ class Client(ClientLike):
         self.intents = intents
         self.application_id = application_id
         self.config = config
+        self.sync_commands = sync_commands
 
         self._logger = Logger(debug_mode, quiet)
         
@@ -282,11 +285,12 @@ class Client(ClientLike):
                     await hook(self)
                 self._logger.log_high_priority("Hooks set up.")
 
-            await self.command_dispatcher.register_guild_commands()
+            if self.sync_commands:
+                await self.command_dispatcher.register_guild_commands()
 
-            await self.command_dispatcher.register_global_commands()
+                await self.command_dispatcher.register_global_commands()
 
-            self._logger.log_high_priority("Commands set up.")
+                self._logger.log_high_priority("Commands set up.")
 
             tasks = await asyncio.create_task(self._start_shards())
 
