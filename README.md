@@ -23,8 +23,6 @@ Not convinced ScurryPy has a place among top libraries? See the benchmarks below
 
 - **Python**: 3.11.6
 - **OS**: Windows 11
-- **Method**: New Python process per measurement
-- **Tool**: See benchmarks folder
 
 ### Results Summary
 
@@ -37,7 +35,7 @@ discord             252.5             7.64        14099
 disnake             185.9             6.31        12111
 ```
 
-*(See `benchmark.py` for how this test was done.)*
+*(See `tests/benchmark.py` for how this test was done.)*
 
 ## Getting Started
 
