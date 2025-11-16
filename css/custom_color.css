@@ -74,7 +74,11 @@
     text-align: initial;
 }
 
-p {
+.reading-paragraph {
     line-height: 2.0; /* This creates double spacing */
-    text-indent: 2em; /* Adjust the value as needed */
+    text-indent: 2em;
+}
+
+.reading-list {
+    line-height: 2.0; /* This creates double spacing */
 }
