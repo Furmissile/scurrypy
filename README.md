@@ -29,10 +29,10 @@ Not convinced ScurryPy has a place among top libraries? See the benchmarks below
 ```
 Library         Time (ms)    Memory Δ (MB)      Objects
 --------------------------------------------------------
-scurrypy              8.9             0.44         1417
-hikari             1710.3            27.67        53658
-discord             252.5             7.64        14099
-disnake             185.9             6.31        12111
+hikari              ~2700            27.67        53658
+discord              ~300             7.64        14099
+disnake              ~200             6.31        12111
+scurrypy              ~18             0.44         1417
 ```
 
 *(See `tests/benchmark.py` for how this test was done.)*
