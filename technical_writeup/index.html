@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://furmissile.github.io/scurrypy/resources/">
+        <link rel="canonical" href="https://furmissile.github.io/scurrypy/technical_writeup/">
       
       
-        <link rel="prev" href="../api/embed/">
+        <link rel="prev" href="../legacy_examples/">
       
       
-        <link rel="next" href="application/">
+        <link rel="next" href="../api/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Overview - ScurryPy</title>
+        <title>Technical Writeup - ScurryPy</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview-of-resources" class="md-skip">
+        <a href="#introduction" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Technical Writeup
             
           </span>
         </div>
@@ -367,10 +367,30 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../technical_writeup/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Technical Writeup
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -381,6 +401,87 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP Client
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gateway-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gateway Client
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bot-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bot Client
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -692,8 +793,6 @@
       
   
   
-    
-  
   
   
     
@@ -706,11 +805,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
@@ -726,7 +825,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Resources
@@ -737,32 +836,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Overview
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../resources/" class="md-nav__link">
         
   
   
@@ -773,35 +850,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#welcome-to-the-resources-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      Welcome to the Resources section!
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -814,7 +862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="application/" class="md-nav__link">
+      <a href="../resources/application/" class="md-nav__link">
         
   
   
@@ -837,7 +885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="bot_emojis/" class="md-nav__link">
+      <a href="../resources/bot_emojis/" class="md-nav__link">
         
   
   
@@ -860,7 +908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="channel/" class="md-nav__link">
+      <a href="../resources/channel/" class="md-nav__link">
         
   
   
@@ -883,7 +931,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guild/" class="md-nav__link">
+      <a href="../resources/guild/" class="md-nav__link">
         
   
   
@@ -906,7 +954,7 @@
   
   
     <li class="md-nav__item">
-      <a href="interaction/" class="md-nav__link">
+      <a href="../resources/interaction/" class="md-nav__link">
         
   
   
@@ -929,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="message/" class="md-nav__link">
+      <a href="../resources/message/" class="md-nav__link">
         
   
   
@@ -952,7 +1000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="user/" class="md-nav__link">
+      <a href="../resources/user/" class="md-nav__link">
         
   
   
@@ -1436,8 +1484,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1446,9 +1492,63 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#welcome-to-the-resources-section" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
-      Welcome to the Resources section!
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP Client
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gateway-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gateway Client
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bot-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bot Client
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix
     </span>
   </a>
   
@@ -1473,21 +1573,126 @@
   
 
 
-<h1 id="overview-of-resources">Overview of Resources<a class="headerlink" href="#overview-of-resources" title="Permanent link">&para;</a></h1>
-<h2 id="welcome-to-the-resources-section">Welcome to the Resources section!<a class="headerlink" href="#welcome-to-the-resources-section" title="Permanent link">&para;</a></h2>
-<hr />
-<p>This section is dedicated to modeling Discord's resources. These resources represent an object with methods to interact with itself. Resources need to be requested unless the resource is part of the event object. Resources act as a thin layer over the HTTP client handling requests internally.
-See <a href="../events/">Events</a> for event-related details.</p>
-<hr />
-<ul>
-<li><a href="interaction/">Interaction</a> - the interaction resource. This is where you respond to interactions.</li>
-<li><a href="message/">Message</a> - the message resource. This is where you can create, edit, and delete a message.</li>
-<li><a href="user/">User</a> - the user resource. This is where you can fetch information about a user or guild member.</li>
-<li><a href="channel/">Channel</a> - the channel resource. This is where you can create, edit, and delete a channel.</li>
-<li><a href="guild/">Guild</a> - the guild resource. This is where you can fetch information about a guild.</li>
-<li><a href="bot_emojis/">Bot Emojis</a> - data pertaining to bot-owned emojis. Treated like a resource.</li>
-<li><a href="application/">Application</a> - the application resource. This is where you can fetch information about an application.</li>
+  <h1>Technical Writeup</h1>
+
+<p>I proved that prioritizing clarity over magic makes better software. ScurryPy is a discord API wrapper written in Python. While this may seem straightforward at first glance, especially when other libraries have already implemented it, there are plenty of technical accomplishments that help ScurryPy stand out from other trending libraries; most notably, its benchmark.</p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Library</th>
+<th style="text-align: center;">Time (ms)</th>
+<th style="text-align: center;">Memory (MB)</th>
+<th style="text-align: center;">Objects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">hikari</td>
+<td style="text-align: center;">1710.3</td>
+<td style="text-align: center;">27.67</td>
+<td style="text-align: center;">53658</td>
+</tr>
+<tr>
+<td style="text-align: left;">discordpy</td>
+<td style="text-align: center;">252.5</td>
+<td style="text-align: center;">7.64</td>
+<td style="text-align: center;">14099</td>
+</tr>
+<tr>
+<td style="text-align: left;">disnake</td>
+<td style="text-align: center;">185.8</td>
+<td style="text-align: center;">6.31</td>
+<td style="text-align: center;">12111</td>
+</tr>
+<tr>
+<td style="text-align: left;">scurrypy</td>
+<td style="text-align: center;">8.9</td>
+<td style="text-align: center;">0.44</td>
+<td style="text-align: center;">1417</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>So what makes ScurryPy so effective? Lazy imports? That’s how the import memory is so low. Caching? No. ScurryPy does not assume what the user needs nor does it try to <em>guess</em> what the user wants to do. This leads to another technical advantage: ScurryPy is <em>modular</em> in that it provides you with the building blocks and you do what you want with them so long as they can fit together (guided by Discord’s API). Avoiding circular imports with annotations? Nope. All classes have clearly set boundaries for what they do so there is no need for annotations. These are just the highlights of what <em>clarity over magic</em> can bring to the table. This writeup will cover the main parts of ScurryPy including the HTTP and rate limiting, Gateway logic and sharding, and how the Client glues this all together without being a god object. Don’t let the terms intimidate you. Each section will have a mental map to help visualize steps. By the end of this writeup, you'll understand how clarity over magic leads to better software - and how to implement Discord's most notoriously difficult features.</p>
+<h2 id="http-client">HTTP Client<a class="headerlink" href="#http-client" title="Permanent link">&para;</a></h2>
+<p>Before digging in with the HTTP Client, this section, and future sections, will lead with a mental map to help guide the explanation.</p>
+<div class="center">
+<p><img alt="HTTP Mental Map" src="../assets/http_mental_map.png" title="HTTP Mental Map" /></p>
+<p><em>Figure 1: HTTP Client Mental Map</em></p>
+</div>
+<p>The HTTP Client is responsible for queuing and sending requests. That’s it. No fancy abstractions. No layers of indirection. Just. Sending and documenting the requests. This set up makes the client self-sufficient so when adding an endpoint, fire a request and think of nothing else. If it’s a GET request, expect data to return. ScurryPy marks all GET endpoints with “fetch_{object}”. The client takes the parameters you’d <em>expect</em> to need to make a request, like endpoint and method, and spits back out the JSON object from Discord. Now, let’s go through the map step by step:</p>
+<ol>
+<li>Send request via GET to endpoint, say, “channels/123/messages”</li>
+<li>The request is put into a queue based on this endpoint with a lock.<ul>
+<li>A lock coordinates updates to the dictionary that maps endpoints to their queues.</li>
+<li>Each queue has a dedicated worker to handle the request.</li>
 </ul>
+</li>
+<li>The worker sends the HTTP request and waits for Discord's response.</li>
+<li>Using the bucket ID from Discord's response, update or create the bucket's rate limit info (with proper lock coordination).<ul>
+<li>A lock coordinates lock access itself and then a lock per bucket ID.</li>
+<li>If the rate limit is exhausted (no remaining requests), then create a sleep task. This is <em>proactive</em> rate limiting so no 429 is returned.</li>
+<li>If another request targets the same bucket, it waits for the sleep task to finish.</li>
+</ul>
+</li>
+</ol>
+<p>Done.</p>
+<h2 id="gateway-client">Gateway Client<a class="headerlink" href="#gateway-client" title="Permanent link">&para;</a></h2>
+<p>Gateway is more straightforward. Let’s start with the mental map.</p>
+<div class="center">
+<p><img alt="Gateway Mental Map" src="../assets/gateway_mental_map.png" title="Gateway Mental Map" /></p>
+<p><em>Figure 2: Gateway Client Mental Map</em></p>
+</div>
+<p>The Gateway Client is self-sufficient in that it handles its own connection to the Gateway. That is <em>all</em> this client is for. Beyond the Client starting connections, no further action is needed by the Client. The beauty of the Gateway Client is that because it is self-sufficient, sharding is the matter of spawning the needed number of shards at the rate of the max concurrency as recommended by Discord. Done. What if you need to access a specific shard or know what event a shard came from? Not a problem! By using Discord’s formula: <code>(guild_id &gt;&gt; 22) % shard_count</code>.</p>
+<p>Let’s dig into the steps of the mental map:
+1. Connect to the gateway with the URL provided by the GET /gateway/bot endpoint and use the URL params “?v=10&amp;encoding=json”. URL params set the stage for how Discord should send its data packets. In this case, the URL signals using JSON encoding: Discord <em>serializes</em> events as JSON strings to be <em>deserialized</em> into Python dicts.
+2. Await the HELLO event Discord sends back when you connect.
+    * Use this to set heartbeat intervals and initialize the sequence number.
+    * This is when the heartbeat task is started to keep the session alive. Fire and forget!
+3. Send IDENTIFY through the websocket.
+4. That’s it for new shards or connections. At this point, it’s about listening to certain OP codes. <em>Only OP codes that impact the connection state are listed</em>.
+    * OP 0: dispatch. Enqueue this for the Client to pick up.
+    * OP 7: a disconnect occurred and Discord wants you to RESUME.
+    * OP 9: a disconnect occurred causing the session to be invalid. Discord wants you to start fresh.</p>
+<p>Done. This is the bare minimum to hold a gateway connection. This architecture should be kind to new developments or build on top.</p>
+<h2 id="bot-client">Bot Client<a class="headerlink" href="#bot-client" title="Permanent link">&para;</a></h2>
+<p>Almost there, if you’ve read this far, you’re doing great! Know that from here on out, it’s dead simple. The mental map for the Bot Client looks something like:</p>
+<div class="center">
+<p><img alt="Bot Client Mental Map" src="../assets/client_mental_map.png" title="Bot Client Mental Map" /></p>
+<p><em>Figure 3: Bot Client Mental Map</em></p>
+</div>
+<p>At this point, you can see the Bot Client is really just an orchestrator - it uses the HTTP and Gateway Clients you've already seen. There are parts that were left out of the map such as the decorators to register commands and resource fetching helpers so the user doesn’t have to touch the HTTP Client directly. But let’s be honest, connection logic is the meat of the Bot Client. And that’s all. Let’s go through the mental map step by step:</p>
+<ol>
+<li>Start the HTTP Client. No strings attached.</li>
+<li>Run setup hooks. This is an array of callable functions that the user can set using the “setup_hook” decorators. These hooks run once for the entire life cycle of the bot. Need to start a database? This is where you do it!</li>
+<li>Sync slash commands (guild and global). This is just toggled with a setting in the Bot Client’s constructor for convenience.</li>
+<li>Fetch the gateway info. This is where important start up info is located such as the total number of recommended shards, how many shards can be started concurrently, and the recommended gateway connect URL.</li>
+<li>Then based on the gateway info, as shards start up, fire a task to listen to <em>each</em> shard.This is a task <em>per shard</em> and each shard has its own event queue so the listener doesn’t need to know anything about what shard it is, just direct the event accordingly. Listening and starting occur concurrently. So as shards are starting up, the shards already started can start taking in events as soon as they’re ready. The “sleep 5 seconds” is waiting per batch to not spam Discord’s gateway.</li>
+</ol>
+<p>Done.</p>
+<h2 id="data-model">Data Model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h2>
+<p>The final piece: how to turn Discord's JSON into clean, type-safe Python objects. DataModel is a class that transforms Discord's JSON into usable Python objects - and back again when needed. A user could just access the dictionary itself, sure. But, what if dictionaries could be represented as a class so instead of <code>event[‘data’]</code>, it looks like <code>event.data</code>? This is where the DataModel class (see Appendix B) comes in. Let’s take a look at the mental map</p>
+<div class="center">
+<p><img alt="Data Model Mental Map" src="../assets/data_model_mental_map.png" title="Data Model Mental Map" /></p>
+<p><em>Figure 4: Data Model Mental Map</em></p>
+</div>
+<p>This one is straightforward. Let’s dig into the step by step:</p>
+<ol>
+<li>The from_dict function hydrates a dataclass by iterating over its fields and pulling matching values from Discord's JSON payload. If a field isn't in the payload, it's skipped - no guessing. The result? Clean dot notation (<code>event.data</code>) instead of dictionary access (<code>event['data']</code>).</li>
+<li>When you need to send data back to Discord, to_dict does the reverse - converts the dataclass attributes back into a dictionary.</li>
+</ol>
+<p>Done.</p>
+<p>You might be wondering: what about nested objects like a Message containing a User? DataModel handles that recursively. It calls from_dict/to_dict on child DataModels automatically.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>I didn't benchmark ScurryPy until months into development. I wasn't chasing performance - I was chasing clarity and understanding. When you see a "hello world" Discord bot in 8 lines, remember: you didn't write a bot in 8 lines. You're standing on 65,000 lines of someone else's abstraction. This writeup demonstrates that simplicity doesn't mean less-than, and magic doesn't mean better. That benchmark in Table 1? That's the cost of magic. ScurryPy proves you don't need it. Every decision is traceable. That's all you need.</p>
+<h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
+<p><em>Appendix A: Benchmark Methodology</em>
+All libraries were benchmarked by measuring their import overhead using Python's <code>tracemalloc</code> and <code>time.perf_counter()</code>. This captures initialization time, memory allocation, and object count.
+Garbage collection was run before each test to ensure a clean state. You can reproduce these results using <a href="https://github.com/Furmissile/scurrypy/blob/main/tests/benchmark.py"><code>benchmark.py</code></a> in the repository.</p>
+<p><em>Appendix B: The DataModel class</em>
+See the <a href="https://github.com/Furmissile/scurrypy/blob/main/scurrypy/model.py"><code>DataModel</code></a> Class</p>
 
 
 
