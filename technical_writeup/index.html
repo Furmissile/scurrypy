@@ -471,15 +471,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#appendix" class="md-nav__link">
-    <span class="md-ellipsis">
-      Appendix
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1547,15 +1538,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#appendix" class="md-nav__link">
-    <span class="md-ellipsis">
-      Appendix
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1578,49 +1560,12 @@
   <h1>Technical Writeup</h1>
 
 <div class="reading-paragraph">
-<p>I proved that prioritizing clarity over magic makes better software. ScurryPy is a discord API wrapper written in Python. While this may seem straightforward at first glance, especially when other libraries have already implemented it, there are plenty of technical accomplishments that help ScurryPy stand out from other trending libraries; most notably, its benchmark.</p>
-</div>
-<div class="center">
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Library</th>
-<th style="text-align: center;">Time (ms)</th>
-<th style="text-align: center;">Memory (MB)</th>
-<th style="text-align: center;">Objects</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">hikari</td>
-<td style="text-align: center;">~2700</td>
-<td style="text-align: center;">27.67</td>
-<td style="text-align: center;">53658</td>
-</tr>
-<tr>
-<td style="text-align: left;">discordpy</td>
-<td style="text-align: center;">~300</td>
-<td style="text-align: center;">7.64</td>
-<td style="text-align: center;">14099</td>
-</tr>
-<tr>
-<td style="text-align: left;">disnake</td>
-<td style="text-align: center;">~200</td>
-<td style="text-align: center;">6.31</td>
-<td style="text-align: center;">12111</td>
-</tr>
-<tr>
-<td style="text-align: left;">scurrypy</td>
-<td style="text-align: center;">~18</td>
-<td style="text-align: center;">0.44</td>
-<td style="text-align: center;">1417</td>
-</tr>
-</tbody>
-</table>
+<p>I proved that prioritizing clarity over magic makes better software. ScurryPy is a discord API wrapper written in Python. While this may seem straightforward at first glance, especially when other libraries have already implemented it, there are plenty of technical accomplishments that help ScurryPy stand out from other trending libraries; most notably, the core is less than 1000 lines.</p>
 </div>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
-<p>So what makes ScurryPy so effective? Lazy imports? That’s how the import memory is so low. Caching? No. ScurryPy does not assume what the user needs nor does it try to <em>guess</em> what the user wants to do. This leads to another technical advantage: ScurryPy is <em>modular</em> in that it provides you with the building blocks and you do what you want with them so long as they can fit together (guided by Discord’s API). Avoiding circular imports with annotations? Nope. All classes have clearly set boundaries for what they do so there is no need for annotations. These are just the highlights of what <em>clarity over magic</em> can bring to the table. This writeup will cover the main parts of ScurryPy including the HTTP and rate limiting, Gateway logic and sharding, and how the Client glues this all together without being a god object. Don’t let the terms intimidate you. Each section will have a mental map to help visualize steps. By the end of this writeup, you'll understand how clarity over magic leads to better software - and how to implement Discord's most notoriously difficult features.</p>
+<p>So what makes ScurryPy so effective? Caching? No. ScurryPy does not assume what the user needs nor does it try to <em>guess</em> what the user wants to do. Avoiding circular imports with annotations? Nope. All classes have clearly set boundaries for what they do so there is no need for annotations. As a result, ScurryPy is <em>modular</em> in that it provides you with the building blocks, and you do what you want with them (guided by Discord’s API). These are just the highlights of what <em>clarity over magic</em> can bring to the table. </p>
+<p>This writeup will cover the main parts of ScurryPy including the HTTP and rate limiting, Gateway logic and sharding, and how the Client glues this all together without being a god object. Don’t let the terms intimidate you. Each section will have a mental map to help visualize steps. By the end of this writeup, you'll understand how clarity over magic leads to better software - and how to implement Discord's most notoriously difficult features.</p>
 </div>
 <h2 id="http-client">HTTP Client<a class="headerlink" href="#http-client" title="Permanent link">&para;</a></h2>
 <p>Before digging in with the HTTP Client, this section, and future sections, will lead with a mental map to help guide the explanation.</p>
@@ -1629,7 +1574,7 @@
 <p><em>Figure 1: HTTP Client Mental Map</em></p>
 </div>
 <div class="reading-paragraph">
-<p>The HTTP Client is responsible for queuing and sending requests. That’s it. No fancy abstractions. No layers of indirection. Just. Sending and documenting the requests. This set up makes the client self-sufficient so when adding an endpoint, fire a request and think of nothing else. If it’s a GET request, expect data to return. ScurryPy marks all GET endpoints with <code>fetch_{object}</code>. The client takes the parameters you’d <em>expect</em> to need to make a request, like endpoint and method, and spits back out the JSON object from Discord. </p>
+<p>The HTTP Client is responsible for queuing and sending requests. That’s it. No fancy abstractions. No layers of indirection. Just. Sending and documenting the requests. This sets up independence such that when adding an endpoint, fire a request and think of nothing else. If it’s a GET request, expect data to return. ScurryPy marks all GET endpoints with <code>fetch_{object}</code>. The client takes the parameters you’d <em>expect</em> to need to make a request, like endpoint and method, and spits back out the JSON object from Discord. </p>
 </div>
 <p>Now, let’s go through the map step by step:</p>
 <div class="reading-list">
@@ -1659,7 +1604,7 @@
 <p><em>Figure 2: Gateway Client Mental Map</em></p>
 </div>
 <div class="reading-paragraph">
-<p>The Gateway Client is self-sufficient in that it handles its own connection to the Gateway. That is <em>all</em> this client is for. The beauty of the Gateway Client is that because it is self-sufficient, sharding is the matter of spawning the needed number of shards at the rate of the max concurrency as recommended by Discord. Done. What if you need to access a specific shard or know what event a shard came from? Not a problem! Use Discord’s formula: <code>(guild_id &gt;&gt; 22) % shard_count</code>. </p>
+<p>The Gateway Client is self-sufficient in that it handles its own connection to the Gateway. That is <em>all</em> this client is for. The beauty of this design is that sharding is the matter of spawning the needed number of shards at the rate of the max concurrency as recommended by Discord. What if you need to access a specific shard or know what event a shard came from? Not a problem! Use Discord’s formula: <code>(guild_id &gt;&gt; 22) % shard_count</code>. </p>
 </div>
 <p>Let’s dig into the steps of the mental map:</p>
 <div class="reading-list">
@@ -1703,7 +1648,7 @@
 <p>Done.</p>
 <h2 id="data-model">Data Model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
-<p>The final piece: how to turn Discord's JSON into clean, type-safe Python objects. DataModel is a class that transforms Discord's JSON into usable Python objects - and back again when needed. A user could just access the dictionary itself, sure. But, what if dictionaries could be represented as a class so instead of <code>event[‘data’]</code>, it looks like <code>event.data</code>? This is where the DataModel class (see Appendix B) comes in. Let’s take a look at the mental map</p>
+<p>The final piece: how to turn Discord's JSON into clean, type-safe Python objects. DataModel is a class that transforms Discord's JSON into usable Python objects and back again when needed. A user could just access the dictionary itself, sure. But, what if dictionaries could be represented as a class so instead of <code>event[‘data’]</code>, it looks like <code>event.data</code>? This is where the DataModel class comes in. Let’s take a look at the mental map</p>
 </div>
 <div class="center">
 <p><img alt="Data Model Mental Map" src="../assets/data_model_mental_map.png" title="Data Model Mental Map" /></p>
@@ -1712,8 +1657,8 @@
 <p>This one is straightforward. Let’s dig into the step by step:</p>
 <div class="reading-list">
 <ol>
-<li>The <code>from_dict</code> function hydrates a dataclass by iterating over its fields and pulling matching values from Discord's JSON payload. If a field isn't in the payload, it's skipped - no guessing. The result? Clean dot notation (<code>event.data</code>) instead of dictionary access (<code>event['data']</code>).</li>
-<li>When you need to send data back to Discord, <code>to_dict</code> does the reverse - converts the dataclass attributes back into a dictionary.</li>
+<li>The <code>from_dict</code> function hydrates a dataclass by iterating over its fields and pulling matching values from Discord's JSON payload. If a field isn't in the payload, it's skipped; no guessing. The result? Clean dot notation (<code>event.data</code>) instead of dictionary access (<code>event['data']</code>).</li>
+<li>When you need to send data back to Discord, <code>to_dict</code> does the reverse: converts the dataclass attributes back into a dictionary.</li>
 </ol>
 </div>
 <p>Done.</p>
@@ -1722,15 +1667,7 @@
 </div>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
-<p>I didn't benchmark ScurryPy until months into development. I wasn't chasing performance - I was chasing clarity and understanding. When you see a "hello world" Discord bot in 8 lines, remember: you didn't write a bot in 8 lines. You're standing on 65,000 lines of someone else's abstraction. This writeup demonstrates that simplicity doesn't mean less-than, and magic doesn't mean better. That benchmark in Table 1? That's the cost of magic. ScurryPy proves you don't need it. Every decision is traceable. That's all you need.</p>
-</div>
-<h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
-<div class="reading-paragraph">
-<p><em>Appendix A: Benchmark Methodology</em></p>
-<p>All libraries were benchmarked by measuring their import overhead using Python's <code>tracemalloc</code> and <code>time.perf_counter()</code>. This captures initialization time, memory allocation, and object count.
-Garbage collection was run before each test to ensure a clean state. You can reproduce these results using <a href="https://github.com/Furmissile/scurrypy/blob/main/tests/benchmark.py"><code>benchmark.py</code></a> in the repository.</p>
-<p><em>Appendix B: The DataModel class</em></p>
-<p>See the <a href="https://github.com/Furmissile/scurrypy/blob/main/scurrypy/model.py"><code>DataModel</code></a> Class</p>
+<p>I wasn't chasing line count - I was chasing clarity and understanding. When you see a "hello world" Discord bot in 8 lines, remember: you didn't write a bot in 8 lines. You're standing on 65,000 lines of someone else's abstraction. That's the cost of magic. This writeup demonstrates that simplicity doesn't mean less-than, and magic doesn't mean better. ScurryPy proves you don't need it. Every decision is traceable. That's all you need.</p>
 </div>
 
 
