@@ -3,6 +3,8 @@ site_url: https://furmissile.github.io/scurrypy/
 
 theme: # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#changing-the-colors
   name: material
+  logo: assets/wizard.svg
+  favicon: assets/wizard.svg
   font:
     text: Source Serif Pro
   features:
@@ -31,15 +33,18 @@ theme: # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#
 repo_url: https://github.com/Furmissile/scurrypy
 
 markdown_extensions:
-  - pymdownx.superfences
-  - admonition
-  - tables
   - md_in_html
+  - admonition
+  - attr_list
+  - tables
   - toc:
       permalink: true
+  - pymdownx.superfences
 
 extra_css:
   - css/custom_color.css
+  - css/header.css
+  - css/text_alignment.css
 
 copyright: Copyright &copy; 2025 Furmissile
 

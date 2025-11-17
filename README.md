@@ -1,4 +1,4 @@
-# __ScurryPy__
+## __<center> ScurryPy </center>__
 
 [![PyPI version](https://badge.fury.io/py/scurrypy.svg)](https://badge.fury.io/py/scurrypy)
 
@@ -15,27 +15,6 @@ While this wrapper is mainly used for various squirrel-related shenanigans, it c
 * Respects Discord's rate limits
 * No `__future__` hacks to avoid circular import
 * Capable of sharding
-
-## Benchmarks
-Not convinced ScurryPy has a place among top libraries? See the benchmarks below!
-
-### Test Environment
-
-- **Python**: 3.11.6
-- **OS**: Windows 11
-
-### Results Summary
-
-```
-Library         Time (ms)    Memory Δ (MB)      Objects
---------------------------------------------------------
-hikari              ~2700            27.67        53658
-discord              ~300             7.64        14099
-disnake              ~200             6.31        12111
-scurrypy              ~18             0.44         1417
-```
-
-*(See `tests/benchmark.py` for how this test was done.)*
 
 ## Getting Started
 
