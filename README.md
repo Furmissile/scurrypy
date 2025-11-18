@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/scurrypy.svg)](https://badge.fury.io/py/scurrypy)
 
-A dataclass-driven Discord API wrapper in Python!
+A tiny, explicit Discord API wrapper built to give you primitives, not policies.
 
 While this wrapper is mainly used for various squirrel-related shenanigans, it can also be used for more generic bot purposes.
 
