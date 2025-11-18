@@ -1560,7 +1560,7 @@
   <h1>Technical Writeup</h1>
 
 <div class="reading-paragraph">
-<p>I proved that prioritizing clarity over magic makes better software. ScurryPy is a discord API wrapper written in Python. While this may seem straightforward at first glance, especially when other libraries have already implemented it, there are plenty of technical accomplishments that help ScurryPy stand out from other trending libraries; most notably, the core is less than 1000 lines.</p>
+<p>ScurryPy is a discord API wrapper written in Python that aims to provide clarity over magic. While this may seem straightforward at first glance, especially when other libraries have already implemented it, there are plenty of technical accomplishments that help ScurryPy stand out from other trending libraries; most notably, the core is under 1000 lines of code.</p>
 </div>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
@@ -1595,6 +1595,7 @@
 </ol>
 </div>
 <p>Done.</p>
+<p><strong>Key Idea</strong>: Each endpoint gets its own queue and worker, and each worker enforces proactive rate limiting using Discord’s bucket replies.</p>
 <h2 id="gateway-client">Gateway Client<a class="headerlink" href="#gateway-client" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
 <p>Gateway is more straightforward. Let’s start with the mental map.</p>
@@ -1604,7 +1605,7 @@
 <p><em>Figure 2: Gateway Client Mental Map</em></p>
 </div>
 <div class="reading-paragraph">
-<p>The Gateway Client is self-sufficient in that it handles its own connection to the Gateway. That is <em>all</em> this client is for. The beauty of this design is that sharding is the matter of spawning the needed number of shards at the rate of the max concurrency as recommended by Discord. What if you need to access a specific shard or know what event a shard came from? Not a problem! Use Discord’s formula: <code>(guild_id &gt;&gt; 22) % shard_count</code>. </p>
+<p>The Gateway Client is self-sufficient in that it handles its own connection (or shard) to the Gateway. That is <em>all</em> this client is for. The beauty of this design is that sharding is the matter of spawning the needed number of shards at the rate of the max concurrency as recommended by Discord. What if you need to access a specific shard or know what event a shard came from? Not a problem! Use Discord’s formula: <code>(guild_id &gt;&gt; 22) % shard_count</code>. </p>
 </div>
 <p>Let’s dig into the steps of the mental map:</p>
 <div class="reading-list">
@@ -1612,7 +1613,7 @@
 <li>Connect to the gateway with the URL provided by the GET /gateway/bot endpoint and use the URL params “?v=10&amp;encoding=json”. URL params set the stage for how Discord should send its data packets. In this case, the URL signals using JSON encoding: Discord <em>serializes</em> events as JSON strings to be <em>deserialized</em> into Python dictionaries.</li>
 <li>Await the HELLO event Discord sends back when you connect.<ul>
 <li>Use this to set heartbeat intervals and initialize the sequence number.</li>
-<li>This is when the heartbeat task is started to keep the session alive. Fire and forget!</li>
+<li>This is when the heartbeat task is started to keep the session alive. Fire-and-forget.</li>
 </ul>
 </li>
 <li>Send IDENTIFY through the websocket.</li>
@@ -1624,7 +1625,8 @@
 </li>
 </ol>
 </div>
-<p>Done. This is the bare minimum to hold a gateway connection. This architecture should be kind to new developments or build on top.</p>
+<p>Done. This is the minimal set of logic required to maintain a stable gateway connection.</p>
+<p><strong>Key Idea:</strong> Each connection or shard gets its own task to connect, identify, reconnect or re-identify if needed, listen to events, and eventually close.</p>
 <h2 id="bot-client">Bot Client<a class="headerlink" href="#bot-client" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
 <p>Almost there, if you’ve read this far, you’re doing great! Know that from here on out, it’s dead simple. The mental map for the Bot Client looks something like:</p>
@@ -1634,7 +1636,7 @@
 <p><em>Figure 3: Bot Client Mental Map</em></p>
 </div>
 <div class="reading-paragraph">
-<p>At this point, you can see the Bot Client is really just an orchestrator - it uses the HTTP and Gateway Clients you've already seen. There are parts that were left out of the map such as the decorators to register commands and resource fetching helpers so the user doesn’t have to touch the HTTP Client directly. But let’s be honest, connection logic is the meat of the Bot Client. And that’s all. Let’s go through the mental map step by step:</p>
+<p>The Bot Client is intentionally not a god object. It is really just an orchestrator - it uses the HTTP and Gateway clients you've already seen. There are parts that were left out of the map such as the decorators to register commands and resource fetching helpers so the user doesn’t have to touch the HTTP Client directly. But let’s be honest, connection logic is the meat of the Bot Client. And that’s all. Let’s go through the mental map step by step:</p>
 </div>
 <div class="reading-list">
 <ol>
@@ -1646,6 +1648,7 @@
 </ol>
 </div>
 <p>Done.</p>
+<p><strong>Key Idea:</strong> The Client's sole purpose is to provide a thin abstraction layer between internals and the user-facing API.</p>
 <h2 id="data-model">Data Model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
 <p>The final piece: how to turn Discord's JSON into clean, type-safe Python objects. DataModel is a class that transforms Discord's JSON into usable Python objects and back again when needed. A user could just access the dictionary itself, sure. But, what if dictionaries could be represented as a class so instead of <code>event[‘data’]</code>, it looks like <code>event.data</code>? This is where the DataModel class comes in. Let’s take a look at the mental map</p>
@@ -1665,9 +1668,10 @@
 <div class="reading-paragraph">
 <p>You might be wondering: what about nested objects like a <code>Message</code> containing a <code>User</code>? <code>DataModel</code> handles that recursively. It calls <code>from_dict</code> or <code>to_dict</code> on child DataModels automatically.</p>
 </div>
+<p><strong>Key Idea:</strong> This <code>DataModel</code> class exists to deserialize Discord's payloads and serialize dataclasses for fluent communication between ScurryPy and Discord.</p>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
-<p>I wasn't chasing line count - I was chasing clarity and understanding. When you see a "hello world" Discord bot in 8 lines, remember: you didn't write a bot in 8 lines. You're standing on 65,000 lines of someone else's abstraction. That's the cost of magic. This writeup demonstrates that simplicity doesn't mean less-than, and magic doesn't mean better. ScurryPy proves you don't need it. Every decision is traceable. That's all you need.</p>
+<p>Because every subsystem is small, explicit, and self-contained, extending ScurryPy is almost trivial: add a model, add a resource, and use the HTTP client directly. You can prototype new Discord features the day they release, build custom caching, or omit caching entirely. The library never fights you; it never assumes what you want. That’s the benefit of clarity over magic.</p>
 </div>
 
 
