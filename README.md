@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/scurrypy.svg)](https://badge.fury.io/py/scurrypy)
 
-A tiny, explicit Discord API wrapper built to give you primitives, not policies.
+A lightweight Discord API framework built to accommodate everything from basic bots to building frameworks.
 
 While this wrapper is mainly used for various squirrel-related shenanigans, it can also be used for more generic bot purposes.
 
