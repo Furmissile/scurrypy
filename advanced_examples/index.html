@@ -413,6 +413,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#building-on-top-of-scurrypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building on top of ScurryPy
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1508,6 +1517,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#building-on-top-of-scurrypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building on top of ScurryPy
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1611,6 +1629,28 @@ between setup and <code>client.run()</code>.</p>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">build_slash</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Slash&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;description&#39;</span><span class="p">))</span>
 <span class="c1"># SlashCommand(name=&#39;Slash&#39;, description=&#39;description&#39;, options=[], type=1)</span>
+</code></pre></div></p>
+<h2 id="building-on-top-of-scurrypy">Building on top of ScurryPy<a class="headerlink" href="#building-on-top-of-scurrypy" title="Permanent link">&para;</a></h2>
+<hr />
+<p>ScurryPy is also built to accept custom configurations.</p>
+<p>Demonstrates injecting custom implementations like a cache.
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CacheProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">...</span><span class="n">etc</span><span class="p">)</span> <span class="o">...</span>
+
+    <span class="c1"># and the rest...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyCache</span><span class="p">(</span><span class="n">CacheProtocol</span><span class="p">):</span>
+    <span class="c1"># your implementation...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyConfig</span><span class="p">(</span><span class="n">BaseConfig</span><span class="p">):</span>
+    <span class="n">cache</span><span class="p">:</span> <span class="n">MyCache</span>
+    <span class="c1"># other stuff here...</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">scurrypy</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;your-token&#39;</span><span class="p">,</span>
+    <span class="n">application_id</span> <span class="o">=</span> <span class="mi">123456789012345</span><span class="p">,</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">MyConfig</span><span class="p">()</span>
+<span class="p">)</span>
 </code></pre></div></p>
 
 
