@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from ..model import DataModel
+from ..core.model import DataModel
 
 class CommandTypes:
     CHAT_INPUT = 1

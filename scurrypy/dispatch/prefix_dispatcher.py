@@ -1,4 +1,4 @@
-from ..client_like import ClientLike
+from ..core.client_like import ClientLike
 
 from ..events.message_events import MessageCreateEvent
 

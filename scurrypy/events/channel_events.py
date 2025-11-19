@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from ..model import DataModel
+from ..core.model import DataModel
 from typing import Optional
 
 @dataclass

@@ -1,4 +1,4 @@
-from ..http import HTTPClient
+from ..core.http import HTTPClient
 from ..models import EmojiModel
 
 class BotEmojis:

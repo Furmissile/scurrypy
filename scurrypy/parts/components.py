@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Literal, Optional
-from ..model import DataModel
+from ..core.model import DataModel
 
 from .component_types import *
 

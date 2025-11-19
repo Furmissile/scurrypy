@@ -1,9 +1,9 @@
 import asyncio
 
-from .config import BaseConfig
-from .intents import Intents
-from .gateway import GatewayClient
-from .client_like import ClientLike
+from .core.config import BaseConfig
+from .core.intents import Intents
+from .core.gateway import GatewayClient
+from .core.client_like import ClientLike
 
 from .parts.command import SlashCommand, MessageCommand, UserCommand
 
@@ -38,8 +38,8 @@ class Client(ClientLike):
         if not application_id:
             raise ValueError("Application ID is required")
         
-        from .logger import Logger
-        from .http import HTTPClient
+        from .core.logger import Logger
+        from .core.http import HTTPClient
         from .resources.bot_emojis import BotEmojis
         from .dispatch.event_dispatcher import EventDispatcher
         from .dispatch.prefix_dispatcher import PrefixDispatcher

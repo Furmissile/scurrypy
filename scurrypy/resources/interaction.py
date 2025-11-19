@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional, Unpack
 
-from ..http import HTTPClient
-from ..model import DataModel
+from ..core.http import HTTPClient
+from ..core.model import DataModel
 
 from ..parts.modal import ModalPart
 from ..parts.message import MessagePart, MessageFlagParams

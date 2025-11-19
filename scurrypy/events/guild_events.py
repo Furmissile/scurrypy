@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from ..model import DataModel
+from ..core.model import DataModel
 
 from ..models import MemberModel
 from ..resources.channel import Channel

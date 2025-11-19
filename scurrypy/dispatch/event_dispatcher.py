@@ -1,5 +1,5 @@
 import importlib
-from ..client_like import ClientLike
+from ..core.client_like import ClientLike
 
 from ..resources.message import Message
 

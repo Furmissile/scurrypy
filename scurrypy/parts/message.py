@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional, TypedDict, Unpack
-from ..model import DataModel
+from ..core.model import DataModel
 from .embed import EmbedPart
 from .components import ActionRowPart
 from .components_v2 import ContainerPart

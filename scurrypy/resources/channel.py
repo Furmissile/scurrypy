@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import TypedDict, Unpack, Optional, Literal
 
-from ..http import HTTPClient
-from ..model import DataModel
+from ..core.http import HTTPClient
+from ..core.model import DataModel
 from .message import Message
 
 from ..parts.channel import GuildChannel

@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
-from ..model import DataModel
+from ..core.model import DataModel
 
 from ..resources.interaction import Interaction
 from ..parts.components import ComponentTypes

@@ -1,6 +1,6 @@
 import fnmatch
 
-from ..client_like import ClientLike
+from ..core.client_like import ClientLike
 
 from ..events.interaction_events import ApplicationCommandData, MessageComponentData, ModalData, InteractionEvent
 from ..resources.interaction import Interaction, InteractionDataTypes

@@ -1,4 +1,4 @@
-from scurrypy.error import DiscordError
+from scurrypy.core.error import DiscordError
 
 e = DiscordError(400, {
   "code": 50035,

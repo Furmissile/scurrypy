@@ -2,7 +2,7 @@
   Test converting dict to dataclass using DataModel
 """
 from dataclasses import dataclass
-from scurrypy.model import DataModel
+from scurrypy.core.model import DataModel
 
 @dataclass
 class TestComponent(DataModel):
