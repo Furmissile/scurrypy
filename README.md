@@ -2,12 +2,13 @@
 
 [![PyPI version](https://badge.fury.io/py/scurrypy.svg)](https://badge.fury.io/py/scurrypy)
 
-A lightweight Discord API framework built to accommodate everything from basic bots to building frameworks.
+A lightweight, fully readable Discord API framework built to accommodate everything from basic bots to custom frameworks.
 
-While this wrapper is mainly used for various squirrel-related shenanigans, it can also be used for more generic bot purposes.
+While ScurryPy powers many squirrel-related shenanigans, it works just as well for game bots, interactive components, and educational projects.
 
 ## Features
-* Easy to extend
+* Easy to extend and build frameworks on top
+* Lightweight core (<1000 lines)
 * Command, and event handling
 * Unix shell-style wildcards for component routing
 * Declarative style using decorators
@@ -69,6 +70,32 @@ async def on_ping(bot: scurrypy.Client, event: scurrypy.MessageCreateEvent):
     await event.message.send("Pong!")
 
 client.run()
+```
+
+## Building on Top of ScurryPy
+
+ScurryPy is designed to be easy to extend with your own abstractions.
+
+The following demonstrates integrating a custom cache into your client configuration:
+
+```py
+class CacheProtocol(Protocol):
+    async def get_user(self, user_id: int) ...
+
+    # and the rest...
+
+class MyCache(CacheProtocol):
+    # your implementation...
+
+class MyConfig(BaseConfig):
+    cache: MyCache
+    # other stuff here...
+
+client = scurrypy.Client(
+    token = 'your-token',
+    application_id = 123456789012345,
+    config = MyConfig()
+)
 ```
 
 ## Like What You See?
