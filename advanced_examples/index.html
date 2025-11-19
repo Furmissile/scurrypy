@@ -404,6 +404,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#building-convenience-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building Convenience Methods
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1490,6 +1499,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#building-convenience-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building Convenience Methods
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1573,6 +1591,27 @@ between setup and <code>client.run()</code>.</p>
 <p class="admonition-title">Tip</p>
 <p>This is passed to the user so that the client only loads what is needed.</p>
 </div>
+<h2 id="building-convenience-methods">Building Convenience Methods<a class="headerlink" href="#building-convenience-methods" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Building convenience methods has never been easier!</p>
+<p>Demonstrates parametizing the <a class="autorefs autorefs-internal" title="              SlashCommand
+
+  
+      dataclass
+  " href="../api/commands/#scurrypy.parts.command.SlashCommand"><code>SlashCommand</code></a> object.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">Unpack</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SlashCommandParams</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">scurrypy</span><span class="o">.</span><span class="n">CommandOption</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">build_slash</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Unpack</span><span class="p">[</span><span class="n">SlashCommandParams</span><span class="p">]):</span>
+    <span class="k">return</span> <span class="n">scurrypy</span><span class="o">.</span><span class="n">SlashCommand</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">build_slash</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Slash&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;description&#39;</span><span class="p">))</span>
+<span class="c1"># SlashCommand(name=&#39;Slash&#39;, description=&#39;description&#39;, options=[], type=1)</span>
+</code></pre></div></p>
 
 
 
