@@ -39,6 +39,14 @@ class Message(DataModel):
         """Update this message in place."""
         self.__dict__.update(Message.from_dict(data, self._http).__dict__)
 
+    def _prepare_message(self, message: MessagePart):
+        # set attachment IDs (if any)
+        if message.attachments:
+            for idx, file in enumerate(message.attachments):
+                file.id = idx
+        
+        return message.to_dict()
+
     async def fetch(self):
         """Fetches the message data based on the given channel ID and message id.
 
@@ -67,7 +75,7 @@ class Message(DataModel):
         data = await self._http.request(
             "POST",
             f"/channels/{self.channel_id}/messages",
-            data=message.to_dict(),
+            data=self._prepare_message(message),
             files=[fp.path for fp in message.attachments] if message.attachments else None
         )
         return Message.from_dict(data, self._http)
@@ -87,7 +95,7 @@ class Message(DataModel):
         data = await self._http.request(
             "PATCH", 
             f"/channels/{self.channel_id}/messages/{self.id}", 
-            data=message.to_dict(),
+            data=self._prepare_message(message),
             files=[fp.path for fp in message.attachments] if message.attachments else None)
 
         self._update(data)
@@ -109,7 +117,7 @@ class Message(DataModel):
         await self._http.request(
             'POST', 
             f"/channels/{self.channel_id}/messages",
-            data=message.to_dict(),
+            data=self._prepare_message(message),
             files=[fp.path for fp in message.attachments] if message.attachments else None)
 
     async def crosspost(self):
