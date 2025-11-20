@@ -96,23 +96,6 @@ class Interaction(DataModel):
     channel: Optional[Channel] = None
     """Partial channel object the interaction was invoked."""
 
-    def _prepare_message(self, message: MessagePart, t: int):
-        """Prepares a message to be sent to HTTPClient.
-
-        Args:
-            message (MessagePart): the message content
-            t (int): the interaction type. See [`InteractionTypes`][scurrypy.dispatch.command_dispatcher.InteractionTypes].
-
-        Returns:
-            (dict): the complete interaction content payload
-        """
-        # set attachment IDs (if any)
-        if message.attachments:
-            for idx, file in enumerate(message.attachments):
-                file.id = idx
-
-        return {'type': t, 'data': message.to_dict()}
-
     async def respond(self, message: str | MessagePart, with_response: bool = False, **flags: Unpack[MessageFlagParams]):
         """Create a message in response to an interaction.
 
@@ -129,10 +112,15 @@ class Interaction(DataModel):
         elif not isinstance(message, MessagePart):
             raise TypeError(f"Interaction.respond expects type str or MessagePart, got {type(message).__name__}")
         
+        content = {
+            'type': InteractionCallbackTypes.CHANNEL_MESSAGE_WITH_SOURCE, 
+            'data': message._prepare().to_dict()
+        }
+        
         data = await self._http.request(
             'POST', 
             f'/interactions/{self.id}/{self.token}/callback', 
-            data=self._prepare_message(message, InteractionCallbackTypes.CHANNEL_MESSAGE_WITH_SOURCE), 
+            data=content, 
             files=[fp.path for fp in message.attachments],
             params={'with_response': with_response}
         )
@@ -154,11 +142,16 @@ class Interaction(DataModel):
             message = MessagePart(content=message).set_flags(**flags)
         elif not isinstance(message, MessagePart):
             raise TypeError(f"Interaction.update expects type str or MessagePart, got {type(message).__name__}")
+        
+        content = {
+            'type': InteractionCallbackTypes.UPDATE_MESSAGE, 
+            'data': message._prepare().to_dict()
+        }
 
         await self._http.request(
             'POST', 
             f'/interactions/{self.id}/{self.token}/callback', 
-            data=self._prepare_message(message, InteractionCallbackTypes.UPDATE_MESSAGE), 
+            data=content, 
             files=[fp.path for fp in message.attachments])
 
     async def respond_modal(self, modal: ModalPart):

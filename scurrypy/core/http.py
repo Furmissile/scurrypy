@@ -194,18 +194,24 @@ class HTTPClient:
         """
         match resp.status:
             case 204:
+                # No content
                 return None
-            case 200 | 201 | 202:
+
+            case 200:
+                # JSON body is guaranteed if successful
                 try:
                     return await resp.json()
                 except aiohttp.ContentTypeError:
                     return await resp.text()
+
             case _:
+                # error handling
                 try:
                     body = await resp.json()
                 except aiohttp.ContentTypeError:
                     body = await resp.text()
                 raise DiscordError(resp.status, body)
+
             
     async def _update_bucket_rate_limit(self, resp: aiohttp.ClientResponse, bucket_id: str, endpoint: str):
         """Update the bucket for this endpoint and sleep if necessary.
@@ -297,7 +303,7 @@ class HTTPClient:
         async with self.session.request(
             method=item.method, url=url, params=item.params, timeout=15, **kwargs
         ) as resp:
-
+            
             if resp.headers.get("X-RateLimit-Global") == "true":
                 retry_after = float(resp.headers.get("Retry-After", 0))
                 self.global_reset = asyncio.get_event_loop().time() + retry_after

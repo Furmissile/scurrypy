@@ -1,5 +1,6 @@
 import importlib
 from ..core.client_like import ClientLike
+from ..core.error import DiscordError
 
 from ..resources.message import Message
 
@@ -12,6 +13,8 @@ class EventDispatcher:
         'GUILD_CREATE': ('scurrypy.events.guild_events', 'GuildCreateEvent'),
         'GUILD_UPDATE': ('scurrypy.events.guild_events', 'GuildUpdateEvent'),
         'GUILD_DELETE': ('scurrypy.events.guild_events', 'GuildDeleteEvent'),
+        'GUILD_MEMBER_ADD': ('scurrypy.events.guild_events', 'GuildMemberAddEvent'),
+        'GUILD_MEMBER_REMOVE': ('scurrypy.events.guild_events', 'GuildMemberRemoveEvent'),
 
         'CHANNEL_CREATE': ('scurrypy.events.channel_events', 'GuildChannelCreateEvent'),
         'CHANNEL_UPDATE': ('scurrypy.events.channel_events', 'GuildChannelUpdateEvent'),
@@ -89,8 +92,13 @@ class EventDispatcher:
             return # ignore bot's own messages
         
         handler = self._handlers.get(event_name, None)
-        if handler:
-            obj = cls.from_dict(data, self._http)
-            obj.config = self.config
-            await handler(self.bot, obj)
-            self._logger.log_info(f"Event {event_name} Acknowledged.")
+        if handler: # IGNORE events not registered
+            try:
+                obj = cls.from_dict(data, self._http)
+                obj.config = self.config
+                await handler(self.bot, obj)
+                self._logger.log_info(f"Event {event_name} Acknowledged.")
+            except DiscordError as e:
+                self._logger.log_error(f"Error in event '{event_name}': {e}")
+            except Exception as e:
+                self._logger.log_error(f"Unhandled error in event '{event_name}': {e}")

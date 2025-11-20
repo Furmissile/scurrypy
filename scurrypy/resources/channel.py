@@ -148,7 +148,14 @@ class Channel(DataModel):
         if isinstance(message, str):
             message = MessagePart(content=message)
 
-        data = await self._http.request("POST", f"/channels/{self.id}/messages", data=message.to_dict())
+        message = message._prepare()
+
+        data = await self._http.request(
+            "POST", 
+            f"/channels/{self.id}/messages", 
+            data=message._prepare().to_dict(),
+            files=[fp.path for fp in message.attachments]
+        )
 
         return Message.from_dict(data, self._http)
 

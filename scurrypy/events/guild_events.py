@@ -34,3 +34,23 @@ class GuildUpdateEvent(GuildEvent):
 class GuildDeleteEvent(GuildEvent):
     """Received when the bot has left a guild or the guild was deleted."""
     pass
+
+from ..models.user import MemberModel, UserModel
+
+@dataclass
+class GuildMemberAddEvent(MemberModel):
+    """Received when a member joins a guild the bot is in."""
+
+    guild_id: int
+    """ID of the guild."""
+
+
+@dataclass
+class GuildMemberRemoveEvent(DataModel):
+    """Received when a member leaves or is kicked/banned from a guild the bot is in."""
+
+    guild_id: int
+    """ID of the guild."""
+
+    user: UserModel
+    """User object of the user leaving the guild."""

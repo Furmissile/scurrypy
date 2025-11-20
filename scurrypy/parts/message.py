@@ -65,7 +65,7 @@ class MessageReference(DataModel):
 class Attachment(DataModel):
     """Represents an attachment."""
 
-    id: int = field(init=False)
+    id: int = field(init=False, default=None)
     """ID of the attachment (internally set)."""
 
     path: str
@@ -102,6 +102,19 @@ class MessagePart(DataModel):
 
     message_reference: Optional[MessageReference] = None
     """Message reference if reply."""
+
+    def _prepare(self):
+        """Prepares MessagePart for ANY internally set attributes.
+
+        Returns:
+            (MessagePart): self
+        """
+        # set attachment IDs (if any)
+        if self.attachments:
+            for idx, file in enumerate(self.attachments):
+                file.id = idx
+        
+        return self
 
     def set_flags(self, **flags: Unpack[MessageFlagParams]):
         """Set this message's flags using MessageFlagParams.

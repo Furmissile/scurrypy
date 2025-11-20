@@ -1,6 +1,7 @@
 import fnmatch
 
 from ..core.client_like import ClientLike
+from ..core.error import DiscordError
 
 from ..events.interaction_events import ApplicationCommandData, MessageComponentData, ModalData, InteractionEvent
 from ..resources.interaction import Interaction, InteractionDataTypes
@@ -200,6 +201,8 @@ class CommandDispatcher:
 
         try:
             await handler(self.bot, event)
-            self._logger.log_info(f"Interaction Event '{name}' Acknowledged.")
-        except Exception as e:
+            self._logger.log_info(f"Interaction '{name}' Acknowledged.")
+        except DiscordError as e:
             self._logger.log_error(f"Error in interaction '{name}': {e}")
+        except Exception as e:
+            self._logger.log_error(f"Unhandled error in interaction '{name}': {e}")

@@ -1,4 +1,5 @@
 from ..core.client_like import ClientLike
+from ..core.error import DiscordError
 
 from ..events.message_events import MessageCreateEvent
 
@@ -74,5 +75,7 @@ class PrefixDispatcher:
             await handler(self.bot, event)
             
             self._logger.log_info(f"Prefix Event '{command}' acknowledged with args: {event.prefix_args or 'No args'}")
-        except Exception as e:
+        except DiscordError as e:
             self._logger.log_error(f"Error in prefix command '{command}': {e}")
+        except Exception as e:
+            self._logger.log_error(f"Unhandled error in prefix command '{command}': {e}")
