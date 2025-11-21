@@ -99,4 +99,4 @@ client = scurrypy.Client(
 ```
 
 ## Like What You See?
-Explore the full [documentation](https://furmissile.github.io/scurrypy) for more examples, guides, and API reference.
+Explore the full [documentation](https://scurry-works.github.io/scurrypy) for more examples, guides, and API reference.
