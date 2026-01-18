@@ -1,46 +1,15 @@
 from dataclasses import dataclass
-from typing import TypedDict, Unpack, Literal
+from typing import Literal
 
 from .base_resource import BaseResource
 
 from ..parts.channel import GuildChannel
 from ..parts.message import MessagePart
+from ..parts.channel import GuildChannel
 
 from ..models.message import MessageModel
 from ..models.channel import ChannelModel, PinnedMessageModel
 
-class MessagesFetchParams(TypedDict, total=False):
-    """Params when fetching guild channel messages."""
-
-    limit: int
-    """Max number of messages to return. Range 1 - 100. Default 50."""
-
-    before: int
-    """Get messages before this message ID."""
-
-    after: int
-    """Get messages after this message ID."""
-
-    around: int
-    """Get messages around this message ID."""
-
-class PinsFetchParams(TypedDict, total=False):
-    """Params when fetching pinned messages."""
-
-    before: str
-    """Get pinned messages before this ISO8601 timestamp."""
-
-    limit: int
-    """Max number of pinned messages to return. Range 1 - 50. Default 50."""
-
-class ThreadFromMessageParams(TypedDict, total=False):
-    """Params when attaching a thread to a message."""
-
-    rate_limit_per_user: Literal[60, 1440, 4320, 10080]
-    """time (minutes) of inactivity before thread is archived."""
-
-    rate_limit_per_user: int
-    """time (seconds) user waits before sending another message."""
 
 @dataclass
 class Channel(BaseResource):
@@ -49,49 +18,80 @@ class Channel(BaseResource):
     id: int
     """ID of the channel."""
 
-    async def fetch(self):
+    async def fetch(self) -> ChannelModel:
         """Fetch the full channel data from Discord.
 
         Returns:
-            (ChannelModel): A new Channel object with all fields populated
+            (ChannelModel): queried channel
         """
         data = await self._http.request("GET", f"/channels/{self.id}")
 
         return ChannelModel.from_dict(data)
     
-    async def fetch_messages(self, **kwargs: Unpack[MessagesFetchParams]):
+    async def edit(self, channel: GuildChannel) -> ChannelModel:
+        """Edit this channel.
+
+        Permissions:
+            * `MANAGE_CHANNELS` → required to edit this channel
+
+        Args:
+            channel (GuildChannel): channel fields to edit
+
+        Returns:
+            (ChannelModel): updated channel
+        """
+
+        data = self._http.request('PATCH', f'/channels/{self.id}', data=channel.to_dict())
+
+        return ChannelModel.from_dict(data)
+    
+    async def delete(self) -> None:
+        """Deletes this channel from the server.
+
+        Permissions:
+            * `MANAGE_CHANNELS` → required to delete this channel
+            * `MANAGE_THREADS` → required to delete a thread
+        """
+        await self._http.request("DELETE", f"/channels/{self.id}")
+
+    async def fetch_messages(self, limit: int = 50, before: int = None, after: int = None, around: int = None) -> list[MessageModel]:
         """Fetches this channel's messages.
 
         Permissions:
-            * VIEW_CHANNEL → required to access channel messages
-            * READ_MESSAGE_HISTORY → required for user, otherwise no messages are returned
+            * `VIEW_CHANNEL` → required to access channel messages
+            * `READ_MESSAGE_HISTORY` → required for user, otherwise no messages are returned
 
         Args:
-            **kwargs: message fetch params
-                !!! note
-                    if no kwargs are provided, default to 50 fetched messages limit.
+            limit (int, optional): Max number of messages to return. Range 1 - 100. Defaults to `50`.
+            before (int, optional): get messages before this message ID
+            after (int, optional): get messages after this message ID
+            around (int, optional): get messages around this message ID
 
         Returns:
-            (list[MessageModel]): queried messages
+            (list[MessageModel]): queried list of messages
         """
-        params = {"limit": 50, **kwargs}
+        params = {
+            "limit": limit,
+            "before": before,
+            "after": after,
+            "around": around
+        }
 
         data = await self._http.request('GET', f'/channels/{self.id}/messages', params=params)
 
         return [MessageModel.from_dict(msg) for msg in data]
     
-    async def send(self, message: str | MessagePart):
-        """
-        Send a message to this channel.
+    async def send(self, message: str | MessagePart) -> MessageModel:
+        """Send a message to this channel.
 
         Permissions:
-            * SEND_MESSAGES → required to create a message in this channel
+            * `SEND_MESSAGES` → required to create a message in this channel
 
         Args:
-            message (str | MessagePart): can be just text or the MessagePart for dynamic messages
+            message (str | MessagePart): content as a string or MessagePart
 
         Returns:
-            (MessageModel): The created Message object
+            (MessageModel): created message
         """
         if isinstance(message, str):
             message = MessagePart(content=message)
@@ -106,70 +106,55 @@ class Channel(BaseResource):
         )
 
         return MessageModel.from_dict(data)
-
-    async def edit(self, channel: GuildChannel):
-        """Edit this channel's settings.
-
-        Permissions:
-            * MANAGE_CHANNELS → required to edit this channel
-
-        Args:
-            channel (GuildChannel): channel changes
-
-        Returns:
-            (ChannelModel): The updated channel object
-        """
-        data = await self._http.request("PATCH", f"/channels/{self.id}", data=channel.to_dict())
-
-        return ChannelModel.from_dict(data)
     
-    async def create_thread_from_message(self, message_id: int, name: str, **kwargs: Unpack[ThreadFromMessageParams]):
-        """Create a thread from this message
+    async def create_thread_from_message(self, 
+        message_id: int, 
+        name: str, 
+        auto_archive_duration: Literal[60, 1440, 4320, 10080] = None, 
+        rate_limit_per_user: int = None
+    ) -> ChannelModel:
+        """Create a thread from this message.
 
         Args:
-            message_id: ID of message to attach thread
+            message_id (int): ID of message to attach thread
             name (str): thread name
-            **kwargs (Unpack[ThreadFromMessageParams]): thread create params
+            auto_archive_duration (int, optional): time (minutes) of inactivity before thread is archived
+            rate_limit_per_user (int, optional): time (seconds) user waits before sending another message
 
         Returns:
-            (ChannelModel): The updated channel object
+            (ChannelModel): updated channel
         """
 
         content = {
             'name': name, 
-            **kwargs
+            'auto_archive_duration': auto_archive_duration,
+            'rate_limit_per_user': rate_limit_per_user
         }
 
         data = await self._http.request('POST', f"channels/{self.id}/messages/{message_id}/threads", data=content)
 
         return ChannelModel.from_dict(data)
     
-    async def fetch_pins(self, **kwargs: Unpack[PinsFetchParams]):
+    async def fetch_pins(self, limit: int = 50, before: str = None) -> list[PinnedMessageModel]:
         """Get this channel's pinned messages.
 
         Permissions:
-            * VIEW_CHANNEL → required to access pinned messages
-            * READ_MESSAGE_HISTORY → required for reading pinned messages
+            * `VIEW_CHANNEL` → required to access pinned messages
+            * `READ_MESSAGE_HISTORY` → required for reading pinned messages
 
         Args:
-            **kwargs: pinned message fetch params
-                !!! note
-                    If no kwargs are provided, default to 50 fetched messages limit.
-            
+            before (str, optional): get pinned messages before this ISO8601 timestamp
+            limit (int, optional): Max number of pinned messages to return. Range 1 - 50. Defaults to `50`.
+        
         Returns:
-            (list[PinnedMessage]): list of pinned messages
+            (list[PinnedMessage]): queried list of pinned messages
         """
         # Set default limit if user didn't supply one
-        params = {"limit": 50, **kwargs}
+        params = {
+            "limit": limit,
+            "before": before
+        }
 
         data = await self._http.request('GET', f'/channels/{self.id}/pins', params=params)
 
         return [PinnedMessageModel.from_dict(item) for item in data]
-
-    async def delete(self):
-        """Deletes this channel from the server.
-
-        Permissions:
-            * MANAGE_CHANNELS → required to delete this channel
-        """
-        await self._http.request("DELETE", f"/channels/{self.id}")

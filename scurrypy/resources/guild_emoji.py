@@ -13,36 +13,39 @@ class GuildEmoji(BaseResource):
     guild_id: int
     """Guild ID of the emojis."""
 
-    async def fetch(self, emoji_id: int):
+    async def fetch(self, emoji_id: int) -> EmojiModel:
         """Fetch an emoji from this guild.
 
         Args:
             emoji_id (int): emoji ID
 
         Returns:
-            (EmojiModel): the Emoji object
+            (EmojiModel): queried guild emoji
         """
         data = await self._http.request("GET", f"/guilds/{self.guild_id}/emojis/{emoji_id}")
 
         return EmojiModel.from_dict(data)
     
-    async def fetch_all(self):
+    async def fetch_all(self) -> list[EmojiModel]:
         """Fetch all emojis from this guild.
 
         Returns:
-            (list[EmojiModel]): queried guild emojis
+            (list[EmojiModel]): queried list of guild emojis
         """
         data = await self._http.request("GET", f"/guilds/{self.guild_id}/emojis")
 
         return [EmojiModel.from_dict(emoji) for emoji in data]
 
-    async def create(self, name: str, image: ImageData, roles: list[int] = None):
+    async def create(self, name: str, image: ImageData, roles: list[int] = None) -> EmojiModel:
         """Create a new emoji for this guild.
 
         Args:
             name (str): name of the emoji
             image (ImageData): emoji image (128x128)
             roles (list[int]): roles allowed to use this emoji
+
+        Returns:
+            (EmojiModel): new emoji
         """
 
         data = await self._http.request(
@@ -57,13 +60,16 @@ class GuildEmoji(BaseResource):
 
         return EmojiModel.from_dict(data)
     
-    async def modify(self, emoji_id: int, name: str = None, roles: list[int] = None):
-        """Modify a guild emoji in this guild.
+    async def edit(self, emoji_id: int, name: str = None, roles: list[int] = None) -> EmojiModel:
+        """Edit a guild emoji in this guild.
 
         Args:
-            emoji_id (int): ID of the emoji to modify
+            emoji_id (int): ID of the emoji to edit
             name (str): new name for the emoji
             roles (list[int]): new roles allowed to use this emoji
+
+        Returns:
+            (EmojiModel): updated emoji
         """
 
         data = await self._http.request(
@@ -77,12 +83,12 @@ class GuildEmoji(BaseResource):
 
         return EmojiModel.from_dict(data)
 
-    async def delete(self, emoji_id: int):
+    async def delete(self, emoji_id: int) -> None:
         """Delete an emoji from this guild.
 
         Permissions:
-            * CREATE_GUILD_EXPRESSIONS → if created by the current user (or `MANAGE_GUILD_EXPRESSIONS`)
-            * MANAGE_GUILD_EXPRESSIONS → for other emojis
+            * `CREATE_GUILD_EXPRESSIONS` → if created by the current user (or `MANAGE_GUILD_EXPRESSIONS`)
+            * `MANAGE_GUILD_EXPRESSIONS` → for other emojis
 
         Args:
             emoji_id (int): ID of the emoji

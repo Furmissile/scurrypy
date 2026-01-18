@@ -11,11 +11,11 @@ class Application(BaseResource):
     id: int
     """ID of the application."""
 
-    async def fetch(self):
+    async def fetch(self) -> ApplicationModel:
         """Fetch this application's data.
 
         Returns:
-            (Application): the Application data
+            (Application): queried application
         """
         data = await self._http.request('GET', '/applications/@me')
 

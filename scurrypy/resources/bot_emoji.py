@@ -13,24 +13,24 @@ class BotEmoji(BaseResource):
     application_id: int
     """Application ID of the emojis."""
 
-    async def fetch(self, emoji_id: int):
+    async def fetch(self, emoji_id: int) -> EmojiModel:
         """Fetch an emoji from the bot repository.
 
         Args:
             emoji_id (int): emoji ID
 
         Returns:
-            (EmojiModel): the Emoji object
+            (EmojiModel): queried emoji
         """
         data = await self._http.request("GET", f"/applications/{self.application_id}/emojis/{emoji_id}")
 
         return EmojiModel.from_dict(data)
     
-    async def fetch_all(self):
+    async def fetch_all(self) -> list[EmojiModel]:
         """Fetch all emojis from the bot repository.
 
         Returns:
-            (list[EmojiModel]): queried bot emojis
+            (list[EmojiModel]): queried list of bot emojis
         """
         data = await self._http.request("GET", f"/applications/{self.application_id}/emojis")
 
@@ -38,7 +38,7 @@ class BotEmoji(BaseResource):
 
         return [EmojiModel.from_dict(emoji) for emoji in emojis]
     
-    async def create(self, emoji_name: str, image: ImageData):
+    async def create(self, emoji_name: str, image: ImageData) -> EmojiModel:
         """Add an emoji to the bot emoji repository.
 
         Args:
@@ -46,7 +46,7 @@ class BotEmoji(BaseResource):
             image (ImageData): image data of the emoji
 
         Returns:
-            (EmojiModel): the new Emoji object
+            (EmojiModel): new emoji
         """
         content = {
             'name': emoji_name,
@@ -61,15 +61,15 @@ class BotEmoji(BaseResource):
     
         return EmojiModel.from_dict(data)
     
-    async def modify(self, emoji_id: int, new_name: str):
-        """Modify an emoji in the bot repository.
+    async def edit(self, emoji_id: int, new_name: str) -> EmojiModel:
+        """Edit an emoji in the bot repository.
 
         Args:
-            emoji_id (int): ID of the emoji to modify
+            emoji_id (int): ID of the emoji to edit
             new_name (str): new name for the emoji
 
         Returns:
-            (EmojiModel): the updated emoji
+            (EmojiModel): updated emoji
         """
         data = await self._http.request(
             'PATCH', 
@@ -79,7 +79,7 @@ class BotEmoji(BaseResource):
 
         return EmojiModel.from_dict(data)
 
-    async def delete(self, emoji_id: int):
+    async def delete(self, emoji_id: int) -> None:
         """Deletes an emoji from the bot repository.
 
         Args:

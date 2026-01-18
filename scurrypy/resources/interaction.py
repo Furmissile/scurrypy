@@ -19,19 +19,19 @@ class Interaction(BaseResource):
     token: str
     """Continuation token for responding to the interaction."""
 
-    async def respond(self, message: str | MessagePart, with_response: bool = False, **flags: Unpack[MessageFlagParams]):
+    async def respond(self, message: str | MessagePart, with_response: bool = False, **flags: Unpack[MessageFlagParams]) -> InteractionCallbackModel | None:
         """Create a message in response to an interaction.
 
         Args:
-            message (str | MessagePart): content as a string or MessagePart
-            with_response (bool, optional): if the interaction data should be returned. Defaults to False.
-            **flags: message flags to set. (set respective flag to True to toggle.)
+            message (str | MessagePart): 2
+            with_response (bool, optional): if the interaction data should be returned. Defaults to `False`.
+            **flags: message flags to set. (set respective flag to `True` to toggle.)
 
         Raises:
             (TypeError): invalid `message` type
 
         Returns:
-            (InteractionCallbackModel | None): interaction callback object (if with_response is toggled) else None
+            (InteractionCallbackModel | None): interaction callback object (if `with_response` is toggled) else None
         """
         if isinstance(message, str):
             message = MessagePart(content=message).set_flags(**flags)
@@ -54,7 +54,7 @@ class Interaction(BaseResource):
         if with_response:
             return InteractionCallbackModel.from_dict(data)
         
-    async def update(self, message: str | MessagePart):
+    async def update(self, message: str | MessagePart) -> None:
         """Update a message in response to an interaction.
 
         Args:
@@ -79,7 +79,7 @@ class Interaction(BaseResource):
             data=content, 
             files=[fp.path for fp in message.attachments])
 
-    async def respond_modal(self, modal: ModalPart):
+    async def respond_modal(self, modal: ModalPart) -> None:
         """Create a modal in response to an interaction.
 
         Args:
@@ -101,7 +101,7 @@ class Interaction(BaseResource):
             f'/interactions/{self.id}/{self.token}/callback', 
             data=content)
 
-    async def respond_autocomplete(self, choices: list[CommandOptionChoice]):
+    async def respond_autocomplete(self, choices: list[CommandOptionChoice]) -> None:
         """Autocomplete a command in response to an interaction.
 
         Args:
@@ -121,7 +121,7 @@ class Interaction(BaseResource):
             data=content
         )
 
-    async def defer_respond(self, ephemeral: bool):
+    async def defer_respond(self, ephemeral: bool) -> None:
         """Defer creating a message in response to an interaction.
 
         Args:
@@ -141,7 +141,7 @@ class Interaction(BaseResource):
             data=content
         )
 
-    async def defer_update(self, ephemeral: bool):
+    async def defer_update(self, ephemeral: bool) -> None:
         """Defer updating a message in response to an interaction.
 
         Args:
@@ -161,7 +161,7 @@ class Interaction(BaseResource):
             data=content
         )
 
-    async def followup(self, application_id, message: str | MessagePart, **flags: Unpack[MessageFlagParams]):
+    async def followup(self, application_id, message: str | MessagePart, **flags: Unpack[MessageFlagParams]) -> None:
         """Create a new message to respond to a deferred interaction.
 
         !!! important
@@ -189,7 +189,7 @@ class Interaction(BaseResource):
             data=content
         )
 
-    async def edit_original(self, application_id: int, message: str | MessagePart):
+    async def edit_original(self, application_id: int, message: str | MessagePart) -> None:
         """Update the original interaction response from a deferred update interaction.
 
         Args:

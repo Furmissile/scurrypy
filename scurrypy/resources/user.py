@@ -12,24 +12,24 @@ class User(BaseResource):
     id: int
     """ID of the user."""
 
-    async def fetch(self):
+    async def fetch(self) -> UserModel:
         """Fetch this user by ID.
 
         Returns:
-            (UserModel): the User object
+            (UserModel): queried user
         """
         data = await self._http.request('GET', f'/users/{self.id}')
 
         return UserModel.from_dict(data)
 
-    async def fetch_guild_member(self, guild_id: int):
+    async def fetch_guild_member(self, guild_id: int) -> GuildMemberModel:
         """Fetch this user's guild member data.
 
         Args:
             guild_id (int): ID of guild to fetch data from
 
         Returns:
-            (GuildMemberModel): member data from guild
+            (GuildMemberModel): queried guild member for the user
         """
         data = await self._http.request('GET', f'/guilds/{guild_id}/members/{self.id}')
 

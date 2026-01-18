@@ -20,14 +20,14 @@ class Command(BaseResource):
     guild_id: Optional[int] = None
     "Guild ID of command (if on guild-level)."
 
-    async def fetch(self):
+    async def fetch(self) -> ApplicationCommandModel:
         """Fetches the command object.
 
         Raises:
             (ValueError): no ID set
 
         Returns:
-            (ApplicationCommandModel): the application command object
+            (ApplicationCommandModel): queried application command
         """
         if not self.id:
             raise ValueError("No command ID to fetch.")
@@ -42,11 +42,11 @@ class Command(BaseResource):
 
         return ApplicationCommandModel.from_dict(data)
     
-    async def fetch_all(self):
+    async def fetch_all(self) -> list[ApplicationCommandModel]:
         """Fetches ALL commands.
 
         Returns:
-            (list[ApplicationCommandModel]): list of application command objects
+            (list[ApplicationCommandModel]): queried list of application commands
         """
         endpoint = (
             f"applications/{self.application_id}/guilds/{self.guild_id}/commands" 
@@ -58,14 +58,17 @@ class Command(BaseResource):
 
         return [ApplicationCommandModel.from_dict(cmd) for cmd in data]
 
-    async def create(self, command: SlashCommand | UserCommand | MessageCommand):
+    async def create(self, command: SlashCommand | UserCommand | MessageCommand) -> ApplicationCommandModel:
         """Add command to the client.
 
         !!! danger
-            Creating a command with the same name as an existing command for your application will overwrite the old command.
+            Creating a command with the same name as an existing command in the same scope will overwrite the old command.
 
         Args:
             command (SlashCommand | UserCommand | MessageCommand): command to register
+
+        Returns:
+            (ApplicationCommandModel): created command
         """
         endpoint = (
             f"applications/{self.application_id}/guilds/{self.guild_id}/commands" 
@@ -77,20 +80,17 @@ class Command(BaseResource):
 
         return ApplicationCommandModel.from_dict(data)
 
-    async def edit(self, command: SlashCommand | UserCommand | MessageCommand):
-        """Edit a command. 
-        
-        !!! note
-            Only use the fields you want to edit.
+    async def edit(self, command: SlashCommand | UserCommand | MessageCommand) -> ApplicationCommandModel:
+        """Edit a command.
 
         Args:
-            command (SlashCommand | UserCommand | MessageCommand): the new command
+            command (SlashCommand | UserCommand | MessageCommand): command fields to edit
         
         Raises:
             (ValueError): no ID set
 
         Returns:
-            (ApplicationCommandModel): the new application command object
+            (ApplicationCommandModel): updated application command
         """
         if not self.id:
             raise ValueError("No command ID to fetch.")
@@ -105,7 +105,7 @@ class Command(BaseResource):
 
         return ApplicationCommandModel.from_dict(data)
 
-    async def delete(self):
+    async def delete(self) -> None:
         """Delete this command.
 
         Raises:
@@ -122,7 +122,7 @@ class Command(BaseResource):
 
         await self._http.request('DELETE', endpoint)
 
-    async def bulk_overwrite(self, commands: list[SlashCommand | UserCommand | MessageCommand]):
+    async def bulk_overwrite(self, commands: list[SlashCommand | UserCommand | MessageCommand]) -> list[ApplicationCommandModel]:
         """Takes a list of application commands, overwriting the existing global or guild command list for this application. 
         
         !!! warning
@@ -133,6 +133,9 @@ class Command(BaseResource):
 
         Args:
             commands (list[SlashCommand  |  UserCommand  |  MessageCommand]): commands to register
+
+        Returns:
+            (list[ApplicationCommandModel]): created application commands
         """
 
         endpoint = (
