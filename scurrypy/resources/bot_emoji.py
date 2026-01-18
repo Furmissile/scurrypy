@@ -64,9 +64,6 @@ class BotEmoji(BaseResource):
     async def modify(self, emoji_id: int, new_name: str):
         """Modify an emoji in the bot repository.
 
-        !!! note
-            `name` is the only field that can be edited, so no object is passed.
-
         Args:
             emoji_id (int): ID of the emoji to modify
             new_name (str): new name for the emoji

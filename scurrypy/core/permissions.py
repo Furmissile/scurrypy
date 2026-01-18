@@ -21,12 +21,14 @@ class PermissionsFlagParams(TypedDict, total=False):
     read_message_history: bool
     use_external_emojis: bool
     manage_roles: bool
+    manage_guild_expressions: bool
     use_application_commands: bool
     manage_threads: bool
     create_public_threads: bool
     create_private_threads: bool
     send_messages_in_threads: bool
     moderate_members: bool
+    create_guild_expressions: bool
     send_polls: bool
     pin_messages: bool
     bypass_slowmode: bool
@@ -89,6 +91,9 @@ class Permissions:
     MANAGE_ROLES = 1 << 28
     """Allows management and editing of roles."""
 
+    MANAGE_GUILD_EXPRESSIONS = 1 << 30
+    """Allows for editing and deleting emojis, stickers, and soundboard sounds created by all users."""
+
     USE_APPLICATION_COMMANDS = 1 << 31
     """Allows members to use application commands, including slash commands and context menu commands."""
 
@@ -106,6 +111,9 @@ class Permissions:
     
     MODERATE_MEMBERS = 1 << 40
     """Allows for timing out users to prevent them from sending or reacting to messages in chat and threads, and from speaking in voice and stage channels."""
+
+    CREATE_GUILD_EXPRESSIONS = 1 << 43
+    """Allows for creating emojis, stickers, and soundboard sounds, and editing and deleting those created by the current user."""
 
     SEND_POLLS = 1 << 49
     """Allows sending polls."""
