@@ -123,7 +123,8 @@ Some fetches have JSON query strings attached. In this case you define them as f
     and PLEASE: document the function completely!
 
 ## Missing Endpoints
-All endpoints should send requests through [`HTTPClient.request()`](https://scurry-works.github.io/scurrypy/internals/http/#scurrypy.core.http.HTTPClient.request) and be attached to their respective resource. Which resource gets the endpoint is a design decision for the contributor to make based on the criteria of the endpoint. The request function does the bulk of the heavy lifting; just return the data if it's a GET request.
+All endpoints should send requests through [`HTTPClient.request()`](https://scurry-works.github.io/scurrypy/internals/http/#scurrypy.core.http.HTTPClient.request) and be attached to their respective resource. Which resource gets the endpoint is based on the criteria of the endpoint, NOT based on how Discord organizes them. 
+For example, the endpoint for fetching messages falls under the Message resource by Discord's docs. However, by ScurryPy's standards, the endpoint falls under the Channel resource because the endpoint requires a channel ID.
 
 ## Questions?
 Open an issue or discussion!
