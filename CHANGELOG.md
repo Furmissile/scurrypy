@@ -2,14 +2,43 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
-## [0.14.0] - Jan 2026
+## [0.15.0] - Jan 2026
+
+### Breaking Changes'
+
+* Renamed all `modify` resource functions to `edit`
+* All endpoints except fetching now require a part.
+
+### Changed
+
+* New endpoints:
+    * `GuildEmoji.create`, `GuildEmoji.update`, `GuildEmoji.delete` - this completes the `GuildEmoji` resource
+    * `Channel.edit` now accepts DM, thread, and guild channel.
+    * Channel threads
+
+* New Parts:
+    * `CreateBotEmoji`, `EditBotEmoji`, `CreateGuildEmoji`, `EditGuildEmoji`
+
+* New permissions:
+    * `MANAGE_GUILD_EXPRESSIONS`, `CREATE_GUILD_EXPRESSIONS`
+
+* Fixed: reconnection logic
+    * `seq` was being set on every HELLO event
+
+* Patched: contributing guide to better explain how endpoints are divided among resources.
+
+* Revised and Corrected: resource docstrings
+
+* Moved: `PinnedMessageModel` from `scurrypy.models.channel` -> `scurrypy.models.message`
+
+## [0.14.0]
 
 ### Changed
 
 * New resource: `ImageData`, used for images like emojis, guild icons, banners, etc.
 
 * New endpoints:
-    * `BotEmoji.create`, `BotEmoji.modify`, `BotEmoji.delete`
+    * `BotEmoji.create`, `BotEmoji.modify`, `BotEmoji.delete` - this completes the `BotEmoji` resource
 
 * Fixed various docstring formatting.
 

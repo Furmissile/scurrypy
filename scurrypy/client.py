@@ -173,7 +173,7 @@ class Client:
         Returns:
             (Channel): the Channel resource
         """
-        from .resources.channel import Channel\
+        from .resources.channel import Channel
 
         return Channel(self._http, context, channel_id)
     
