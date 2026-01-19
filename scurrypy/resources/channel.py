@@ -303,7 +303,7 @@ class Channel(BaseResource):
 
         Args:
             before (int, optional): threads before this ID
-            after (int, optional): threads after this ID
+            limit (int, optional): max number of threads to return
 
         Returns:
             (ArchivedThreads): queried archived threads
