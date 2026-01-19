@@ -3,7 +3,7 @@ from ..core.model import DataModel
 from typing import Optional
 from .base_event import Event
 
-from ..models.guild_member import GuildMemberModel
+from ..models.user import GuildMemberModel
 from ..models.channel import ChannelModel
 from ..models.guild import UnavailableGuild, GuildModel
 

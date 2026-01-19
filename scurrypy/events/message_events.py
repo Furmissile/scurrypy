@@ -5,7 +5,7 @@ from .base_event import Event
 from typing import Optional
 
 from ..models.message import MessageModel
-from ..models.guild_member import GuildMemberModel
+from ..models.user import GuildMemberModel
 
 @dataclass
 class MessageCreateEvent(Event, MessageModel):

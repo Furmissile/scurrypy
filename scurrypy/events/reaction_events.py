@@ -4,7 +4,7 @@ from .base_event import Event
 
 from typing import Optional
 
-from ..models.guild_member import GuildMemberModel
+from ..models.user import GuildMemberModel
 from ..models.emoji import EmojiModel
 
 class ReactionType:

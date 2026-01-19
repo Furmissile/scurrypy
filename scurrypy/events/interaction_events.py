@@ -7,7 +7,7 @@ from typing import Optional
 from ..models.interaction import InteractionModel
 
 from ..models.user import UserModel
-from ..models.guild_member import GuildMemberModel
+from ..models.user import GuildMemberModel
 from ..models.role import RoleModel
 from ..models.channel import ChannelModel
 from ..models.message import MessageModel
