@@ -53,11 +53,8 @@ class YourModel(DataModel):
     field_1: type
     """This is a mandatory field. It needs to be filled NOW."""
 
-    field_2: Optional[type] = None
-    """This is an optional field. It can be omitted entirely."""
-
-    field_3: type = None
-    """This is a deferrable field. It can be filled out LATER."""
+    field_2: Optional[type]
+    """This is an optional field. It might be omitted."""
 ```
 Notes:
 * Fields must mimic objects verbatim. (e.g., if an object field is named `icon`, the dataclass field must also be called `icon`.)
@@ -65,7 +62,7 @@ Notes:
 * If an object appears that was already defined, use that model; don't create a new model! (e.g., the user object appears in many places. Always use the defined `UserModel`.)
 
 For MODELS ONLY:
-* Models should have NO helper functions. Functions in models will be removed!
+* Models should have NO helper functions. Functions in models will be removed! The only exception is if the helper function can be *widely* used (e.g., `Channel.user_can`).
 * Models are NOT responsible for HTTP requests. Resources do this!
 
 ## Adding Resources
@@ -85,24 +82,7 @@ class YourResource(BaseResource):
     # endpoints as functions
 ```
 
-Some fetches have JSON query strings attached. In this case you define them as follows:
-
-    ```python
-    from typing import TypedDict
-
-    class YourParams(TypedDict, total=False):
-        param_1: type
-        param_2: type
-
-    ...
-
-    @dataclass
-    class YourResource(DataModel):
-        # the fields
-
-        async def fetch_me(self, **kwargs: Unpack[YourParams]):
-            # the logic...
-    ```
+JSON query strings should be attached as parameters to the function they represent.
 
 [`Client`](https://scurry-works.github.io/scurrypy/api/client/#scurrypy.client.Client) provides a thin layer for requesting resources. If you implement a new resource, please also add it to the client as follows:
 
@@ -125,6 +105,25 @@ Some fetches have JSON query strings attached. In this case you define them as f
 ## Missing Endpoints
 All endpoints should send requests through [`HTTPClient.request()`](https://scurry-works.github.io/scurrypy/internals/http/#scurrypy.core.http.HTTPClient.request) and be attached to their respective resource. Which resource gets the endpoint is based on the criteria of the endpoint, NOT based on how Discord organizes them. 
 For example, the endpoint for fetching messages falls under the Message resource by Discord's docs. However, by ScurryPy's standards, the endpoint falls under the Channel resource because the endpoint requires a channel ID.
+
+## Adding Parts
+Parts are used to model Discord payloads the user sends. Parts are just like models, except all fields are deferrable, meaning they must be set to `None`. 
+
+If you implement a new part, it should be formatted as follows:
+
+    ```python
+    @dataclass
+    class YourPart(DataModel):
+        """Your model's description."""
+
+        field_1: type = None
+        """This is a field that must be filled out at some point."""
+
+        field_2: Optional[type] = None
+        """This is an optional field. It can be omitted."""
+    ```
+
+> **NOTE:** querying params are NOT a part!
 
 ## Questions?
 Open an issue or discussion!
