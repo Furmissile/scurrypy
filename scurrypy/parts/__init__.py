@@ -1,8 +1,19 @@
 # scurrypy/parts
 
+from .bot_emoji import CreateBotEmoji, EditBotEmoji
+
 from .channel import (
-    ChannelTypes, 
-    GuildChannel
+    ChannelTypes,
+    ChannelFlags,
+    SortOrderTypes,
+    ForumLayoutTypes,
+    TagPart,
+    DefaultReactionPart,
+    CreateGuildChannel,
+    EditDMChannel,
+    EditThreadChannel,
+    EditGuildChannel,
+    CreateThreadWithoutMessage
 )
 
 from .command import (
@@ -63,6 +74,8 @@ from .embed import (
     EmbedPart
 )
 
+from .guild_emoji import CreateGuildEmoji, EditGuildEmoji
+
 from .image_data import ImageData
 
 from .message import (
@@ -75,10 +88,12 @@ from .message import (
 )
 
 from .modal import ModalPart
-from .role import Role, RoleColors
+from .role import CreateGuildRole, EditGuildRole, RoleColors
 
 __all__ = [
-    "ChannelTypes", "GuildChannel",
+    "CreateBotEmoji", "EditBotEmoji",
+    "CreateGuildChannel", "TagPart", "DefaultReactionPart", "ChannelTypes", "ChannelFlags", "SortOrderTypes", "ForumLayoutTypes", 
+    "EditDMChannel", "EditThreadChannel", "EditGuildChannel", "CreateThreadWithoutMessage",
     "CommandTypes", "CommandOption", "CommandOptionChoice", "CommandOptionTypes", "SlashCommand", "UserCommand", "MessageCommand",
     "ContainerChild", "ActionRowChild", "LabelChild", "SectionAccessoryChild", "SectionChild",
     "SectionPart", "TextDisplay", "Thumbnail", "MediaGalleryItem", "MediaGallery",
@@ -87,6 +102,9 @@ __all__ = [
     "TextInputStyles", "TextInput", "DefaultValue", "UserSelect", "RoleSelect", "MentionableSelect",
     "ChannelSelect",
     "EmbedAuthor", "EmbedThumbnail", "EmbedField", "EmbedImage", "EmbedFooter", "EmbedPart",
+    "CreateGuildEmoji", "EditGuildEmoji",
     "ImageData",
-    "MessageFlags", "MessageReferenceTypes", "MessageReference", "Attachment", "MessagePart", "Role", "RoleColors", "ModalPart"
+    "MessageFlags", "MessageReferenceTypes", "MessageReference", "Attachment", "MessagePart", 
+    "ModalPart",
+    "CreateGuildRole", "EditGuildRole", "RoleColors"
 ]

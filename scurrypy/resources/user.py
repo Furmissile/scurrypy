@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from .base_resource import BaseResource
 
-from ..models.guild_member import GuildMemberModel
+from ..models.user import GuildMemberModel
 from ..models.user import UserModel
 
 @dataclass

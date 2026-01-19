@@ -96,7 +96,7 @@ class Message(BaseResource):
         await self._http.request("DELETE", f"/channels/{self.channel_id}/messages/{self.id}")
 
     async def add_reaction(self, emoji: EmojiModel | str) -> None:
-        """Add a reaction from this message.
+        """Add a reaction to this message.
 
         Permissions:
             * `READ_MESSAGE_HISTORY` → required to view message

@@ -32,3 +32,13 @@ class MessageModel(DataModel):
 
     timestamp: Optional[str]
     """Timestamp of when the message was sent."""
+
+@dataclass
+class PinnedMessageModel(DataModel):
+    """Pinned message data."""
+
+    message: MessageModel
+    """Message resource of the pinned message."""
+
+    pinned_at: Optional[str]
+    """ISO8601 timestamp of when the message was pinned."""

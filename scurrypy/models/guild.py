@@ -18,8 +18,13 @@ class ReadyGuildModel(DataModel):
 
 @dataclass
 class UnavailableGuild(DataModel):
+    """Guild info during an outage or before bot bootup."""
+
     id: int
+    """ID of the associated guild."""
+
     unavailable: bool
+    """If the guild is offline."""
 
 @dataclass
 class GuildModel(DataModel):

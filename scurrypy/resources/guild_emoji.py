@@ -4,7 +4,7 @@ from .base_resource import BaseResource
 
 from ..models.emoji import EmojiModel
 
-from ..parts.image_data import ImageData
+from ..parts.guild_emoji import *
 
 @dataclass
 class GuildEmoji(BaseResource):
@@ -36,13 +36,11 @@ class GuildEmoji(BaseResource):
 
         return [EmojiModel.from_dict(emoji) for emoji in data]
 
-    async def create(self, name: str, image: ImageData, roles: list[int] = None) -> EmojiModel:
+    async def create(self, params: CreateGuildEmoji) -> EmojiModel:
         """Create a new emoji for this guild.
 
         Args:
-            name (str): name of the emoji
-            image (ImageData): emoji image (128x128)
-            roles (list[int]): roles allowed to use this emoji
+            params (CreateGuildEmoji): fields for creating a guild emoji
 
         Returns:
             (EmojiModel): new emoji
@@ -51,22 +49,17 @@ class GuildEmoji(BaseResource):
         data = await self._http.request(
             'POST', 
             f'/guilds/{self.guild_id}/emojis', 
-            data={
-                'name': name,
-                'image': image.uri,
-                'roles': roles
-            }
+            data=params.to_dict()
         )
 
         return EmojiModel.from_dict(data)
     
-    async def edit(self, emoji_id: int, name: str = None, roles: list[int] = None) -> EmojiModel:
+    async def edit(self, emoji_id: int, params: EditGuildEmoji) -> EmojiModel:
         """Edit a guild emoji in this guild.
 
         Args:
             emoji_id (int): ID of the emoji to edit
-            name (str): new name for the emoji
-            roles (list[int]): new roles allowed to use this emoji
+            params (EditGuildEmoji): params for editing a guild's emoji
 
         Returns:
             (EmojiModel): updated emoji
@@ -75,10 +68,7 @@ class GuildEmoji(BaseResource):
         data = await self._http.request(
             'PATCH', 
             f'/guilds/{self.guild_id}/emojis/{emoji_id}', 
-            data={
-                'name': name,
-                'roles': roles
-            }
+            data=params.to_dict()
         )
 
         return EmojiModel.from_dict(data)

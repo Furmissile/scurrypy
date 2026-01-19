@@ -2,7 +2,14 @@
 
 from .application import ApplicationFlags, ApplicationModel
 from .attachment import AttachmentModel
-from .channel import ChannelModel, PinnedMessageModel
+from .channel import (
+    ThreadMetadataModel,
+    ChannelModel, 
+    FollowedChannelModel,
+    TagModel,
+    DefaultReactionModel,
+    ArchivedThreads
+)
 from .command import (
     ApplicationCommandTypes,
     ApplicationCommandOptionTypes,
@@ -11,7 +18,6 @@ from .command import (
     ApplicationCommandModel
 )
 from .emoji import EmojiModel
-from .guild_member import GuildMemberModel
 from .guild import ReadyGuildModel, GuildModel
 from .integration import IntegrationModel
 from .interaction import (
@@ -22,25 +28,24 @@ from .interaction import (
     InteractionTypes,
     InteractionModel
 )
-from .message import MessageModel
+from .message import MessageModel, PinnedMessageModel
 from .role import RoleColorModel, RoleModel
-from .user import UserModel
+from .user import UserModel, GuildMemberModel
 
 __all__ = [
     "ApplicationFlags", "ApplicationModel",
     "AttachmentModel",
-    "ChannelModel", "PinnedMessageModel",
+    "ChannelModel", "FollowedChannelModel", "ThreadMetadataModel", "TagModel", "DefaultReactionModel", "ArchivedThreads",
     "ApplicationCommandTypes", "ApplicationCommandOptionTypes", "ApplicationCommandOptionChoiceModel", 
     "ApplicationCommandOptionModel", "ApplicationCommandModel",
     "EmojiModel",
-    "GuildMemberModel",
     "ReadyGuildModel", "GuildModel",
     "IntegrationModel",
     
     "InteractionCallbackDataModel", "InteractionCallbackModel", "InteractionCallbackTypes", 
     "InteractionDataTypes", "InteractionTypes", "InteractionModel",
 
-    "MessageModel",
+    "MessageModel", "PinnedMessageModel",
     "RoleColorModel", "RoleModel",
-    "UserModel"
+    "UserModel", "GuildMemberModel"
 ]

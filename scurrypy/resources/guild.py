@@ -2,12 +2,12 @@ from dataclasses import dataclass
 
 from .base_resource import BaseResource
 
-from ..parts.channel import GuildChannel
-from ..parts.role import Role
+from ..parts.channel import CreateGuildChannel
+from ..parts.role import CreateGuildRole, EditGuildRole
 
 from ..models.role import RoleModel
 from ..models.guild import GuildModel
-from ..models.guild_member import GuildMemberModel
+from ..models.user import GuildMemberModel
 from ..models.channel import ChannelModel
 
 @dataclass
@@ -42,19 +42,19 @@ class Guild(BaseResource):
 
         return [ChannelModel.from_dict(channel) for channel in data]
 
-    async def create_channel(self, channel: GuildChannel) -> ChannelModel:
+    async def create_channel(self, params: CreateGuildChannel) -> ChannelModel:
         """Create a channel in this guild.
 
         Permissions:
             * `MANAGE_CHANNELS` → required to create a channel
 
         Args:
-            channel (GuildChannel): the guild channel to create
+            params (CreateGuildChannel): the guild channel to create
 
         Returns:
             (ChannelModel): created channel
         """
-        data = await self._http.request('POST', f'/guilds/{self.id}/channels', data=channel.to_dict())
+        data = await self._http.request('POST', f'/guilds/{self.id}/channels', data=params.to_dict())
 
         return ChannelModel.from_dict(data)
 
@@ -143,35 +143,35 @@ class Guild(BaseResource):
         
         return [RoleModel.from_dict(role) for role in data]
 
-    async def create_guild_role(self, role: Role) -> RoleModel:
+    async def create_guild_role(self, params: CreateGuildRole) -> RoleModel:
         """Create a role in this guild.
 
         Permissions:
             * `MANAGE_ROLES` → required to add a role to the guild
 
         Args:
-            role (Role): role to create
+            params (CreateGuildRole): fields to create a role
 
         Returns:
             (RoleModel): created role
         """
-        data = await self._http.request('POST', f'/guilds/{self.id}/roles', data=role.to_dict())
+        data = await self._http.request('POST', f'/guilds/{self.id}/roles', data=params.to_dict())
 
         return RoleModel.from_dict(data)
 
-    async def edit_guild_role(self, role_id: int, role: Role) -> RoleModel:
+    async def edit_guild_role(self, role_id: int, params: EditGuildRole) -> RoleModel:
         """Edit a role in this guild.
 
         Permissions:
             * `MANAGE_ROLES` → required to edit a role in the guild
 
         Args:
-            role (Role): role with fields to edit
+            params (EditGuildRole): role with fields to edit
 
         Returns:
             (RoleModel): edited role
         """
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=role.to_dict())
+        data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=params.to_dict())
 
         return RoleModel.from_dict(data)
     

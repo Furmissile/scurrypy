@@ -3,6 +3,8 @@ from ..core.model import DataModel
 
 from typing import Optional
 
+from .image_data import ImageData
+
 @dataclass
 class RoleColors(DataModel):
     """Parameters for setting role colors."""
@@ -17,8 +19,8 @@ class RoleColors(DataModel):
     """Tertiary color of the role. Creates a holographic style."""
 
 @dataclass
-class Role(DataModel):
-    """Parameters for creating/editing a role."""
+class CreateGuildRole(DataModel):
+    """Parameters for creating a role."""
 
     colors: RoleColors = None
     """Colors of the role."""
@@ -29,11 +31,36 @@ class Role(DataModel):
     permissions: int = 0
     """Permission bit set."""
 
-    hoist: bool = False
+    hoist: bool = None
     """If the role is pinned in the user listing."""
 
-    mentionable: bool = False
+    mentionable: bool = None
     """If the role is mentionable."""
 
     unicode_emoji: Optional[str] = None
     """Unicode emoji of the role."""
+
+@dataclass
+class EditGuildRole(DataModel):
+    """Parameters for editing a role."""
+
+    name: Optional[str] = None
+    """Name of the role."""
+
+    permissions: Optional[int] = 0
+    """Permission bit set."""
+
+    colors: Optional[RoleColors] = None
+    """Colors of the role."""
+
+    hoist: Optional[bool] = None
+    """If the role is pinned in the user listing."""
+
+    icon: Optional[ImageData] = None
+    """Role's icon image (if guild has `ROLE_ICONS` feature)."""
+
+    unicode_emoji: Optional[str] = None
+    """Unicode emoji of the role."""
+
+    mentionable: bool = None
+    """If the role is mentionable."""

@@ -6,7 +6,7 @@ from typing import Optional
 
 from .channel import ChannelModel
 from .guild import GuildModel
-from .guild_member import GuildMemberModel
+from .user import GuildMemberModel
 from .message import MessageModel
 
 class InteractionDataTypes:
