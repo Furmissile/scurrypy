@@ -2715,14 +2715,11 @@
     <div class="doc doc-contents ">
 
         <p>Edit this channel.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>MANAGE_CHANNELS</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>MANAGE_CHANNELS</code> → required to edit this channel</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -2777,15 +2774,11 @@
     <div class="doc doc-contents ">
 
         <p>Deletes this channel from the server.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>MANAGE_CHANNELS</code> and <code>MANAGE_THREADS</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>MANAGE_CHANNELS</code> → required to delete this channel</li>
-<li><code>MANAGE_THREADS</code> → required to delete a thread</li>
-</ul>
-</details>
 
     </div>
 
@@ -2807,15 +2800,11 @@
     <div class="doc doc-contents ">
 
         <p>Fetches this channel's messages.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>VIEW_CHANNEL</code> and <code>READ_MESSAGE_HISTORY</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>VIEW_CHANNEL</code> → required to access channel messages</li>
-<li><code>READ_MESSAGE_HISTORY</code> → required for user, otherwise no messages are returned</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -2898,14 +2887,11 @@
     <div class="doc doc-contents ">
 
         <p>Send a message to this channel.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>SEND_MESSAGES</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>SEND_MESSAGES</code> → required to create a message in this channel</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -3023,6 +3009,10 @@
     <div class="doc doc-contents ">
 
         <p>Get this channel's pinned messages.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>VIEW_CHANNEL</code> and <code>READ_MESSAGE_HISTORY</code></p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul>
@@ -3035,14 +3025,6 @@
 <p>Does not work on a <code>GUILD_FORUM</code> channel!</p>
 </div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>VIEW_CHANNEL</code> → required to access pinned messages</li>
-<li><code>READ_MESSAGE_HISTORY</code> → required for reading pinned messages</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -3420,14 +3402,11 @@
 <p class="admonition-title">Note</p>
 <p>Threads are ordered by <code>active_timestamp</code> in descending order.</p>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>READ_MESSAGE_HISTORY</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>READ_MESSAGE_HISTORY</code> → required for reading threads</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -3490,15 +3469,11 @@
 <p class="admonition-title">Note</p>
 <p>Threads are ordered by <code>active_timestamp</code> in descending order.</p>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>READ_MESSAGE_HISTORY</code> and <code>MANAGE_THREADS</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>READ_MESSAGE_HISTORY</code> → required for reading threads</li>
-<li><code>MANAGE_THREADS</code> → required for accessing threads</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -3561,14 +3536,11 @@
 <p class="admonition-title">Note</p>
 <p>Threads are ordered by their ID in descending order.</p>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>READ_MESSAGE_HISTORY</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>READ_MESSAGE_HISTORY</code> → required for reading threads</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>

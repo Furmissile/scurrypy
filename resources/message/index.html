@@ -2647,14 +2647,11 @@
     <div class="doc doc-contents ">
 
         <p>Sends a new message to the current channel.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>SEND_MESSAGES</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>SEND_MESSAGES</code> → required to send your own messages</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -2709,14 +2706,11 @@
     <div class="doc doc-contents ">
 
         <p>Edits this message.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>MANAGE_MESSAGES</code> <em>only</em> if editing another user's message</p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>MANAGE_MESSAGES</code> → ONLY if editing another user's message</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -2771,15 +2765,14 @@
     <div class="doc doc-contents ">
 
         <p>Crosspost this message in an Annoucement channel to all following channels.</p>
-
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<ul>
 <li><code>SEND_MESSAGES</code> → required to publish your own messages</li>
 <li><code>MANAGE_MESSAGES</code> → required to publish messages from others</li>
 </ul>
-</details>
+</div>
+
 
 <p><span class="doc-section-title">Returns:</span></p>
     <ul>
@@ -2839,15 +2832,11 @@
     <div class="doc doc-contents ">
 
         <p>Add a reaction to this message.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>READ_MESSAGE_HISTORY</code> and <code>ADD_REACTIONS</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>READ_MESSAGE_HISTORY</code> → required to view message</li>
-<li><code>ADD_REACTIONS</code> → required to create reaction</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -2925,14 +2914,11 @@
     <div class="doc doc-contents ">
 
         <p>Remove a specific user's reaction from this message.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>MANAGE_MESSAGES</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>MANAGE_MESSAGES</code> → required to remove another user's reaction</li>
-</ul>
-</details>
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
@@ -2979,14 +2965,11 @@
     <div class="doc doc-contents ">
 
         <p>Clear all reactions from this message.</p>
+<div class="admonition important">
+<p class="admonition-title">Permissions</p>
+<p>Requires <code>MANAGE_MESSAGES</code></p>
+</div>
 
-
-<details class="permissions" open>
-  <summary>Permissions</summary>
-  <ul>
-<li><code>MANAGE_MESSAGES</code> → required to remove all reaction</li>
-</ul>
-</details>
 
     </div>
 
