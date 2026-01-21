@@ -2,9 +2,22 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
-## [0.15.0] - Jan 2026
+## [0.16.0] - Jan 2026
 
-### Breaking Changes'
+## Breaking Changes
+* Removed: `ImageData.uri` 
+    * the uri code is factored into `to_dict`
+* New category: `params/` for modifying resources. Used internally by resources.
+* Removed: `Message.send` in favor of `Channel.send`
+* Renamed: `resources/commands.py` to `resources/command.py`
+* `Channel` resource has been split into `ThreadChannel` and `GuildChannel` with `Channel` as a base class.
+* `Command` resource has been split into `GuildCommand` and `GlobalCommand` with `Command` as a base class.
+
+* Moving forward, params are for modifying, function parameters are for querying, and parts are for creating.
+
+## [0.15.0]
+
+### Breaking Changes
 
 * Renamed all `modify` resource functions to `edit`
 * All endpoints except fetching now require a part.
