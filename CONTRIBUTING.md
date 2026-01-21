@@ -34,7 +34,7 @@ ScurryPy prioritizes **clarity over magic**. When contributing:
 
 > **Important Note**: Throughout this document, Discord's payloads are called objects and ScurryPy's models are called data classes.
 
-## Adding Models
+## Models
 
 All models and resources in ScurryPy are data classes themselves and inherit the `DataModel` base class. 
 
@@ -65,10 +65,11 @@ For MODELS ONLY:
 * Models should have NO helper functions. Functions in models will be removed! The only exception is if the helper function can be *widely* used (e.g., `Channel.user_can`).
 * Models are NOT responsible for HTTP requests. Resources do this!
 
-## Adding Resources
+## Resources
 Resources are just like model, but with added functionality. All resources inherit the [`BaseResource`](https://scurry-works.github.io/scurrypy/internals/model/#scurrypy.resources.base_resource.BaseResource) class.
 
 Please refer to the following example for how the resource is expected to be laid out:
+
 ```python
 from dataclasses import dataclass
 from .base_resource import BaseResource
@@ -82,34 +83,38 @@ class YourResource(BaseResource):
     # endpoints as functions
 ```
 
-JSON query strings should be attached as parameters to the function they represent.
-
 [`Client`](https://scurry-works.github.io/scurrypy/api/client/#scurrypy.client.Client) provides a thin layer for requesting resources. If you implement a new resource, please also add it to the client as follows:
 
-    ```python
-    def your_resource(self, some_id: int, etc, *, context = None):
-        """Creates an interactable resource.
+```python
+def your_resource(self, some_id: int, etc, *, context = None):
+    """Creates an interactable resource.
 
-        Args:
-            some_id (int): ID of target resource
+    Args:
+        some_id (int): ID of target resource
 
-        Returns:
-            (YourResource): the class resource
-        """
-        from .resources.me import YourResource
+    Returns:
+        (YourResource): the class resource
+    """
+    from .resources.me import YourResource
 
-        return YourResource(self._http, context, some_id, etc...)
-    ```
-    and PLEASE: document the function completely!
+    return YourResource(self._http, context, some_id, etc...)
+```
+> **NOTE:** document the function completely!
 
-## Missing Endpoints
+## Endpoints
 All endpoints should send requests through [`HTTPClient.request()`](https://scurry-works.github.io/scurrypy/internals/http/#scurrypy.core.http.HTTPClient.request) and be attached to their respective resource. Which resource gets the endpoint is based on the criteria of the endpoint, NOT based on how Discord organizes them. 
 For example, the endpoint for fetching messages falls under the Message resource by Discord's docs. However, by ScurryPy's standards, the endpoint falls under the Channel resource because the endpoint requires a channel ID.
 
-## Adding Parts
-Parts are used to model Discord payloads the user sends. Parts are just like models, except all fields are deferrable, meaning they must be set to `None`. 
+Discord's resources have 4 common actions: fetch, create, edit, and delete. These functions must always be implemented as:
 
-If you implement a new part, it should be formatted as follows:
+* *fetch/delete*: flat parameters as part of the endpoint's function
+* *create*: add as a part or use an existing part from `/parts`
+* *edit*: add as a param or use an existing param in `/params`
+
+    ### Parts
+    Parts are used to model Discord payloads the user sends. Parts are just like models, except all fields are deferrable, meaning they must be set to `None`. 
+
+    If you implement a new part, it should be formatted as follows:
 
     ```python
     @dataclass
@@ -123,7 +128,27 @@ If you implement a new part, it should be formatted as follows:
         """This is an optional field. It can be omitted."""
     ```
 
-> **NOTE:** querying params are NOT a part!
+    > **NOTE:** querying params are NOT a part!
+
+    ### Parameters
+    Modifying endpoints that edit discord objects should have a parameters object defined in `params/`. These objects represent the fields that can be modified.
+
+    If you implement a new param, it should be formatted as follows:
+
+    ```python
+    from typing import TypedDict, Optional
+
+    class MyParams(TypedDict, total=False):
+        """Your params description."""
+
+        field_1: type
+        """This field must be filled out."""
+
+        field_2: Optional[type]
+        """This field is optional and may be omitted."""
+    ```
+
+    > **NOTE:** if including a dataclass, please prepare to convert it to a dictionary using `DataModel.to_dict` in the resource endpoint.
 
 ## Questions?
 Open an issue or discussion!
