@@ -51,7 +51,7 @@ class EditGuildChannelParams(TypedDict, total=False):
         This field does not live update!
     """
 
-class EditThreadChannelParams(TypedDict):
+class EditThreadChannelParams(TypedDict, total=False):
     """Parameters for editing a thread channel."""
 
     name: Optional[str]

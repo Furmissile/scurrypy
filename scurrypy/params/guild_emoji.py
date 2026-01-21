@@ -1,6 +1,6 @@
 from typing import TypedDict
 
-class EditGuildEmojiParams(TypedDict):
+class EditGuildEmojiParams(TypedDict, total=False):
     """Parameters for editing a guild emoji."""
 
     name: str

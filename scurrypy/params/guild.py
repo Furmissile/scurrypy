@@ -3,7 +3,7 @@ from typing import TypedDict, Optional
 from ..parts.role import RoleColorsPart
 from ..parts.image_data import ImageData
 
-class EditGuildRoleParams(TypedDict):
+class EditGuildRoleParams(TypedDict, total=False):
     """Represents fields for editing a guild role."""
 
     name: Optional[str]

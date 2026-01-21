@@ -2,7 +2,7 @@ from typing import TypedDict, Optional
 
 from ..parts.command import CommandOption
 
-class EditGuildCommandParams(TypedDict):
+class EditGuildCommandParams(TypedDict, total=False):
     """Parameters for editing a guild command."""
 
     name: Optional[str]
@@ -17,7 +17,7 @@ class EditGuildCommandParams(TypedDict):
     nsfw: Optional[bool]
     """Whether this command is age restricted."""
 
-class EditGlobalCommandParams(TypedDict):
+class EditGlobalCommandParams(TypedDict, total=False):
     """Parameters for editing a global command."""
 
     name: Optional[str]
