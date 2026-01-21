@@ -23,7 +23,7 @@ class Interaction(BaseResource):
         """Create a message in response to an interaction.
 
         Args:
-            message (str | MessagePart): 2
+            message (str | MessagePart): content as a string or MessagePart
             with_response (bool, optional): if the interaction data should be returned. Defaults to `False`.
             **flags: message flags to set. (set respective flag to `True` to toggle.)
 

@@ -1,6 +1,6 @@
 # scurrypy/parts
 
-from .bot_emoji import CreateBotEmoji, EditBotEmoji
+from .bot_emoji import BotEmojiPart
 
 from .channel import (
     ChannelTypes,
@@ -9,11 +9,9 @@ from .channel import (
     ForumLayoutTypes,
     TagPart,
     DefaultReactionPart,
-    CreateGuildChannel,
-    EditDMChannel,
-    EditThreadChannel,
-    EditGuildChannel,
-    CreateThreadWithoutMessage
+    GuildChannelPart,
+    ThreadFromMessagePart,
+    ThreadWithoutMessagePart
 )
 
 from .command import (
@@ -74,7 +72,7 @@ from .embed import (
     EmbedPart
 )
 
-from .guild_emoji import CreateGuildEmoji, EditGuildEmoji
+from .guild_emoji import GuildEmojiPart
 
 from .image_data import ImageData
 
@@ -88,12 +86,12 @@ from .message import (
 )
 
 from .modal import ModalPart
-from .role import CreateGuildRole, EditGuildRole, RoleColors
+from .role import RoleColorsPart, GuildRolePart
 
 __all__ = [
-    "CreateBotEmoji", "EditBotEmoji",
-    "CreateGuildChannel", "TagPart", "DefaultReactionPart", "ChannelTypes", "ChannelFlags", "SortOrderTypes", "ForumLayoutTypes", 
-    "EditDMChannel", "EditThreadChannel", "EditGuildChannel", "CreateThreadWithoutMessage",
+    "BotEmojiPart",
+    "TagPart", "DefaultReactionPart", "ChannelTypes", "ChannelFlags", "SortOrderTypes", "ForumLayoutTypes", 
+    "GuildChannelPart", "ThreadFromMessagePart", "ThreadWithoutMessagePart",
     "CommandTypes", "CommandOption", "CommandOptionChoice", "CommandOptionTypes", "SlashCommand", "UserCommand", "MessageCommand",
     "ContainerChild", "ActionRowChild", "LabelChild", "SectionAccessoryChild", "SectionChild",
     "SectionPart", "TextDisplay", "Thumbnail", "MediaGalleryItem", "MediaGallery",
@@ -102,9 +100,9 @@ __all__ = [
     "TextInputStyles", "TextInput", "DefaultValue", "UserSelect", "RoleSelect", "MentionableSelect",
     "ChannelSelect",
     "EmbedAuthor", "EmbedThumbnail", "EmbedField", "EmbedImage", "EmbedFooter", "EmbedPart",
-    "CreateGuildEmoji", "EditGuildEmoji",
+    "GuildEmojiPart",
     "ImageData",
     "MessageFlags", "MessageReferenceTypes", "MessageReference", "Attachment", "MessagePart", 
     "ModalPart",
-    "CreateGuildRole", "EditGuildRole", "RoleColors"
+    "RoleColorsPart", "GuildRolePart"
 ]

@@ -1,17 +1,19 @@
 from dataclasses import dataclass
+from typing import Unpack
 
 from .base_resource import BaseResource
 
-from ..parts.channel import EditGuildChannel, CreateThreadFromMessage, EditDMChannel, EditThreadChannel, CreateThreadWithoutMessage
-from ..parts.message import MessagePart
-
 from ..models.message import MessageModel, PinnedMessageModel
-from ..models.channel import ChannelModel, ThreadMemberModel, ArchivedThreads
+from ..models.channel import ChannelModel, ThreadMemberModel
 
+from ..parts.message import MessagePart
+from ..parts.channel import ThreadFromMessagePart, ThreadWithoutMessagePart
+
+from ..params.channel import EditGuildChannelParams, EditThreadChannelParams
 
 @dataclass
 class Channel(BaseResource):
-    """Represents a Discord guild channel."""
+    """Represents a Discord channel."""
 
     id: int
     """ID of the channel."""
@@ -26,38 +28,19 @@ class Channel(BaseResource):
 
         return ChannelModel.from_dict(data)
     
-    async def edit(self, params: EditGuildChannel | EditDMChannel | EditThreadChannel) -> ChannelModel:
-        """Edit this channel.
-
-        Permissions:
-            * `MANAGE_CHANNELS` → required to edit this channel
-
-        Args:
-            params (EditGuildChannel): channel fields to edit
-
-        Returns:
-            (ChannelModel): updated channel
-        """
-
-        data = self._http.request('PATCH', f'/channels/{self.id}', data=params.to_dict())
-
-        return ChannelModel.from_dict(data)
-    
     async def delete(self) -> None:
         """Deletes this channel from the server.
 
-        Permissions:
-            * `MANAGE_CHANNELS` → required to delete this channel
-            * `MANAGE_THREADS` → required to delete a thread
+        !!! important "Permissions"
+            Requires `MANAGE_CHANNELS` and `MANAGE_THREADS`
         """
         await self._http.request("DELETE", f"/channels/{self.id}")
 
     async def fetch_messages(self, limit: int = 50, before: int = None, after: int = None, around: int = None) -> list[MessageModel]:
         """Fetches this channel's messages.
 
-        Permissions:
-            * `VIEW_CHANNEL` → required to access channel messages
-            * `READ_MESSAGE_HISTORY` → required for user, otherwise no messages are returned
+        !!! important "Permissions"
+            Requires `VIEW_CHANNEL` and `READ_MESSAGE_HISTORY`
 
         Args:
             limit (int, optional): Max number of messages to return. Range 1 - 100. Defaults to `50`.
@@ -82,8 +65,8 @@ class Channel(BaseResource):
     async def send(self, message: str | MessagePart) -> MessageModel:
         """Send a message to this channel.
 
-        Permissions:
-            * `SEND_MESSAGES` → required to create a message in this channel
+        !!! important "Permissions"
+            Requires `SEND_MESSAGES`
 
         Args:
             message (str | MessagePart): content as a string or MessagePart
@@ -105,34 +88,18 @@ class Channel(BaseResource):
 
         return MessageModel.from_dict(data)
     
-    async def create_thread_from_message(self, message_id: int, params: CreateThreadFromMessage) -> ChannelModel:
-        """Create a thread from a message.
-
-        Args:
-            message_id (int): ID of message to attach thread
-            params (CreateThreadFromMessage): fields to create thread
-
-        Returns:
-            (ChannelModel): new thread
-        """
-
-        data = await self._http.request('POST', f"channels/{self.id}/messages/{message_id}/threads", data=params.to_dict())
-
-        return ChannelModel.from_dict(data)
-    
     async def fetch_pins(self, limit: int = 50, before: str = None) -> list[PinnedMessageModel]:
         """Get this channel's pinned messages.
 
+        !!! important "Permissions"
+            Requires `VIEW_CHANNEL` and `READ_MESSAGE_HISTORY`
+            
         !!! note
-            * Creates a `PUBLIC_THREAD` when called on a `GUILF_TEXT` channel
+            * Creates a `PUBLIC_THREAD` when called on a `GUILD_TEXT` channel
             * Creates an `ANNOUNCEMENT_THREAD` when called on a `GUILD_ANNOUNCEMENT` channel
         
         !!! warning
             Does not work on a `GUILD_FORUM` channel!
-
-        Permissions:
-            * `VIEW_CHANNEL` → required to access pinned messages
-            * `READ_MESSAGE_HISTORY` → required for reading pinned messages
 
         Args:
             before (str, optional): get pinned messages before this ISO8601 timestamp
@@ -151,53 +118,38 @@ class Channel(BaseResource):
 
         return [PinnedMessageModel.from_dict(item) for item in data]
 
-    async def create_thread_without_message(self, params: CreateThreadWithoutMessage) -> ChannelModel:
-        """Create a thread not connected to an existing message.
+@dataclass
+class GuildChannel(Channel):
+    """Represents a Discord guild channel."""
+
+    async def edit(self, **options: Unpack[EditGuildChannelParams]) -> ChannelModel:
+        """Edit this channel.
+
+        !!! important "Permissions"
+            Requires `MANAGE_CHANNELS`
 
         Args:
-            params (CreateThreadWithoutMessage): fields to create the thread
+            options (EditGuildChannelParams): channel fields to edit
 
         Returns:
-            (ChannelModel): new thread
+            (ChannelModel): updated channel
         """
 
-        data = self._http.request('POST', f'/channels/{self.id}/threads', data=params.to_dict())
+        if options.get('default_reaction_emoji'):
+            options['default_reaction_emoji'] = options['default_reaction_emoji'].to_dict()
+
+        if options.get('available_tags'):
+            options['available_tags'] = [i.to_dict() for i in options['available_tags']]
+
+        data = await self._http.request('PATCH', f'/channels/{self.id}', data=options)
 
         return ChannelModel.from_dict(data)
 
-    async def join_thread(self) -> None:
-        """Add the bot to this thread.
+@dataclass
+class ThreadChannel(Channel):
+    """Represents a thread channel."""
 
-        !!! important
-            Required the thread NOT be archived.
-        """
-        await self._http.request('PUT', f'/channels/{self.id}/thread-members/@me')
-    
-    async def add_thread_member(self, user_id: int) -> None:
-        """Add a user to this thread.
-
-        Args:
-            user_id (int): ID of the user to add
-        """
-        await self._http.request('PUT', f'/channels/{self.id}/thread-members/{user_id}')
-
-    async def leave_thread(self) -> None:
-        """Remove the bot from a thread.
-
-        !!! important
-            Required the thread NOT be archived.
-        """
-        await self._http.request('DELETE', f'/channels/{self.id}/thread-members/@me')
-    
-    async def remove_thread_member(self, user_id: int) -> None:
-        """Remove a user to this thread.
-
-        Args:
-            user_id (int): ID of the user to remove
-        """
-        await self._http.request('DELETE', f'/channels/{self.id}/thread-members/{user_id}')
-
-    async def fetch_thread_member(self, user_id: int, with_member: bool = False) -> ThreadMemberModel:
+    async def fetch_member(self, user_id: int, with_member: bool = False) -> ThreadMemberModel:
         """Fetch a thread emmber of the specified user ID from this thread.
 
         Args:
@@ -214,7 +166,7 @@ class Channel(BaseResource):
 
         return ThreadMemberModel.from_dict(data)
     
-    async def fetch_thread_members(self, limit: int = 100, after: int = None, with_member: bool = False) -> list[ThreadMemberModel]:
+    async def fetch_members(self, limit: int = 100, after: int = None, with_member: bool = False) -> list[ThreadMemberModel]:
         """Fetch all members of this thread.
 
         !!! warning
@@ -239,81 +191,81 @@ class Channel(BaseResource):
 
         return [ThreadMemberModel.from_dict(n) for n in data]
 
-    async def fetch_public_archived_threads(self, before: str = None, limit: int = None) -> ArchivedThreads:
-        """Return public archived threads in this channel.
-
-        !!! note
-            Threads are ordered by `active_timestamp` in descending order.
-
-        Permissions:
-            * `READ_MESSAGE_HISTORY` → required for reading threads
+    async def create_from_message(self, message_id: int, thread: ThreadFromMessagePart) -> ChannelModel:
+        """Create a thread from a message (attached to the message).
 
         Args:
-            before (str, optional): threads before this timestamp
-            limit (int, optional): max number of threads to return
+            message_id (int): ID of the message to attach the thread
+            thread (ThreadFromMessagePart): thread to attach
 
         Returns:
-            (ArchivedThreads): queried archived threads
+            ChannelModel: new thread
         """
 
-        params = {
-            'before': before,
-            'limit': limit
-        }
+        data = await self._http.request('POST', f"channels/{self.id}/messages/{message_id}/threads", data=thread.to_dict())
 
-        data = await self._http.request('GET', f'/channels/{self.id}/threads/archived/public', params=params)
+        return ChannelModel.from_dict(data)
 
-        return ArchivedThreads.from_dict(data)
-
-    async def fetch_private_archived_threads(self, before: str = None, limit: int = None) -> ArchivedThreads:
-        """Return private archived threads in this channel.
-
-        !!! note
-            Threads are ordered by `active_timestamp` in descending order.
-
-        Permissions:
-            * `READ_MESSAGE_HISTORY` → required for reading threads
-            * `MANAGE_THREADS` → required for accessing threads
+    async def create_without_message(self, thread: ThreadWithoutMessagePart) -> ChannelModel:
+        """Create a thread not connected to an existing message.
 
         Args:
-            before (str, optional): threads before this timestamp
-            limit (int, optional): max number of threads to return
+            thread (ThreadWithoutMessagePart): thread to create
 
         Returns:
-            (ArchivedThreads): queried archived threads
+            ChannelModel: new thread
         """
 
-        params = {
-            'before': before,
-            'limit': limit
-        }
+        data = await self._http.request('POST', f'/channels/{self.id}/threads', data=thread.to_dict())
 
-        data = await self._http.request('GET', f'/channels/{self.id}/threads/archived/private', params=params)
+        return ChannelModel.from_dict(data)
+    
+    async def edit(self, **options: Unpack[EditThreadChannelParams]) -> ChannelModel:
+        """Edit this channel.
 
-        return ArchivedThreads.from_dict(data)
-
-    async def fetch_joined_private_archived_threads(self, before: int = None, limit: int = None) -> ArchivedThreads:
-        """Return private archived threads in this channel that the bot has joined.
-
-        !!! note
-            Threads are ordered by their ID in descending order.
-
-        Permissions:
-            * `READ_MESSAGE_HISTORY` → required for reading threads
+        !!! important "Permissions"
+            Requires `MANAGE_CHANNELS`
 
         Args:
-            before (int, optional): threads before this ID
-            limit (int, optional): max number of threads to return
+            options (EditThreadChannelParams): channel fields to edit
 
         Returns:
-            (ArchivedThreads): queried archived threads
+            (ChannelModel): updated channel
         """
 
-        params = {
-            'before': before,
-            'limit': limit
-        }
+        data = await self._http.request('PATCH', f'/channels/{self.id}', data=options)
 
-        data = await self._http.request('GET', f'/channels/{self.id}/users/@me/threads/archived/private', params=params)
+        return ChannelModel.from_dict(data)
 
-        return ArchivedThreads.from_dict(data)
+    async def join(self) -> None:
+        """Add the bot to this thread.
+
+        !!! important
+            Required the thread NOT be archived.
+        """
+        await self._http.request('PUT', f'/channels/{self.id}/thread-members/@me')
+    
+    async def leave(self) -> None:
+        """Remove the bot from a thread.
+
+        !!! important
+            Required the thread NOT be archived.
+        """
+        await self._http.request('DELETE', f'/channels/{self.id}/thread-members/@me')
+    
+    async def add_member(self, user_id: int) -> None:
+        """Add a user to this thread.
+
+        Args:
+            user_id (int): ID of the user to add
+        """
+        await self._http.request('PUT', f'/channels/{self.id}/thread-members/{user_id}')
+
+    async def remove_member(self, user_id: int) -> None:
+        """Remove a user to this thread.
+
+        Args:
+            user_id (int): ID of the user to remove
+        """
+        await self._http.request('DELETE', f'/channels/{self.id}/thread-members/{user_id}')
+

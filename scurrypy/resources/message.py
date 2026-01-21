@@ -27,39 +27,14 @@ class Message(BaseResource):
 
         return MessageModel.from_dict(data)
 
-    async def send(self, message: str | MessagePart) -> MessageModel:
-        """Sends a new message to the current channel.
-
-        Permissions:
-            * `SEND_MESSAGES` → required to send your own messages
-
-        Args:
-            message (str | MessagePart): content as a string or MessagePart
-
-        Returns:
-            (MessageModel): created message
-        """
-        if isinstance(message, str):
-            message = MessagePart(content=message)
-        elif not message:
-            raise ValueError("Missing message.")
-
-        data = await self._http.request(
-            "POST",
-            f"/channels/{self.channel_id}/messages",
-            data=message._prepare().to_dict(),
-            files=[fp.path for fp in message.attachments] if message.attachments else None
-        )
-        return MessageModel.from_dict(data)
-
     async def edit(self, message: str | MessagePart) -> MessageModel:
         """Edits this message.
 
-        Permissions:
-            * `MANAGE_MESSAGES` → ONLY if editing another user's message
+        !!! important "Permissions"
+            Requires `MANAGE_MESSAGES` *only* if editing another user's message
 
         Args:
-            message (str | MessagePart): can be just text or the MessagePart for dynamic messages
+            message (str | MessagePart): content as a string or MessagePart
 
         Returns:
             (MessageModel): updated message
@@ -80,7 +55,7 @@ class Message(BaseResource):
     async def crosspost(self) -> MessageModel:
         """Crosspost this message in an Annoucement channel to all following channels.
 
-        Permissions:
+        !!! important "Permissions"
             * `SEND_MESSAGES` → required to publish your own messages
             * `MANAGE_MESSAGES` → required to publish messages from others
 
@@ -98,9 +73,8 @@ class Message(BaseResource):
     async def add_reaction(self, emoji: EmojiModel | str) -> None:
         """Add a reaction to this message.
 
-        Permissions:
-            * `READ_MESSAGE_HISTORY` → required to view message
-            * `ADD_REACTIONS` → required to create reaction
+        !!! important "Permissions"
+            Requires `READ_MESSAGE_HISTORY` and `ADD_REACTIONS`
 
         Args:
             emoji (EmojiModel | str): the standard emoji (str) or custom emoji (EmojiModel)
@@ -132,8 +106,8 @@ class Message(BaseResource):
     async def remove_user_reaction(self, emoji: EmojiModel | str, user_id: int) -> None:
         """Remove a specific user's reaction from this message.
 
-        Permissions:
-            * `MANAGE_MESSAGES` → required to remove another user's reaction
+        !!! important "Permissions"
+            Requires `MANAGE_MESSAGES`
 
         Args:
             emoji (EmojiModel | str): the standard emoji (str) or custom emoji (EmojiModel)
@@ -151,8 +125,8 @@ class Message(BaseResource):
     async def remove_all_reactions(self) -> None:
         """Clear all reactions from this message.
 
-        Permissions:
-            * `MANAGE_MESSAGES` → required to remove all reaction
+        !!! important "Permissions"
+            Requires `MANAGE_MESSAGES`
         """
         await self._http.request(
             "DELETE",

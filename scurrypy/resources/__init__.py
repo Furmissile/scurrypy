@@ -7,9 +7,11 @@ from .channel import (
     # MessagesFetchParams,
     # PinsFetchParams,
     # ThreadFromMessageParams,
-    Channel
+    Channel,
+    GuildChannel,
+    ThreadChannel
 )
-from .commands import Command
+from .command import Command, GuildCommand, GlobalCommand
 from .guild_emoji import GuildEmoji
 
 from .guild import (
@@ -30,8 +32,8 @@ from .user import (
 __all__ = [
     "Application",
     "BotEmoji",
-    "Channel",
-    "Command",
+    "Channel", "GuildChannel", "ThreadChannel",
+    "Command", "GuildCommand", "GlobalCommand",
     "Guild",
     "GuildEmoji",
     "Interaction",

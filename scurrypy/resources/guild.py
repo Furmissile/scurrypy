@@ -1,14 +1,17 @@
 from dataclasses import dataclass
+from typing import Unpack
 
 from .base_resource import BaseResource
 
-from ..parts.channel import CreateGuildChannel
-from ..parts.role import CreateGuildRole, EditGuildRole
+from ..parts.channel import GuildChannelPart
+from ..parts.role import GuildRolePart
 
 from ..models.role import RoleModel
 from ..models.guild import GuildModel
 from ..models.user import GuildMemberModel
 from ..models.channel import ChannelModel
+
+from ..params.guild import EditGuildRoleParams
 
 @dataclass
 class Guild(BaseResource):
@@ -35,6 +38,9 @@ class Guild(BaseResource):
     async def fetch_channels(self) -> list[ChannelModel]:
         """Fetch this guild's channels.
 
+        !!! note
+            Does not include threads!
+
         Returns:
             (list[ChannelModel]): queried list of the guild's channels
         """
@@ -42,19 +48,19 @@ class Guild(BaseResource):
 
         return [ChannelModel.from_dict(channel) for channel in data]
 
-    async def create_channel(self, params: CreateGuildChannel) -> ChannelModel:
+    async def create_channel(self, channel: GuildChannelPart) -> ChannelModel:
         """Create a channel in this guild.
 
-        Permissions:
-            * `MANAGE_CHANNELS` → required to create a channel
+        !!! important "Permissions"
+            Requires `MANAGE_CHANNELS`
 
         Args:
-            params (CreateGuildChannel): the guild channel to create
+            channel (GuildChannelPart): the guild channel to create
 
         Returns:
             (ChannelModel): created channel
         """
-        data = await self._http.request('POST', f'/guilds/{self.id}/channels', data=params.to_dict())
+        data = await self._http.request('POST', f'/guilds/{self.id}/channels', data=channel.to_dict())
 
         return ChannelModel.from_dict(data)
 
@@ -96,30 +102,6 @@ class Guild(BaseResource):
 
         return [GuildMemberModel.from_dict(member) for member in data]
 
-    async def add_guild_member_role(self, user_id: int, role_id: int) -> None:
-        """Append a role to a guild member of this guild.
-
-        Permissions:
-            * `MANAGE_ROLES` → required to add a role to the user
-        
-        Args:
-            user_id (int): ID of the member for the role
-            role_id (int): ID of the role to append
-        """
-        await self._http.request('PUT', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
-    
-    async def remove_guild_member_role(self, user_id: int, role_id: int) -> None:
-        """Remove a role from a guild member of this guild.
-
-        Permissions:
-            * `MANAGE_ROLES` → required to remove a role from the user
-
-        Args:
-            user_id (int): ID of the member with the role
-            role_id (int): ID of the role to remove
-        """
-        await self._http.request('DELETE', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
-
     async def fetch_guild_role(self, role_id: int) -> RoleModel:
         """Fetch a role in this guild.
 
@@ -132,7 +114,7 @@ class Guild(BaseResource):
         data = await self._http.request('GET', f'/guilds/{self.id}/roles/{role_id}')
         
         return RoleModel.from_dict(data)
-
+    
     async def fetch_guild_roles(self) -> list[RoleModel]:
         """Fetch all roles in this guild.
 
@@ -143,43 +125,70 @@ class Guild(BaseResource):
         
         return [RoleModel.from_dict(role) for role in data]
 
-    async def create_guild_role(self, params: CreateGuildRole) -> RoleModel:
-        """Create a role in this guild.
+    async def add_guild_member_role(self, user_id: int, role_id: int) -> None:
+        """Append a role to a guild member of this guild.
 
-        Permissions:
-            * `MANAGE_ROLES` → required to add a role to the guild
+        !!! important "Permissions"
+            Requires `MANAGE_ROLES`
+        
+        Args:
+            user_id (int): ID of the member for the role
+            role_id (int): ID of the role to append
+        """
+        await self._http.request('PUT', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
+    
+    async def remove_guild_member_role(self, user_id: int, role_id: int) -> None:
+        """Remove a role from a guild member of this guild.
+
+        !!! important "Permissions"
+            Requires `MANAGE_ROLES`
 
         Args:
-            params (CreateGuildRole): fields to create a role
+            user_id (int): ID of the member with the role
+            role_id (int): ID of the role to remove
+        """
+        await self._http.request('DELETE', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
+
+    async def create_guild_role(self, role: GuildRolePart) -> RoleModel:
+        """Create a role in this guild.
+
+        !!! important "Permissions"
+            Requires `MANAGE_ROLES`
+
+        Args:
+            role (GuildRolePart): fields to create a role
 
         Returns:
             (RoleModel): created role
         """
-        data = await self._http.request('POST', f'/guilds/{self.id}/roles', data=params.to_dict())
+        data = await self._http.request('POST', f'/guilds/{self.id}/roles', data=role.to_dict())
 
         return RoleModel.from_dict(data)
 
-    async def edit_guild_role(self, role_id: int, params: EditGuildRole) -> RoleModel:
+    async def edit_guild_role(self, role_id: int, **options: Unpack[EditGuildRoleParams]) -> RoleModel:
         """Edit a role in this guild.
 
-        Permissions:
-            * `MANAGE_ROLES` → required to edit a role in the guild
+        !!! important "Permissions"
+            Requires `MANAGE_ROLES`
 
         Args:
-            params (EditGuildRole): role with fields to edit
+            options (EditGuildRoleParams): role with fields to edit
 
         Returns:
             (RoleModel): edited role
         """
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=params.to_dict())
+        if options.get('colors'):
+            options['colors'] = options['colors'].to_dict()
+
+        data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=options)
 
         return RoleModel.from_dict(data)
     
     async def delete_guild_role(self, role_id: int) -> None:
         """Delete a role in this guild.
 
-        Permissions:
-            * `MANAGE_ROLES` → required to delete a role in the guild
+        !!! important "Permissions"
+            Requires `MANAGE_ROLES`
 
         Args:
             role_id (int): ID of role to delete

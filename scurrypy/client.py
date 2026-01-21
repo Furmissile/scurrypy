@@ -163,21 +163,50 @@ class Client:
 
         return Guild(self._http, context, guild_id)
 
-    def channel(self, channel_id: int, *, context = None):
-        """Creates an interactable channel resource.
+    def guild_channel(self, channel_id: int, *, context = None):
+        """Creates an interactable guild channel resource.
 
         Args:
             channel_id (int): ID of target channel
             context (Any, optional): associated data
 
         Returns:
-            (Channel): the Channel resource
+            (GuildChannel): the GuildChannel resource
         """
-        from .resources.channel import Channel
+        from .resources.channel import GuildChannel
 
-        return Channel(self._http, context, channel_id)
+        return GuildChannel(self._http, context, channel_id)
     
-    def command(self, application_id: int, guild_id: int = None, command_id: int = None, *, context = None):
+    def thread_channel(self, channel_id: int, *, context = None):
+        """Creates an interactable guild channel resource.
+
+        Args:
+            channel_id (int): ID of target channel
+            context (Any, optional): associated data
+
+        Returns:
+            (ThreadChannel): the ThreadChannel resource
+        """
+        from .resources.channel import ThreadChannel
+
+        return ThreadChannel(self._http, context, channel_id)
+    
+    def global_command(self, application_id: int, command_id: int = None, *, context = None):
+        """Creates an interactable command resource.
+
+        Args:
+            application_id (int): bot's user ID
+            command_id (int, optional): ID of command
+            context (Any, optional): associated data
+
+        Returns:
+            (GlobalCommand): the GlobalCommand resource
+        """
+        from .resources.command import GlobalCommand
+
+        return GlobalCommand(self._http, context, application_id, command_id)
+    
+    def guild_command(self, application_id: int, guild_id: int = None, command_id: int = None, *, context = None):
         """Creates an interactable command resource.
 
         Args:
@@ -187,11 +216,11 @@ class Client:
             context (Any, optional): associated data
 
         Returns:
-            (Command): the Command resource
+            (GuildCommand): the GuildCommand resource
         """
-        from .resources.commands import Command
+        from .resources.command import GuildCommand
 
-        return Command(self._http, context, application_id, command_id, guild_id)
+        return GuildCommand(self._http, context, application_id, command_id, guild_id)
 
     def message(self, channel_id: int, message_id: int, *, context = None):
         """Creates an interactable message resource.

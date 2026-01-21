@@ -8,16 +8,7 @@ class ImageData(DataModel):
     path: str = None
     """Path to image."""
 
-    @property
-    def uri(self):
-        """Creates the Base64 data URI scheme.
-
-        Raises:
-            ValueError: Unknown file type
-
-        Returns:
-            (str): the formatted data URI scheme
-        """
+    def to_dict(self):
         import base64, mimetypes
 
         mime, _ = mimetypes.guess_type(self.path)

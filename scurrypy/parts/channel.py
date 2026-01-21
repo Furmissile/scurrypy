@@ -3,19 +3,11 @@ from ..core.model import DataModel
 
 from typing import Optional, Literal
 
-from .image_data import ImageData
-
 class ChannelTypes:
     """Represents the types of channels."""
 
     GUILD_TEXT = 0
     """Text channel within a guild."""
-
-    DM = 1
-    """Direct message between users."""
-
-    GROUP_DM = 3
-    """Direct message between many users."""
 
     GUILD_CATEGORY = 4
     """Organizational category for channels."""
@@ -95,7 +87,7 @@ class TagPart(DataModel):
     """Unicode character of the emoji."""
 
 @dataclass
-class CreateGuildChannel(DataModel):
+class GuildChannelPart(DataModel):
     """Parameters for creating a guild channel."""
 
     name: str = None
@@ -104,99 +96,84 @@ class CreateGuildChannel(DataModel):
     type: Optional[int] = None
     """Type of channel. See [`ChannelTypes`][scurrypy.parts.channel.ChannelTypes]."""
 
-    position: Optional[int] = None
-    """Sorting position of the channel (channels with the same position are sorted by id)."""
-
     topic: Optional[str] = None
     """Topic of the channel."""
 
+    position: Optional[int] = None
+    """Sorting position of the channel (channels with the same position are sorted by id)."""
+
     rate_limit_per_user: Optional[int] = None
-    """Seconds user must wait between sending messages in the channel."""
+    """Seconds user must wait between sending messages in the channel.
+    
+    !!! note
+        Only works for `GUILD_TEXT` and `GUILD_FORUM`.
+    """
 
     parent_id: Optional[int] = None
-    """Category ID of the channel."""
+    """Category ID of the channel.
+    
+    !!! note
+        Only works for `GUILD_TEXT`, `GUILD_ANNOUNCEMENT`, and `GUILD_FORUM`.
+    """
 
     nsfw: Optional[bool] = None
-    """If the channel is flagged NSFW."""
+    """If the channel is flagged NSFW.
+    
+    !!! note
+        Only works for `GUILD_TEXT`, `GUILD_ANNOUNCEMENT`, and `GUILD_FORUM`.
+    """
 
     default_auto_archive_duration: Optional[int] = None
-    """Default duration in minutes threads will be hidden after period of inactivity."""
+    """Default duration in minutes threads will be hidden after period of inactivity.
+
+    !!! note
+        Only works for `GUILD_TEXT`, `GUILD_ANNOUNCEMENT`, and `GUILD_FORUM`.
+    """
 
     default_reaction_emoji: Optional[DefaultReactionPart] = None
-    """Emoji to show in the add reaction button in a `GUILD_FORUM` post."""
+    """Emoji to show in the add reaction button in a `GUILD_FORUM` post.
+
+    !!! note
+        Only works for `GUILD_FORUM`.
+    """
 
     available_tags: Optional[list[TagPart]] = None
-    """Set of tags that can be applied to a `GUILD_FORUM` post."""
+    """Set of tags that can be applied to a `GUILD_FORUM` post.
+    
+    !!! note
+        Only works for `GUILD_FORUM`.
+    """
 
     default_sort_order: Optional[int] = None
-    """Default forum sort order. See [`SortOrderTypes`][scurrypy.parts.channel.SortOrderTypes]. Defaults to `None`."""
+    """Default forum sort order. See [`SortOrderTypes`][scurrypy.parts.channel.SortOrderTypes].
+    
+    !!! note
+        Only works for `GUILD_FORUM`.
+    """
 
     default_forum_layout: Optional[int] = None
-    """Default forum layout view. See [`ForumLayoutTypes`][scurrypy.parts.channel.ForumLayoutTypes]. Defaults to `ForumLayoutTypes.NOT_SET`."""
+    """Default forum layout view. See [`ForumLayoutTypes`][scurrypy.parts.channel.ForumLayoutTypes].
+    
+    !!! note
+        Only works for `GUILD_FORUM`.
+    """
 
     default_thread_rate_limit_per_user: Optional[int] = None
     """Rate limit per user set on newly created threads.
     
     !!! note
         This field does not live update!
-    """
 
-@dataclass
-class EditGuildChannel(DataModel):
-    """Parameters for editing a guild channel."""
-
-    name: str = None
-    """Name of the channel."""
-
-    type: Optional[int] = None
-    """Type of channel. See [`ChannelTypes`][scurrypy.parts.channel.ChannelTypes]."""
-
-    position: Optional[int] = None
-    """Sorting position of the channel (channels with the same position are sorted by id)."""
-
-    topic: Optional[str] = None
-    """Topic of the channel."""
-
-    nsfw: Optional[bool] = None
-    """If the channel is flagged NSFW."""
-
-    rate_limit_per_user: Optional[int] = None
-    """Seconds user must wait between sending messages in the channel."""
-
-    parent_id: Optional[int] = None
-    """Category ID of the channel."""
-
-    default_auto_archive_duration: Optional[int] = None
-    """Default duration in minutes threads will be hidden after period of inactivity."""
-
-    flags: Optional[int] = None
-    """Channel flags. See [`ChannelFlags`][scurrypy.parts.channel.ChannelFlags]."""
-
-    default_reaction_emoji: Optional[DefaultReactionPart] = None
-    """Emoji to show in the add reaction button in a `GUILD_FORUM` post."""
-
-    available_tags: Optional[list[TagPart]] = None
-    """Set of tags that can be applied to a `GUILD_FORUM` post."""
-
-    default_sort_order: Optional[int] = None
-    """Default forum sort order. See [`SortOrderTypes`][scurrypy.parts.channel.SortOrderTypes]. Defaults to `None`."""
-
-    default_forum_layout: Optional[int] = None
-    """Default forum layout view. See [`ForumLayoutTypes`][scurrypy.parts.channel.ForumLayoutTypes]. Defaults to `ForumLayoutTypes.NOT_SET`."""
-
-    default_thread_rate_limit_per_user: Optional[int] = None
-    """Rate limit per user set on newly created threads.
-    
     !!! note
-        This field does not live update!
+        Only works for `GUILD_TEXT`, `GUILD_ANNOUNCEMENT`, and `GUILD_FORUM`.
     """
 
 @dataclass
-class CreateThreadFromMessage(DataModel):
+class ThreadFromMessagePart(DataModel):
     """Parameters for creating a thread attached to a message."""
 
     name: str = None
-    """Name of the channel."""
+    """Name of the thread."""
 
     rate_limit_per_user: Optional[int] = None
     """Seconds user must wait between sending messages in the channel."""
@@ -205,11 +182,11 @@ class CreateThreadFromMessage(DataModel):
     """Duration in minutes threads will be hidden after period of inactivity."""
 
 @dataclass
-class CreateThreadWithoutMessage(DataModel):
+class ThreadWithoutMessagePart(DataModel):
     """Parameters for creating a thread without a message."""
 
     name: str = None
-    """Name of the channel."""
+    """Name of the thread."""
 
     rate_limit_per_user: Optional[int] = None
     """Seconds user must wait between sending messages in the channel."""
@@ -222,45 +199,3 @@ class CreateThreadWithoutMessage(DataModel):
 
     invitable: Optional[bool] = None
     """Whether non-moderators can add other non-moderators to the thread (private threads only)."""
-
-@dataclass
-class EditDMChannel(DataModel):
-    """Parameters for editing a DM channel."""
-
-    name: Optional[str] = None
-    """Channel name."""
-
-    icon: Optional[ImageData] = None
-    """Channel icon."""
-
-@dataclass
-class EditThreadChannel(DataModel):
-    """Parameters for editing a thread channel."""
-
-    name: Optional[str] = None
-    """Name of the channel."""
-
-    archived: Optional[bool] = None
-    """Whether the thread is archived."""
-
-    auto_archive_duration: Optional[Literal[60, 1440, 4320, 10080]] = None
-    """Duration in minutes threads will be hidden after period of inactivity."""
-
-    locked: bool = None
-    """Whether the thread is locked.
-    
-    !!! note
-        Only users with `MANAGE_THREADS` can unarchive the thread.
-    """
-
-    invitable: Optional[bool] = None
-    """Whether non-moderators can add other non-moderators to the thread (private threads only)."""
-
-    rate_limit_per_user: Optional[int] = None
-    """Seconds user must wait between sending messages in the channel."""
-
-    flags: Optional[int] = None
-    """Channel flags. See [`ChannelFlags`][scurrypy.parts.channel.ChannelFlags]."""
-
-    applied_tags: Optional[list[int]]= None
-    """Set of tags applied to a `GUILD_FORUM` post."""

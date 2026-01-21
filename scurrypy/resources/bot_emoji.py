@@ -1,10 +1,13 @@
 from dataclasses import dataclass
+from typing import Unpack
 
 from .base_resource import BaseResource
 
 from ..models.emoji import EmojiModel
 
-from ..parts.bot_emoji import *
+from ..parts.bot_emoji import BotEmojiPart
+
+from ..params.bot_emoji import EditBotEmojiParams
 
 @dataclass
 class BotEmoji(BaseResource):
@@ -38,11 +41,11 @@ class BotEmoji(BaseResource):
 
         return [EmojiModel.from_dict(emoji) for emoji in emojis]
     
-    async def create(self, params: CreateBotEmoji) -> EmojiModel:
+    async def create(self, emoji: BotEmojiPart) -> EmojiModel:
         """Add an emoji to the bot emoji repository.
 
         Args:
-            params (CreateBotEmoji): fields for creating a bot emoji
+            emoji (BotEmojiPart): bot emoji fields
 
         Returns:
             (EmojiModel): new emoji
@@ -50,16 +53,17 @@ class BotEmoji(BaseResource):
         data = await self._http.request(
             'POST', 
             f'/applications/{self.application_id}/emojis',
-            data=params.to_dict()
+            data=emoji.to_dict()
         )
     
         return EmojiModel.from_dict(data)
     
-    async def edit(self, emoji_id: int, params: EditBotEmoji) -> EmojiModel:
+    async def edit(self, emoji_id: int, **options: Unpack[EditBotEmojiParams]) -> EmojiModel:
         """Edit an emoji in the bot repository.
 
         Args:
-            params (EditBotEmoji): fields for editing a bot emoji
+            emoji_id (int): ID of the emoji
+            options (EditBotEmojiParams): fields to edit the emoji
 
         Returns:
             (EmojiModel): updated emoji
@@ -67,7 +71,7 @@ class BotEmoji(BaseResource):
         data = await self._http.request(
             'PATCH', 
             f'/applications/{self.application_id}/emojis/{emoji_id}', 
-            data=params.to_dict()
+            data=options
         )
 
         return EmojiModel.from_dict(data)

@@ -1,10 +1,13 @@
 from dataclasses import dataclass
+from typing import Unpack
 
 from .base_resource import BaseResource
 
 from ..models.emoji import EmojiModel
 
-from ..parts.guild_emoji import *
+from ..parts.guild_emoji import GuildEmojiPart
+
+from ..params.guild_emoji import EditGuildEmojiParams
 
 @dataclass
 class GuildEmoji(BaseResource):
@@ -36,11 +39,11 @@ class GuildEmoji(BaseResource):
 
         return [EmojiModel.from_dict(emoji) for emoji in data]
 
-    async def create(self, params: CreateGuildEmoji) -> EmojiModel:
+    async def create(self, emoji: GuildEmojiPart) -> EmojiModel:
         """Create a new emoji for this guild.
 
         Args:
-            params (CreateGuildEmoji): fields for creating a guild emoji
+            emoji (GuildEmojiPart): fields for creating a guild emoji
 
         Returns:
             (EmojiModel): new emoji
@@ -49,17 +52,17 @@ class GuildEmoji(BaseResource):
         data = await self._http.request(
             'POST', 
             f'/guilds/{self.guild_id}/emojis', 
-            data=params.to_dict()
+            data=emoji.to_dict()
         )
 
         return EmojiModel.from_dict(data)
     
-    async def edit(self, emoji_id: int, params: EditGuildEmoji) -> EmojiModel:
+    async def edit(self, emoji_id: int, **options: Unpack[EditGuildEmojiParams]) -> EmojiModel:
         """Edit a guild emoji in this guild.
 
         Args:
             emoji_id (int): ID of the emoji to edit
-            params (EditGuildEmoji): params for editing a guild's emoji
+            options (EditGuildEmojiParams): params for editing a guild's emoji
 
         Returns:
             (EmojiModel): updated emoji
@@ -68,7 +71,7 @@ class GuildEmoji(BaseResource):
         data = await self._http.request(
             'PATCH', 
             f'/guilds/{self.guild_id}/emojis/{emoji_id}', 
-            data=params.to_dict()
+            data=options
         )
 
         return EmojiModel.from_dict(data)
@@ -76,9 +79,9 @@ class GuildEmoji(BaseResource):
     async def delete(self, emoji_id: int) -> None:
         """Delete an emoji from this guild.
 
-        Permissions:
-            * `CREATE_GUILD_EXPRESSIONS` → if created by the current user (or `MANAGE_GUILD_EXPRESSIONS`)
-            * `MANAGE_GUILD_EXPRESSIONS` → for other emojis
+        !!! important "Permissions"
+            * `CREATE_GUILD_EXPRESSIONS` → required if created by the current user (or `MANAGE_GUILD_EXPRESSIONS`)
+            * `MANAGE_GUILD_EXPRESSIONS` → required for other emojis
 
         Args:
             emoji_id (int): ID of the emoji

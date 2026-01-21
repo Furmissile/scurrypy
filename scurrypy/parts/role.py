@@ -3,10 +3,10 @@ from ..core.model import DataModel
 
 from typing import Optional
 
-from .image_data import ImageData
+from ..parts.image_data import ImageData
 
 @dataclass
-class RoleColors(DataModel):
+class RoleColorsPart(DataModel):
     """Parameters for setting role colors."""
 
     primary_color: int = None
@@ -19,17 +19,20 @@ class RoleColors(DataModel):
     """Tertiary color of the role. Creates a holographic style."""
 
 @dataclass
-class CreateGuildRole(DataModel):
+class GuildRolePart(DataModel):
     """Parameters for creating a role."""
-
-    colors: RoleColors = None
-    """Colors of the role."""
 
     name: str = None
     """Name of the role."""
 
-    permissions: int = 0
-    """Permission bit set."""
+    colors: RoleColorsPart = None
+    """Colors of the role."""
+
+    icon: Optional[ImageData] = None
+    """Icon of the role (if guild has `ROLE_ICONS` feature)."""
+
+    permissions: int = None
+    """Permission bit set. [`INT_LIMIT`]"""
 
     hoist: bool = None
     """If the role is pinned in the user listing."""
@@ -39,28 +42,3 @@ class CreateGuildRole(DataModel):
 
     unicode_emoji: Optional[str] = None
     """Unicode emoji of the role."""
-
-@dataclass
-class EditGuildRole(DataModel):
-    """Parameters for editing a role."""
-
-    name: Optional[str] = None
-    """Name of the role."""
-
-    permissions: Optional[int] = 0
-    """Permission bit set."""
-
-    colors: Optional[RoleColors] = None
-    """Colors of the role."""
-
-    hoist: Optional[bool] = None
-    """If the role is pinned in the user listing."""
-
-    icon: Optional[ImageData] = None
-    """Role's icon image (if guild has `ROLE_ICONS` feature)."""
-
-    unicode_emoji: Optional[str] = None
-    """Unicode emoji of the role."""
-
-    mentionable: bool = None
-    """If the role is mentionable."""
