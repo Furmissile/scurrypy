@@ -58,7 +58,16 @@ This changelog documents all notable and breaking changes to ScurryPy.
     * `Guild.edit_welcome_screen`
     * `Guild.fetch_onboarding`
 
-* New part: `BulkGuildBanPart`
+* New parts: 
+    * `BulkGuildBanPart`
+    * `ThreadFromMessagePart`
+    * `ThreadWithoutMessagePart`
+    * `DefaultReactionPart`
+    * `TagPart`
+    * `BulkGuildBanPart`
+    * `WelcomeScreenChannelPart`
+    * `InvitePart`
+    
 
 ## [0.16.0] - Jan 2026
 
