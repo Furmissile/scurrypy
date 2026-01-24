@@ -106,7 +106,7 @@ class ApplicationCommandModel(DataModel):
     """Unique ID of command."""
 
     type: Optional[int]
-    """Type of command, defaults to `1`. See [`ApplicationCommandTypes`][scurrypy.models.command.ApplicationCommandTypes]."""
+    """Type of command. See [`ApplicationCommandTypes`][scurrypy.models.command.ApplicationCommandTypes]. Defaults to `ApplicationCommandTypes.CHAT_INPUT`."""
 
     application_id: int
     """ID of the parent application."""

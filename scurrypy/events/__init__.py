@@ -1,11 +1,16 @@
 # scurrypy/events
 
 from .channel_events import (
-    # GuildChannelEvent,
-    GuildChannelCreateEvent,
-    GuildChannelUpdateEvent,
-    GuildChannelDeleteEvent,
+    ChannelCreateEvent,
+    ChannelUpdateEvent,
+    ChannelDeleteEvent,
     ChannelPinsUpdateEvent,
+    ThreadCreateEvent,
+    ThreadUpdateEvent,
+    ThreadDeleteEvent,
+    ThreadMembersUpdateEvent,
+    BulkMessageDeleteEvent,
+    WebhooksUpdateEvent
 )
 
 # from .gateway_events import (
@@ -14,7 +19,6 @@ from .channel_events import (
 # )
 
 from .guild_events import (
-    # GuildEvent,
     GuildCreateEvent,
     GuildUpdateEvent,
     GuildDeleteEvent,
@@ -22,7 +26,14 @@ from .guild_events import (
     GuildMemberAddEvent,
     GuildMemberUpdateEvent,
     GuildMemberRemoveEvent,
-    GuildEmojisUpdateEvent
+
+    GuildEmojisUpdateEvent,
+
+    GuildBanAddEvent,
+    GuildBanRemoveEvent,
+
+    GuildIntegrationUpdateEvent,
+    GuildIntegrationDeleteEvent
 )
 
 # from .hello_event import HelloEvent
@@ -38,6 +49,8 @@ from .interaction_events import (
     InteractionEvent
 )
 
+from .invite_events import InviteCreateEvent, InviteDeleteEvent
+
 from .message_events import (
     MessageCreateEvent,
     MessageUpdateEvent,
@@ -45,7 +58,6 @@ from .message_events import (
 )
 
 from .reaction_events import (
-    ReactionType,
     ReactionAddEvent,
     ReactionRemoveEvent,
     ReactionRemoveEmojiEvent,
@@ -65,12 +77,15 @@ from .base_event import Event
 from .event_types import EventTypes
 
 __all__ = [
-    "GuildChannelCreateEvent", "GuildChannelUpdateEvent", "GuildChannelDeleteEvent", "ChannelPinsUpdateEvent",
+    "ChannelCreateEvent", "ChannelUpdateEvent", "ChannelDeleteEvent", "ChannelPinsUpdateEvent", "ThreadCreateEvent",
+    "ThreadMembersUpdateEvent", "ThreadDeleteEvent", "ThreadUpdateEvent", "BulkMessageDeleteEvent", "WebhooksUpdateEvent",
     "GuildCreateEvent", "GuildUpdateEvent", "GuildDeleteEvent",
     "GuildMemberAddEvent", "GuildMemberRemoveEvent", "GuildMemberUpdateEvent", "GuildEmojisUpdateEvent",
+    "GuildBanAddEvent", "GuildBanRemoveEvent", "GuildIntegrationUpdateEvent", "GuildIntegrationDeleteEvent",
     "InteractionEvent",
+    "InviteCreateEvent", "InviteDeleteEvent",
     "MessageCreateEvent", "MessageUpdateEvent", "MessageDeleteEvent",
-    "ReactionType", "ReactionAddEvent", "ReactionRemoveEvent", "ReactionRemoveEmojiEvent", "ReactionRemoveAllEvent",
+    "ReactionAddEvent", "ReactionRemoveEvent", "ReactionRemoveEmojiEvent", "ReactionRemoveAllEvent",
     "ReadyEvent", 
     "RoleCreateEvent", "RoleUpdateEvent", "RoleDeleteEvent",
     "Event", "EventTypes"

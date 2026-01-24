@@ -4,10 +4,12 @@ from typing import Unpack
 from .base_resource import BaseResource
 
 from ..models.message import MessageModel, PinnedMessageModel
-from ..models.channel import ChannelModel, ThreadMemberModel
+from ..models.channel import ChannelModel, ThreadMemberModel, FollowedChannelModel, ArchivedThreadsModel
+from ..models.invite import InviteModel, InviteWithMetadataModel
 
 from ..parts.message import MessagePart
 from ..parts.channel import ThreadFromMessagePart, ThreadWithoutMessagePart
+from ..parts.invite import InvitePart
 
 from ..params.channel import EditGuildChannelParams, EditThreadChannelParams
 
@@ -27,9 +29,39 @@ class Channel(BaseResource):
         data = await self._http.request("GET", f"/channels/{self.id}")
 
         return ChannelModel.from_dict(data)
+
+    async def edit_guild_channel(self, **options: Unpack[EditGuildChannelParams]) -> ChannelModel:
+        """Edit this channel. 
+        Fires [`ChannelUpdateEvent`][scurrypy.events.channel_events.ChannelUpdateEvent].
+        
+        !!! note
+            If modifying a category, all child channels also fire [`ChannelUpdateEvent`][scurrypy.events.channel_events.ChannelUpdateEvent].
+
+        !!! important "Permissions"
+            Requires `MANAGE_CHANNELS`
+
+        Args:
+            options (EditGuildChannelParams): channel fields to edit
+
+        Returns:
+            (ChannelModel): updated channel
+        """
+
+        if options.get('default_reaction_emoji'):
+            options['default_reaction_emoji'] = options['default_reaction_emoji'].to_dict()
+
+        if options.get('available_tags'):
+            options['available_tags'] = [i.to_dict() for i in options['available_tags']]
+
+        data = await self._http.request('PATCH', f'/channels/{self.id}', data=options)
+
+        return ChannelModel.from_dict(data)
     
     async def delete(self) -> None:
-        """Deletes this channel from the server.
+        """Deletes this channel from the server. 
+        Fires [`ChannelUpdateEvent`][scurrypy.events.channel_events.ChannelUpdateEvent] if success,
+        and [`ChannelDeleteEvent`][scurrypy.events.channel_events.ChannelDeleteEvent] 
+            (or [`ThreadDeleteEvent`][scurrypy.events.channel_events.ThreadDeleteEvent] if a thread).
 
         !!! important "Permissions"
             Requires `MANAGE_CHANNELS` and `MANAGE_THREADS`
@@ -61,33 +93,7 @@ class Channel(BaseResource):
         data = await self._http.request('GET', f'/channels/{self.id}/messages', params=params)
 
         return [MessageModel.from_dict(msg) for msg in data]
-    
-    async def send(self, message: str | MessagePart) -> MessageModel:
-        """Send a message to this channel.
 
-        !!! important "Permissions"
-            Requires `SEND_MESSAGES`
-
-        Args:
-            message (str | MessagePart): content as a string or MessagePart
-
-        Returns:
-            (MessageModel): created message
-        """
-        if isinstance(message, str):
-            message = MessagePart(content=message)
-
-        message = message._prepare()
-
-        data = await self._http.request(
-            "POST", 
-            f"/channels/{self.id}/messages", 
-            data=message._prepare().to_dict(),
-            files=[fp.path for fp in message.attachments]
-        )
-
-        return MessageModel.from_dict(data)
-    
     async def fetch_pins(self, limit: int = 50, before: str = None) -> list[PinnedMessageModel]:
         """Get this channel's pinned messages.
 
@@ -118,38 +124,74 @@ class Channel(BaseResource):
 
         return [PinnedMessageModel.from_dict(item) for item in data]
 
-@dataclass
-class GuildChannel(Channel):
-    """Represents a Discord guild channel."""
-
-    async def edit(self, **options: Unpack[EditGuildChannelParams]) -> ChannelModel:
-        """Edit this channel.
+    async def send(self, message: str | MessagePart) -> MessageModel:
+        """Send a message to this channel.
+        Fires [`MessageCreateEvent`][scurrypy.events.message_events.MessageCreateEvent].
 
         !!! important "Permissions"
-            Requires `MANAGE_CHANNELS`
+            Requires `SEND_MESSAGES`
 
         Args:
-            options (EditGuildChannelParams): channel fields to edit
+            message (str | MessagePart): content as a string or MessagePart
 
         Returns:
-            (ChannelModel): updated channel
+            (MessageModel): created message
         """
+        if isinstance(message, str):
+            message = MessagePart(content=message)
 
-        if options.get('default_reaction_emoji'):
-            options['default_reaction_emoji'] = options['default_reaction_emoji'].to_dict()
+        message = message._prepare()
 
-        if options.get('available_tags'):
-            options['available_tags'] = [i.to_dict() for i in options['available_tags']]
+        data = await self._http.request(
+            "POST", 
+            f"/channels/{self.id}/messages", 
+            data=message._prepare().to_dict(),
+            files=[fp.path for fp in message.attachments]
+        )
 
-        data = await self._http.request('PATCH', f'/channels/{self.id}', data=options)
+        return MessageModel.from_dict(data)
 
-        return ChannelModel.from_dict(data)
+    async def bulk_delete_messages(self, message_ids: list[int]) -> None:
+        """Delete multiple messages in a single request.
+        Fires [`BulkMessageDeleteEvent`][scurrypy.events.channel_events.BulkMessageDeleteEvent].
+        
+        !!! important "Permissions"
+            Requires `MANAGE_MESSAGES`.
 
-@dataclass
-class ThreadChannel(Channel):
-    """Represents a thread channel."""
+        !!! important
+            Messages **older than 2 weeks** will fail to get deleted!
 
-    async def fetch_member(self, user_id: int, with_member: bool = False) -> ThreadMemberModel:
+        !!! note
+            Only available for `GUILD_TEXT` channels.
+
+        Args:
+            message_ids (list[int]): IDs of the messages to delete range(2, 100)
+        """
+        await self._http.request(
+            'POST', 
+            f'/channels/{self.id}/messages/bulk-delete', 
+            data={'messages': message_ids}
+        )
+
+    async def follow(self, webhook_channel_id: int) -> FollowedChannelModel:
+        """Follow announcement channel to send messages to a target channel.
+        Fires [`WebhooksUpdateEvent`][scurrypy.events.channel_events.WebhooksUpdateEvent].
+
+        Args:
+            webhook_channel_id (int): ID of target channel
+
+        Returns:
+            (FollowedChannelModel): followed channel
+        """
+        data = await self._http.request(
+            'POST', 
+            f'/channels/{self.id}/followers', 
+            params={'webhook_channel_id': webhook_channel_id}
+        )
+
+        return FollowedChannelModel.from_dict(data)
+
+    async def fetch_thread_member(self, user_id: int, with_member: bool = False) -> ThreadMemberModel:
         """Fetch a thread emmber of the specified user ID from this thread.
 
         Args:
@@ -166,7 +208,7 @@ class ThreadChannel(Channel):
 
         return ThreadMemberModel.from_dict(data)
     
-    async def fetch_members(self, limit: int = 100, after: int = None, with_member: bool = False) -> list[ThreadMemberModel]:
+    async def fetch_thread_members(self, limit: int = 100, after: int = None, with_member: bool = False) -> list[ThreadMemberModel]:
         """Fetch all members of this thread.
 
         !!! warning
@@ -191,8 +233,10 @@ class ThreadChannel(Channel):
 
         return [ThreadMemberModel.from_dict(n) for n in data]
 
-    async def create_from_message(self, message_id: int, thread: ThreadFromMessagePart) -> ChannelModel:
-        """Create a thread from a message (attached to the message).
+    async def create_thread_from_message(self, message_id: int, thread: ThreadFromMessagePart) -> ChannelModel:
+        """Create a thread from a message (attached to the message). 
+        Fires [`ThreadCreateEvent`][scurrypy.events.channel_events.ThreadCreateEvent] 
+        and [`MessageUpdateEvent`][scurrypy.events.message_events.MessageUpdateEvent].
 
         Args:
             message_id (int): ID of the message to attach the thread
@@ -206,8 +250,9 @@ class ThreadChannel(Channel):
 
         return ChannelModel.from_dict(data)
 
-    async def create_without_message(self, thread: ThreadWithoutMessagePart) -> ChannelModel:
+    async def create_thread_without_message(self, thread: ThreadWithoutMessagePart) -> ChannelModel:
         """Create a thread not connected to an existing message.
+        Fires [`ThreadCreateEvent`][scurrypy.events.channel_events.ThreadCreateEvent].
 
         Args:
             thread (ThreadWithoutMessagePart): thread to create
@@ -219,12 +264,16 @@ class ThreadChannel(Channel):
         data = await self._http.request('POST', f'/channels/{self.id}/threads', data=thread.to_dict())
 
         return ChannelModel.from_dict(data)
-    
-    async def edit(self, **options: Unpack[EditThreadChannelParams]) -> ChannelModel:
-        """Edit this channel.
+
+    async def edit_thread(self, **options: Unpack[EditThreadChannelParams]) -> ChannelModel:
+        """Edit this thread. 
+        Fires [`ChannelUpdateEvent`][scurrypy.events.channel_events.ChannelUpdateEvent].
 
         !!! important "Permissions"
             Requires `MANAGE_CHANNELS`
+
+        !!! important
+            Requires `archived` be `False` or set to `False`.
 
         Args:
             options (EditThreadChannelParams): channel fields to edit
@@ -237,35 +286,157 @@ class ThreadChannel(Channel):
 
         return ChannelModel.from_dict(data)
 
-    async def join(self) -> None:
+    async def join_thread(self) -> None:
         """Add the bot to this thread.
+        Fires [`ThreadMembersUpdateEvent`][scurrypy.events.channel_events.ThreadMembersUpdateEvent] 
+        and [`ThreadCreateEvent`][scurrypy.events.channel_events.ThreadCreateEvent].
 
         !!! important
             Required the thread NOT be archived.
         """
         await self._http.request('PUT', f'/channels/{self.id}/thread-members/@me')
-    
-    async def leave(self) -> None:
+
+    async def leave_thread(self) -> None:
         """Remove the bot from a thread.
+        Fires [`ThreadMembersUpdateEvent`][scurrypy.events.channel_events.ThreadMembersUpdateEvent].
 
         !!! important
             Required the thread NOT be archived.
         """
         await self._http.request('DELETE', f'/channels/{self.id}/thread-members/@me')
-    
-    async def add_member(self, user_id: int) -> None:
+
+    async def add_thread_member(self, user_id: int) -> None:
         """Add a user to this thread.
+        Fires [`ThreadMembersUpdateEvent`][scurrypy.events.channel_events.ThreadMembersUpdateEvent].
 
         Args:
             user_id (int): ID of the user to add
         """
         await self._http.request('PUT', f'/channels/{self.id}/thread-members/{user_id}')
 
-    async def remove_member(self, user_id: int) -> None:
+    async def remove_thread_member(self, user_id: int) -> None:
         """Remove a user to this thread.
+        Fires [`ThreadMembersUpdateEvent`][scurrypy.events.channel_events.ThreadMembersUpdateEvent].
 
         Args:
             user_id (int): ID of the user to remove
         """
         await self._http.request('DELETE', f'/channels/{self.id}/thread-members/{user_id}')
 
+    async def fetch_invites(self) -> list[InviteWithMetadataModel]:
+        """Fetch a list of invites for this channel.
+
+        !!! important "Permissions"
+            Requires `MANAGE_CHANNELS`
+
+        !!! note
+            Only usable on guild channels.
+
+        Returns:
+            list[InviteWithMetadataModel]: queried list of invites
+        """
+        data = await self._http.request('GET', f'/channels/{self.id}/invites')
+
+        return [InviteWithMetadataModel.from_dict(i) for i in data]
+
+    async def create_invite(self, invite: InvitePart) -> InviteModel:
+        """Create a new invite for this channel.
+        Fires [`InviteCreateEvent`][scurrypy.events.invite_events.InviteCreateEvent].
+
+        !!! important "Permissions"
+            Requires `CREATE_INSTANT_INVITE`
+
+        Args:
+            invite (InvitePart): invite to create
+
+        Returns:
+            (InviteModel): created invite object 
+        """
+        data = await self._http.request('POST', f'/channels/{self.id}/invites', data=invite.to_dict())
+
+        return InviteModel.from_dict(data)
+
+    async def fetch_public_archived_threads(self, before: str = None, limit: int = None) -> ArchivedThreadsModel:
+        """Fetch archived public threads in this channel.
+
+        !!! important "Permissions"
+            Requires `READ_MESSAGE_HISTORY`
+
+        !!! note:
+            Returns `PUBLIC_THREAD` threads if this is a `GUILD_TEXT` channel.
+            Returns `ANNOUNCEMENT_THREAD` if this is a `GUILD_ANNOUNCEMENT` channel.
+
+        !!! note
+            Threads are ordered by `archive_timestamp` in descending order.
+
+        Args:
+            before (str, optional): threads archived before this timestamp
+            limit (int, optional): max numer of threads to fetch
+
+        Returns:
+            (ArchivedThreadsModel): queried public archived threads
+        """
+        data = await self._http.request(
+            'GET', 
+            f'/channels/{self.id}/threads/archived/public', 
+            params={
+                'before': before, 
+                'limit': limit
+            }
+        )
+
+        return ArchivedThreadsModel.from_dict(data)
+    
+    async def fetch_private_archived_threads(self, before: str = None, limit: int = None) -> ArchivedThreadsModel:
+        """Fetch archived private threads in this channel.
+
+        !!! important "Permissions"
+            Requires `READ_MESSAGE_HISTORY` and `MANAGE_THREADS`
+
+        !!! note
+            Threads are ordered by `archive_timestamp` in descending order.
+
+        Args:
+            before (str, optional): threads archived before this timestamp
+            limit (int, optional): max numer of threads to fetch
+
+        Returns:
+            (ArchivedThreadsModel): queried private archived threads
+        """
+        data = await self._http.request(
+            'GET', 
+            f'/channels/{self.id}/threads/archived/private', 
+            params={
+                'before': before, 
+                'limit': limit
+            }
+        )
+
+        return ArchivedThreadsModel.from_dict(data)
+    
+    async def fetch_joined_private_archived_threads(self, before: str = None, limit: int = None) -> ArchivedThreadsModel:
+        """Fetch archived private threads in this channel the bot has joined.
+
+        !!! important "Permissions"
+            Requires `READ_MESSAGE_HISTORY`
+
+        !!! note
+            Threads are ordered by their `id` in descending order.
+
+        Args:
+            before (str, optional): threads archived before this timestamp
+            limit (int, optional): max numer of threads to fetch
+
+        Returns:
+            (ArchivedThreadsModel): queried private archived threads
+        """
+        data = await self._http.request(
+            'GET', 
+            f'/channels/{self.id}/users/@me/threads/archived/private', 
+            params={
+                'before': before, 
+                'limit': limit
+            }
+        )
+
+        return ArchivedThreadsModel.from_dict(data)

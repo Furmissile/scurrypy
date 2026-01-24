@@ -24,6 +24,8 @@ from typing import Any
 
 from dataclasses import dataclass
 
+from ..config import USER_AGENT
+
 from .error import DiscordError
 
 import logging
@@ -71,7 +73,10 @@ class HTTPClient:
         """Start the HTTP session."""
 
         if not self.session:
-            self.session = aiohttp.ClientSession(headers={"Authorization": f"Bot {token}"})
+            self.session = aiohttp.ClientSession(headers={
+                "Authorization": f"Bot {token}",
+                "User-Agent": USER_AGENT
+            })
             logger.info("HTTP session started.")
         else:
             logger.warning("HTTP session already initialized.")

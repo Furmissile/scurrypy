@@ -5,7 +5,7 @@ from typing import Optional
 
 @dataclass
 class EmbedAuthor(DataModel):
-    """Embed author parameters."""
+    """Represents fields for creating an embed author."""
 
     name: str = None
     """Name of the author."""
@@ -18,14 +18,14 @@ class EmbedAuthor(DataModel):
 
 @dataclass
 class EmbedThumbnail(DataModel):
-    """Embed thumbnail."""
+    """Represents fields for creating an embed thumbnail."""
 
     url: str = None
     """Thumbnail content. http or attachment://<filename> scheme."""
 
 @dataclass
 class EmbedField(DataModel):
-    """Embed field."""
+    """Represents fields for creating an embed field."""
 
     name: str = None
     """Name of the field."""
@@ -38,14 +38,14 @@ class EmbedField(DataModel):
 
 @dataclass
 class EmbedImage(DataModel):
-    """Embed image."""
+    """Represents fields for creating an embed image."""
 
     url: str = None
     """Image content. http or attachment://<filename> scheme."""
 
 @dataclass
 class EmbedFooter(DataModel):
-    """Embed footer."""
+    """Represents fields for creating an embed footer."""
 
     text: str = None
     """Footer text."""
@@ -55,7 +55,7 @@ class EmbedFooter(DataModel):
 
 @dataclass
 class EmbedPart(DataModel):
-    """Represents the Embed portion of a message."""
+    """Represents fields for creating an embed."""
 
     title: Optional[str] = None
     """This embed's title."""

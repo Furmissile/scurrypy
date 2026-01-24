@@ -31,6 +31,7 @@ ScurryPy prioritizes **clarity over magic**. When contributing:
 * Auto-caching (architectural decision)
 * Voice support (out of scope for now)
 * Subcommands (lots of overhead for not enough gain)
+* Endpoints with non-`bot` auth scopes, are unstable/experimental, or related to voice.
 
 > **Important Note**: Throughout this document, Discord's payloads are called objects and ScurryPy's models are called data classes.
 
@@ -107,9 +108,9 @@ For example, the endpoint for fetching messages falls under the Message resource
 
 Discord's resources have 4 common actions: fetch, create, edit, and delete. These functions must always be implemented as:
 
-* *fetch/delete*: flat parameters as part of the endpoint's function
-* *create*: add as a part or use an existing part from `/parts`
-* *edit*: add as a param or use an existing param in `/params`
+* *DELETE/PUT*: parameters to the endpoint's function
+* *POST*: add a part or use an existing part from `/parts`
+* *PATCH*: add a param or use an existing param in `/params`
 
     ### Parts
     Parts are used to model Discord payloads the user sends. Parts are just like models, except all fields are deferrable, meaning they must be set to `None`. 

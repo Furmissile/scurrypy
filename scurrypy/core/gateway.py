@@ -6,6 +6,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+from ..config import GATEWAY_PROPERTIES
+
 MIN_BACKOFF = 5
 
 class GatewayClient:
@@ -23,6 +25,8 @@ class GatewayClient:
         self.seq = None
         self.session_id = None
         self.allow_resume = False # default: assume IDENTIFY
+        self.reconnect_immediately = False
+        self._ws_closed = False
         self.backoff = MIN_BACKOFF
         self.heartbeat_task = None
         self.heartbeat_interval = None
@@ -33,7 +37,7 @@ class GatewayClient:
 
     async def wait_reconnect(self):
         """Sleep for exponentially increasing time between reconnects."""
-        
+
         logger.warning(f"SHARD ID {self.shard_id}: Disconnected, reconnecting in {self.backoff}s...")
         await asyncio.sleep(self.backoff)
 
@@ -59,25 +63,38 @@ class GatewayClient:
 
                 await self._listen()  # blocks until disconnect
 
-            except websockets.exceptions.ConnectionClosedOK:
+            except (websockets.exceptions.ConnectionClosedOK, websockets.exceptions.ConnectionClosed):
                 logger.info(f"SHARD ID {self.shard_id}: Connection closed properly.")
+                
+                if not self._ws_closed:
+                    await self.close_ws()
 
-                break
+                if self.reconnect_immediately:
+                    await self.wait_reconnect()
+                    self.reconnect_immediately = False
 
             except (ConnectionError, websockets.exceptions.ConnectionClosedError) as e:
-                logger.error(f"SHARD ID {self.shard_id}: {e}")
+                logger.exception(f"SHARD ID {self.shard_id}: {e}")
 
                 await self.close_ws()
-                await self.wait_reconnect()
+
+                if self.reconnect_immediately:
+                    await self.wait_reconnect()
+                    self.reconnect_immediately = False
 
             except Exception:
                 logger.exception(f"SHARD ID {self.shard_id}: Unexpected error")
                 
                 await self.close_ws()
-                await self.wait_reconnect()
+
+                if self.reconnect_immediately:
+                    await self.wait_reconnect()
+                    self.reconnect_immediately = False
 
     async def connect_ws(self):
         """Connect to Discord's Gateway (websocket)."""
+
+        self._ws_closed = False
 
         # connect to websocket
         self.ws = await websockets.connect(self.base_url + self.url_params)
@@ -140,11 +157,7 @@ class GatewayClient:
             'd': {
                 'token': f"Bot {token}",
                 'intents': intents,
-                'properties': {
-                    'os': 'my_os',
-                    'browser': 'my_browser',
-                    'device': 'my_device'
-                },
+                'properties': GATEWAY_PROPERTIES,
                 'shards': [self.shard_id, self.total_shards]
             }
         })
@@ -198,11 +211,12 @@ class GatewayClient:
 
                 case 7:  # RECONNECT
                     self.allow_resume = True
+                    self.reconnect_immediately = True
                     logger.debug(f"SHARD ID {self.shard_id}: Reconnect requested by server.")
 
                     raise ConnectionError("Reconnect requested by server.")
 
-                case 9: # INVALID_SESSION
+                case 9:  # INVALID_SESSION
                     resumable = bool(data.get("d"))
                     self.allow_resume = resumable
 
@@ -212,6 +226,7 @@ class GatewayClient:
                         self.session_id = self.seq = None
                         logger.debug(f"SHARD ID {self.shard_id}: Invalid session (not resumable).")
 
+                    self.reconnect_immediately = True
                     raise ConnectionError("Invalid session.")
 
                 case 11:  # HEARTBEAT_ACK
@@ -220,15 +235,20 @@ class GatewayClient:
     async def close_ws(self):
         """Close the websocket connection if one is still open and cancels heartbeat."""
 
+        if self._ws_closed or not self.ws:
+            logger.debug(f"Shard ID {self.shard_id}: Connection already closed!")
+            return
+    
+        self._ws_closed = True
         logger.info(f"Shard ID {self.shard_id}: Closing connection...")
-        if self.ws:
-            if self.heartbeat_task:
-                self.heartbeat_task.cancel()
-                try:
-                    await self.heartbeat_task
-                except asyncio.CancelledError:
-                    pass
-                self.heartbeat_task = None
-            await self.ws.close()
+
+        if self.heartbeat_task:
+            self.heartbeat_task.cancel()
+            try:
+                await self.heartbeat_task
+            except asyncio.CancelledError:
+                pass
+            self.heartbeat_task = None
+        await self.ws.close()
 
         self.ws = None

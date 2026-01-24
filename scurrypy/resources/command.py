@@ -39,7 +39,7 @@ class GlobalCommand(Command):
         return ApplicationCommandModel.from_dict(data)
     
     async def fetch_all(self) -> list[ApplicationCommandModel]:
-        """Fetches ALL commands.
+        """Fetches ALL global commands.
 
         Returns:
             (list[ApplicationCommandModel]): queried list of application commands
@@ -146,7 +146,7 @@ class GuildCommand(Command):
         return ApplicationCommandModel.from_dict(data)
     
     async def fetch_all(self) -> list[ApplicationCommandModel]:
-        """Fetches ALL commands.
+        """Fetches ALL guild commands.
 
         Returns:
             (list[ApplicationCommandModel]): queried list of application commands

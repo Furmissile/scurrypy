@@ -7,7 +7,7 @@ from .user import UserModel
 
 @dataclass
 class MessageModel(DataModel):
-    """A Discord message."""
+    """Represents a Discord message."""
 
     id: int
     """ID of the message."""
@@ -35,7 +35,7 @@ class MessageModel(DataModel):
 
 @dataclass
 class PinnedMessageModel(DataModel):
-    """Pinned message data."""
+    """Represents a pinned message."""
 
     message: MessageModel
     """Message resource of the pinned message."""

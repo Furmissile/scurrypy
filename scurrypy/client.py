@@ -41,18 +41,21 @@ class Client:
     def __init__(self, 
         *,
         token: str,
-        intents: int = Intents.DEFAULT
+        intents: int = Intents.DEFAULT,
+        shard_count: int = 0
     ):
         """
         Args:
             token (str): the bot's token
             intents (int, optional): gateway intents. Defaults to `Intents.DEFAULT`.
+            shard_count (int, optional): number of shards to spawn. Defaults to `0` or recommended shard count.
         """
         if not isinstance(intents, int):
             raise ValueError("Intents must be an integer.")
         
         self.token = token
         self.intents = intents
+        self.shard_count = shard_count
         
         self._http = HTTPClient()
 
@@ -163,7 +166,7 @@ class Client:
 
         return Guild(self._http, context, guild_id)
 
-    def guild_channel(self, channel_id: int, *, context = None):
+    def channel(self, channel_id: int, *, context = None):
         """Creates an interactable guild channel resource.
 
         Args:
@@ -173,23 +176,20 @@ class Client:
         Returns:
             (GuildChannel): the GuildChannel resource
         """
-        from .resources.channel import GuildChannel
+        from .resources.channel import Channel
 
-        return GuildChannel(self._http, context, channel_id)
+        return Channel(self._http, context, channel_id)
     
-    def thread_channel(self, channel_id: int, *, context = None):
-        """Creates an interactable guild channel resource.
+    def invite(self, code: str, *, context = None):
+        """Creates an interactable invite resource.
 
         Args:
-            channel_id (int): ID of target channel
-            context (Any, optional): associated data
-
-        Returns:
-            (ThreadChannel): the ThreadChannel resource
+            code (str): unique invite code
+            context (_type_, optional): associated data
         """
-        from .resources.channel import ThreadChannel
+        from .resources.invite import Invite
 
-        return ThreadChannel(self._http, context, channel_id)
+        return Invite(self._http, context, code)
     
     def global_command(self, application_id: int, command_id: int = None, *, context = None):
         """Creates an interactable command resource.
@@ -312,7 +312,7 @@ class Client:
         """Starts all shards batching by max_concurrency."""
 
         # pull important values for easier access
-        total_shards = gateway.shards
+        total_shards = self.shard_count or gateway.shards
         batch_size = gateway.session_start_limit.max_concurrency
 
         tasks = []
@@ -352,19 +352,18 @@ class Client:
                 try:
                     result = hook()
                     if inspect.isawaitable(result):
-                        await result
+                        await asyncio.wait_for(result, timeout=5)
                 except Exception:
                     logger.exception("Error in shartup hook")
 
             tasks = await asyncio.create_task(self._start_shards(gateway))
 
-            # end all ongoing tasks
             await asyncio.gather(*tasks)
             
         except asyncio.CancelledError:
             logger.info("Connection cancelled via KeyboardInterrupt.")
         except Exception:
-            logger.error(f"Unhandled client start exception.")
+            logger.exception(f"Unhandled client start exception.")
         finally:
             await self._close()
 
@@ -375,15 +374,18 @@ class Client:
             try:
                 result = hook()
                 if inspect.isawaitable(result):
-                    await result
+                    await asyncio.wait_for(result, timeout=5)
             except Exception:
                 logger.exception("Error in shutdown hook")
-                
+
+        # close each connection or shard BEFORE HTTP
+        await asyncio.gather(
+            *(shard.close_ws() for shard in self.shards),
+            return_exceptions=True
+        )
+
         logger.info("Closing HTTP session...")
         await self._http.close()
-
-        # close each connection or shard
-        await asyncio.gather(*[shard.close_ws() for shard in self.shards])
     
     def run(self):
         """User-facing entry point for starting the client."""  
@@ -391,6 +393,6 @@ class Client:
         try:
             asyncio.run(self.start())
         except Exception as e:
-            logger.error(f"{type(e).__name__} {e}")
+            logger.exception(f"{type(e).__name__} {e}")
         finally:
             logger.info("Bot shutting down.")

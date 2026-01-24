@@ -2,9 +2,68 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
+## [0.17.0]
+
+### Breaking Changes
+
+* Renamed: channel events. Removed `Guild` prefix.
+    * The event is for any channel type
+* Removed: Channel resource split. Now just the Channel resource.
+    * Splitting Channel was not justified.
+* Removed: `ReactionType` (unused)
+* Removed: `guild` pattern from `Guild` resource functions
+* Renamed: `UnavailableGuild` to `UnavailableGuildModel`
+
+### Changed
+
+* Added: Thread events.
+* Resources that fire events now say what events are fired.
+* Fixed: bot reconnects on normal closure if not cancelled by user
+* Revised ordering of reconnection and logic
+* Gateway now says:
+    * if error due to connection: reconnect + backoff
+    * if reconnecting + `RESUME` or `INVALID_SESSION`: reconnect
+    * if normal closure by discord: reconnect
+    * if normal closure by user: disconnect
+* Added: `Message.fetch_emoji_reactions` and `Message.remove_emoji_reaction`. This completes the `Message` resource.
+* Added:
+    * `Channel.follow`
+    * `Channel.bulk_delete_messages`
+    * `Channel.fetch_invites`
+    * `Channel.create_invite`
+    * `Channel.fetch_public_archived_threads`
+    * `Channel.fetch_private_archived_threads`
+    * `Channel.fetch_joined_private_archived_threads`
+    This completes the `Channel` resource.
+
+* New resource: `Invite`
+
+* Added:
+    * `Guild.edit`
+    * `Guild.fetch_active_threads`
+    * `Guild.search_members`
+    * `Guild.edit_member`
+    * `Guild.remove_member`
+    * `Guild.fetch_ban`
+    * `Guild.fetch_bans`
+    * `Guild.create_ban`
+    * `Guild.remove_ban`
+    * `Guild.bulk_create_ban`
+    * `Guild.fetch_role_member_counts`
+    * `Guild.fetch_invites`
+    * `Guild.fetch_invites_with_metadata`
+    * `Guild.fetch_integrations`
+    * `Guild.delete_integration`
+    * `Guild.fetch_welcome_screen`
+    * `Guild.edit_welcome_screen`
+    * `Guild.fetch_onboarding`
+
+* New part: `BulkGuildBanPart`
+
 ## [0.16.0] - Jan 2026
 
-## Breaking Changes
+### Breaking Changes
+
 * Removed: `ImageData.uri` 
     * the uri code is factored into `to_dict`
 * New category: `params/` for modifying resources. Used internally by resources.

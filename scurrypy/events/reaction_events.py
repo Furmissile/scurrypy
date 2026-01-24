@@ -7,15 +7,6 @@ from typing import Optional
 from ..models.user import GuildMemberModel
 from ..models.emoji import EmojiModel
 
-class ReactionType:
-    """Reaction types."""
-
-    NORMAL = 0
-    """A standard emoji."""
-
-    BURST = 1
-    """A super emoji."""
-
 @dataclass
 class ReactionAddEvent(Event, DataModel):
     """Reaction added event."""

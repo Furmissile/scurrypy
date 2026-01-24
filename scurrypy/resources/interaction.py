@@ -21,6 +21,8 @@ class Interaction(BaseResource):
 
     async def respond(self, message: str | MessagePart, with_response: bool = False, **flags: Unpack[MessageFlagParams]) -> InteractionCallbackModel | None:
         """Create a message in response to an interaction.
+        Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent]
+        and [`MessageCreateEvent`][scurrypy.events.message_events.MessageCreateEvent].
 
         Args:
             message (str | MessagePart): content as a string or MessagePart
@@ -56,6 +58,7 @@ class Interaction(BaseResource):
         
     async def update(self, message: str | MessagePart) -> None:
         """Update a message in response to an interaction.
+        Fires [`MessageUpdateEvent`][scurrypy.events.message_events.MessageUpdateEvent].
 
         Args:
             message (str | MessagePart): content as a string or MessagePart
@@ -81,6 +84,7 @@ class Interaction(BaseResource):
 
     async def respond_modal(self, modal: ModalPart) -> None:
         """Create a modal in response to an interaction.
+        Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent].
 
         Args:
             modal (ModalPart): modal data
@@ -103,6 +107,7 @@ class Interaction(BaseResource):
 
     async def respond_autocomplete(self, choices: list[CommandOptionChoice]) -> None:
         """Autocomplete a command in response to an interaction.
+        Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent].
 
         Args:
             choices (list[CommandOptionChoice]): list of choices to autocomplete
@@ -123,6 +128,7 @@ class Interaction(BaseResource):
 
     async def defer_respond(self, ephemeral: bool) -> None:
         """Defer creating a message in response to an interaction.
+        Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent].
 
         Args:
             ephemeral (bool): whether thinking + deferred interaction response is ephemeral
@@ -143,6 +149,7 @@ class Interaction(BaseResource):
 
     async def defer_update(self, ephemeral: bool) -> None:
         """Defer updating a message in response to an interaction.
+        Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent].
 
         Args:
             ephemeral (bool): whether the deferred interaction response is ephemeral
@@ -163,6 +170,7 @@ class Interaction(BaseResource):
 
     async def followup(self, application_id, message: str | MessagePart, **flags: Unpack[MessageFlagParams]) -> None:
         """Create a new message to respond to a deferred interaction.
+        Fires [`MessageCreateEvent`][scurrypy.events.message_events.MessageCreateEvent].
 
         !!! important
             Apps are limited to 5 followup messages PER interaction.

@@ -5,7 +5,7 @@ from typing import Optional
 
 @dataclass
 class RoleColorModel(DataModel):
-    """Role color data."""
+    """Represents role color data."""
 
     primary_color: int
     """Primary color of the role."""

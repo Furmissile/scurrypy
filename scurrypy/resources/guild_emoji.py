@@ -41,6 +41,7 @@ class GuildEmoji(BaseResource):
 
     async def create(self, emoji: GuildEmojiPart) -> EmojiModel:
         """Create a new emoji for this guild.
+        Fires [`GuildEmojisUpdateEvent`][scurrypy.events.guild_events.GuildEmojisUpdateEvent].
 
         Args:
             emoji (GuildEmojiPart): fields for creating a guild emoji
@@ -59,6 +60,7 @@ class GuildEmoji(BaseResource):
     
     async def edit(self, emoji_id: int, **options: Unpack[EditGuildEmojiParams]) -> EmojiModel:
         """Edit a guild emoji in this guild.
+        Fires [`GuildEmojisUpdateEvent`][scurrypy.events.guild_events.GuildEmojisUpdateEvent].
 
         Args:
             emoji_id (int): ID of the emoji to edit
@@ -78,6 +80,7 @@ class GuildEmoji(BaseResource):
 
     async def delete(self, emoji_id: int) -> None:
         """Delete an emoji from this guild.
+        Fires [`GuildEmojisUpdateEvent`][scurrypy.events.guild_events.GuildEmojisUpdateEvent].
 
         !!! important "Permissions"
             * `CREATE_GUILD_EXPRESSIONS` → required if created by the current user (or `MANAGE_GUILD_EXPRESSIONS`)

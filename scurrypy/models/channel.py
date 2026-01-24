@@ -166,7 +166,7 @@ class ChannelModel(DataModel):
     """
 
     default_sort_order: Optional[int]
-    """Default forum sort order. See [`SortOrderTypes`][scurrypy.parts.channel.SortOrderTypes]. Defaults to `None`."""
+    """Default forum sort order. See [`SortOrderTypes`][scurrypy.parts.channel.SortOrderTypes]."""
 
     default_forum_layout: Optional[int]
     """Default forum layout view. See [`ForumLayoutTypes`][scurrypy.parts.channel.ForumLayoutTypes]. Defaults to `ForumLayoutTypes.NOT_SET`."""
@@ -198,7 +198,7 @@ class FollowedChannelModel(DataModel):
     """Target webhook ID created."""
 
 @dataclass
-class ArchivedThreads(DataModel):
+class ArchivedThreadsModel(DataModel):
     """Response body for fetching archived threads."""
 
     threads: list[ChannelModel]
@@ -209,3 +209,13 @@ class ArchivedThreads(DataModel):
 
     has_more: bool
     """Whether there are additional threads to be returned with subsequent calls."""
+
+@dataclass
+class ActiveThreadsModel(DataModel):
+    """Response body for fetching active guild threads."""
+
+    threads: list[ChannelModel]
+    """The arctive threads."""
+
+    members: list[ThreadMemberModel]
+    """Thread member for each returned thread the bot has joined."""

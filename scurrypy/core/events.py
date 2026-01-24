@@ -7,11 +7,23 @@ EVENTS = {
     EventTypes.READY: ReadyEvent,
 
     # channel events
-    EventTypes.CHANNEL_CREATE: GuildChannelCreateEvent,
-    EventTypes.CHANNEL_UPDATE: GuildChannelUpdateEvent,
-    EventTypes.CHANNEL_DELETE: GuildChannelDeleteEvent,
+    EventTypes.CHANNEL_CREATE: ChannelCreateEvent,
+    EventTypes.CHANNEL_UPDATE: ChannelUpdateEvent,
+    EventTypes.CHANNEL_DELETE: ChannelDeleteEvent,
     
     EventTypes.CHANNEL_PINS_UPDATE: ChannelPinsUpdateEvent,
+
+    EventTypes.THREAD_CREATE: ThreadCreateEvent,
+    EventTypes.THREAD_UPDATE: ThreadUpdateEvent,
+    EventTypes.THREAD_DELETE: ThreadDeleteEvent,
+
+    EventTypes.BULK_MESSAGE_DELETE: BulkMessageDeleteEvent,
+    
+    EventTypes.WEBHOOKS_UPDATE: WebhooksUpdateEvent,
+
+    # invite events
+    EventTypes.INVITE_CREATE: InviteCreateEvent,
+    EventTypes.INVITE_DELETE: InviteDeleteEvent,
 
     # guild events
     EventTypes.GUILD_CREATE: GuildCreateEvent,

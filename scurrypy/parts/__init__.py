@@ -72,9 +72,13 @@ from .embed import (
     EmbedPart
 )
 
+from .guild import BulkGuildBanPart, WelcomeScreenChannelPart
+
 from .guild_emoji import GuildEmojiPart
 
 from .image_data import ImageData
+
+from .invite import InvitePart
 
 from .message import (
     MessageFlags,
@@ -100,8 +104,10 @@ __all__ = [
     "TextInputStyles", "TextInput", "DefaultValue", "UserSelect", "RoleSelect", "MentionableSelect",
     "ChannelSelect",
     "EmbedAuthor", "EmbedThumbnail", "EmbedField", "EmbedImage", "EmbedFooter", "EmbedPart",
+    "BulkGuildBanPart", "WelcomeScreenChannelPart",
     "GuildEmojiPart",
     "ImageData",
+    "InvitePart",
     "MessageFlags", "MessageReferenceTypes", "MessageReference", "Attachment", "MessagePart", 
     "ModalPart",
     "RoleColorsPart", "GuildRolePart"

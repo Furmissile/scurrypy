@@ -5,6 +5,16 @@ from typing import Optional
 
 from .emoji import EmojiModel
 from .role import RoleModel
+from .user import UserModel
+
+class GuildFeatures:
+    NEWS = "NEWS"
+    ROLE_ICONS = "ROLE_ICONS"
+    ANIMATED_ICON = "ANIMATED_ICON"
+    INVITE_SPLASH = "INVITE_SPLASH"
+    DISCOVERABLE = "DISCOVERABLE"
+    BANNER = "BANNER"
+    ANIMATED_BANNER = "ANIMATED_BANNER"
 
 @dataclass
 class ReadyGuildModel(DataModel):
@@ -17,7 +27,7 @@ class ReadyGuildModel(DataModel):
     """If the guild is offline."""
 
 @dataclass
-class UnavailableGuild(DataModel):
+class UnavailableGuildModel(DataModel):
     """Guild info during an outage or before bot bootup."""
 
     id: int
@@ -95,3 +105,136 @@ class GuildModel(DataModel):
 
     safety_alerts_channel_id: int
     """Channel ID for safety alerts."""
+
+@dataclass
+class GuildBanModel(DataModel):
+    """Represents the guild ban object."""
+
+    reason: str
+    """Reason for the ban."""
+    
+    user: UserModel
+    """Banned user object."""
+
+@dataclass
+class BulkGuildBanModel(DataModel):
+    """Response body for creating bulk guild bans."""
+
+    banned_users: list[int]
+    """IDs of successfully banned users."""
+
+    failed_users: list[int]
+    """IDs of users not banned."""
+
+@dataclass
+class GuildWelcomeChannelModel(DataModel):
+    """Represents channels shown on a welcome screen."""
+
+    channel_id: int
+    """ID of the channel."""
+
+    description: str
+    """Description for the channel."""
+
+    emoji_id: int
+    """Emoji ID for the welcome screen (if custom)."""
+
+    emoji_name: str
+    """Emoji name for the welcome screen."""
+
+@dataclass
+class GuildWelcomeScreenModel(DataModel):
+    """Represents a guild's welcome screen."""
+
+    description: str
+    """Guild description displayed."""
+
+    welcome_channels: list[GuildWelcomeChannelModel]
+    """Channels displayed on the welcome screen. Max `5`."""
+
+@dataclass
+class OnboardingPromptOptionModel(DataModel):
+    """Represents a guild's prompt option for onboarding.
+    
+    !!! note
+        `emoji_id`, `emoji_name`, and `emoji_animated` must be used when editing.
+    """
+
+    id: int
+    """ID of the prompt option."""
+
+    channel_ids: list[int]
+    """Channel IDs a member is added to when selected."""
+
+    role_ids: list[int]
+    """Role IDs a member is given when selected."""
+
+    emoji: Optional[EmojiModel]
+    """Emoji for the option."""
+
+    emoji_id: Optional[int]
+    """ID for the emoji of the option."""
+
+    emoji_name: Optional[str]
+    """Name for the emoji of the option."""
+
+    emoji_animated: Optional[bool]
+    """Whether the emoji of the option is animated."""
+
+    title: str
+    """Title of the option."""
+
+    description: str
+    """Description of the option."""
+
+class PromptTypes:
+    MULTIPLE_CHOICE = 0
+    DROPDOWN = 1
+
+class OnboardingModes:
+    ONBOARDING_DEFAULT = 0
+    ONBOARDING_ADVANCED = 1
+
+@dataclass
+class OnboardingPromptModel(DataModel):
+    """Represents a guild's prompt for onboarding."""
+
+    id: int
+    """ID of the prompt."""
+
+    type: int
+    """Type of prompt. See [`PromptTypes`][scurrypy.models.guild.PromptTypes]."""
+
+    options: list[OnboardingPromptOptionModel]
+    """Options available with the prompt."""
+
+    title: str
+    """Title of the prompt."""
+
+    single_select: bool
+    """Whether users are limited to selecting one option."""
+
+    required: bool
+    """Whether the prompt is required for completing the onboarding process."""
+
+    in_onboarding: bool
+    """Whether the prompt is present in the onboarding flow."""
+
+@dataclass
+class GuildOnboadingModel(DataModel):
+    """Represents a guild's onboarding flow."""
+
+    guild_id: int
+    """ID of the guild for onboarding."""
+
+    prompts: list[OnboardingPromptModel]
+    """Prompts shown during onboarding."""
+
+    default_channel_ids: list[int]
+    """Channel IDs members are opted into by default."""
+
+    enabled: bool
+    """Whether onboarding is enabled for the guild."""
+
+    mode: int
+    """Current mode of onboarding. See [`OnboardingModes`][scurrypy.models.guild.OnboardingModes]."""

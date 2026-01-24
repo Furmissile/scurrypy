@@ -9,7 +9,11 @@ class EditGuildChannelParams(TypedDict, total=False):
     """Name of the channel."""
 
     type: Optional[int]
-    """Type of channel. See [`ChannelTypes`][scurrypy.parts.channel.ChannelTypes]."""
+    """Type of channel. See [`ChannelTypes`][scurrypy.parts.channel.ChannelTypes].
+    
+    !!! important
+        Only conversion between text and announcement is supported in guilds with `NEWS` feature.
+    """
 
     position: Optional[int]
     """Sorting position of the channel (channels with the same position are sorted by id)."""

@@ -3,9 +3,19 @@ from ..core.model import DataModel
 
 from typing import Optional
 
+class GuildMemberFlags:
+    DID_REJOIN = 1 << 0
+    COMPLETED_ONBOARDING = 1 << 1
+    BYPASSES_VERIFICATION = 1 << 2
+    STARTED_ONBOARDING = 1 << 3
+    STARTED_HOME_ACTIONS = 1 << 5
+    COMPLETED_HOME_ACTIONS = 1 << 6
+    AUTOMOD_QUARANTINED_USERNAME = 1 << 7
+    AUTOMOD_QUARANTINED_TAG = 1 << 8
+
 @dataclass
 class UserModel(DataModel):
-    """Describes the User object."""
+    """Represents the User object."""
 
     id: int
     """ID of the user."""
@@ -58,12 +68,6 @@ class GuildMemberModel(DataModel):
 
     joined_at: str
     """ISO8601 timestamp of when the guild member joined server."""
-
-    deaf: bool
-    """If the member is deaf in a VC (input)."""
-
-    mute: bool
-    """If the member is muted in VC (output)."""
 
     permissions: Optional[int]
     """Total permissions of the member in the channel, including overwrites, 

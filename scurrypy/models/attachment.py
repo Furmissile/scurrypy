@@ -40,11 +40,5 @@ class AttachmentModel(DataModel):
     ephemeral: Optional[bool]
     """Whether this file is ephemeral."""
 
-    duration_secs: Optional[float]
-    """Duration of the file (for voice messages)."""
-
-    waveform: Optional[str]
-    """base64 encoded bytearray representing a sampled waveform (for voice messages)."""
-
     flags: Optional[int]
     """Attachment flags as a combined bitfield."""

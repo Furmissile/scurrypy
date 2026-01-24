@@ -3,6 +3,10 @@ from ..core.model import DataModel
 
 from urllib.parse import quote
 
+class ReactionTypes:
+    NORMAL = 0
+    BURST = 1
+
 @dataclass
 class EmojiModel(DataModel):
     """Represents a Discord emoji."""
@@ -14,7 +18,7 @@ class EmojiModel(DataModel):
     """ID of the emoji (if custom)."""
 
     animated: bool = False
-    """If the emoji is animated. Defaults to False."""
+    """If the emoji is animated. Defaults to `False`."""
 
     @property
     def mention(self) -> str:

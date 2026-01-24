@@ -8,7 +8,8 @@ from .channel import (
     FollowedChannelModel,
     TagModel,
     DefaultReactionModel,
-    ArchivedThreads
+    ArchivedThreadsModel,
+    ActiveThreadsModel
 )
 from .command import (
     ApplicationCommandTypes,
@@ -17,8 +18,21 @@ from .command import (
     ApplicationCommandOptionModel,
     ApplicationCommandModel
 )
-from .emoji import EmojiModel
-from .guild import ReadyGuildModel, GuildModel
+from .emoji import EmojiModel, ReactionTypes
+from .guild import (
+    ReadyGuildModel, 
+    GuildModel, 
+    GuildFeatures, 
+    GuildBanModel, 
+    BulkGuildBanModel,
+    GuildWelcomeChannelModel,
+    GuildWelcomeScreenModel,
+    OnboardingModes,
+    OnboardingPromptModel,
+    OnboardingPromptOptionModel,
+    GuildOnboadingModel,
+    PromptTypes
+)
 from .integration import IntegrationModel
 from .interaction import (
     InteractionCallbackDataModel, 
@@ -28,6 +42,7 @@ from .interaction import (
     InteractionTypes,
     InteractionModel
 )
+from .invite import InviteModel, InviteWithMetadataModel, InviteTypes
 from .message import MessageModel, PinnedMessageModel
 from .role import RoleColorModel, RoleModel
 from .user import UserModel, GuildMemberModel
@@ -35,16 +50,16 @@ from .user import UserModel, GuildMemberModel
 __all__ = [
     "ApplicationFlags", "ApplicationModel",
     "AttachmentModel",
-    "ChannelModel", "FollowedChannelModel", "ThreadMetadataModel", "TagModel", "DefaultReactionModel", "ArchivedThreads",
+    "ChannelModel", "FollowedChannelModel", "ThreadMetadataModel", "TagModel", "DefaultReactionModel", "ArchivedThreadsModel", "ActiveThreadsModel",
     "ApplicationCommandTypes", "ApplicationCommandOptionTypes", "ApplicationCommandOptionChoiceModel", 
     "ApplicationCommandOptionModel", "ApplicationCommandModel",
-    "EmojiModel",
-    "ReadyGuildModel", "GuildModel",
+    "EmojiModel", "ReactionTypes",
+    "ReadyGuildModel", "GuildModel", "GuildFeatures", "GuildBanModel", "BulkGuildBanModel", "GuildWelcomeChannelModel", "GuildWelcomeScreenModel",
+    "OnboardingModes", "OnboardingPromptModel", "OnboardingPromptOptionModel", "GuildOnboadingModel", "PromptTypes",
     "IntegrationModel",
-    
     "InteractionCallbackDataModel", "InteractionCallbackModel", "InteractionCallbackTypes", 
     "InteractionDataTypes", "InteractionTypes", "InteractionModel",
-
+    "InviteModel", "InviteWithMetadataModel", "InviteTypes",
     "MessageModel", "PinnedMessageModel",
     "RoleColorModel", "RoleModel",
     "UserModel", "GuildMemberModel"
