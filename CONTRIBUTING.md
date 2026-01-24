@@ -32,6 +32,7 @@ ScurryPy prioritizes **clarity over magic**. When contributing:
 * Voice support (out of scope for now)
 * Subcommands (lots of overhead for not enough gain)
 * Endpoints with non-`bot` auth scopes, are unstable/experimental, or related to voice.
+* Anything monetization based (e.g., entitlements and subscriptions)
 
 > **Important Note**: Throughout this document, Discord's payloads are called objects and ScurryPy's models are called data classes.
 
