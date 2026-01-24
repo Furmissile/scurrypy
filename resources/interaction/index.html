@@ -14,7 +14,7 @@
         <link rel="prev" href="../guild/">
       
       
-        <link rel="next" href="../message/">
+        <link rel="next" href="../invite/">
       
       
       <link rel="icon" href="../../assets/wizard.svg">
@@ -930,6 +930,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../api/guild/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Guild
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../api/image_data/" class="md-nav__link">
         
   
@@ -959,6 +982,29 @@
   
   <span class="md-ellipsis">
     Intents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/invite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invite
     
   </span>
   
@@ -1216,6 +1262,29 @@
   
   <span class="md-ellipsis">
     Interaction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../events/invite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invite
     
   </span>
   
@@ -1720,6 +1789,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../invite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../message/" class="md-nav__link">
         
   
@@ -2023,6 +2115,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../models/invite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Invite
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../models/message/" class="md-nav__link">
         
   
@@ -2263,6 +2378,29 @@
   
   <span class="md-ellipsis">
     Guild
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../params/user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    User
     
   </span>
   
@@ -2762,7 +2900,17 @@
 
     <div class="doc doc-contents ">
 
-        <p>Create a message in response to an interaction.</p>
+        <p>Create a message in response to an interaction.
+Fires <a class="autorefs autorefs-internal" title="              InteractionEvent
+
+  
+      dataclass
+  " href="../../events/interaction/#scurrypy.events.interaction_events.InteractionEvent"><code>InteractionEvent</code></a>
+and <a class="autorefs autorefs-internal" title="              MessageCreateEvent
+
+  
+      dataclass
+  " href="../../events/message/#scurrypy.events.message_events.MessageCreateEvent"><code>MessageCreateEvent</code></a>.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2849,7 +2997,12 @@
 
     <div class="doc doc-contents ">
 
-        <p>Update a message in response to an interaction.</p>
+        <p>Update a message in response to an interaction.
+Fires <a class="autorefs autorefs-internal" title="              MessageUpdateEvent
+
+  
+      dataclass
+  " href="../../events/message/#scurrypy.events.message_events.MessageUpdateEvent"><code>MessageUpdateEvent</code></a>.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2900,7 +3053,12 @@
 
     <div class="doc doc-contents ">
 
-        <p>Create a modal in response to an interaction.</p>
+        <p>Create a modal in response to an interaction.
+Fires <a class="autorefs autorefs-internal" title="              InteractionEvent
+
+  
+      dataclass
+  " href="../../events/interaction/#scurrypy.events.interaction_events.InteractionEvent"><code>InteractionEvent</code></a>.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2947,7 +3105,12 @@
 
     <div class="doc doc-contents ">
 
-        <p>Autocomplete a command in response to an interaction.</p>
+        <p>Autocomplete a command in response to an interaction.
+Fires <a class="autorefs autorefs-internal" title="              InteractionEvent
+
+  
+      dataclass
+  " href="../../events/interaction/#scurrypy.events.interaction_events.InteractionEvent"><code>InteractionEvent</code></a>.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2982,7 +3145,12 @@
 
     <div class="doc doc-contents ">
 
-        <p>Defer creating a message in response to an interaction.</p>
+        <p>Defer creating a message in response to an interaction.
+Fires <a class="autorefs autorefs-internal" title="              InteractionEvent
+
+  
+      dataclass
+  " href="../../events/interaction/#scurrypy.events.interaction_events.InteractionEvent"><code>InteractionEvent</code></a>.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -3017,7 +3185,12 @@
 
     <div class="doc doc-contents ">
 
-        <p>Defer updating a message in response to an interaction.</p>
+        <p>Defer updating a message in response to an interaction.
+Fires <a class="autorefs autorefs-internal" title="              InteractionEvent
+
+  
+      dataclass
+  " href="../../events/interaction/#scurrypy.events.interaction_events.InteractionEvent"><code>InteractionEvent</code></a>.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -3052,7 +3225,12 @@
 
     <div class="doc doc-contents ">
 
-        <p>Create a new message to respond to a deferred interaction.</p>
+        <p>Create a new message to respond to a deferred interaction.
+Fires <a class="autorefs autorefs-internal" title="              MessageCreateEvent
+
+  
+      dataclass
+  " href="../../events/message/#scurrypy.events.message_events.MessageCreateEvent"><code>MessageCreateEvent</code></a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Apps are limited to 5 followup messages PER interaction.</p>
