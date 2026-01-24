@@ -2,7 +2,7 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
-## [0.17.0]
+## [0.17.0] - Jan 2026
 
 ### Breaking Changes
 

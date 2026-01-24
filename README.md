@@ -92,4 +92,4 @@ Check out the [Migration Guide](https://scurry-works.github.io/scurrypy/getting_
 Check out the [FAQ](https://scurry-works.github.io/scurrypy/faq) page for commonly asked questions!
 
 **Looking for changes?** 
-See the [Changelog](https://github.com/scurry-works/scurrypy/blob/main/CONTRIBUTING.md).
+See the [Changelog](https://github.com/scurry-works/scurrypy/blob/main/CHANGELOG.md).
