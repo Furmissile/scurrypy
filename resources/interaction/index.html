@@ -792,6 +792,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../api/attachment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attachment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../api/channel/" class="md-nav__link">
         
   
@@ -2184,6 +2207,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../models/sticker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sticker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../models/user/" class="md-nav__link">
         
   
@@ -2378,6 +2424,29 @@
   
   <span class="md-ellipsis">
     Guild
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../params/message/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Message
     
   </span>
   
@@ -2950,18 +3019,6 @@ and <a class="autorefs autorefs-internal" title="              MessageCreateEven
     </ul>
 
 
-<p><span class="doc-section-title">Raises:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="TypeError">TypeError</span></code>
-            –
-          <div class="doc-md-description">
-            <p>invalid <code>message</code> type</p>
-          </div>
-        </li>
-    </ul>
-
-
 <p><span class="doc-section-title">Returns:</span></p>
     <ul>
         <li class="doc-section-item field-body">
@@ -3008,27 +3065,13 @@ Fires <a class="autorefs autorefs-internal" title="              MessageUpdateEv
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-            <b><code>message</code></b>
-              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessagePart
-
-  
-      dataclass
-   (scurrypy.parts.message.MessagePart)" href="../../api/message/#scurrypy.parts.message.MessagePart">MessagePart</a></code>)
+            <b><code>options</code></b>
+              (<code><a class="autorefs autorefs-internal" title="            EditMessageParams (scurrypy.params.message.EditMessageParams)" href="../../params/message/#scurrypy.params.message.EditMessageParams">EditMessageParams</a></code>, default:
+                  <code>{}</code>
+)
           –
           <div class="doc-md-description">
             <p>content as a string or MessagePart</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Raises:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="TypeError">TypeError</span></code>
-            –
-          <div class="doc-md-description">
-            <p>invalid <code>message</code> type</p>
           </div>
         </li>
     </ul>
@@ -3074,18 +3117,6 @@ Fires <a class="autorefs autorefs-internal" title="              InteractionEven
     </ul>
 
 
-<p><span class="doc-section-title">Raises:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="TypeError">TypeError</span></code>
-            –
-          <div class="doc-md-description">
-            <p>invalid <code>modal</code> type</p>
-          </div>
-        </li>
-    </ul>
-
-
     </div>
 
 </div>
@@ -3117,7 +3148,7 @@ Fires <a class="autorefs autorefs-internal" title="              InteractionEven
     <ul>
         <li class="doc-section-item field-body">
             <b><code>choices</code></b>
-              (<code><span title="list">list</span>[<span title="scurrypy.parts.command.CommandOptionChoice">CommandOptionChoice</span>]</code>)
+              (<code><span title="list">list</span>[<span title="scurrypy.parts.command.CommandOptionChoicePart">CommandOptionChoicePart</span>]</code>)
           –
           <div class="doc-md-description">
             <p>list of choices to autocomplete</p>
@@ -3272,18 +3303,6 @@ Fires <a class="autorefs autorefs-internal" title="              MessageCreateEv
     </ul>
 
 
-<p><span class="doc-section-title">Raises:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="TypeError">TypeError</span></code>
-            –
-          <div class="doc-md-description">
-            <p>invalid <code>message</code> type</p>
-          </div>
-        </li>
-    </ul>
-
-
     </div>
 
 </div>
@@ -3326,18 +3345,6 @@ Fires <a class="autorefs autorefs-internal" title="              MessageCreateEv
           –
           <div class="doc-md-description">
             <p>content as a string or MessagePart</p>
-          </div>
-        </li>
-    </ul>
-
-
-<p><span class="doc-section-title">Raises:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="TypeError">TypeError</span></code>
-            –
-          <div class="doc-md-description">
-            <p>invalid <code>message</code> type</p>
           </div>
         </li>
     </ul>

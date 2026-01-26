@@ -792,6 +792,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../api/attachment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attachment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../api/channel/" class="md-nav__link">
         
   
@@ -2220,6 +2243,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../models/sticker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sticker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../models/user/" class="md-nav__link">
         
   
@@ -2414,6 +2460,29 @@
   
   <span class="md-ellipsis">
     Guild
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../params/message/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Message
     
   </span>
   
@@ -3018,22 +3087,20 @@ Fires <a class="autorefs autorefs-internal" title="              MessageUpdateEv
   " href="../../events/message/#scurrypy.events.message_events.MessageUpdateEvent"><code>MessageUpdateEvent</code></a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Permissions</p>
-<p>Requires <code>MANAGE_MESSAGES</code> <em>only</em> if editing another user's message</p>
+<p>Requires <code>MANAGE_MESSAGES</code> <em>only</em> if editing another user's message or to edit flags</p>
 </div>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-            <b><code>message</code></b>
-              (<code><span title="str">str</span> | <a class="autorefs autorefs-internal" title="              MessagePart
-
-  
-      dataclass
-   (scurrypy.parts.message.MessagePart)" href="../../api/message/#scurrypy.parts.message.MessagePart">MessagePart</a></code>)
+            <b><code>options</code></b>
+              (<code><a class="autorefs autorefs-internal" title="            EditMessageParams (scurrypy.params.message.EditMessageParams)" href="../../params/message/#scurrypy.params.message.EditMessageParams">EditMessageParams</a></code>, default:
+                  <code>{}</code>
+)
           –
           <div class="doc-md-description">
-            <p>content as a string or MessagePart</p>
+            <p>fields to edit for the message</p>
           </div>
         </li>
     </ul>
@@ -3225,7 +3292,12 @@ Fires <a class="autorefs autorefs-internal" title="              ChannelPinsUpda
         <li class="doc-section-item field-body">
             <b><code>type</code></b>
               (<code><span title="int">int</span></code>, default:
-                  <code><span title="scurrypy.models.emoji.ReactionTypes.NORMAL">NORMAL</span></code>
+                  <code><a class="autorefs autorefs-internal" title="            NORMAL = 0
+
+  
+      class-attribute
+      instance-attribute
+   (scurrypy.models.emoji.ReactionTypes.NORMAL)" href="../../models/emoji/#scurrypy.models.emoji.ReactionTypes.NORMAL">NORMAL</a></code>
 )
           –
           <div class="doc-md-description">
