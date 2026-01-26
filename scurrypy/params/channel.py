@@ -46,7 +46,7 @@ class EditGuildChannelParams(TypedDict, total=False):
     """Default forum sort order. See [`SortOrderTypes`][scurrypy.parts.channel.SortOrderTypes]."""
 
     default_forum_layout: Optional[int]
-    """Default forum layout view. See [`ForumLayoutTypes`][scurrypy.parts.channel.ForumLayoutTypes]. Defaults to `ForumLayoutTypes.NOT_SET`."""
+    """Default forum layout view. See [`ForumLayoutTypes`][scurrypy.parts.channel.ForumLayoutTypes]."""
 
     default_thread_rate_limit_per_user: Optional[int]
     """Rate limit per user set on newly created threads.

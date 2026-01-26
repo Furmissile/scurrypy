@@ -7,7 +7,6 @@ from .component_types import *
 from ..models import EmojiModel
 from .component_types import ComponentTypes
 
-
 @dataclass
 class ActionRowPart(DataModel, ContainerChild):
     """Represents a container of interactable components."""
@@ -37,14 +36,14 @@ class ButtonStyles:
     """Navigates to a URL. (Gray + window)"""
 
 @dataclass
-class Button(DataModel, ActionRowChild, SectionAccessoryChild):
+class ButtonPart(DataModel, ActionRowChild, SectionAccessoryChild):
     """Represents the Button component."""
 
     style: int = None
     """A button style. See [`ButtonStyles`][scurrypy.parts.components.ButtonStyles]."""
 
     custom_id: str = None
-    """ID for the button. Do not supply for `LINK` style buttons."""
+    """ID for the button. Do not supply for `ButtonStyles.LINK` style buttons."""
 
     label: Optional[str] = None
     """Text that appears on the button."""
@@ -59,13 +58,13 @@ class Button(DataModel, ActionRowChild, SectionAccessoryChild):
     """Whether the button is disabled. Defaults to `False`."""
 
     link: Optional[str] = None
-    """Hyperlink for button. For `LINK` style only."""
+    """Hyperlink for button. For `ButtonStyles.LINK` style only."""
 
     type: int = field(init=False, default=ComponentTypes.BUTTON)
     """Component type. Always `ComponentTypes.BUTTON` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
-class SelectOption(DataModel):
+class SelectOptionPart(DataModel):
     """Represents the Select Option component."""
 
     label: str = None
@@ -81,17 +80,17 @@ class SelectOption(DataModel):
     """Partial emoji object."""
 
     default: Optional[bool] = False
-    """Whether this option is selected by default."""
+    """Whether this option is selected by default. Defaults to `False`."""
 
 @dataclass
-class StringSelect(DataModel, ActionRowChild, LabelChild):
+class StringSelectPart(DataModel, ActionRowChild, LabelChild):
     """Represents the String Select component."""
 
     custom_id: str = None
     """ID for the select menu."""
 
-    options: list[SelectOption] = field(default_factory=list)
-    """Specified choices in a select menu. See [`SelectOption`][scurrypy.parts.components.SelectOption]."""
+    options: list[SelectOptionPart] = field(default_factory=list)
+    """Specified choices in a select menu. See [`SelectOptionPart`][scurrypy.parts.components.SelectOptionPart]."""
 
     placeholder: Optional[str] = None
     """Placeholder text if nothing is selected or default."""
@@ -121,7 +120,7 @@ class TextInputStyles:
     """Multi-line text input."""
 
 @dataclass
-class TextInput(DataModel, LabelChild):
+class TextInputPart(DataModel, LabelChild):
     """Represents the Text Input component."""
 
     custom_id: str = None
@@ -137,7 +136,7 @@ class TextInput(DataModel, LabelChild):
     """Maximum input length for a text input."""
 
     required: Optional[bool] = True
-    """Whether this component is required to be filled. Defaults to True."""
+    """Whether this component is required to be filled. Defaults to `True`."""
 
     value: Optional[str] = None
     """Pre-filled value for this component."""
@@ -149,7 +148,7 @@ class TextInput(DataModel, LabelChild):
     """Component type. Always `ComponentTypes.TEXT_INPUT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
-class DefaultValue(DataModel):
+class DefaultValuePart(DataModel):
     """Represents the Default Value for Select components."""
 
     id: int = None
@@ -168,17 +167,17 @@ class SelectMenu(DataModel):
     placeholder: Optional[str] = None
     """Placeholder text if nothing is selected."""
 
-    default_values: Optional[list[DefaultValue]] = field(default_factory=list)
+    default_values: Optional[list[DefaultValuePart]] = field(default_factory=list)
     """
-        List of default values for auto-populated select menu components. See [`DefaultValue`][scurrypy.parts.components.DefaultValue].
+        List of default values for auto-populated select menu components. See [`DefaultValuePart`][scurrypy.parts.components.DefaultValuePart].
         Number of default values must be in the range of `min_values` to `max_values`.
     """
 
     min_values: Optional[int] = 1
-    """Minimum number of items that must be chosen. Defaults to 1."""
+    """Minimum number of items that must be chosen. Defaults to `1`."""
 
     max_values: Optional[int] = 1
-    """Maximum number of items that can be chosen. Defaults to 1."""
+    """Maximum number of items that can be chosen. Defaults to `1`."""
 
     required: Optional[bool] = False
     """Whether the select is required to answer in a modal. Defaults to `False`."""
@@ -188,28 +187,28 @@ class SelectMenu(DataModel):
 
 
 @dataclass
-class UserSelect(SelectMenu, ActionRowChild, LabelChild):
+class UserSelectPart(SelectMenu, ActionRowChild, LabelChild):
     """Represents the User Select component."""
 
     type: int = field(init=False, default=ComponentTypes.USER_SELECT)
     """Component type. Always `ComponentTypes.USER_SELECT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
-class RoleSelect(SelectMenu, ActionRowChild, LabelChild):
+class RoleSelectPart(SelectMenu, ActionRowChild, LabelChild):
     """Represents the Role Select component."""
 
     type: int = field(init=False, default=ComponentTypes.ROLE_SELECT)
     """Component type. Always `ComponentTypes.ROLE_SELECT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
-class MentionableSelect(SelectMenu, ActionRowChild, LabelChild):
+class MentionableSelectPart(SelectMenu, ActionRowChild, LabelChild):
     """Represents the Mentionable Select component."""
 
     type: int = field(init=False, default=ComponentTypes.MENTIONABLE_SELECT)
     """Component type. Always `ComponentTypes.MENTIONABLE_SELECT` for this class. See [`ComponentTypes`][scurrypy.parts.components.ComponentTypes]."""
 
 @dataclass
-class ChannelSelect(SelectMenu, ActionRowChild, LabelChild):
+class ChannelSelectPart(SelectMenu, ActionRowChild, LabelChild):
     """Represents the Channel Select component."""
 
     type: int = field(init=False, default=ComponentTypes.CHANNEL_SELECT)

@@ -33,7 +33,9 @@ from .guild_events import (
     GuildBanRemoveEvent,
 
     GuildIntegrationUpdateEvent,
-    GuildIntegrationDeleteEvent
+    GuildIntegrationDeleteEvent,
+
+    GuildStickersUpdateEvent
 )
 
 # from .hello_event import HelloEvent
@@ -81,7 +83,7 @@ __all__ = [
     "ThreadMembersUpdateEvent", "ThreadDeleteEvent", "ThreadUpdateEvent", "BulkMessageDeleteEvent", "WebhooksUpdateEvent",
     "GuildCreateEvent", "GuildUpdateEvent", "GuildDeleteEvent",
     "GuildMemberAddEvent", "GuildMemberRemoveEvent", "GuildMemberUpdateEvent", "GuildEmojisUpdateEvent",
-    "GuildBanAddEvent", "GuildBanRemoveEvent", "GuildIntegrationUpdateEvent", "GuildIntegrationDeleteEvent",
+    "GuildBanAddEvent", "GuildBanRemoveEvent", "GuildIntegrationUpdateEvent", "GuildIntegrationDeleteEvent", "GuildStickersUpdateEvent",
     "InteractionEvent",
     "InviteCreateEvent", "InviteDeleteEvent",
     "MessageCreateEvent", "MessageUpdateEvent", "MessageDeleteEvent",

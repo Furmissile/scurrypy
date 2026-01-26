@@ -20,7 +20,6 @@ class Invite(BaseResource):
         Returns:
             (InviteModel): queried invite object
         """
-
         data = await self._http.request(
             'GET', 
             f'/invites/{self.code}', 

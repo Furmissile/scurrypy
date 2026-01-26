@@ -36,6 +36,8 @@ EVENTS = {
 
     EventTypes.GUILD_EMOJIS_UPDATE: GuildEmojisUpdateEvent,
 
+    EventTypes.GUILD_STICKERS_UPDATE: GuildStickersUpdateEvent,
+
     # interaction events
     EventTypes.INTERACTION_CREATE: InteractionEvent,
 

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
 
-from .image_data import ImageData
+from .image_data import ImageDataPart
 
 @dataclass
 class BotEmojiPart(DataModel):
@@ -10,5 +10,5 @@ class BotEmojiPart(DataModel):
     name: str = None
     """Name of the emoji."""
     
-    image: ImageData = None
+    image: ImageDataPart = None
     """Image data for the icon of the emoji."""

@@ -1,6 +1,6 @@
 from typing import TypedDict, Optional
 
-from ..parts.command import CommandOption
+from ..parts.command import CommandOptionPart
 
 class EditGuildCommandParams(TypedDict, total=False):
     """Parameters for editing a guild command."""
@@ -11,7 +11,7 @@ class EditGuildCommandParams(TypedDict, total=False):
     description: Optional[str]
     """Description for the command."""
 
-    options: Optional[list[CommandOption]]
+    options: Optional[list[CommandOptionPart]]
     """Options with the command."""
 
     nsfw: Optional[bool]
@@ -26,7 +26,7 @@ class EditGlobalCommandParams(TypedDict, total=False):
     description: Optional[str]
     """Description for the command."""
 
-    options: Optional[list[CommandOption]]
+    options: Optional[list[CommandOptionPart]]
     """Options with the command."""
 
     nsfw: Optional[bool]

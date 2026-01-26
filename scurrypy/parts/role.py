@@ -3,7 +3,7 @@ from ..core.model import DataModel
 
 from typing import Optional
 
-from ..parts.image_data import ImageData
+from ..parts.image_data import ImageDataPart
 
 @dataclass
 class RoleColorsPart(DataModel):
@@ -28,7 +28,7 @@ class GuildRolePart(DataModel):
     colors: RoleColorsPart = None
     """Colors of the role."""
 
-    icon: Optional[ImageData] = None
+    icon: Optional[ImageDataPart] = None
     """Icon of the role (if guild has `ROLE_ICONS` feature)."""
 
     permissions: int = None

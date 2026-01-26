@@ -1,5 +1,7 @@
 # scurrypy/parts
 
+from .attachment import AttachmentPart
+
 from .bot_emoji import BotEmojiPart
 
 from .channel import (
@@ -17,11 +19,11 @@ from .channel import (
 from .command import (
     CommandTypes,
     CommandOptionTypes,
-    CommandOption,
-    CommandOptionChoice,
-    SlashCommand, 
-    UserCommand,
-    MessageCommand
+    CommandOptionPart,
+    CommandOptionChoicePart,
+    SlashCommandPart, 
+    UserCommandPart,
+    MessageCommandPart
 )
 
 from .component_types import (
@@ -34,49 +36,57 @@ from .component_types import (
 
 from .components_v2 import (
     SectionPart,
-    TextDisplay,
-    Thumbnail,
-    MediaGalleryItem,
-    MediaGallery,
-    File,
+    TextDisplayPart,
+    ThumbnailPart,
+    MediaGalleryItemPart,
+    MediaGalleryPart,
+    FilePart,
     SeparatorTypes,
-    Separator,
+    SeparatorPart,
     ContainerPart,
-    Label,
-    FileUpload
+    LabelPart,
+    FileUploadPart
 )
 
 from .components import (
     ComponentTypes,
     ActionRowPart, 
     ButtonStyles,
-    Button,
-    SelectOption,
-    StringSelect,
+    ButtonPart,
+    SelectOptionPart,
+    StringSelectPart,
     TextInputStyles,
-    TextInput,
-    DefaultValue,
+    TextInputPart,
+    DefaultValuePart,
     # SelectMenu,
-    UserSelect,
-    RoleSelect,
-    MentionableSelect,
-    ChannelSelect
+    UserSelectPart,
+    RoleSelectPart,
+    MentionableSelectPart,
+    ChannelSelectPart
 )
 
 from .embed import (
-    EmbedAuthor,
-    EmbedThumbnail,
-    EmbedField,
-    EmbedImage,
-    EmbedFooter,
+    EmbedAuthorPart,
+    EmbedThumbnailPart,
+    EmbedFieldPart,
+    EmbedImagePart,
+    EmbedFooterPart,
     EmbedPart
 )
 
-from .guild import BulkGuildBanPart, WelcomeScreenChannelPart
+from .guild import (
+    BulkGuildBanPart, 
+    WelcomeScreenChannelPart,
+    PromptTypes,
+    OnboardingPromptOptionPart,
+    OnboardingModes,
+    OnboardingPromptPart,
+    GuildStickerPart
+)
 
 from .guild_emoji import GuildEmojiPart
 
-from .image_data import ImageData
+from .image_data import ImageDataPart, ImageAssetPart
 
 from .invite import InvitePart
 
@@ -84,8 +94,7 @@ from .message import (
     MessageFlags,
     # MessageFlagParams,
     MessageReferenceTypes,
-    MessageReference,
-    Attachment,
+    MessageReferencePart,
     MessagePart
 )
 
@@ -93,22 +102,23 @@ from .modal import ModalPart
 from .role import RoleColorsPart, GuildRolePart
 
 __all__ = [
+    "AttachmentPart",
     "BotEmojiPart",
     "TagPart", "DefaultReactionPart", "ChannelTypes", "ChannelFlags", "SortOrderTypes", "ForumLayoutTypes", 
     "GuildChannelPart", "ThreadFromMessagePart", "ThreadWithoutMessagePart",
-    "CommandTypes", "CommandOption", "CommandOptionChoice", "CommandOptionTypes", "SlashCommand", "UserCommand", "MessageCommand",
+    "CommandTypes", "CommandOptionPart", "CommandOptionChoicePart", "CommandOptionTypes", "SlashCommandPart", "UserCommandPart", "MessageCommandPart",
     "ContainerChild", "ActionRowChild", "LabelChild", "SectionAccessoryChild", "SectionChild",
-    "SectionPart", "TextDisplay", "Thumbnail", "MediaGalleryItem", "MediaGallery",
-    "File", "SeparatorTypes", "Separator", "ContainerPart", "Label", "FileUpload",
-    "ComponentTypes", "ActionRowPart", "ButtonStyles", "Button", "SelectOption", "StringSelect",
-    "TextInputStyles", "TextInput", "DefaultValue", "UserSelect", "RoleSelect", "MentionableSelect",
-    "ChannelSelect",
-    "EmbedAuthor", "EmbedThumbnail", "EmbedField", "EmbedImage", "EmbedFooter", "EmbedPart",
-    "BulkGuildBanPart", "WelcomeScreenChannelPart",
+    "SectionPart", "TextDisplayPart", "ThumbnailPart", "MediaGalleryItemPart", "MediaGalleryPart",
+    "FilePart", "SeparatorTypes", "SeparatorPart", "ContainerPart", "LabelPart", "FileUploadPart",
+    "ComponentTypes", "ActionRowPart", "ButtonStyles", "ButtonPart", "SelectOptionPart", "StringSelectPart",
+    "TextInputStyles", "TextInputPart", "DefaultValuePart", "UserSelectPart", "RoleSelectPart", "MentionableSelectPart",
+    "ChannelSelectPart",
+    "EmbedAuthorPart", "EmbedThumbnailPart", "EmbedFieldPart", "EmbedImagePart", "EmbedFooterPart", "EmbedPart",
+    "BulkGuildBanPart", "WelcomeScreenChannelPart", "PromptTypes", "OnboardingPromptOptionPart", "OnboardingModes", "OnboardingPromptPart", "GuildStickerPart",
     "GuildEmojiPart",
-    "ImageData",
+    "ImageDataPart", "ImageAssetPart",
     "InvitePart",
-    "MessageFlags", "MessageReferenceTypes", "MessageReference", "Attachment", "MessagePart", 
+    "MessageFlags", "MessageReferenceTypes", "MessageReferencePart", "MessagePart", 
     "ModalPart",
     "RoleColorsPart", "GuildRolePart"
 ]

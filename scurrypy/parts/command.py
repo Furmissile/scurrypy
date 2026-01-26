@@ -36,10 +36,10 @@ class CommandOptionTypes:
     """number (Any double between -2^53 and 2^53)"""
 
     ATTACHMENT = 11
-    """file upload (See [Attachment][scurrypy.parts.message.Attachment])"""
+    """file upload (See [`AttachmentPart`][scurrypy.parts.message.AttachmentPart])"""
 
 @dataclass
-class CommandOptionChoice(DataModel):
+class CommandOptionChoicePart(DataModel):
     """Choice for a command option."""
 
     name: str = None
@@ -52,7 +52,7 @@ class CommandOptionChoice(DataModel):
     """Dictionary with keys in available locales."""
 
 @dataclass
-class CommandOption(DataModel):
+class CommandOptionPart(DataModel):
     """Option for a slash command."""
 
     type: int = None
@@ -67,14 +67,14 @@ class CommandOption(DataModel):
     required: bool = False
     """Whether this option is required. Defaults to `False`."""
 
-    choices: list[CommandOptionChoice] = field(default_factory=list)
+    choices: list[CommandOptionChoicePart] = field(default_factory=list)
     """Choices for the user to pick from, max 25. Only valid for STRING, INTEGER, NUMBER option types."""
 
     autocomplete: bool = False
     """Whether autocomplete interactions are enabled for this option. Defaults to `False`."""
 
 @dataclass
-class SlashCommand(DataModel):
+class SlashCommandPart(DataModel):
     """Represents the slash command object."""
 
     name: str = None
@@ -83,14 +83,14 @@ class SlashCommand(DataModel):
     description: str = None
     """Description of the command."""
 
-    options: list[CommandOption] = field(default_factory=list)
+    options: list[CommandOptionPart] = field(default_factory=list)
     """Parameters or options for the command."""
 
     type: int = field(init=False, default=CommandTypes.CHAT_INPUT)
     """Command type. Always `CommandTypes.CHAT_INPUT` for this class. See [`CommandTypes`][scurrypy.parts.command.CommandTypes]."""
 
 @dataclass
-class UserCommand(DataModel):
+class UserCommandPart(DataModel):
     """Represents the user command object."""
 
     name: str = None
@@ -100,7 +100,7 @@ class UserCommand(DataModel):
     """Command type. Always `CommandTypes.USER_COMMAND` for this class. See [`CommandTypes`][scurrypy.parts.command.CommandTypes]."""
 
 @dataclass
-class MessageCommand(DataModel):
+class MessageCommandPart(DataModel):
     """Represents the message command object."""
     
     name: str = None

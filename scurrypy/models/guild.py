@@ -15,6 +15,7 @@ class GuildFeatures:
     DISCOVERABLE = "DISCOVERABLE"
     BANNER = "BANNER"
     ANIMATED_BANNER = "ANIMATED_BANNER"
+    PARTNERED = "PARTNERED"
 
 @dataclass
 class ReadyGuildModel(DataModel):
@@ -154,11 +155,7 @@ class GuildWelcomeScreenModel(DataModel):
 
 @dataclass
 class OnboardingPromptOptionModel(DataModel):
-    """Represents a guild's prompt option for onboarding.
-    
-    !!! note
-        `emoji_id`, `emoji_name`, and `emoji_animated` must be used when editing.
-    """
+    """Represents a guild's prompt option for onboarding."""
 
     id: int
     """ID of the prompt option."""
@@ -187,14 +184,6 @@ class OnboardingPromptOptionModel(DataModel):
     description: str
     """Description of the option."""
 
-class PromptTypes:
-    MULTIPLE_CHOICE = 0
-    DROPDOWN = 1
-
-class OnboardingModes:
-    ONBOARDING_DEFAULT = 0
-    ONBOARDING_ADVANCED = 1
-
 @dataclass
 class OnboardingPromptModel(DataModel):
     """Represents a guild's prompt for onboarding."""
@@ -203,7 +192,7 @@ class OnboardingPromptModel(DataModel):
     """ID of the prompt."""
 
     type: int
-    """Type of prompt. See [`PromptTypes`][scurrypy.models.guild.PromptTypes]."""
+    """Type of prompt. See [`PromptTypes`][scurrypy.parts.guild.PromptTypes]."""
 
     options: list[OnboardingPromptOptionModel]
     """Options available with the prompt."""
@@ -237,4 +226,4 @@ class GuildOnboadingModel(DataModel):
     """Whether onboarding is enabled for the guild."""
 
     mode: int
-    """Current mode of onboarding. See [`OnboardingModes`][scurrypy.models.guild.OnboardingModes]."""
+    """Current mode of onboarding. See [`OnboardingModes`][scurrypy.parts.guild.OnboardingModes]."""

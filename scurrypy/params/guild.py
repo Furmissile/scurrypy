@@ -1,8 +1,8 @@
 from typing import TypedDict, Optional
 
 from ..parts.role import RoleColorsPart
-from ..parts.image_data import ImageData
-from ..parts.guild import WelcomeScreenChannelPart
+from ..parts.image_data import ImageDataPart
+from ..parts.guild import WelcomeScreenChannelPart, OnboardingPromptPart
 
 class EditGuildParams(TypedDict, total=False):
     """Represents fields for editing a guild."""
@@ -13,20 +13,20 @@ class EditGuildParams(TypedDict, total=False):
     afk_channel_id: int
     """Channel ID for AFK channel."""
 
-    icon: ImageData
+    icon: ImageDataPart
     """Data URI scheme for guild icon.
     
     !!! note
         Can be animated if guild has `ANIMATED_ICON` feature.
     """
 
-    splash: ImageData
+    splash: ImageDataPart
     """Data URI scheme for guild splash if guild has `INVITE_SPLASH` feature."""
 
-    discovery_splash: ImageData
+    discovery_splash: ImageDataPart
     """Data URI scheme for guild discovery if guild has `DISCOVERABLE` feature."""
 
-    banner: ImageData
+    banner: ImageDataPart
     """Data URI scheme for guild banner if guild has `BANNER` feature.
     
     !!! note
@@ -66,10 +66,10 @@ class EditGuildRoleParams(TypedDict, total=False):
     hoist: Optional[bool]
     """Whether the role is displayed separately on the sidebar."""
 
-    icon: Optional[ImageData]
+    icon: Optional[ImageDataPart]
     """Icon of the role (if guild has `ROLE_ICONS` feature)."""
 
-    permissions: int = None
+    permissions: int
     """Permission bit set. [`INT_LIMIT`]"""
 
     unicode_emoji: Optional[str]
@@ -78,7 +78,7 @@ class EditGuildRoleParams(TypedDict, total=False):
     mentionable: Optional[bool]
     """Whether the role should be mentionable."""
 
-class EditGuildWelcomeScreen(TypedDict, total=False):
+class EditGuildWelcomeScreenParams(TypedDict, total=False):
     """Represents fields for editing a guild welcome screen."""
 
     enabled: bool
@@ -89,3 +89,30 @@ class EditGuildWelcomeScreen(TypedDict, total=False):
 
     description: str
     """Guild description to show on the welcome screen."""
+
+class EditOnboardingParams(TypedDict, total=False):
+    """Represents fields for editing a guild onboarding flow."""
+
+    prompts: list[OnboardingPromptPart]
+    """Prompts shown during onboarding."""
+
+    default_channel_ids: list[int]
+    """Channel IDs that members get opted into automatically."""
+
+    enabled: bool
+    """Whether onboarding is enabled in the guild."""
+    
+    mode: int
+    """Current mode of onboarding. See [`OnboardingModes`][scurrypy.parts.guild.OnboardingModes]."""
+
+class EditGuildStickerParams(TypedDict, total=False):
+    """Represents fields for editing a guild sticker."""
+
+    name: str
+    """Name of the sticker."""
+
+    description: str
+    """Description of the sticker."""
+
+    tags: str
+    """Autocomplete/suggestion tags for the sticker."""

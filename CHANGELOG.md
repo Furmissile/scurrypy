@@ -2,6 +2,35 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
+## [0.18.0] - Jan 2026
+
+### Breaking Changes
+
+* `Attachment` (now `AttachmentPart`) is now in its own file.
+* Renamed: **ALL** parts without the `Part` suffix now have the `Part` suffix!
+* `Message.edit` and `Interaction.update` now take `EditMessageParams` instead of `MessagePart`
+* ScurryPy no longer validates parameter types. This must be checked by frameworks or bots.
+    * **NOTE:** The only exceptions are if Discord's errors are cryptic or there's a legitimate reason to confuse types.
+* Renamed intent: `GUILD_EMOJIS_AND_STICKERS` to `GUILD_EXPRESSIONS`
+
+### Changed
+
+* Added endpoint `Guild.edit_onboarding`
+* New parts: `OnboardingPromptOptionPart` and `OnboardingPromptPart`
+* Fixed: docstring formats
+* Fixed: `Message.fetch_emoji_reactions` to actually include parameters
+* Added permissions: `USE_EXTERNAL_STICKERS`, `CHANGE_NICKNAME`, `MANAGE_NICKNAMES`, `MENTION_EVERYONE`
+* Added intents: `GUILD_MODERATION`, `GUILD_INVITES`
+* Added new resource: `Sticker`
+* New `Guild` endpoints:
+    * `Guild.fetch_sticker`
+    * `Guild.fetch_stickers`
+    * `Guild.create_sticker`
+    * `Guild.edit_sticker`
+    * `Guild.delete_sticker`
+    -- with the exception of a few endpoints, this completes the `Guild` resource
+* New part: `ImageAssetPart` - currently only used for creating guild stickers
+
 ## [0.17.0] - Jan 2026
 
 ### Breaking Changes
@@ -83,7 +112,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 
 * Moving forward, params are for modifying, function parameters are for querying, and parts are for creating.
 
-## [0.15.0]
+## [0.15.0] - Jan 2026
 
 ### Breaking Changes
 
@@ -112,7 +141,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 
 * Moved: `PinnedMessageModel` from `scurrypy.models.channel` -> `scurrypy.models.message`
 
-## [0.14.0]
+## [0.14.0] - Jan 2026
 
 ### Changed
 
@@ -157,7 +186,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
             await client.command(APP_ID, GUILD_ID).create_command(command)
         ```
 
-## [0.12.0]
+## [0.12.0] - Dec 2025
 
 ### Changed
 
@@ -169,7 +198,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 
 * Bug fix: Boolean conversion in DataModel (string "false" now correctly converts to False)
 
-## [0.11.0]
+## [0.11.0] - Dec 2025
 
 ### Breaking Changes
 
@@ -182,7 +211,7 @@ User was patched to be more bot specific. Some endpoints are not accessible to b
 
 * Bug fix: `User.fetch_guild_member` endpoint corrected
 
-## [0.10.1]
+## [0.10.1] - Dec 2025
 
 ### Changes
 
@@ -190,7 +219,7 @@ Logging has been improved for finer grained control.
 
 * Gateway heartbeat logs are now emitted at `DEBUG` level.
 
-## [0.10.0]
+## [0.10.0] - Dec 2025
 
 ### Changes
 
@@ -198,7 +227,7 @@ Logging has been improved for finer grained control.
 
 * Events not registered by the user are now `DEBUG` messages.
 
-## [0.9.0]
+## [0.9.0] - Dec 2025
 
 ### Breaking Changes
 
@@ -238,7 +267,7 @@ The handling of `application_id` has been refactored and is now passed explicitl
         client.add_event_listener(EventTypes.MESSAGE_CREATE, on_message_create)
         ```
 
-## [0.8.8.2]
+## [0.8.8.2] - Dec 2025
 
 ### Changed
 * Corrected `FileUpload`: `component: LabelChild` is supposed to be `custom_id: str`.

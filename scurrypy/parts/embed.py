@@ -4,7 +4,7 @@ from ..core.model import DataModel
 from typing import Optional
 
 @dataclass
-class EmbedAuthor(DataModel):
+class EmbedAuthorPart(DataModel):
     """Represents fields for creating an embed author."""
 
     name: str = None
@@ -17,14 +17,14 @@ class EmbedAuthor(DataModel):
     """URL of author's icon. http or attachment://<filename> scheme."""
 
 @dataclass
-class EmbedThumbnail(DataModel):
+class EmbedThumbnailPart(DataModel):
     """Represents fields for creating an embed thumbnail."""
 
     url: str = None
     """Thumbnail content. http or attachment://<filename> scheme."""
 
 @dataclass
-class EmbedField(DataModel):
+class EmbedFieldPart(DataModel):
     """Represents fields for creating an embed field."""
 
     name: str = None
@@ -37,14 +37,14 @@ class EmbedField(DataModel):
     """Whether or not this field should display inline. Defaults to `False`."""
 
 @dataclass
-class EmbedImage(DataModel):
+class EmbedImagePart(DataModel):
     """Represents fields for creating an embed image."""
 
     url: str = None
     """Image content. http or attachment://<filename> scheme."""
 
 @dataclass
-class EmbedFooter(DataModel):
+class EmbedFooterPart(DataModel):
     """Represents fields for creating an embed footer."""
 
     text: str = None
@@ -69,19 +69,19 @@ class EmbedPart(DataModel):
     color: Optional[int] = None
     """Embed's accent color."""
 
-    author: Optional[EmbedAuthor] = None
+    author: Optional[EmbedAuthorPart] = None
     """Embed's author."""
 
-    thumbnail: Optional[EmbedThumbnail] = None
+    thumbnail: Optional[EmbedThumbnailPart] = None
     """Embed's thumbnail attachment."""
 
-    image: Optional[EmbedImage] = None
+    image: Optional[EmbedImagePart] = None
     """Embed's image attachment."""
 
-    fields: Optional[list[EmbedField]] = field(default_factory=list)
+    fields: Optional[list[EmbedFieldPart]] = field(default_factory=list)
     """List of embed's fields."""
 
-    footer: Optional[EmbedFooter] = None
+    footer: Optional[EmbedFooterPart] = None
     """Embed's footer."""
 
     def to_dict(self):
@@ -95,7 +95,7 @@ class EmbedPart(DataModel):
         easy to confuse. This guard catches the mistake early and provides a clear,
         actionable error instead of allowing Discord to return an obscure 400 error.
         """
-        from .components_v2 import Thumbnail as V2Thumbnail
+        from .components_v2 import ThumbnailPart as V2Thumbnail
 
         if isinstance(self.thumbnail, V2Thumbnail):
             raise TypeError(

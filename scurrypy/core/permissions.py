@@ -19,13 +19,17 @@ class PermissionsFlagParams(TypedDict, total=False):
     embed_links: bool
     attach_files: bool
     read_message_history: bool
+    mention_everyone: bool
     use_external_emojis: bool
+    change_nickname: bool
+    manage_nicknames: bool
     manage_roles: bool
     manage_guild_expressions: bool
     use_application_commands: bool
     manage_threads: bool
     create_public_threads: bool
     create_private_threads: bool
+    use_external_stickers: bool
     send_messages_in_threads: bool
     moderate_members: bool
     create_guild_expressions: bool
@@ -85,8 +89,17 @@ class Permissions:
     READ_MESSAGE_HISTORY = 1 << 16
     """Allows for reading of message history."""
 
+    MENTION_EVERYONE = 1 << 17
+    """Allows for using the @everyone tag to notify all users in a channel, and the @here tag to notify all online users in a channel."""
+
     USE_EXTERNAL_EMOJIS = 1 << 18
     """Allows the usage of custom emojis from other servers."""
+
+    CHANGE_NICKNAME = 1 << 26
+    """Allows for modification of own nickname."""
+
+    MANAGE_NICKNAMES = 1 << 27
+    """Allows for modification of other users nicknames."""
 
     MANAGE_ROLES = 1 << 28
     """Allows management and editing of roles."""
@@ -105,6 +118,9 @@ class Permissions:
 
     CREATE_PRIVATE_THREADS = 1 << 36
     """Allows for creating private threads."""
+
+    USE_EXTERNAL_STICKERS = 1 << 37
+    """Allows the usage of custom stickers from other servers."""
 
     SEND_MESSAGES_IN_THREADS = 1 << 38
     """Allows for sending messages in threads."""

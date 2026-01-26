@@ -44,7 +44,7 @@ class ApplicationCommandOptionTypes:
     """number (Any double between -2^53 and 2^53)"""
 
     ATTACHMENT = 11
-    """file upload (See [Attachment][scurrypy.parts.message.Attachment])"""
+    """file upload (See [`AttachmentPart`][scurrypy.parts.message.AttachmentPart])"""
 
 @dataclass
 class ApplicationCommandOptionChoiceModel(DataModel):
@@ -106,7 +106,7 @@ class ApplicationCommandModel(DataModel):
     """Unique ID of command."""
 
     type: Optional[int]
-    """Type of command. See [`ApplicationCommandTypes`][scurrypy.models.command.ApplicationCommandTypes]. Defaults to `ApplicationCommandTypes.CHAT_INPUT`."""
+    """Type of command. Defaults to `ApplicationCommandTypes.CHAT_INPUT`. See [`ApplicationCommandTypes`][scurrypy.models.command.ApplicationCommandTypes]."""
 
     application_id: int
     """ID of the parent application."""

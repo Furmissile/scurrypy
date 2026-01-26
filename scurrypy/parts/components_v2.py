@@ -19,7 +19,7 @@ class SectionPart(DataModel, ContainerChild):
     """Component type. Always `ComponentTypes.SECTION` for this class. See [`ComponentTypes`][scurrypy.parts.component_types.ComponentTypes]."""
 
 @dataclass
-class TextDisplay(DataModel, ContainerChild, SectionChild):
+class TextDisplayPart(DataModel, ContainerChild, SectionChild):
     """Represents the Text Display component."""
 
     content: str = None
@@ -29,7 +29,7 @@ class TextDisplay(DataModel, ContainerChild, SectionChild):
     """Component type. Always `ComponentTypes.TEXT_DISPLAY` for this class. See [`ComponentTypes`][scurrypy.parts.component_types.ComponentTypes]."""
 
 @dataclass
-class Thumbnail(DataModel, SectionAccessoryChild):
+class ThumbnailPart(DataModel, SectionAccessoryChild):
     """Represents the Thumbnail component."""
     
     media: str = None
@@ -45,7 +45,7 @@ class Thumbnail(DataModel, SectionAccessoryChild):
     """Component type. Always `ComponentTypes.THUMBNAIL` for this class. See [`ComponentTypes`][scurrypy.parts.component_types.ComponentTypes]."""
 
 @dataclass
-class MediaGalleryItem(DataModel):
+class MediaGalleryItemPart(DataModel):
     """Represents the Media Gallery Item component."""
 
     media: str = None
@@ -58,17 +58,17 @@ class MediaGalleryItem(DataModel):
     """Whether the thumbnail should be a spoiler (or blurred out). Defaults to `False`."""
 
 @dataclass
-class MediaGallery(DataModel, ContainerChild):
+class MediaGalleryPart(DataModel, ContainerChild):
     """Represents the Media Gallery component."""
 
-    items: list[MediaGalleryItem] = field(default_factory=list)
-    """1 to 10 nedia gallery items. See [`MediaGalleryItem`][scurrypy.parts.components_v2.MediaGalleryItem]."""
+    items: list[MediaGalleryItemPart] = field(default_factory=list)
+    """1 to 10 nedia gallery items. See [`MediaGalleryItemPart`][scurrypy.parts.components_v2.MediaGalleryItemPart]."""
 
     type: int = field(init=False, default=ComponentTypes.MEDIA_GALLERY)
     """Component type. Always `ComponentTypes.MEDIA_GALLERY` for this class. See [`ComponentTypes`][scurrypy.parts.component_types.ComponentTypes]."""
 
 @dataclass
-class File(DataModel, ContainerChild):
+class FilePart(DataModel, ContainerChild):
     """Represents the File component."""
 
     file: str = None
@@ -90,14 +90,14 @@ class SeparatorTypes:
     """Large separator padding."""
 
 @dataclass
-class Separator(DataModel, ContainerChild):
+class SeparatorPart(DataModel, ContainerChild):
     """Represents the Separator component."""
 
     divider: Optional[bool] = True
-    """Whether a visual divider should be displayed in the component. Defaults to True."""
+    """Whether a visual divider should be displayed in the component. Defaults to `True`."""
 
     spacing: Optional[int] = SeparatorTypes.SMALL_PADDING
-    """Size of separator padding. Defaults to `SMALL_PADDING`. See [`SeparatorTypes`][scurrypy.parts.components_v2.SeparatorTypes]."""
+    """Size of separator padding. Defaults to `SeparatorTypes.SMALL_PADDING`. See [`SeparatorTypes`][scurrypy.parts.components_v2.SeparatorTypes]."""
 
     type: int = field(init=False, default=ComponentTypes.SEPARATOR)
     """Component type. Always `ComponentTypes.SEPARATOR` for this class. See [`ComponentTypes`][scurrypy.parts.component_types.ComponentTypes]."""
@@ -119,7 +119,7 @@ class ContainerPart(DataModel):
     """Component type. Always `ComponentTypes.CONTAINER` for this class. See [`ComponentTypes`][scurrypy.parts.component_types.ComponentTypes]."""
 
 @dataclass
-class Label(DataModel):
+class LabelPart(DataModel):
     """Represents the Discord Label component."""
 
     label: str = None
@@ -135,7 +135,7 @@ class Label(DataModel):
     """Component type. Always `ComponentTypes.LABEL` for this class. See [`ComponentTypes`][scurrypy.parts.component_types.ComponentTypes]."""
 
 @dataclass
-class FileUpload(DataModel, ContainerChild):
+class FileUploadPart(DataModel, ContainerChild):
     """Represents the file upload component."""
 
     custom_id: str = None

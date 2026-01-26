@@ -6,9 +6,13 @@ from typing import Optional, TypedDict, Unpack
 from .embed import EmbedPart
 from .components import ActionRowPart
 from .components_v2 import ContainerPart
+from .attachment import AttachmentPart
 
 class MessageFlags:
     """Flags that can be applied to a message."""
+
+    NO_FLAGS = 0
+    """Message has no flags."""
 
     CROSSPOSTED = 1 << 0
     """Message has been published."""
@@ -17,7 +21,7 @@ class MessageFlags:
     """Message originated from another channel."""
 
     SUPPRESS_EMBEDS = 1 << 2
-    """Hide embeds (if any)."""
+    """Hide embeds."""
 
     EPHEMERAL = 1 << 6
     """Only visible to the invoking user."""
@@ -47,7 +51,7 @@ class MessageReferenceTypes:
     """Reference used to point to a message at a point in time."""
 
 @dataclass
-class MessageReference(DataModel):
+class MessageReferencePart(DataModel):
     """Represents the Message Reference object."""
 
     message_id: int = None
@@ -61,52 +65,28 @@ class MessageReference(DataModel):
     """
 
     type: int = MessageReferenceTypes.DEFAULT
-    """Type of reference. Defaults to `DEFAULT`. See [`MessageReferenceTypes`][scurrypy.parts.message.MessageReferenceTypes]."""
-
-@dataclass
-class Attachment(DataModel):
-    """Represents an attachment."""
-
-    id: int = field(init=False, default=None)
-    """ID of the attachment (internally set)."""
-
-    path: str = None
-    """Relative path to the file."""
-
-    description: str = None
-    """Description of the file."""
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'filename': self.path.split('/')[-1],
-            'description': self.description
-        }
+    """Type of reference. Defaults to `MessageReferenceTypes.DEFAULT`. See [`MessageReferenceTypes`][scurrypy.parts.message.MessageReferenceTypes]."""
 
 @dataclass
 class MessagePart(DataModel):
-    """Describes expected params when editing/creating a message."""
+    """Represents a Discord Message."""
 
     content: Optional[str] = None
     """Message text content."""
 
-    flags: Optional[int] = 0
-    """Message flags. See [`MessageFlags`][scurrypy.parts.message.MessageFlags].
-
-    !!! note
-        Flags are ignored if editing an existing message.
-    """
+    flags: Optional[int] = MessageFlags.NO_FLAGS
+    """Message flags. Defaults to `MessageFlags.NO_FLAGS`. See [`MessageFlags`][scurrypy.parts.message.MessageFlags]."""
 
     components: Optional[list[ActionRowPart | ContainerPart]] = field(default_factory=list)
     """Components to be attached to this message."""
 
-    attachments: Optional[list[Attachment]] = field(default_factory=list)
+    attachments: Optional[list[AttachmentPart]] = field(default_factory=list)
     """Attachments to be attached to this message."""
 
     embeds: Optional[list[EmbedPart]] = field(default_factory=list)
     """Embeds to be attached to this message."""
 
-    message_reference: Optional[MessageReference] = None
+    message_reference: Optional[MessageReferencePart] = None
     """Message reference if reply."""
 
     def _prepare(self):

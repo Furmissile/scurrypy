@@ -8,8 +8,10 @@ class IntentFlagParams(TypedDict, total=False):
     """
     guilds: bool
     guild_members: bool
-    guild_emojis_and_stickers: bool
+    guild_moderation: bool
+    guild_expressions: bool
     guild_integrations: bool
+    guild_invites: bool
     guild_webhooks: bool
     guild_messages: bool
     guild_message_reactions: bool
@@ -34,14 +36,17 @@ class Intents:
     Receive events related to guild members.
     """
 
-    GUILD_EMOJIS_AND_STICKERS = 1 << 3
+    GUILD_MODERATION = 1 << 2
+    """Receive events related to guild moderation."""
+
+    GUILD_EXPRESSIONS = 1 << 3
     """Receive events related to custom emojis and stickers."""
 
     GUILD_INTEGRATIONS = 1 << 4
     """Receive events related to integrations within a guild."""
 
-    GUILD_WEBHOOKS = 1 << 5
-    """Track webhook events within a guild."""
+    GUILD_INVITES = 1 << 6
+    """Receive events related to creating guild invites."""
 
     GUILD_MESSAGES = 1 << 9
     """Receive events about messages within a guild."""

@@ -49,7 +49,6 @@ class GuildEmoji(BaseResource):
         Returns:
             (EmojiModel): new emoji
         """
-
         data = await self._http.request(
             'POST', 
             f'/guilds/{self.guild_id}/emojis', 
@@ -69,7 +68,6 @@ class GuildEmoji(BaseResource):
         Returns:
             (EmojiModel): updated emoji
         """
-
         data = await self._http.request(
             'PATCH', 
             f'/guilds/{self.guild_id}/emojis/{emoji_id}', 
@@ -89,5 +87,4 @@ class GuildEmoji(BaseResource):
         Args:
             emoji_id (int): ID of the emoji
         """
-
         await self._http.request('DELETE', f'/guilds/{self.guild_id}/emojis/{emoji_id}')

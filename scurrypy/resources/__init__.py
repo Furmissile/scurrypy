@@ -24,6 +24,8 @@ from .invite import Invite
 
 from .message import Message
 
+from .sticker import Sticker
+
 from .user import (
     # FetchUserGuildsParams,
     User
@@ -39,5 +41,6 @@ __all__ = [
     "Interaction",
     "Invite",
     "Message",
+    "Sticker",
     "User"
 ]

@@ -27,11 +27,9 @@ from .guild import (
     BulkGuildBanModel,
     GuildWelcomeChannelModel,
     GuildWelcomeScreenModel,
-    OnboardingModes,
     OnboardingPromptModel,
     OnboardingPromptOptionModel,
-    GuildOnboadingModel,
-    PromptTypes
+    GuildOnboadingModel
 )
 from .integration import IntegrationModel
 from .interaction import (
@@ -45,6 +43,7 @@ from .interaction import (
 from .invite import InviteModel, InviteWithMetadataModel, InviteTypes
 from .message import MessageModel, PinnedMessageModel
 from .role import RoleColorModel, RoleModel
+from .sticker import StickerItemModel, StickerModel, StickerPackModel
 from .user import UserModel, GuildMemberModel
 
 __all__ = [
@@ -55,12 +54,13 @@ __all__ = [
     "ApplicationCommandOptionModel", "ApplicationCommandModel",
     "EmojiModel", "ReactionTypes",
     "ReadyGuildModel", "GuildModel", "GuildFeatures", "GuildBanModel", "BulkGuildBanModel", "GuildWelcomeChannelModel", "GuildWelcomeScreenModel",
-    "OnboardingModes", "OnboardingPromptModel", "OnboardingPromptOptionModel", "GuildOnboadingModel", "PromptTypes",
+    "OnboardingPromptModel", "OnboardingPromptOptionModel", "GuildOnboadingModel",
     "IntegrationModel",
     "InteractionCallbackDataModel", "InteractionCallbackModel", "InteractionCallbackTypes", 
     "InteractionDataTypes", "InteractionTypes", "InteractionModel",
     "InviteModel", "InviteWithMetadataModel", "InviteTypes",
     "MessageModel", "PinnedMessageModel",
     "RoleColorModel", "RoleModel",
+    "StickerItemModel", "StickerModel", "StickerPackModel",
     "UserModel", "GuildMemberModel"
 ]

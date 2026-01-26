@@ -6,6 +6,7 @@ from .base_event import Event
 from ..models.user import UserModel, GuildMemberModel
 from ..models.channel import ChannelModel
 from ..models.guild import UnavailableGuildModel, GuildModel
+from ..models.sticker import StickerModel
 from ..models.emoji import EmojiModel
 
 @dataclass
@@ -165,3 +166,13 @@ class GuildIntegrationDeleteEvent(Event, DataModel):
 
     application_id: Optional[int]
     """ID of the bot for this Discord integration."""
+
+@dataclass
+class GuildStickersUpdateEvent(Event, DataModel):
+    """Received when a guild's stickers have been updated."""
+
+    guild_id: int
+    """ID of the guild."""
+
+    stickers: list[StickerModel]
+    """List of the guild's stickers."""

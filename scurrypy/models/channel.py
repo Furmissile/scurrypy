@@ -147,7 +147,7 @@ class ChannelModel(DataModel):
     """Default duration in minutes threads will be hidden after period of inactivity."""
 
     flags: Optional[int]
-    """Channel flags combined as a bitfield. See [ChannelFlags][scurrypy.parts.channel.ChannelFlags]."""
+    """Channel flags combined as a bitfield. See [`ChannelFlags`][scurrypy.parts.channel.ChannelFlags]."""
 
     available_tags: Optional[list[TagModel]]
     """Set of tags that can be applied to a `GUILD_FORUM` post."""
@@ -169,7 +169,7 @@ class ChannelModel(DataModel):
     """Default forum sort order. See [`SortOrderTypes`][scurrypy.parts.channel.SortOrderTypes]."""
 
     default_forum_layout: Optional[int]
-    """Default forum layout view. See [`ForumLayoutTypes`][scurrypy.parts.channel.ForumLayoutTypes]. Defaults to `ForumLayoutTypes.NOT_SET`."""
+    """Default forum layout view. Defaults to `ForumLayoutTypes.NOT_SET`. See [`ForumLayoutTypes`][scurrypy.parts.channel.ForumLayoutTypes]."""
 
     def user_can(self, permission_bit: int):
         """Checks `permissions` to see if permission bit is toggled.
@@ -178,7 +178,7 @@ class ChannelModel(DataModel):
             If `permission` field is `None`, this function always returns `False`.
 
         Args:
-            permission_bit (int): permission bit. See [Permissions][scurrypy.core.permissions.Permissions].
+            permission_bit (int): permission bit. See [`Permissions`][scurrypy.core.permissions.Permissions].
 
         Returns:
             (bool): whether the user has this permission

@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from ..core.model import DataModel
 
-from .image_data import ImageData
+from .image_data import ImageDataPart
 
 @dataclass
 class GuildEmojiPart(DataModel):
@@ -10,7 +10,7 @@ class GuildEmojiPart(DataModel):
     name: str = None
     """Name of the emoji."""
     
-    image: ImageData = None
+    image: ImageDataPart = None
     """Image data for the icon of the emoji."""
     
     roles: list[int] = field(default_factory=list)

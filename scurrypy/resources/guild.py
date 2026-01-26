@@ -3,7 +3,8 @@ from typing import Unpack
 
 from .base_resource import BaseResource
 
-from ..parts.guild import BulkGuildBanPart
+from ..parts.image_data import ImageAssetPart
+from ..parts.guild import BulkGuildBanPart, GuildStickerPart
 from ..parts.channel import GuildChannelPart
 from ..parts.role import GuildRolePart
 
@@ -13,8 +14,9 @@ from ..models.user import GuildMemberModel
 from ..models.channel import ChannelModel, ActiveThreadsModel
 from ..models.invite import InviteModel, InviteWithMetadataModel
 from ..models.integration import IntegrationModel
+from ..models.sticker import StickerModel
 
-from ..params.guild import EditGuildRoleParams, EditGuildParams, EditGuildWelcomeScreen
+from ..params.guild import EditGuildRoleParams, EditGuildParams, EditGuildWelcomeScreenParams, EditOnboardingParams, EditGuildStickerParams
 from ..params.user import EditGuildMemberParams
 
 @dataclass
@@ -436,7 +438,7 @@ class Guild(BaseResource):
 
         return GuildWelcomeScreenModel.from_dict(data)
 
-    async def edit_welcome_screen(self, **options: Unpack[EditGuildWelcomeScreen]) -> GuildWelcomeScreenModel:
+    async def edit_welcome_screen(self, **options: Unpack[EditGuildWelcomeScreenParams]) -> GuildWelcomeScreenModel:
         """Edit this guild's welcome screen.
         May fire [`GuildUpdateEvent`][scurrypy.events.guild_events.GuildUpdateEvent].
 
@@ -462,3 +464,100 @@ class Guild(BaseResource):
         data = await self._http.request('GET', f'/guilds/{self.id}/onboarding')
 
         return GuildOnboadingModel.from_dict(data)
+
+    async def edit_onboarding(self, **options: Unpack[EditOnboardingParams]) -> GuildOnboadingModel:
+        """Modifies this guild's onboarding flow.
+
+        !!! important "Permissions"
+            Requires `MANAGE_GUILD` and `MANAGE_ROLES`
+
+        !!! note
+            Must be at least **7** Default Channels and at least **5** allow sending message to the @everyone role.
+            Constraints depend on the new `mode`.
+
+        Args:
+            options (EditOnboardingParams): onboarding field to edit
+
+        Returns:
+            (GuildOnboadingModel): edited onboarding flow
+        """
+        data = await self._http.request(
+            'PUT',
+            f'/guilds/{self.id}/onboarding',
+            params=options
+        )
+        return GuildOnboadingModel.from_dict(data)
+
+    async def fetch_sticker(self, sticker_id: int) -> StickerModel:
+        """Fetch a sticker from this guild.
+
+        !!! note
+            Includes the `user` field if the bot has
+            `CREATE_GUILD_EXPRESSIONS` and `MANAGE_GUILD_EXPRESSIONS`
+
+        Args:
+            sticker_id (int): ID of the sticker to fetch
+
+        Returns:
+            (StickerModel): queried sticker
+        """
+        data = await self._http.request('GET', f'/guilds/{self.id}/stickers/{sticker_id}')
+
+        return StickerModel.from_dict(data)
+
+    async def fetch_stickers(self) -> list[StickerModel]:
+        """Fetch this guild's stickers.
+
+        !!! note
+            Includes the `user` field if the bot has
+            `CREATE_GUILD_EXPRESSIONS` and `MANAGE_GUILD_EXPRESSIONS`
+
+        Returns:
+            list[StickerModel]: queried guild stickers
+        """
+        data = await self._http.request('GET', f'/guilds/{self.id}/stickers')
+
+        return [StickerModel.from_dict(i) for i in data]
+
+    async def create_sticker(self, sticker: GuildStickerPart, file: ImageAssetPart) -> StickerModel:
+        """Add a sticker to this guild.
+        Fires [`GuildStickersUpdateEvent`][scurrypy.events.guild_events.GuildStickersUpdateEvent].
+
+        !!! important "Permissions"
+            Requires `CREATE_GUILD_EXPRESSIONS`
+
+        Args:
+            sticker (GuildStickerPart): sticker to create
+            file (ImageAssetPart): the sticker file to upload
+                !!! note
+                    Accepted file types: PNG, APNG, GIF, Lottie JSON file.
+
+        Returns:
+            (StickerModel): created sticker
+        """
+        data = await self._http.request(
+            'POST', f'/guilds/{self.id}/stickers', 
+            data=sticker.to_dict(),
+            assets=file.to_dict()
+        )
+    
+        return StickerModel.from_dict(data)
+
+    async def edit_sticker(self, sticker_id: int, **options: Unpack[EditGuildStickerParams]) -> StickerModel:
+        """Delete a sticker from this guild.
+
+        Args:
+            sticker_id (int): ID of the sticker to delete
+            options (EditGuildStickerParams): fields to edit
+        """
+        data = await self._http.request('PATCH', f'/guilds/{self.id}/stickers/{sticker_id}', data=options)
+
+        return StickerModel.from_dict(data)
+
+    async def delete_sticker(self, sticker_id: int) -> None:
+        """Delete a sticker from this guild.
+
+        Args:
+            sticker_id (int): ID of the sticker to delete
+        """
+        await self._http.request('DELETE', f'/guilds/{self.id}/stickers/{sticker_id}')

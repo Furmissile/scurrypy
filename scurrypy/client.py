@@ -252,6 +252,19 @@ class Client:
 
         return Interaction(self._http, context, id, token)
     
+    def sticker(self, *, context = None):
+        """Creates an interactable sticker resource
+
+        Args:
+            context (Any, optional): associated data
+
+        Returns:
+            (Sticker): the Sticker resource
+        """
+        from .resources.sticker import Sticker
+
+        return Sticker(self._http, context)
+    
     def user(self, user_id: int, *, context = None):
         """Creates an interactable user resource.
 

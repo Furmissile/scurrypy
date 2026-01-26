@@ -5,9 +5,11 @@ from .base_resource import BaseResource
 
 from ..parts.modal import ModalPart
 from ..parts.message import MessagePart, MessageFlagParams, MessageFlags
-from ..parts.command import CommandOptionChoice
+from ..parts.command import CommandOptionChoicePart
 
 from ..models.interaction import InteractionCallbackModel, InteractionCallbackTypes
+
+from ..params.message import EditMessageParams
 
 @dataclass
 class Interaction(BaseResource):
@@ -29,17 +31,12 @@ class Interaction(BaseResource):
             with_response (bool, optional): if the interaction data should be returned. Defaults to `False`.
             **flags: message flags to set. (set respective flag to `True` to toggle.)
 
-        Raises:
-            (TypeError): invalid `message` type
-
         Returns:
             (InteractionCallbackModel | None): interaction callback object (if `with_response` is toggled) else None
         """
         if isinstance(message, str):
             message = MessagePart(content=message).set_flags(**flags)
-        elif not isinstance(message, MessagePart):
-            raise TypeError(f"Interaction.respond expects type str or MessagePart, got {type(message).__name__}")
-        
+
         content = {
             'type': InteractionCallbackTypes.CHANNEL_MESSAGE_WITH_SOURCE, 
             'data': message._prepare().to_dict()
@@ -56,21 +53,15 @@ class Interaction(BaseResource):
         if with_response:
             return InteractionCallbackModel.from_dict(data)
         
-    async def update(self, message: str | MessagePart) -> None:
+    async def update(self, **options: Unpack[EditMessageParams]) -> None:
         """Update a message in response to an interaction.
         Fires [`MessageUpdateEvent`][scurrypy.events.message_events.MessageUpdateEvent].
 
         Args:
-            message (str | MessagePart): content as a string or MessagePart
-
-        Raises:
-            (TypeError): invalid `message` type
+            options (EditMessageParams): content as a string or MessagePart
         """
-        if isinstance(message, str):
-            message = MessagePart(content=message)
-        elif not isinstance(message, MessagePart):
-            raise TypeError(f"Interaction.update expects type str or MessagePart, got {type(message).__name__}")
-        
+        message = MessagePart(**options)
+
         content = {
             'type': InteractionCallbackTypes.UPDATE_MESSAGE, 
             'data': message._prepare().to_dict()
@@ -88,13 +79,7 @@ class Interaction(BaseResource):
 
         Args:
             modal (ModalPart): modal data
-
-        Raises:
-            (TypeError): invalid `modal` type
         """
-        if not isinstance(modal, ModalPart):
-            raise TypeError(f"Interaction.respond_modal expects type ModalPart, got {type(modal).__name__}")
-        
         content = {
             'type': InteractionCallbackTypes.MODAL,
             'data': modal.to_dict()
@@ -105,14 +90,13 @@ class Interaction(BaseResource):
             f'/interactions/{self.id}/{self.token}/callback', 
             data=content)
 
-    async def respond_autocomplete(self, choices: list[CommandOptionChoice]) -> None:
+    async def respond_autocomplete(self, choices: list[CommandOptionChoicePart]) -> None:
         """Autocomplete a command in response to an interaction.
         Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent].
 
         Args:
-            choices (list[CommandOptionChoice]): list of choices to autocomplete
+            choices (list[CommandOptionChoicePart]): list of choices to autocomplete
         """
-        
         content = {
             'type': InteractionCallbackTypes.APPLICATION_COMMAND_AUTOCOMPLETE_RESULT,
             'data': {
@@ -133,7 +117,6 @@ class Interaction(BaseResource):
         Args:
             ephemeral (bool): whether thinking + deferred interaction response is ephemeral
         """
-
         content = {
             'type': InteractionCallbackTypes.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
             'data': {
@@ -154,7 +137,6 @@ class Interaction(BaseResource):
         Args:
             ephemeral (bool): whether the deferred interaction response is ephemeral
         """
-
         content = {
             'type': InteractionCallbackTypes.DEFERRED_UPDATE_MESSAGE,
             'data': {
@@ -179,16 +161,10 @@ class Interaction(BaseResource):
             application_id (int): ID of the application
             message (str | MessagePart): content as a string or MessagePart  
             **flags: message flags to set. (set respective flag to True to toggle.)
-
-        Raises:
-            (TypeError): invalid `message` type          
         """
-
         if isinstance(message, str):
             message = MessagePart(content=message).set_flags(**flags)
-        elif not isinstance(message, MessagePart):
-            raise TypeError(f"Interaction.respond expects type str or MessagePart, got {type(message).__name__}")
-        
+
         content = message._prepare().to_dict()
 
         await self._http.request(
@@ -203,20 +179,12 @@ class Interaction(BaseResource):
         Args:
             application_id (int): ID of the application
             message (str | MessagePart): content as a string or MessagePart
-
-        Raises:
-            (TypeError): invalid `message` type
         """
-
         if isinstance(message, str):
             message = MessagePart(content=message)
-        elif not isinstance(message, MessagePart):
-            raise TypeError(f"Interaction.respond expects type str or MessagePart, got {type(message).__name__}")
-        
-        content = message._prepare().to_dict()
 
         await self._http.request(
             'PATCH',
             f'/webhooks/{application_id}/{self.token}/messages/@original',
-            data=content
+            data=message._prepare().to_dict()
         )

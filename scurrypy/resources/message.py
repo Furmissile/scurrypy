@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from typing import Unpack
+
 from .base_resource import BaseResource
 
 from ..models.emoji import EmojiModel,  ReactionTypes
@@ -7,6 +9,8 @@ from ..models.message import MessageModel
 from ..models.user import UserModel
 
 from ..parts.message import MessagePart
+
+from ..params.message import EditMessageParams
 
 @dataclass
 class Message(BaseResource):
@@ -28,21 +32,20 @@ class Message(BaseResource):
 
         return MessageModel.from_dict(data)
     
-    async def edit(self, message: str | MessagePart) -> MessageModel:
+    async def edit(self, **options: Unpack[EditMessageParams]) -> MessageModel:
         """Edits this message.
         Fires [`MessageUpdateEvent`][scurrypy.events.message_events.MessageUpdateEvent].
 
         !!! important "Permissions"
-            Requires `MANAGE_MESSAGES` *only* if editing another user's message
+            Requires `MANAGE_MESSAGES` *only* if editing another user's message or to edit flags
 
         Args:
-            message (str | MessagePart): content as a string or MessagePart
+            options (EditMessageParams): fields to edit for the message
 
         Returns:
             (MessageModel): updated message
         """
-        if isinstance(message, str):
-            message = MessagePart(content=message)
+        message = MessagePart(**options)
 
         data = await self._http.request(
             "PATCH", 
@@ -100,9 +103,15 @@ class Message(BaseResource):
         if isinstance(emoji, str):
             emoji = EmojiModel(emoji)
 
-        data = self._http.request('GET',
-            f"/channels/{self.channel_id}/messages/{self.id}/reactions/{emoji.api_code}")
-    
+        data = self._http.request(
+            'GET',
+            f"/channels/{self.channel_id}/messages/{self.id}/reactions/{emoji.api_code}",
+            params={
+                'type': type,
+                'after': after,
+                'limit': limit
+            }
+        )
         return [UserModel.from_dict(user) for user in data]
 
     async def add_reaction(self, emoji: EmojiModel | str) -> None:

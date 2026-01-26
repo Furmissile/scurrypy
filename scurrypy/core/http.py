@@ -39,6 +39,7 @@ class RequestItem:
     data: dict = None
     params: dict = None
     files: dict = None
+    assets: dict = None
     future: asyncio.Future = None
 
 @dataclass
@@ -96,6 +97,7 @@ class HTTPClient:
         data: dict | None = None,
         params: dict | None = None,
         files: Any | None = None,
+        assets: dict | None = None
     ):
         """Queue a request for the given endpoint.
 
@@ -133,7 +135,7 @@ class HTTPClient:
             return {k: ('true' if v is True else 'false' if v is False else v)
                 for k, v in params.items() if v is not None}
 
-        await queue.put(RequestItem(method, endpoint, data, sanitize_query_params(params), files, future))
+        await queue.put(RequestItem(method, endpoint, data, sanitize_query_params(params), files, assets, future))
 
         # return promise
         try:
@@ -269,7 +271,6 @@ class HTTPClient:
             (dict): kwargs to pass to session.request
         """
         if item.files and any(item.files):
-            # payload = await self._make_payload(item.data, item.files)
             form = aiohttp.FormData()
             form.add_field("payload_json", json.dumps(item.data))
 
@@ -282,6 +283,16 @@ class HTTPClient:
                         filename=file_path.split('/')[-1],
                         content_type='application/octet-stream'
                     )
+
+            return {"data": form}
+        
+        if item.assets:
+            form = aiohttp.FormData()
+
+            for k, v in item.data.items():
+                form.add_field(k, v)
+            
+            form.add_field('file', **item.assets)
 
             return {"data": form}
 
