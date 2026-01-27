@@ -2,6 +2,34 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
+## [0.19.0] - Jan 2026
+
+### Breaking Changes
+* Renamed event: `GuildIntegrationUpdateEvent` to `GuildIntegrationsUpdateEvent` (with the 's')
+
+* `User` resource now only takes ID for certain endpoints.
+    * ID is no longer required to instantiate the dataclass.
+
+### Changed
+
+* Client now exposes a public http client that is a ref to its private http client
+    * Users can now use the http client directly for missing endpoints
+
+* Added new events:
+    * `GuildIntegrationCreateEvent`
+    * `GuildIntegrationUpdateEvent`
+    * `ThreadMemberUpdateEvent`
+    * `ThreadListSyncEvent`
+    * `UserUpdateEvent`
+
+* Reorganized events for easier navigation
+    * NOTE: This does NOT impact user code.
+
+* New `User` endpoints:
+    * `User.modify_current_user`
+    * `User.leave_guild`
+    * `User.create_dm`
+
 ## [0.18.0] - Jan 2026
 
 ### Breaking Changes

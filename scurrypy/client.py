@@ -26,6 +26,9 @@ class Client:
     _http: HTTPClient
     """HTTP session for requests."""
 
+    http: HTTPClient
+    """Public HTTP session (ref to `_http`) for requests."""
+
     shards: list[GatewayClient]
     """Shards as a list of gateways."""
 
@@ -58,6 +61,7 @@ class Client:
         self.shard_count = shard_count
         
         self._http = HTTPClient()
+        self.http = self._http
 
         self.shards: list[GatewayClient] = []
 
@@ -265,11 +269,10 @@ class Client:
 
         return Sticker(self._http, context)
     
-    def user(self, user_id: int, *, context = None):
+    def user(self, *, context = None):
         """Creates an interactable user resource.
 
         Args:
-            user_id (int): ID of target user
             context (Any, optional): associated data
 
         Returns:
@@ -277,7 +280,7 @@ class Client:
         """
         from .resources.user import User
 
-        return User(self._http, context, user_id)
+        return User(self._http, context)
 
     async def listen_shard(self, shard: GatewayClient):
         """Consume a GatewayClient's event queue.

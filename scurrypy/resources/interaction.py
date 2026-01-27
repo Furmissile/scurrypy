@@ -3,11 +3,11 @@ from typing import Unpack
 
 from .base_resource import BaseResource
 
+from ..models.interaction import InteractionCallbackModel, InteractionCallbackTypes
+
 from ..parts.modal import ModalPart
 from ..parts.message import MessagePart, MessageFlagParams, MessageFlags
 from ..parts.command import CommandOptionChoicePart
-
-from ..models.interaction import InteractionCallbackModel, InteractionCallbackTypes
 
 from ..params.message import EditMessageParams
 

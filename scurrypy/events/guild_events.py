@@ -68,66 +68,6 @@ class GuildDeleteEvent(Event, UnavailableGuildModel):
     pass
 
 @dataclass
-class GuildMemberAddEvent(Event, GuildMemberModel):
-    """Received when a member joins a guild the bot is in.
-
-    !!! warning
-        Requires privileged `GUILD_MEMBERS` intent.
-    """
-
-    guild_id: int
-    """ID of the guild."""
-
-@dataclass
-class GuildMemberUpdateEvent(Event, DataModel):
-    """Received when a guild member is updated.
-    
-    !!! warning
-        Requires privileged `GUILD_MEMBERS` intent.
-    """
-    guild_id: int
-    """ID of the guild."""
-
-    roles: list[int]
-    """List of user's roles (their IDs)."""
-
-    user: UserModel
-    """The User object."""
-
-    avatar: str
-    """Guild avatar hash."""
-
-    banner: str
-    """Guild banner hash."""
-
-    joined_at: str
-    """When the user joined the guild"""
-
-@dataclass
-class GuildMemberRemoveEvent(Event, DataModel):
-    """Received when a member leaves or is kicked/banned from a guild the bot is in.
-    
-    !!! warning
-        Requires privileged `GUILD_MEMBERS` intent.
-    """
-
-    guild_id: int
-    """ID of the guild."""
-
-    user: UserModel
-    """User object of the user leaving the guild."""
-
-@dataclass
-class GuildEmojisUpdateEvent(Event, DataModel):
-    """Received when a guild updates their emojis."""
-
-    guild_id: int
-    """ID of the guild."""
-
-    emojis: list[EmojiModel]
-    """Complete set of guild emojis with changes."""
-
-@dataclass
 class GuildBanAddEvent(Event, DataModel):
     """Received when a user is banned from a guild."""
 
@@ -148,24 +88,14 @@ class GuildBanRemoveEvent(Event, DataModel):
     """The user who was banned."""
 
 @dataclass
-class GuildIntegrationUpdateEvent(Event, DataModel):
-    """Received when a guild's integration is updated."""
+class GuildEmojisUpdateEvent(Event, DataModel):
+    """Received when a guild updates their emojis."""
 
     guild_id: int
-    """ID of the guild whose integrations were updated."""
+    """ID of the guild."""
 
-@dataclass
-class GuildIntegrationDeleteEvent(Event, DataModel):
-    """Received when a guild's integration is deleted."""
-
-    id: int
-    """ID of the deleted integration."""
-
-    guild_id: int
-    """Guild ID of the deleted integration."""
-
-    application_id: Optional[int]
-    """ID of the bot for this Discord integration."""
+    emojis: list[EmojiModel]
+    """Complete set of guild emojis with changes."""
 
 @dataclass
 class GuildStickersUpdateEvent(Event, DataModel):

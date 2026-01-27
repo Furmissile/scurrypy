@@ -63,18 +63,6 @@ class ReactionRemoveEvent(Event, DataModel):
     burst: bool
     """If the emoji of the removed reaction is super."""
 
-class ReactionRemoveAllEvent(Event, DataModel):
-    """Remove all reactions event."""
-
-    channel_id: int
-    """ID of the channel where all reaction were removed."""
-
-    message_id: int
-    """ID of the message where all reaction were removed."""
-
-    guild_id: Optional[int]
-    """ID of the guild where all reaction were removed (if in a guild)."""
-
 @dataclass
 class ReactionRemoveEmojiEvent(Event, DataModel):
     """All reactions of a specific emoji removed."""
@@ -90,3 +78,15 @@ class ReactionRemoveEmojiEvent(Event, DataModel):
 
     guild_id: Optional[int]
     """ID of the guild where the reaction emoji was removed. (if in a guild)"""
+
+class ReactionRemoveAllEvent(Event, DataModel):
+    """Remove all reactions event."""
+
+    channel_id: int
+    """ID of the channel where all reaction were removed."""
+
+    message_id: int
+    """ID of the message where all reaction were removed."""
+
+    guild_id: Optional[int]
+    """ID of the guild where all reaction were removed (if in a guild)."""

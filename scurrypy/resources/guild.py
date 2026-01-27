@@ -26,6 +26,7 @@ class Guild(BaseResource):
     id: int
     """ID of the guild."""
 
+    # GUILD
     async def fetch(self, with_counts: bool = False) -> GuildModel:
         """Fetch the Guild object by the given ID.
 
@@ -43,6 +44,7 @@ class Guild(BaseResource):
 
     async def edit(self, **options: Unpack[EditGuildParams]) -> GuildModel:
         """Edit this guild.
+        Fires [`GuildUpdateEvent`][scurrypy.events.guild_events.GuildUpdateEvent].
 
         Args:
             options (EditGuildParams): guild with fields to edit
@@ -54,6 +56,7 @@ class Guild(BaseResource):
 
         return GuildModel.from_dict(data)
 
+    # --- CHANNELS ---
     async def fetch_channels(self) -> list[ChannelModel]:
         """Fetch this guild's channels.
 
@@ -67,8 +70,22 @@ class Guild(BaseResource):
 
         return [ChannelModel.from_dict(channel) for channel in data]
     
+    async def fetch_active_threads(self) -> ActiveThreadsModel:
+        """Fetch all active threads in a guild (private and public).
+
+        !!! note
+            Threads are ordered by their ID in descending order.
+
+        Returns:
+            (ActiveThreadsModel): active guild threads
+        """
+        data = await self._http.request('GET', f'/guilds/{self.id}/threads/active')
+
+        return ActiveThreadsModel.from_dict(data)
+
     async def create_channel(self, channel: GuildChannelPart) -> ChannelModel:
         """Create a channel in this guild.
+        Fires [`ChannelCreateEvent`][scurrypy.events.channel_events.ChannelCreateEvent].
 
         !!! important "Permissions"
             Requires `MANAGE_CHANNELS`
@@ -83,6 +100,7 @@ class Guild(BaseResource):
 
         return ChannelModel.from_dict(data)
 
+    # --- GUILD MEMBERS ---
     async def fetch_member(self, user_id: int) -> GuildMemberModel:
         """Fetch a member in this guild.
 
@@ -121,78 +139,9 @@ class Guild(BaseResource):
 
         return [GuildMemberModel.from_dict(member) for member in data]
 
-    async def fetch_role(self, role_id: int) -> RoleModel:
-        """Fetch a role in this guild.
-
-        Args:
-            role_id (int): ID of the role to fetch
-
-        Returns:
-            (RoleModel): queried guild role
-        """
-        data = await self._http.request('GET', f'/guilds/{self.id}/roles/{role_id}')
-        
-        return RoleModel.from_dict(data)
-    
-    async def fetch_roles(self) -> list[RoleModel]:
-        """Fetch all roles in this guild.
-
-        Returns:
-            (list[RoleModel]): queried list of guild roles
-        """
-        data = await self._http.request('GET', f'/guilds/{self.id}/roles')
-        
-        return [RoleModel.from_dict(role) for role in data]
-
-    async def create_role(self, role: GuildRolePart) -> RoleModel:
-        """Create a role in this guild.
-
-        !!! important "Permissions"
-            Requires `MANAGE_ROLES`
-
-        Args:
-            role (GuildRolePart): fields to create a role
-
-        Returns:
-            (RoleModel): created role
-        """
-        data = await self._http.request('POST', f'/guilds/{self.id}/roles', data=role.to_dict())
-
-        return RoleModel.from_dict(data)
-
-    async def edit_role(self, role_id: int, **options: Unpack[EditGuildRoleParams]) -> RoleModel:
-        """Edit a role in this guild.
-
-        !!! important "Permissions"
-            Requires `MANAGE_ROLES`
-
-        Args:
-            role_id (int): ID of role to edit
-            options (EditGuildRoleParams): role with fields to edit
-
-        Returns:
-            (RoleModel): edited role
-        """
-        if options.get('colors'):
-            options['colors'] = options['colors'].to_dict()
-
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=options)
-
-        return RoleModel.from_dict(data)
-
-    async def delete_role(self, role_id: int) -> None:
-        """Delete a role in this guild.
-
-        !!! important "Permissions"
-            Requires `MANAGE_ROLES`
-
-        Args:
-            role_id (int): ID of role to delete
-        """
-        await self._http.request('DELETE', f'/guilds/{self.id}/roles/{role_id}')
-
     async def add_member_role(self, user_id: int, role_id: int) -> None:
         """Append a role to a guild member of this guild.
+        Fires [`GuildMemberUpdateEvent`][scurrypy.events.user_events.GuildMemberUpdateEvent].
 
         !!! important "Permissions"
             Requires `MANAGE_ROLES`
@@ -205,6 +154,7 @@ class Guild(BaseResource):
     
     async def remove_member_role(self, user_id: int, role_id: int) -> None:
         """Remove a role from a guild member of this guild.
+        Fires [`GuildMemberUpdateEvent`][scurrypy.events.user_events.GuildMemberUpdateEvent].
 
         !!! important "Permissions"
             Requires `MANAGE_ROLES`
@@ -214,19 +164,6 @@ class Guild(BaseResource):
             role_id (int): ID of the role to remove
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
-
-    async def fetch_active_threads(self) -> ActiveThreadsModel:
-        """Fetch all active threads in a guild (private and public).
-
-        !!! note
-            Threads are ordered by their ID in descending order.
-
-        Returns:
-            (ActiveThreadsModel): active guild threads
-        """
-        data = await self._http.request('GET', f'/guilds/{self.id}/threads/active')
-
-        return ActiveThreadsModel.from_dict(data)
 
     async def search_members(self, query: str = None, limit: int = 1) -> list[GuildMemberModel]:
         """Fetch guild members whose username or nickname starts with the provided query.
@@ -251,7 +188,7 @@ class Guild(BaseResource):
 
     async def edit_member(self, user_id: int, **options: Unpack[EditGuildMemberParams]) -> GuildMemberModel:
         """Edit a guild member's attributes.
-        Fires [`GuildMemberUpdateEvent`][scurrypy.events.guild_events.GuildMemberUpdateEvent].
+        Fires [`GuildMemberUpdateEvent`][scurrypy.events.user_events.GuildMemberUpdateEvent].
 
         Args:
             user_id (int): ID of the member to edit
@@ -259,13 +196,13 @@ class Guild(BaseResource):
         Returns:
             (GuildMemberModel): edited guid member
         """
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/members/{user_id}', params=options)
+        data = await self._http.request('PATCH', f'/guilds/{self.id}/members/{user_id}', data=options)
 
         return GuildMemberModel.from_dict(data)
 
     async def remove_member(self, user_id: int) -> None:
         """Remove a member from this guild.
-        Fires [`GuildMemberRemoveEvent`][scurrypy.events.guild_events.GuildMemberRemoveEvent].
+        Fires [`GuildMemberRemoveEvent`][scurrypy.events.user_events.GuildMemberRemoveEvent].
 
         !!! important "Permissions"
             Requires `KICK_MEMBERS`
@@ -275,6 +212,7 @@ class Guild(BaseResource):
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/members/{user_id}')
 
+    # --- BANS ---
     async def fetch_ban(self, user_id: int) -> GuildBanModel:
         """Fetch a guild ban for the given user ID.
 
@@ -362,6 +300,7 @@ class Guild(BaseResource):
 
         return BulkGuildBanModel.from_dict(data)
 
+    # --- ROLES ---
     async def fetch_role_member_counts(self) -> dict:
         """Fetch a map of role IDs to number of members with the role.
 
@@ -373,6 +312,80 @@ class Guild(BaseResource):
         """
         return await self._http.request('GET', f'/guilds/{self.id}/roles/member-counts')
 
+    async def fetch_role(self, role_id: int) -> RoleModel:
+        """Fetch a role in this guild.
+
+        Args:
+            role_id (int): ID of the role to fetch
+
+        Returns:
+            (RoleModel): queried guild role
+        """
+        data = await self._http.request('GET', f'/guilds/{self.id}/roles/{role_id}')
+        
+        return RoleModel.from_dict(data)
+    
+    async def fetch_roles(self) -> list[RoleModel]:
+        """Fetch all roles in this guild.
+
+        Returns:
+            (list[RoleModel]): queried list of guild roles
+        """
+        data = await self._http.request('GET', f'/guilds/{self.id}/roles')
+        
+        return [RoleModel.from_dict(role) for role in data]
+
+    async def create_role(self, role: GuildRolePart) -> RoleModel:
+        """Create a role in this guild.
+        Fires [`RoleCreateEvent`][scurrypy.events.role_events.RoleCreateEvent].
+
+        !!! important "Permissions"
+            Requires `MANAGE_ROLES`
+
+        Args:
+            role (GuildRolePart): fields to create a role
+
+        Returns:
+            (RoleModel): created role
+        """
+        data = await self._http.request('POST', f'/guilds/{self.id}/roles', data=role.to_dict())
+
+        return RoleModel.from_dict(data)
+
+    async def edit_role(self, role_id: int, **options: Unpack[EditGuildRoleParams]) -> RoleModel:
+        """Edit a role in this guild.
+        Fires [`RoleUpdateEvent`][scurrypy.events.role_events.RoleUpdateEvent].
+
+        !!! important "Permissions"
+            Requires `MANAGE_ROLES`
+
+        Args:
+            role_id (int): ID of role to edit
+            options (EditGuildRoleParams): role with fields to edit
+
+        Returns:
+            (RoleModel): edited role
+        """
+        if options.get('colors'):
+            options['colors'] = options['colors'].to_dict()
+
+        data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=options)
+
+        return RoleModel.from_dict(data)
+
+    async def delete_role(self, role_id: int) -> None:
+        """Delete a role in this guild.
+        Fires [`RoleDeleteEvent`][scurrypy.events.role_events.RoleDeleteEvent].
+
+        !!! important "Permissions"
+            Requires `MANAGE_ROLES`
+
+        Args:
+            role_id (int): ID of role to delete
+        """
+        await self._http.request('DELETE', f'/guilds/{self.id}/roles/{role_id}')
+
+    # --- INVITES ---
     async def fetch_invites(self) -> list[InviteModel]:
         """Fetch this guild's invites with no metadata.
 
@@ -399,6 +412,7 @@ class Guild(BaseResource):
 
         return [InviteWithMetadataModel.from_dict(i) for i in data]
 
+    # --- INTEGRATIONS ---
     async def fetch_integrations(self) -> list[IntegrationModel]:
         """Fetch this guild's integrations.
 
@@ -414,8 +428,8 @@ class Guild(BaseResource):
 
     async def delete_integration(self, integration_id: int) -> None:
         """Delete the attached integration object for this guild.
-        Fires [`GuildIntegrationUpdateEvent`][scurrypy.events.guild_events.GuildIntegrationUpdateEvent] 
-        and [`GuildIntegrationDeleteEvent`][scurrypy.events.guild_events.GuildIntegrationDeleteEvent].
+        Fires [`GuildIntegrationUpdateEvent`][scurrypy.events.integration_events.GuildIntegrationUpdateEvent] 
+        and [`GuildIntegrationDeleteEvent`][scurrypy.events.integration_events.GuildIntegrationDeleteEvent].
 
         !!! important "Permissions"
             Requires `MANAGE_GUILD`
@@ -425,6 +439,7 @@ class Guild(BaseResource):
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/integrations/{integration_id}')
 
+    # --- WELCOME SCREEN ---
     async def fetch_welcome_screen(self) -> GuildWelcomeScreenModel:
         """Fetch the welcome screen for this guild.
 
@@ -451,10 +466,11 @@ class Guild(BaseResource):
         Returns:
             (GuildWelcomeScreenModel): edited welcome screen
         """
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/welcome-screen', params=options)
+        data = await self._http.request('PATCH', f'/guilds/{self.id}/welcome-screen', data=options)
 
         return GuildWelcomeScreenModel.from_dict(data)
 
+    # --- ONBOARDING ---
     async def fetch_onboarding(self) -> GuildOnboadingModel:
         """Fetch this guild's onboarding flow.
 
@@ -488,6 +504,7 @@ class Guild(BaseResource):
         )
         return GuildOnboadingModel.from_dict(data)
 
+    # --- STICKERS ---
     async def fetch_sticker(self, sticker_id: int) -> StickerModel:
         """Fetch a sticker from this guild.
 
@@ -544,7 +561,12 @@ class Guild(BaseResource):
         return StickerModel.from_dict(data)
 
     async def edit_sticker(self, sticker_id: int, **options: Unpack[EditGuildStickerParams]) -> StickerModel:
-        """Delete a sticker from this guild.
+        """Edit a sticker from this guild.
+        Fires [`GuildStickersUpdateEvent`][scurrypy.events.guild_events.GuildStickersUpdateEvent].
+
+        !!! important "Permissions"
+            Requires `CREATE_GUILD_EXPRESSIONS` or `MANAGE_GUILD_EXPRESSIONS`.
+            Requires `MANAGE_GUILD_EXPRESSIONS` if not created by the bot.
 
         Args:
             sticker_id (int): ID of the sticker to delete
@@ -556,6 +578,11 @@ class Guild(BaseResource):
 
     async def delete_sticker(self, sticker_id: int) -> None:
         """Delete a sticker from this guild.
+        Fires [`GuildStickersUpdateEvent`][scurrypy.events.guild_events.GuildStickersUpdateEvent].
+
+        !!! important "Permissions"
+            Requires `CREATE_GUILD_EXPRESSIONS` or `MANAGE_GUILD_EXPRESSIONS`.
+            Requires `MANAGE_GUILD_EXPRESSIONS` if not created by the bot.
 
         Args:
             sticker_id (int): ID of the sticker to delete

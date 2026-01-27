@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-
 from typing import Unpack
 
 from .base_resource import BaseResource

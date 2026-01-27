@@ -29,10 +29,13 @@ ScurryPy prioritizes **clarity over magic**. When contributing:
 
 **Not Accepting:**
 * Auto-caching (architectural decision)
-* Voice support (out of scope for now)
-* Subcommands (lots of overhead for not enough gain)
+* Voice support and *Group* DM (out of scope)
+* Sub-commands and automodding (lots of overhead for not enough gain)
+* Auditing (includes many unsupported features)
 * Endpoints with non-`bot` auth scopes, are unstable/experimental, or related to voice.
 * Anything monetization based (e.g., entitlements and subscriptions)
+
+While ScurryPy itself may not offer these features by default, you are more than welcome to extend ScurryPy to include these features.
 
 > **Important Note**: Throughout this document, Discord's payloads are called objects and ScurryPy's models are called data classes.
 

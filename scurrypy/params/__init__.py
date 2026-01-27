@@ -12,7 +12,7 @@ from .guild import (
     EditGuildStickerParams
 )
 from .message import EditMessageParams
-from .user import EditGuildMemberParams
+from .user import EditGuildMemberParams, EditUserParams
 
 __all__ = [
     "EditBotEmojiParams",
@@ -22,5 +22,5 @@ __all__ = [
     "EditGuildRoleParams", "EditGuildParams", "EditGuildWelcomeScreenParams", "EditOnboardingParams",
     "EditGuildStickerParams",
     "EditMessageParams",
-    "EditGuildMemberParams"
+    "EditGuildMemberParams", "EditUserParams"
 ]

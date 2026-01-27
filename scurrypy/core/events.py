@@ -16,6 +16,9 @@ EVENTS = {
     EventTypes.THREAD_CREATE: ThreadCreateEvent,
     EventTypes.THREAD_UPDATE: ThreadUpdateEvent,
     EventTypes.THREAD_DELETE: ThreadDeleteEvent,
+    EventTypes.THREAD_MEMBER_UPDATE: ThreadMemberUpdateEvent,
+    EventTypes.THREAD_MEMBERS_UPDATE: ThreadMembersUpdateEvent,
+    EventTypes.THREAD_LIST_SYNC: ThreadListSyncEvent,
 
     EventTypes.BULK_MESSAGE_DELETE: BulkMessageDeleteEvent,
     
@@ -38,6 +41,15 @@ EVENTS = {
 
     EventTypes.GUILD_STICKERS_UPDATE: GuildStickersUpdateEvent,
 
+    EventTypes.GUILD_BAN_ADD: GuildBanAddEvent,
+    EventTypes.GUILD_BAN_REMOVE: GuildBanRemoveEvent,
+
+    # integration events
+    EventTypes.INTEGRATION_CREATE: GuildIntegrationCreateEvent,
+    EventTypes.GUILD_INTEGRATIONS_UPDATE: GuildIntegrationsUpdateEvent,
+    EventTypes.INTEGRATION_UPDATE: GuildIntegrationUpdateEvent,
+    EventTypes.INTEGRATION_DELETE: GuildIntegrationDeleteEvent,
+
     # interaction events
     EventTypes.INTERACTION_CREATE: InteractionEvent,
 
@@ -52,6 +64,7 @@ EVENTS = {
     EventTypes.MESSAGE_REACTION_REMOVE_ALL: ReactionRemoveAllEvent,
     EventTypes.MESSAGE_REACTION_REMOVE_EMOJI: ReactionRemoveEmojiEvent,
 
+    # role events
     EventTypes.ROLE_CREATE: RoleCreateEvent,
     EventTypes.ROLE_UPDATE: RoleUpdateEvent,
     EventTypes.ROLE_DELETE: RoleDeleteEvent

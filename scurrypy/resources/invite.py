@@ -34,7 +34,7 @@ class Invite(BaseResource):
         
         !!! important "Permissions"
             Requires `MANAGE_CHANNELS` on the channel this invite belongs to
-            or `MANAGE_GUILD` to remove any invite across the guild.
+            or `MANAGE_GUILD` to remove any invite across the guild
 
         Returns:
             (InviteModel): deleted invite object

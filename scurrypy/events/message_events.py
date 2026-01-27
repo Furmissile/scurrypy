@@ -43,3 +43,16 @@ class MessageDeleteEvent(Event, DataModel):
 
     guild_id: Optional[int]
     """Guild ID of the deleted message (if in a guild channel)."""
+
+@dataclass
+class BulkMessageDeleteEvent(Event, DataModel):
+    """Received when bulk deleting messages."""
+
+    ids: list[int]
+    """IDs of the messages that were deleted."""
+
+    channel_id: int
+    """ID of the channel."""
+
+    guild_id: Optional[int]
+    """ID of the guild."""

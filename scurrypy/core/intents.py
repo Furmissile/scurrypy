@@ -11,10 +11,12 @@ class IntentFlagParams(TypedDict, total=False):
     guild_moderation: bool
     guild_expressions: bool
     guild_integrations: bool
-    guild_invites: bool
     guild_webhooks: bool
+    guild_invites: bool
     guild_messages: bool
     guild_message_reactions: bool
+    direct_messages: bool
+    direct_message_reactions: bool
     message_content: bool
 
 class Intents:
@@ -45,6 +47,9 @@ class Intents:
     GUILD_INTEGRATIONS = 1 << 4
     """Receive events related to integrations within a guild."""
 
+    GUILD_WEBHOOKS = 1 << 5
+    """Receive events related to webhooks."""
+
     GUILD_INVITES = 1 << 6
     """Receive events related to creating guild invites."""
 
@@ -53,6 +58,12 @@ class Intents:
 
     GUILD_MESSAGE_REACTIONS = 1 << 10
     """Track changes in reactions on messages."""
+
+    DIRECT_MESSAGES = 1 << 12
+    """Receive events related to DMs."""
+
+    DIRECT_MESSAGE_REACTIONS = 1 << 13
+    """Receive events related to DM reactions."""
 
     MESSAGE_CONTENT = 1 << 15
     """
