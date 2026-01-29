@@ -705,6 +705,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#experiment-running-two-bots-in-one-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment: Running Two Bots in One Program
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2774,6 +2783,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#experiment-running-two-bots-in-one-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment: Running Two Bots in One Program
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2954,6 +2972,54 @@ You can optionally use <a class="autorefs autorefs-internal" title="            
 <a id="__codelineno-2-25" name="__codelineno-2-25"></a>
 <a id="__codelineno-2-26" name="__codelineno-2-26"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">on_channel_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">GuildChannelDeleteEvent</span><span class="p">):</span>
 <a id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle something on channel delete.&quot;&quot;&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="experiment-running-two-bots-in-one-program">Experiment: Running Two Bots in One Program<a class="headerlink" href="#experiment-running-two-bots-in-one-program" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Demonstrates running two separate bots on the same process.</p>
+<div class="admonition danger">
+<p class="admonition-title">Do Not Use</p>
+<p>The purpose of this example is to showcase ScurryPy's flexibility.</p>
+<p>ScurryPy trusts you to use Python's capabilities responsibly.</p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">EventTypes</span><span class="p">,</span> <span class="n">ReadyEvent</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Bot</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="n">EventTypes</span><span class="o">.</span><span class="n">READY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_ready</span><span class="p">)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">ReadyEvent</span><span class="p">):</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2"> is ready!&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a>        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">Bot</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">task</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">TOKENS</span><span class="p">))</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a>    <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span><span class="p">:</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bots are shutting down...&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </code></pre></div></td></tr></table></div>
 
 
