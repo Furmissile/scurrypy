@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://furmissile.github.io/scurrypy/models/role/">
+        <link rel="canonical" href="https://furmissile.github.io/scurrypy/getting_started/patterns/">
       
       
-        <link rel="prev" href="../message/">
+        <link rel="prev" href="../migrating/">
       
       
-        <link rel="next" href="../sticker/">
+        <link rel="next" href="../../coverage/">
       
       
       <link rel="icon" href="../../assets/wizard.svg">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Role - ScurryPy</title>
+        <title>Advanced Patterns - ScurryPy</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#role-model" class="md-skip">
+        <a href="#advanced-patterns-and-experiments" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Role
+              Advanced Patterns
             
           </span>
         </div>
@@ -258,11 +258,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../getting_started/start_here/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../start_here/" class="md-tabs__link">
           
   
   
@@ -376,13 +378,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../models/" class="md-tabs__link">
           
   
   
@@ -532,26 +532,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -564,7 +569,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Getting Started
@@ -578,7 +583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/start_here/" class="md-nav__link">
+      <a href="../start_here/" class="md-nav__link">
         
   
   
@@ -601,7 +606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/examples/" class="md-nav__link">
+      <a href="../examples/" class="md-nav__link">
         
   
   
@@ -624,7 +629,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/addons/" class="md-nav__link">
+      <a href="../addons/" class="md-nav__link">
         
   
   
@@ -647,7 +652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/logging/" class="md-nav__link">
+      <a href="../logging/" class="md-nav__link">
         
   
   
@@ -670,7 +675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/migrating/" class="md-nav__link">
+      <a href="../migrating/" class="md-nav__link">
         
   
   
@@ -690,10 +695,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../getting_started/patterns/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Advanced Patterns
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -704,6 +731,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#demo-using-http-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Demo: Using HTTP directly
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-running-two-bots-in-one-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment: Running Two Bots In One Process
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#demo-db-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Demo: DB Access
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1880,31 +1954,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   
@@ -1917,7 +1986,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Models
@@ -1931,7 +2000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../models/" class="md-nav__link">
         
   
   
@@ -1954,7 +2023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../application/" class="md-nav__link">
+      <a href="../../models/application/" class="md-nav__link">
         
   
   
@@ -1977,7 +2046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../attachment/" class="md-nav__link">
+      <a href="../../models/attachment/" class="md-nav__link">
         
   
   
@@ -2000,7 +2069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../channel/" class="md-nav__link">
+      <a href="../../models/channel/" class="md-nav__link">
         
   
   
@@ -2023,7 +2092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../commands/" class="md-nav__link">
+      <a href="../../models/commands/" class="md-nav__link">
         
   
   
@@ -2046,7 +2115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../emoji/" class="md-nav__link">
+      <a href="../../models/emoji/" class="md-nav__link">
         
   
   
@@ -2069,7 +2138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guild/" class="md-nav__link">
+      <a href="../../models/guild/" class="md-nav__link">
         
   
   
@@ -2092,7 +2161,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/" class="md-nav__link">
+      <a href="../../models/integration/" class="md-nav__link">
         
   
   
@@ -2115,7 +2184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../interaction/" class="md-nav__link">
+      <a href="../../models/interaction/" class="md-nav__link">
         
   
   
@@ -2138,7 +2207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../invite/" class="md-nav__link">
+      <a href="../../models/invite/" class="md-nav__link">
         
   
   
@@ -2161,7 +2230,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../message/" class="md-nav__link">
+      <a href="../../models/message/" class="md-nav__link">
         
   
   
@@ -2181,32 +2250,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Role
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../models/role/" class="md-nav__link">
         
   
   
@@ -2217,200 +2264,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;RoleModel
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" RoleModel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.id" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;id
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.name" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;name
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.colors" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;colors
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.hoist" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;hoist
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.position" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;position
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.managed" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;managed
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.mentionable" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;mentionable
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.flags" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;flags
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.icon" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;icon
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.permissions" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;permissions
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.unicode_emoji" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;unicode_emoji
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.to_dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;to_dict
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;RoleColorModel
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" RoleColorModel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel.primary_color" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;primary_color
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel.secondary_color" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;secondary_color
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel.tertiary_color" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;tertiary_color
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel.to_dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;to_dict
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2423,7 +2276,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sticker/" class="md-nav__link">
+      <a href="../../models/sticker/" class="md-nav__link">
         
   
   
@@ -2446,7 +2299,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user/" class="md-nav__link">
+      <a href="../../models/user/" class="md-nav__link">
         
   
   
@@ -2918,176 +2771,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel" class="md-nav__link">
+  <a href="#demo-using-http-directly" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;RoleModel
+      Demo: Using HTTP directly
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label=" RoleModel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.id" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;id
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.name" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;name
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.colors" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;colors
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.hoist" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;hoist
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.position" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;position
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.managed" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;managed
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.mentionable" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;mentionable
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.flags" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;flags
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.icon" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;icon
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.permissions" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;permissions
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.unicode_emoji" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;unicode_emoji
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleModel.to_dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;to_dict
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel" class="md-nav__link">
+  <a href="#experiment-running-two-bots-in-one-process" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;RoleColorModel
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label=" RoleColorModel">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel.primary_color" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;primary_color
+      Experiment: Running Two Bots In One Process
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel.secondary_color" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#demo-db-access" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;secondary_color
+      Demo: DB Access
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel.tertiary_color" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;tertiary_color
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.models.role.RoleColorModel.to_dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;to_dict
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3110,490 +2816,143 @@
   
 
 
-<h1 id="role-model">Role Model<a class="headerlink" href="#role-model" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The following classes come from the <code>scurrypy.models.role</code> module.</p>
-</div>
+<h1 id="advanced-patterns-and-experiments">Advanced Patterns and Experiments<a class="headerlink" href="#advanced-patterns-and-experiments" title="Permanent link">&para;</a></h1>
 <hr />
-
-
-<div class="doc doc-object doc-class">
-
-
-
-<h2 id="scurrypy.models.role.RoleModel" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">RoleModel</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel" class="headerlink" title="Permanent link">&para;</a></h2>
-
-
-    <div class="doc doc-contents first">
-            <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
-
-  
-      dataclass
-   (scurrypy.core.model.DataModel)" href="../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
-
-
-        <p>Represents a Discord role.</p>
-
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.id" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="nb">id</span><span class="p">:</span> <span class="nb">int</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.id" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>ID of the role.</p>
-
-    </div>
-
+<p>This section covers features that may not be immediately obvious to power users.
+Additionally, this section will showcase how customizable ScurryPy is.</p>
+<div class="admonition tip">
+<p class="admonition-title">Experiment vs Demo</p>
+<p>Experiments are NOT meant to be tried in production. ScurryPy trusts you use its features responsibly.</p>
+<p>Demos are safe to use in production.</p>
 </div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.name" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.name" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Name of the role.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.colors" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">colors</span><span class="p">:</span> <span class="n">RoleColorModel</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.colors" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Colors of the role.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.hoist" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">hoist</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.hoist" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>If the role is pinned in user listing.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.position" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">position</span><span class="p">:</span> <span class="nb">int</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.position" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Position of the role.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.managed" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">managed</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.managed" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>If the role is managed by an integration.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.mentionable" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">mentionable</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.mentionable" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>If the role is mentionable.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.flags" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">flags</span><span class="p">:</span> <span class="nb">int</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.flags" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Role flags combined as a bitfield.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.icon" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">icon</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.icon" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Icon hash of the role.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.permissions" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">permissions</span><span class="p">:</span> <span class="nb">str</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.permissions" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>permission bits set.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleModel.unicode_emoji" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">unicode_emoji</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleModel.unicode_emoji" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Unicode emoji of the role.</p>
-
-    </div>
-
-</div>
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="scurrypy.models.role.RoleModel.to_dict" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">to_dict</span></code>
-
-<a href="#scurrypy.models.role.RoleModel.to_dict" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Recursively turns the dataclass into a dictionary and drops empty fields.</p>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="dict">dict</span></code>
-          –
-          <div class="doc-md-description">
-            <p>serialized dataclasss</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-
-
-  </div>
-
-    </div>
-
-</div><hr />
-
-
-<div class="doc doc-object doc-class">
-
-
-
-<h2 id="scurrypy.models.role.RoleColorModel" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">RoleColorModel</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleColorModel" class="headerlink" title="Permanent link">&para;</a></h2>
-
-
-    <div class="doc doc-contents first">
-            <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
-
-  
-      dataclass
-   (scurrypy.core.model.DataModel)" href="../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
-
-
-        <p>Represents role color data.</p>
-
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleColorModel.primary_color" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">primary_color</span><span class="p">:</span> <span class="nb">int</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleColorModel.primary_color" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Primary color of the role.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleColorModel.secondary_color" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">secondary_color</span><span class="p">:</span> <span class="nb">int</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleColorModel.secondary_color" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Secondary color of the role. Creates a gradient.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="scurrypy.models.role.RoleColorModel.tertiary_color" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">tertiary_color</span><span class="p">:</span> <span class="nb">int</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.models.role.RoleColorModel.tertiary_color" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Tertiary color of the role. Creates a holographic style.</p>
-
-    </div>
-
-</div>
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="scurrypy.models.role.RoleColorModel.to_dict" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">to_dict</span></code>
-
-<a href="#scurrypy.models.role.RoleColorModel.to_dict" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Recursively turns the dataclass into a dictionary and drops empty fields.</p>
-
-
-<p><span class="doc-section-title">Returns:</span></p>
-    <ul>
-        <li class="doc-section-item field-body">
-              <code><span title="dict">dict</span></code>
-          –
-          <div class="doc-md-description">
-            <p>serialized dataclasss</p>
-          </div>
-        </li>
-    </ul>
-
-
-    </div>
-
-</div>
-
-
-
-  </div>
-
-    </div>
-
-</div>
+<h2 id="demo-using-http-directly">Demo: Using HTTP directly<a class="headerlink" href="#demo-using-http-directly" title="Permanent link">&para;</a></h2>
+<hr />
+<p>As of 0.19.0, ScurryPy exposes its HTTP layer via <a class="autorefs autorefs-internal" title="              HTTPClient" href="../../internals/http/#scurrypy.core.http.HTTPClient"><code>HTTPClient</code></a> for public consumption.
+This layer handles rate limiting and still adheres to Discord's spec requirements.
+This feature is useful for accessing endpoints that may not be exposed through ScurryPy's public interface.</p>
+<p>Demonstrates using ScurryPy's HTTP client directly:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">EventTypes</span><span class="p">,</span> <span class="n">UserModel</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_ready</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>    <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;/users/</span><span class="si">{</span><span class="n">APP_ID</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>    <span class="n">user</span> <span class="o">=</span> <span class="n">UserModel</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="n">client</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="n">EventTypes</span><span class="o">.</span><span class="n">READY</span><span class="p">,</span> <span class="n">on_ready</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="experiment-running-two-bots-in-one-process">Experiment: Running Two Bots In One Process<a class="headerlink" href="#experiment-running-two-bots-in-one-process" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Demonstrates running two separate bots on the same process.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">EventTypes</span><span class="p">,</span> <span class="n">ReadyEvent</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Bot</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="n">EventTypes</span><span class="o">.</span><span class="n">READY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_ready</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">ReadyEvent</span><span class="p">):</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2"> is ready!&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a>        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">Bot</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">task</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">TOKENS</span><span class="p">))</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a>    <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span><span class="p">:</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bots are shutting down...&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="demo-db-access">Demo: DB Access<a class="headerlink" href="#demo-db-access" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Demonstrates an example DB addon.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncpg</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">PostgresDB</span><span class="p">:</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">Client</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">database</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span> <span class="o">=</span> <span class="n">client</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">quote</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dsn</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;postgresql://</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">quote</span><span class="p">(</span><span class="n">password</span><span class="p">)</span><span class="si">}</span><span class="s2">@localhost:5432/</span><span class="si">{</span><span class="n">database</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">:</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">Pool</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a>        <span class="n">client</span><span class="o">.</span><span class="n">add_startup_hook</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_db</span><span class="p">)</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a>        <span class="n">client</span><span class="o">.</span><span class="n">add_shutdown_hook</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close_db</span><span class="p">)</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">create_pool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dsn</span><span class="p">)</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">close_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21"></a>        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22"></a>
+<a id="__codelineno-2-23" name="__codelineno-2-23"></a>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">Connection</span><span class="p">:</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24"></a>        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
 
 
 
