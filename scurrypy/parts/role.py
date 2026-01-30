@@ -6,7 +6,7 @@ from typing import Optional
 from ..parts.image_data import ImageDataPart
 
 @dataclass
-class RoleColorsPart(DataModel):
+class GuildRoleColorsPart(DataModel):
     """Parameters for setting role colors."""
 
     primary_color: int = None
@@ -25,7 +25,7 @@ class GuildRolePart(DataModel):
     name: str = None
     """Name of the role."""
 
-    colors: RoleColorsPart = None
+    colors: GuildRoleColorsPart = None
     """Colors of the role."""
 
     icon: Optional[ImageDataPart] = None

@@ -1,6 +1,6 @@
 from typing import TypedDict, Optional
 
-from ..parts.role import RoleColorsPart
+from ..parts.role import GuildRoleColorsPart
 from ..parts.image_data import ImageDataPart
 from ..parts.guild import WelcomeScreenChannelPart, OnboardingPromptPart
 
@@ -60,7 +60,7 @@ class EditGuildRoleParams(TypedDict, total=False):
     name: Optional[str]
     """Name of the role."""
 
-    colors: Optional[RoleColorsPart]
+    colors: Optional[GuildRoleColorsPart]
     """Colors of the role."""
 
     hoist: Optional[bool]

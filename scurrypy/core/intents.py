@@ -80,7 +80,7 @@ class Intents:
         `Intents.DEFAULT` will also be set.
 
         Args:
-            **flags (Unpack[IntentFlagParams]): intents to set
+            flags (IntentFlagParams): intents to set
 
         Raises:
             (ValueError): invalid flag

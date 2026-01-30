@@ -99,7 +99,7 @@ from .message import (
 )
 
 from .modal import ModalPart
-from .role import RoleColorsPart, GuildRolePart
+from .role import GuildRoleColorsPart, GuildRolePart
 
 __all__ = [
     "AttachmentPart",
@@ -120,5 +120,5 @@ __all__ = [
     "InvitePart",
     "MessageFlags", "MessageReferenceTypes", "MessageReferencePart", "MessagePart", 
     "ModalPart",
-    "RoleColorsPart", "GuildRolePart"
+    "GuildRoleColorsPart", "GuildRolePart"
 ]

@@ -2,9 +2,24 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
+## [0.20.0] - Jan 2026
+
+### Breaking Changes
+
+* Renamed: `RoleColorsPart` to `GuildRoleColorsPart` for easier discoverability
+
+### Changes
+
+* Client.__init__ no longer requires kwargs to instantiate.
+    * For example, instead of `Client(token=TOKEN)`, it's just `Client(TOKEN)`
+    * This is NOT a breaking change because it does not impact user code.
+
+* Bug fix: Parameters with objects now get converted to a dict if used.
+
 ## [0.19.0] - Jan 2026
 
 ### Breaking Changes
+
 * Renamed event: `GuildIntegrationUpdateEvent` to `GuildIntegrationsUpdateEvent` (with the 's')
 
 * `User` resource now only takes ID for certain endpoints.

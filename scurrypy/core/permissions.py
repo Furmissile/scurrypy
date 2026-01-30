@@ -145,7 +145,7 @@ class Permissions:
         """Set permissions. See [`Permission`][scurrypy.core.permissions.Permissions].
 
         Args:
-            **flags (Unpack[PermissionsFlagParams]): permissions to set
+            flags (PermissionsFlagParams): permissions to set
 
         Raises:
             (ValueError): invalid flag

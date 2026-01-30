@@ -41,8 +41,7 @@ class Client:
     shutdown_hooks: list[callable]
     """Handlers to call once after the bot shuts down."""
 
-    def __init__(self, 
-        *,
+    def __init__(self,
         token: str,
         intents: int = Intents.DEFAULT,
         shard_count: int = 0

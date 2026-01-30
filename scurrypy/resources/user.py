@@ -50,6 +50,12 @@ class User(BaseResource):
         Returns:
             (UserModel): edited user
         """
+        if options.get('avatar'):
+            options['avatar'] = options['avatar'].to_dict()
+
+        if options.get('banner'):
+            options['banner'] = options['banner'].to_dict()
+
         data = await self._http.request('PATCH', '/users/@me', data=options)
 
         return UserModel.from_dict(data)

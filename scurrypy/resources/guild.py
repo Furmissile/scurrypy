@@ -52,6 +52,18 @@ class Guild(BaseResource):
         Returns:
             (GuildModel): edited guild
         """
+        if options.get('banner'):
+            options['banner'] = options['banner'].to_dict()
+        
+        if options.get('discovery_splash'):
+            options['discovery_splash'] = options['discovery_splash'].to_dict()
+
+        if options.get('icon'):
+            options['icon'] = options['icon'].to_dict()
+
+        if options.get('splash'):
+            options['splash'] = options['splash'].to_dict()
+
         data = await self._http.request('PATCH', f'/guilds/{self.id}', data=options)
 
         return GuildModel.from_dict(data)
@@ -369,6 +381,9 @@ class Guild(BaseResource):
         if options.get('colors'):
             options['colors'] = options['colors'].to_dict()
 
+        if options.get('icon'):
+            options['icon'] = options['icon'].to_dict()
+
         data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=options)
 
         return RoleModel.from_dict(data)
@@ -466,6 +481,9 @@ class Guild(BaseResource):
         Returns:
             (GuildWelcomeScreenModel): edited welcome screen
         """
+        if options.get('welcome_channels'):
+            options['welcome_channels'] = [i.to_dict() for i in options['welcome_channels']]
+
         data = await self._http.request('PATCH', f'/guilds/{self.id}/welcome-screen', data=options)
 
         return GuildWelcomeScreenModel.from_dict(data)
@@ -497,6 +515,9 @@ class Guild(BaseResource):
         Returns:
             (GuildOnboadingModel): edited onboarding flow
         """
+        if options.get('prompts'):
+            options['prompts'] = [i.to_dict() for i in options['prompts']]
+            
         data = await self._http.request(
             'PUT',
             f'/guilds/{self.id}/onboarding',
