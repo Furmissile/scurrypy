@@ -748,27 +748,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#demo-using-http-directly" class="md-nav__link">
+  <a href="#using-http-directly" class="md-nav__link">
     <span class="md-ellipsis">
-      Demo: Using HTTP directly
+      Using HTTP directly
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#experiment-running-two-bots-in-one-process" class="md-nav__link">
+  <a href="#command-registration" class="md-nav__link">
     <span class="md-ellipsis">
-      Experiment: Running Two Bots In One Process
+      Command Registration
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#demo-db-access" class="md-nav__link">
+  <a href="#caching" class="md-nav__link">
     <span class="md-ellipsis">
-      Demo: DB Access
+      Caching
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#builder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builder
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-two-bots-in-one-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running Two Bots In One Process
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#db-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      DB Access
     </span>
   </a>
   
@@ -2771,27 +2798,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#demo-using-http-directly" class="md-nav__link">
+  <a href="#using-http-directly" class="md-nav__link">
     <span class="md-ellipsis">
-      Demo: Using HTTP directly
+      Using HTTP directly
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#experiment-running-two-bots-in-one-process" class="md-nav__link">
+  <a href="#command-registration" class="md-nav__link">
     <span class="md-ellipsis">
-      Experiment: Running Two Bots In One Process
+      Command Registration
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#demo-db-access" class="md-nav__link">
+  <a href="#caching" class="md-nav__link">
     <span class="md-ellipsis">
-      Demo: DB Access
+      Caching
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#builder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Builder
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-two-bots-in-one-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running Two Bots In One Process
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#db-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      DB Access
     </span>
   </a>
   
@@ -2820,12 +2874,7 @@
 <hr />
 <p>This section covers features that may not be immediately obvious to power users.
 Additionally, this section will showcase how customizable ScurryPy is.</p>
-<div class="admonition tip">
-<p class="admonition-title">Experiment vs Demo</p>
-<p>Experiments are NOT meant to be tried in production. ScurryPy trusts you use its features responsibly.</p>
-<p>Demos are safe to use in production.</p>
-</div>
-<h2 id="demo-using-http-directly">Demo: Using HTTP directly<a class="headerlink" href="#demo-using-http-directly" title="Permanent link">&para;</a></h2>
+<h2 id="using-http-directly">Using HTTP directly<a class="headerlink" href="#using-http-directly" title="Permanent link">&para;</a></h2>
 <hr />
 <p>As of 0.19.0, ScurryPy exposes its HTTP layer via <a class="autorefs autorefs-internal" title="              HTTPClient" href="../../internals/http/#scurrypy.core.http.HTTPClient"><code>HTTPClient</code></a> for public consumption.
 This layer handles rate limiting and still adheres to Discord's spec requirements.
@@ -2859,7 +2908,16 @@ This feature is useful for accessing endpoints that may not be exposed through S
 <a id="__codelineno-0-13" name="__codelineno-0-13"></a>
 <a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="experiment-running-two-bots-in-one-process">Experiment: Running Two Bots In One Process<a class="headerlink" href="#experiment-running-two-bots-in-one-process" title="Permanent link">&para;</a></h2>
+<h2 id="command-registration">Command Registration<a class="headerlink" href="#command-registration" title="Permanent link">&para;</a></h2>
+<hr />
+<p>See ScurryKit's <a href="https://github.com/scurry-works/scurry-kit/blob/main/scurry_kit/addons/commands.py">commands</a> pattern.</p>
+<h2 id="caching">Caching<a class="headerlink" href="#caching" title="Permanent link">&para;</a></h2>
+<hr />
+<p>See ScurryKit's <a href="https://github.com/scurry-works/scurry-kit/blob/main/scurry_kit/addons/cache/channel.py">channel cache</a> pattern.</p>
+<h2 id="builder">Builder<a class="headerlink" href="#builder" title="Permanent link">&para;</a></h2>
+<hr />
+<p>See ScurryKit's <a href="https://github.com/scurry-works/scurry-kit/blob/main/scurry_kit/addons/builders/action_rows.py">action row builder</a> pattern.</p>
+<h2 id="running-two-bots-in-one-process">Running Two Bots In One Process<a class="headerlink" href="#running-two-bots-in-one-process" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Demonstrates running two separate bots on the same process.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
@@ -2902,7 +2960,7 @@ This feature is useful for accessing endpoints that may not be exposed through S
 <a id="__codelineno-1-19" name="__codelineno-1-19"></a>
 <a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="demo-db-access">Demo: DB Access<a class="headerlink" href="#demo-db-access" title="Permanent link">&para;</a></h2>
+<h2 id="db-access">DB Access<a class="headerlink" href="#db-access" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Demonstrates an example DB addon.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
