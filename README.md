@@ -29,6 +29,8 @@ The following are baked into ScurryPy:
 
 Your focus is building what you want.
 
+Need more convincing? See the [manifesto](https://scurry-works.github.io/scurrypy/manifesto) section!
+
 ## Who ScurryPy is for
 
 ScurryPy is for developers who want full control of Discord API usage, design their own frameworks, or learn how bots work under the hood. If you want ready-made commands, consider using ScurryKit or another framework.
