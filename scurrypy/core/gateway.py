@@ -10,6 +10,15 @@ from ..config import GATEWAY_PROPERTIES
 
 MIN_BACKOFF = 5
 
+from dataclasses import dataclass
+
+import time
+
+@dataclass
+class GatewayMetrics:
+    _last_heartbeat_sent: float
+    heartbeat_rrt: float
+
 class GatewayClient:
     def __init__(self, gateway_url: str, shard_id: int, total_shards: int):
         """Initialize this websocket.
@@ -28,6 +37,7 @@ class GatewayClient:
         self.reconnect_immediately = False
         self._ws_closed = False
         self.backoff = MIN_BACKOFF
+        self.metrics = GatewayMetrics(0.0, 0.0)
         self.heartbeat_task = None
         self.heartbeat_interval = None
         self.event_queue = asyncio.Queue()
@@ -134,6 +144,7 @@ class GatewayClient:
         await asyncio.sleep(self.heartbeat_interval * jitter)
 
         while self.ws:
+            self.metrics._last_heartbeat_sent = time.monotonic()
             await self.send({"op": 1, "d": self.seq})
             logger.debug(f"SHARD ID {self.shard_id}: Heartbeat sent")
             await asyncio.sleep(self.heartbeat_interval)
@@ -230,7 +241,11 @@ class GatewayClient:
                     raise ConnectionError("Invalid session.")
 
                 case 11:  # HEARTBEAT_ACK
-                    logger.debug(f"SHARD ID {self.shard_id}: Heartbeat ACK")
+                    now = time.monotonic()
+
+                    self.metrics.heartbeat_rrt = now - self.metrics._last_heartbeat_sent
+
+                    logger.debug(f"SHARD ID {self.shard_id}: Heartbeat ACK ({round(self.metrics.heartbeat_rrt *1000)}ms)")
 
     async def close_ws(self):
         """Close the websocket connection if one is still open and cancels heartbeat."""
