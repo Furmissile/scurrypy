@@ -194,12 +194,11 @@ class Client:
 
         return Invite(self._http, context, code)
     
-    def global_command(self, application_id: int, command_id: int = None, *, context = None):
+    def global_command(self, application_id: int, *, context = None):
         """Creates an interactable command resource.
 
         Args:
             application_id (int): bot's user ID
-            command_id (int, optional): ID of command
             context (Any, optional): associated data
 
         Returns:
@@ -207,15 +206,14 @@ class Client:
         """
         from .resources.command import GlobalCommand
 
-        return GlobalCommand(self._http, context, application_id, command_id)
+        return GlobalCommand(self._http, context, application_id)
     
-    def guild_command(self, application_id: int, guild_id: int = None, command_id: int = None, *, context = None):
+    def guild_command(self, application_id: int, guild_id: int = None, *, context = None):
         """Creates an interactable command resource.
 
         Args:
             application_id (int): bot's user ID
             guild_id (int, optional): ID of guild if command is in guild scope
-            command_id (int, optional): ID of command
             context (Any, optional): associated data
 
         Returns:
@@ -223,7 +221,7 @@ class Client:
         """
         from .resources.command import GuildCommand
 
-        return GuildCommand(self._http, context, application_id, command_id, guild_id)
+        return GuildCommand(self._http, context, application_id, guild_id)
 
     def message(self, channel_id: int, message_id: int, *, context = None):
         """Creates an interactable message resource.
