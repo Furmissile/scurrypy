@@ -2,6 +2,16 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
+## [0.20.1] - Feb 2026
+
+### Changed
+
+* Gateway heartbeats now include latency estimates (not averaged)
+* Fixed: `Client.global_command` and `Client.guild_command` args
+* Silenced websockets, aiohttp, and asyncio debug messages by default
+* Fixed: when passing `MessagePart` to a function like `Channel.send` and then using the `flags` param, flags were not set.
+* Fixed: `Channel.send` now accepts flags.
+
 ## [0.20.0] - Jan 2026
 
 ### Breaking Changes
