@@ -106,8 +106,8 @@ class MessagePart(DataModel):
         """Set this message's flags using MessageFlagParams.
 
         Args:
-            **flags (Unpack[MessageFlagParams]): message flags to set. (set respective flag to True to toggle.)
-
+            flags (MessageFlagParams): message flags to set
+            
         Raises:
             (ValueError): invalid flag
 

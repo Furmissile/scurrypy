@@ -29,13 +29,15 @@ class Interaction(BaseResource):
         Args:
             message (str | MessagePart): content as a string or MessagePart
             with_response (bool, optional): if the interaction data should be returned. Defaults to `False`.
-            **flags: message flags to set. (set respective flag to `True` to toggle.)
+            flags (MessageFlagParams): message flags to set
 
         Returns:
             (InteractionCallbackModel | None): interaction callback object (if `with_response` is toggled) else None
         """
         if isinstance(message, str):
             message = MessagePart(content=message).set_flags(**flags)
+        elif flags:
+            message.set_flags(**flags)
 
         content = {
             'type': InteractionCallbackTypes.CHANNEL_MESSAGE_WITH_SOURCE, 
@@ -58,7 +60,7 @@ class Interaction(BaseResource):
         Fires [`MessageUpdateEvent`][scurrypy.events.message_events.MessageUpdateEvent].
 
         Args:
-            options (EditMessageParams): content as a string or MessagePart
+            options (EditMessageParams): fields to edit
         """
         message = MessagePart(**options)
 
@@ -160,10 +162,12 @@ class Interaction(BaseResource):
         Args:
             application_id (int): ID of the application
             message (str | MessagePart): content as a string or MessagePart  
-            **flags: message flags to set. (set respective flag to True to toggle.)
+            flags (MessageFlagParams): message flags to set
         """
         if isinstance(message, str):
             message = MessagePart(content=message).set_flags(**flags)
+        elif flags:
+            message.set_flags(**flags)
 
         content = message._prepare().to_dict()
 

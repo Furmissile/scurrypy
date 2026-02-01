@@ -7,7 +7,7 @@ from ..models.message import MessageModel, PinnedMessageModel
 from ..models.channel import ChannelModel, ThreadMemberModel, FollowedChannelModel, ArchivedThreadsModel
 from ..models.invite import InviteModel, InviteWithMetadataModel
 
-from ..parts.message import MessagePart
+from ..parts.message import MessagePart, MessageFlagParams
 from ..parts.channel import ThreadFromMessagePart, ThreadWithoutMessagePart
 from ..parts.invite import InvitePart
 
@@ -145,7 +145,7 @@ class Channel(BaseResource):
 
         return [PinnedMessageModel.from_dict(item) for item in data]
 
-    async def send(self, message: str | MessagePart) -> MessageModel:
+    async def send(self, message: str | MessagePart, **flags: Unpack[MessageFlagParams]) -> MessageModel:
         """Send a message to this channel.
         Fires [`MessageCreateEvent`][scurrypy.events.message_events.MessageCreateEvent].
 
@@ -154,12 +154,15 @@ class Channel(BaseResource):
 
         Args:
             message (str | MessagePart): content as a string or MessagePart
+            flags (MessageFlagParams): flags to set
 
         Returns:
             (MessageModel): created message
         """
         if isinstance(message, str):
-            message = MessagePart(content=message)
+            message = MessagePart(content=message).set_flags(**flags)
+        elif flags:
+            message.set_flags(**flags)
 
         message = message._prepare()
 
