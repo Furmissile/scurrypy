@@ -21,3 +21,10 @@ GATEWAY_PROPERTIES = {
     "$browser": __title__,
     "$device": __title__
 }
+
+# silence internals by default
+import logging
+
+logging.getLogger('websockets').setLevel(logging.WARNING)
+logging.getLogger('aiohttp').setLevel(logging.WARNING)
+logging.getLogger('asyncio').setLevel(logging.WARNING)
