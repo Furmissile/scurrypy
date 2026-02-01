@@ -820,6 +820,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#stress-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stress Testing
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2892,6 +2901,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#stress-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stress Testing
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3051,6 +3069,52 @@ This feature is useful for accessing endpoints that may not be exposed through S
 <a id="__codelineno-2-22" name="__codelineno-2-22"></a>
 <a id="__codelineno-2-23" name="__codelineno-2-23"></a>    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">Connection</span><span class="p">:</span>
 <a id="__codelineno-2-24" name="__codelineno-2-24"></a>        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="stress-testing">Stress Testing<a class="headerlink" href="#stress-testing" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Curious to know how ScurryPy handles high traffic? ScurryPy can handle abuse without getting Discord angry.</p>
+<p>This example creates <code>C_COUNT</code> channels, sends <code>M_COUNT</code> messages to each channel, and edits each message for maximum spam!</p>
+<p><strong>Notice:</strong> Not one rate limit error!</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>This example should NOT be run in a public server.</p>
+<p>Consider running it in a server with just you and the bot!</p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">M_COUNT</span> <span class="o">=</span> <span class="mi">30</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="n">C_COUNT</span> <span class="o">=</span> <span class="mi">4</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">spam_messages</span><span class="p">(</span><span class="n">channel</span><span class="p">:</span> <span class="n">Channel</span><span class="p">):</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M_COUNT</span><span class="p">):</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>        <span class="n">msg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Testing </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>        <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">channel_id</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">&#39;Edited!&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_test</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">C_COUNT</span><span class="p">):</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>        <span class="n">ch</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">guild</span><span class="p">(</span><span class="n">GUILD_ID</span><span class="p">)</span><span class="o">.</span><span class="n">create_channel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a>        <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">spam_messages</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">channel</span><span class="p">(</span><span class="n">ch</span><span class="o">.</span><span class="n">id</span><span class="p">)))</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="n">client</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="n">EventTypes</span><span class="o">.</span><span class="n">READY</span><span class="p">,</span> <span class="n">on_test</span><span class="p">)</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 
 
