@@ -3168,7 +3168,10 @@
 <span class="normal"><a href="#__codelineno-1-89">89</a></span>
 <span class="normal"><a href="#__codelineno-1-90">90</a></span>
 <span class="normal"><a href="#__codelineno-1-91">91</a></span>
-<span class="normal"><a href="#__codelineno-1-92">92</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># --- Environment setup ---</span>
+<span class="normal"><a href="#__codelineno-1-92">92</a></span>
+<span class="normal"><a href="#__codelineno-1-93">93</a></span>
+<span class="normal"><a href="#__codelineno-1-94">94</a></span>
+<span class="normal"><a href="#__codelineno-1-95">95</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># --- Environment setup ---</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">load_dotenv</span><span class="p">()</span>
@@ -3238,28 +3241,31 @@
 <a id="__codelineno-1-68" name="__codelineno-1-68"></a>    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">APP_ID</span><span class="p">:</span>
 <a id="__codelineno-1-69" name="__codelineno-1-69"></a>        <span class="k">return</span> <span class="c1"># ignore bot messages</span>
 <a id="__codelineno-1-70" name="__codelineno-1-70"></a>
-<a id="__codelineno-1-71" name="__codelineno-1-71"></a>    <span class="n">command</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-<a id="__codelineno-1-72" name="__codelineno-1-72"></a>
-<a id="__codelineno-1-73" name="__codelineno-1-73"></a>    <span class="n">channel</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">channel</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">channel_id</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">event</span><span class="p">)</span>
-<a id="__codelineno-1-74" name="__codelineno-1-74"></a>
-<a id="__codelineno-1-75" name="__codelineno-1-75"></a>    <span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-1-76" name="__codelineno-1-76"></a>        <span class="k">match</span> <span class="n">command</span><span class="p">:</span>
-<a id="__codelineno-1-77" name="__codelineno-1-77"></a>            <span class="k">case</span> <span class="s1">&#39;!roll&#39;</span><span class="p">:</span>
-<a id="__codelineno-1-78" name="__codelineno-1-78"></a>                <span class="k">await</span> <span class="n">roll</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<a id="__codelineno-1-79" name="__codelineno-1-79"></a>            <span class="k">case</span> <span class="s1">&#39;!choose&#39;</span><span class="p">:</span>
-<a id="__codelineno-1-80" name="__codelineno-1-80"></a>                <span class="k">await</span> <span class="n">choose</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-<a id="__codelineno-1-81" name="__codelineno-1-81"></a>            <span class="k">case</span> <span class="s1">&#39;!repeat&#39;</span><span class="p">:</span>
-<a id="__codelineno-1-82" name="__codelineno-1-82"></a>                <span class="k">await</span> <span class="n">repeat</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<a id="__codelineno-1-83" name="__codelineno-1-83"></a>            <span class="k">case</span> <span class="s1">&#39;!add&#39;</span><span class="p">:</span>
-<a id="__codelineno-1-84" name="__codelineno-1-84"></a>                <span class="k">await</span> <span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-<a id="__codelineno-1-85" name="__codelineno-1-85"></a>            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-<a id="__codelineno-1-86" name="__codelineno-1-86"></a>                <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Command &#39;</span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&#39; not recognized!&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-87" name="__codelineno-1-87"></a>    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-<a id="__codelineno-1-88" name="__codelineno-1-88"></a>        <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Invalid command arguments!&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-89" name="__codelineno-1-89"></a>
-<a id="__codelineno-1-90" name="__codelineno-1-90"></a><span class="n">client</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="n">EventTypes</span><span class="o">.</span><span class="n">MESSAGE_CREATE</span><span class="p">,</span> <span class="n">dispatch</span><span class="p">)</span>
-<a id="__codelineno-1-91" name="__codelineno-1-91"></a>
-<a id="__codelineno-1-92" name="__codelineno-1-92"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<a id="__codelineno-1-71" name="__codelineno-1-71"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">event</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">):</span>
+<a id="__codelineno-1-72" name="__codelineno-1-72"></a>        <span class="k">return</span> <span class="c1"># ignore non-command messages</span>
+<a id="__codelineno-1-73" name="__codelineno-1-73"></a>
+<a id="__codelineno-1-74" name="__codelineno-1-74"></a>    <span class="n">command</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<a id="__codelineno-1-75" name="__codelineno-1-75"></a>
+<a id="__codelineno-1-76" name="__codelineno-1-76"></a>    <span class="n">channel</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">channel</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">channel_id</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">event</span><span class="p">)</span>
+<a id="__codelineno-1-77" name="__codelineno-1-77"></a>
+<a id="__codelineno-1-78" name="__codelineno-1-78"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-1-79" name="__codelineno-1-79"></a>        <span class="k">match</span> <span class="n">command</span><span class="p">:</span>
+<a id="__codelineno-1-80" name="__codelineno-1-80"></a>            <span class="k">case</span> <span class="s1">&#39;!roll&#39;</span><span class="p">:</span>
+<a id="__codelineno-1-81" name="__codelineno-1-81"></a>                <span class="k">await</span> <span class="n">roll</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-1-82" name="__codelineno-1-82"></a>            <span class="k">case</span> <span class="s1">&#39;!choose&#39;</span><span class="p">:</span>
+<a id="__codelineno-1-83" name="__codelineno-1-83"></a>                <span class="k">await</span> <span class="n">choose</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+<a id="__codelineno-1-84" name="__codelineno-1-84"></a>            <span class="k">case</span> <span class="s1">&#39;!repeat&#39;</span><span class="p">:</span>
+<a id="__codelineno-1-85" name="__codelineno-1-85"></a>                <span class="k">await</span> <span class="n">repeat</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<a id="__codelineno-1-86" name="__codelineno-1-86"></a>            <span class="k">case</span> <span class="s1">&#39;!add&#39;</span><span class="p">:</span>
+<a id="__codelineno-1-87" name="__codelineno-1-87"></a>                <span class="k">await</span> <span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<a id="__codelineno-1-88" name="__codelineno-1-88"></a>            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+<a id="__codelineno-1-89" name="__codelineno-1-89"></a>                <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Command &#39;</span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&#39; not recognized!&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-90" name="__codelineno-1-90"></a>    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+<a id="__codelineno-1-91" name="__codelineno-1-91"></a>        <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Invalid command arguments!&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-92" name="__codelineno-1-92"></a>
+<a id="__codelineno-1-93" name="__codelineno-1-93"></a><span class="n">client</span><span class="o">.</span><span class="n">add_event_listener</span><span class="p">(</span><span class="n">EventTypes</span><span class="o">.</span><span class="n">MESSAGE_CREATE</span><span class="p">,</span> <span class="n">dispatch</span><span class="p">)</span>
+<a id="__codelineno-1-94" name="__codelineno-1-94"></a>
+<a id="__codelineno-1-95" name="__codelineno-1-95"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
