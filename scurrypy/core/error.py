@@ -19,11 +19,11 @@ class DiscordError(Exception):
         self.is_fatal = status in (401, 403)
 
         errors = [f"→ {path}: {reason}" for path, reason in self.details]
-        full_message = f"{self.reason} ({self.code})"
+        self.full_message = f"{self.reason} ({self.code})"
         if errors:
-            full_message += '\n' + '\n'.join(errors)
+            self.full_message += '\n' + '\n'.join(errors)
 
-        super().__init__(full_message)
+        super().__init__(self.full_message)
 
     def walk(self, node: dict, path=None):
         """Recursively traverses errors field to flatten nested validation errors into (path, message).

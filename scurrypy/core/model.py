@@ -32,7 +32,7 @@ class DataModel:
                 return None
             
             if t is bool:
-                return v == 'true'
+                return v in ('true', 'True', True)
             
             if is_dataclass(t):
                 return t.from_dict(v)

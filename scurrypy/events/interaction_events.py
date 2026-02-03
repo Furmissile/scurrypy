@@ -169,7 +169,7 @@ class ModalData(DataModel):
     custom_id: str
     """Unique ID associated with the modal."""
 
-    data: ResolvedData
+    resolved: Optional[ResolvedData]
     """Resolved entities from modal data."""
 
     components: list[ModalComponent] = field(default_factory=list)

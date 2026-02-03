@@ -2,6 +2,18 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
+## [0.20.2] - Feb 2026
+
+### Changed
+
+* Fixed: `ModalData.data` should be and is now `ModalData.resolved`
+* Fixed: Components now inherit correct marker types
+* Fixed: `HTTPClient.request` now raises `DiscordError` instead of returning `None`
+    * Now you can catch `DiscordError` in your own code if needed
+* `DiscordError.full_message` is now a class attribute
+    * Now you can access the error you see in the console
+* Fixed: `DataModel.from_dict` now accepts raw booleans, not just string
+
 ## [0.20.1] - Feb 2026
 
 ### Changed

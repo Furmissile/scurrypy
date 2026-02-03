@@ -135,7 +135,7 @@ class LabelPart(DataModel):
     """Component type. Always `ComponentTypes.LABEL` for this class. See [`ComponentTypes`][scurrypy.parts.component_types.ComponentTypes]."""
 
 @dataclass
-class FileUploadPart(DataModel, ContainerChild):
+class FileUploadPart(DataModel, LabelChild):
     """Represents the file upload component."""
 
     custom_id: str = None

@@ -142,7 +142,7 @@ class HTTPClient:
             return await future
         except DiscordError as e:
             logger.error(e)
-            return None
+            raise # surface the error
 
     async def _worker(self, endpoint: str):
         """Background worker that processes requests for this endpoint.

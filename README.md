@@ -29,7 +29,7 @@ The following are baked into ScurryPy:
 
 Your focus is building what you want.
 
-Need more convincing? See the [manifesto](https://scurry-works.github.io/scurrypy/manifesto) section!
+See the [manifesto](https://scurry-works.github.io/scurrypy/manifesto) section for details!
 
 ## Who ScurryPy is for
 
