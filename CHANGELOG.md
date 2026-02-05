@@ -2,6 +2,14 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
+## [0.20.3] - Feb 2026
+
+### Changed
+
+* Startup and shutdown hooks now have a 60s timeout instead of 5s
+* Added: Debug log for what hooks are running
+* Improved error logging
+
 ## [0.20.2] - Feb 2026
 
 ### Changed

@@ -363,9 +363,10 @@ class Client:
 
             for hook in self.startup_hooks:
                 try:
+                    logger.debug(f"Running hook {hook.__qualname__}...")
                     result = hook()
                     if inspect.isawaitable(result):
-                        await asyncio.wait_for(result, timeout=5)
+                        await asyncio.wait_for(result, timeout=60)
                 except Exception:
                     logger.exception("Error in shartup hook")
 
@@ -385,9 +386,10 @@ class Client:
 
         for hook in self.shutdown_hooks:
             try:
+                logger.debug(f"Running hook {hook.__qualname__}...")
                 result = hook()
                 if inspect.isawaitable(result):
-                    await asyncio.wait_for(result, timeout=5)
+                    await asyncio.wait_for(result, timeout=60)
             except Exception:
                 logger.exception("Error in shutdown hook")
 

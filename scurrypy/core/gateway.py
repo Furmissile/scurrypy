@@ -84,7 +84,7 @@ class GatewayClient:
                     self.reconnect_immediately = False
 
             except (ConnectionError, websockets.exceptions.ConnectionClosedError) as e:
-                logger.exception(f"SHARD ID {self.shard_id}: {e}")
+                logger.warning(f"SHARD ID {self.shard_id}: {e}")
 
                 await self.close_ws()
 
