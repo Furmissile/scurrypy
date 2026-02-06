@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -9,10 +10,10 @@ from .user import UserModel
 class MessageModel(DataModel):
     """Represents a Discord message."""
 
-    id: int
+    id: Snowflake
     """ID of the message."""
 
-    channel_id: int
+    channel_id: Snowflake
     """Channel ID of the message."""
 
     author: UserModel
@@ -27,7 +28,7 @@ class MessageModel(DataModel):
     type: int
     """Type of message."""
 
-    webhook_id: Optional[int]
+    webhook_id: Optional[Snowflake]
     """ID of the webhook if the message is a webhook."""
 
     timestamp: Optional[str]

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 from .base_event import Event
 
 from typing import Optional
@@ -14,19 +15,19 @@ class ReactionAddEvent(Event, DataModel):
     type: int
     """Type of reaction added."""
 
-    user_id: int
+    user_id: Snowflake
     """ID of user who added the emoji."""
 
     emoji: EmojiModel
     """Emoji used to react."""
 
-    channel_id: int
+    channel_id: Snowflake
     """ID of the channel where the reaction took place."""
 
-    message_id: int
+    message_id: Snowflake
     """ID of the message where the reaction took place."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """ID of the guild where the reaction took place (if in a guild)."""
 
     burst: bool
@@ -35,7 +36,7 @@ class ReactionAddEvent(Event, DataModel):
     member: Optional[GuildMemberModel]
     """Partial member object of the guild member that added the emoji (if in a guild)."""
 
-    message_author_id: Optional[int]
+    message_author_id: Optional[Snowflake]
     """ID of the user who sent the message where the reaction was added."""
 
 @dataclass
@@ -45,19 +46,19 @@ class ReactionRemoveEvent(Event, DataModel):
     type: int
     """Type of reaction removed."""
 
-    user_id: int
+    user_id: Snowflake
     """ID of user who removed their reaction."""
 
     emoji: EmojiModel
     """Emoji data of the emoji where the reaction was removed."""
 
-    channel_id: int
+    channel_id: Snowflake
     """ID of the channel where the reaction was removed."""
 
-    message_id: int
+    message_id: Snowflake
     """ID of the message where the reaction was removed."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """ID of the guild where the reaction was removed (if in a guild)."""
 
     burst: bool
@@ -70,23 +71,23 @@ class ReactionRemoveEmojiEvent(Event, DataModel):
     emoji: EmojiModel
     """Emoji data of the removed reaction emoji."""
 
-    channel_id: int
+    channel_id: Snowflake
     """ID of the channel where the reaction emoji was removed."""
 
-    message_id: int
+    message_id: Snowflake
     """ID of the message where the reaction emoji was removed."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """ID of the guild where the reaction emoji was removed. (if in a guild)"""
 
 class ReactionRemoveAllEvent(Event, DataModel):
     """Remove all reactions event."""
 
-    channel_id: int
+    channel_id: Snowflake
     """ID of the channel where all reaction were removed."""
 
-    message_id: int
+    message_id: Snowflake
     """ID of the message where all reaction were removed."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """ID of the guild where all reaction were removed (if in a guild)."""

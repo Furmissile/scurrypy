@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Unpack
 
+from ..core.snowflake import Snowflake
+
 from .base_resource import BaseResource
 
 from ..models.emoji import EmojiModel,  ReactionTypes
@@ -15,10 +17,10 @@ from ..params.message import EditMessageParams
 class Message(BaseResource):
     """A Discord message."""
 
-    id: int
+    id: Snowflake
     """ID of the message"""
 
-    channel_id: int
+    channel_id: Snowflake
     """Channel ID of the message."""
 
     async def fetch(self) -> MessageModel:
@@ -144,7 +146,7 @@ class Message(BaseResource):
             "DELETE",
             f"/channels/{self.channel_id}/messages/{self.id}/reactions/{emoji.api_code}/@me")
 
-    async def remove_user_reaction(self, emoji: EmojiModel | str, user_id: int) -> None:
+    async def remove_user_reaction(self, emoji: EmojiModel | str, user_id: Snowflake) -> None:
         """Remove a specific user's reaction from this message.
         Fires [`MessageReactionRemoveEvent`][scurrypy.events.reaction_events.ReactionRemoveEvent].
 
@@ -153,7 +155,7 @@ class Message(BaseResource):
 
         Args:
             emoji (EmojiModel | str): the standard emoji (str) or custom emoji (EmojiModel)
-            user_id (int): user's ID
+            user_id (Snowflake): user's ID
         """
         if isinstance(emoji, str):
             emoji = EmojiModel(emoji)

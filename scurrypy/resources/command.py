@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional, Unpack
 
+from ..core.snowflake import Snowflake
+
 from .base_resource import BaseResource
 
 from ..models.command import ApplicationCommandModel
@@ -13,14 +15,17 @@ from ..params.command import EditGlobalCommandParams, EditGuildCommandParams
 class Command(BaseResource):
     """Represents a Discord command."""
 
-    application_id: int
+    application_id: Snowflake
     """Application ID of the commands."""
 
 @dataclass
 class GlobalCommand(Command):
 
-    async def fetch(self, command_id: int) -> ApplicationCommandModel:
+    async def fetch(self, command_id: Snowflake) -> ApplicationCommandModel:
         """Fetches a command object.
+
+        Args:
+            command_id (int): ID of the command to fetch
 
         Returns:
             (ApplicationCommandModel): queried application command
@@ -55,11 +60,11 @@ class GlobalCommand(Command):
 
         return ApplicationCommandModel.from_dict(data)
 
-    async def edit(self, command_id: int, **options: Unpack[EditGlobalCommandParams]) -> ApplicationCommandModel:
+    async def edit(self, command_id: Snowflake, **options: Unpack[EditGlobalCommandParams]) -> ApplicationCommandModel:
         """Edit this command.
 
         Args:
-            command_id (int): ID of command to edit
+            command_id (Snowflake): ID of command to edit
             options (EditGlobalCommandParams): command fields to edit
 
         Returns:
@@ -75,11 +80,11 @@ class GlobalCommand(Command):
 
         return ApplicationCommandModel.from_dict(data)
 
-    async def delete(self, command_id: int) -> None:
+    async def delete(self, command_id: Snowflake) -> None:
         """Delete a command.
 
         Args:
-            command_id (int): ID of the command to delete
+            command_id (Snowflake): ID of the command to delete
         """
         await self._http.request('DELETE', f"applications/{self.application_id}/commands/{command_id}")
 
@@ -112,10 +117,10 @@ class GlobalCommand(Command):
 class GuildCommand(Command):
     """Represents a guild command."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     "Guild ID of command."
 
-    async def fetch(self, command_id: int) -> ApplicationCommandModel:
+    async def fetch(self, command_id: Snowflake) -> ApplicationCommandModel:
         """Fetches the command object.
 
         Args:
@@ -154,11 +159,11 @@ class GuildCommand(Command):
 
         return ApplicationCommandModel.from_dict(data)
 
-    async def edit(self, command_id: int, **options: Unpack[EditGuildCommandParams]) -> ApplicationCommandModel:
+    async def edit(self, command_id: Snowflake, **options: Unpack[EditGuildCommandParams]) -> ApplicationCommandModel:
         """Edit a command.
 
         Args:
-            command_id (int): ID of command to edit
+            command_id (Snowflake): ID of command to edit
             options (EditGuildCommandParams): command fields to edit
 
         Returns:
@@ -175,11 +180,11 @@ class GuildCommand(Command):
 
         return ApplicationCommandModel.from_dict(data)
 
-    async def delete(self, command_id: int) -> None:
+    async def delete(self, command_id: Snowflake) -> None:
         """Delete a command.
 
         Args:
-            command_id (int): ID of command to delete
+            command_id (Snowflake): ID of command to delete
         """
         await self._http.request('DELETE', f"applications/{self.application_id}/guilds/{self.guild_id}/commands/{command_id}")
 

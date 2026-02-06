@@ -8,6 +8,7 @@ from .http import HTTPClient
 from .intents import Intents
 from .model import DataModel
 from .permissions import Permissions
+from .snowflake import Snowflake
 
 __all__ = [
     "Addon",
@@ -17,5 +18,6 @@ __all__ = [
     "HTTPClient",
     "Intents",
     "DataModel",
-    "Permissions"
+    "Permissions",
+    "Snowflake"
 ]

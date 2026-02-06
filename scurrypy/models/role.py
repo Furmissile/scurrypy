@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -20,7 +21,7 @@ class RoleColorModel(DataModel):
 class RoleModel(DataModel):
     """Represents a Discord role."""
 
-    id: int
+    id: Snowflake
     """ID of the role."""
 
     name: str

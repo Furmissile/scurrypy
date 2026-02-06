@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
+
 from .base_event import Event
 
 from typing import Optional
@@ -29,10 +31,10 @@ class ChannelDeleteEvent(Event, ChannelModel):
 class ChannelPinsUpdateEvent(Event, DataModel):
     """Pin update event."""
     
-    channel_id: int
+    channel_id: Snowflake
     """ID of channel where the pins were updated."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """ID of the guild where the pins were updated."""
 
     last_pin_timestamp: Optional[str]
@@ -42,8 +44,8 @@ class ChannelPinsUpdateEvent(Event, DataModel):
 class WebhooksUpdateEvent(Event, DataModel):
     """Received when a guild's channel webhook is created, updated, or deleted."""
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild."""
 
-    channel_id: int
+    channel_id: Snowflake
     """ID of the channel."""

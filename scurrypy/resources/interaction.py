@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Unpack
 
+from ..core.snowflake import Snowflake
+
 from .base_resource import BaseResource
 
 from ..models.interaction import InteractionCallbackModel, InteractionCallbackTypes
@@ -15,7 +17,7 @@ from ..params.message import EditMessageParams
 class Interaction(BaseResource):
     """Represents a Discord Interaction object."""
 
-    id: int
+    id: Snowflake
     """ID of the interaction."""
 
     token: str
@@ -152,7 +154,7 @@ class Interaction(BaseResource):
             data=content
         )
 
-    async def followup(self, application_id, message: str | MessagePart, **flags: Unpack[MessageFlagParams]) -> None:
+    async def followup(self, application_id: Snowflake, message: str | MessagePart, **flags: Unpack[MessageFlagParams]) -> None:
         """Create a new message to respond to a deferred interaction.
         Fires [`MessageCreateEvent`][scurrypy.events.message_events.MessageCreateEvent].
 
@@ -160,7 +162,7 @@ class Interaction(BaseResource):
             Apps are limited to 5 followup messages PER interaction.
 
         Args:
-            application_id (int): ID of the application
+            application_id (Snowflake): ID of the application
             message (str | MessagePart): content as a string or MessagePart  
             flags (MessageFlagParams): message flags to set
         """
@@ -177,11 +179,11 @@ class Interaction(BaseResource):
             data=content
         )
 
-    async def edit_original(self, application_id: int, message: str | MessagePart) -> None:
+    async def edit_original(self, application_id: Snowflake, message: str | MessagePart) -> None:
         """Update the original interaction response from a deferred update interaction.
 
         Args:
-            application_id (int): ID of the application
+            application_id (Snowflake): ID of the application
             message (str | MessagePart): content as a string or MessagePart
         """
         if isinstance(message, str):

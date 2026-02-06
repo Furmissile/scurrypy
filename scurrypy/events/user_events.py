@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
+
 from .base_event import Event
 
 from ..models.user import UserModel, GuildMemberModel
@@ -17,7 +19,7 @@ class GuildMemberAddEvent(Event, GuildMemberModel):
         Requires privileged `GUILD_MEMBERS` intent.
     """
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild."""
 
 @dataclass
@@ -27,10 +29,10 @@ class GuildMemberUpdateEvent(Event, DataModel):
     !!! warning
         Requires privileged `GUILD_MEMBERS` intent.
     """
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild."""
 
-    roles: list[int]
+    roles: list[Snowflake]
     """List of user's roles (their IDs)."""
 
     user: UserModel
@@ -53,7 +55,7 @@ class GuildMemberRemoveEvent(Event, DataModel):
         Requires privileged `GUILD_MEMBERS` intent.
     """
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild."""
 
     user: UserModel

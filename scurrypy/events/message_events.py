@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
+
 from .base_event import Event
 
 from typing import Optional
@@ -15,7 +17,7 @@ class MessageCreateEvent(Event, MessageModel):
         `member` may be missing on `MESSAGE_CREATE` and `MESSAGE_UPDATE`. Use `author` when you need the user.
     """
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """Guild ID of the updated message (if in a guild channel)."""
 
     member: Optional[GuildMemberModel]  # guild-only author info
@@ -25,7 +27,7 @@ class MessageCreateEvent(Event, MessageModel):
 class MessageUpdateEvent(Event, MessageModel):
     """Received when a message is updated. (This event IS the MessageModel with extra fields)"""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """Guild ID of the updated message (if in a guild channel)."""
 
     member: Optional[GuildMemberModel]
@@ -35,24 +37,24 @@ class MessageUpdateEvent(Event, MessageModel):
 class MessageDeleteEvent(Event, DataModel):
     """Received when a message is deleted."""
 
-    id: int
+    id: Snowflake
     """ID of the deleted message."""
 
-    channel_id: int
+    channel_id: Snowflake
     """Channel ID of the deleted message."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """Guild ID of the deleted message (if in a guild channel)."""
 
 @dataclass
 class BulkMessageDeleteEvent(Event, DataModel):
     """Received when bulk deleting messages."""
 
-    ids: list[int]
+    ids: list[Snowflake]
     """IDs of the messages that were deleted."""
 
-    channel_id: int
+    channel_id: Snowflake
     """ID of the channel."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """ID of the guild."""

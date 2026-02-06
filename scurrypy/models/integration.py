@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -9,7 +10,7 @@ from .application import ApplicationModel
 class IntegrationModel(DataModel):
     """Represents a guild integration."""
 
-    id: int
+    id: Snowflake
     """ID of the integration."""
 
     name: str

@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Unpack
 
+from ..core.snowflake import Snowflake
+
 from .base_resource import BaseResource
 
 from ..models.message import MessageModel, PinnedMessageModel
@@ -17,7 +19,7 @@ from ..params.channel import EditGuildChannelParams, EditThreadChannelParams
 class Channel(BaseResource):
     """Represents a Discord channel."""
 
-    id: int
+    id: Snowflake
     """ID of the channel."""
 
     # --- CHANNEL ---
@@ -42,12 +44,12 @@ class Channel(BaseResource):
         """
         await self._http.request("DELETE", f"/channels/{self.id}")
 
-    async def follow(self, webhook_channel_id: int) -> FollowedChannelModel:
+    async def follow(self, webhook_channel_id: Snowflake) -> FollowedChannelModel:
         """Follow announcement channel to send messages to a target channel.
         Fires [`WebhooksUpdateEvent`][scurrypy.events.channel_events.WebhooksUpdateEvent].
 
         Args:
-            webhook_channel_id (int): ID of target channel
+            webhook_channel_id (Snowflake): ID of target channel
 
         Returns:
             (FollowedChannelModel): followed channel
@@ -89,7 +91,7 @@ class Channel(BaseResource):
         return ChannelModel.from_dict(data)
     
     # --- MESSAGES ---
-    async def fetch_messages(self, limit: int = 50, before: int = None, after: int = None, around: int = None) -> list[MessageModel]:
+    async def fetch_messages(self, limit: int = 50, before: Snowflake = None, after: Snowflake = None, around: Snowflake = None) -> list[MessageModel]:
         """Fetches this channel's messages.
 
         !!! important "Permissions"
@@ -97,9 +99,9 @@ class Channel(BaseResource):
 
         Args:
             limit (int, optional): Max number of messages to return. Range 1 - 100. Defaults to `50`.
-            before (int, optional): get messages before this message ID
-            after (int, optional): get messages after this message ID
-            around (int, optional): get messages around this message ID
+            before (Snowflake, optional): get messages before this message ID
+            after (Snowflake, optional): get messages after this message ID
+            around (Snowflake, optional): get messages around this message ID
 
         Returns:
             (list[MessageModel]): queried list of messages
@@ -175,7 +177,7 @@ class Channel(BaseResource):
 
         return MessageModel.from_dict(data)
 
-    async def bulk_delete_messages(self, message_ids: list[int]) -> None:
+    async def bulk_delete_messages(self, message_ids: list[Snowflake]) -> None:
         """Delete multiple messages in a single request.
         Fires [`BulkMessageDeleteEvent`][scurrypy.events.message_events.BulkMessageDeleteEvent].
         
@@ -189,7 +191,7 @@ class Channel(BaseResource):
             Only available for `GUILD_TEXT` channels.
 
         Args:
-            message_ids (list[int]): IDs of the messages to delete range(2, 100)
+            message_ids (list[Snowflake]): IDs of the messages to delete range(2, 100)
         """
         await self._http.request(
             'POST', 
@@ -232,11 +234,11 @@ class Channel(BaseResource):
         return InviteModel.from_dict(data)
 
     # --- THREAD CHANNELS ---
-    async def fetch_thread_member(self, user_id: int, with_member: bool = False) -> ThreadMemberModel:
+    async def fetch_thread_member(self, user_id: Snowflake, with_member: bool = False) -> ThreadMemberModel:
         """Fetch a thread emmber of the specified user ID from this thread.
 
         Args:
-            user_id (int): ID of the user to fetch
+            user_id (Snowflake): ID of the user to fetch
             with_member (bool, optional): whether to include the member object. Defaults to `False`.
         
         Returns:
@@ -249,7 +251,7 @@ class Channel(BaseResource):
 
         return ThreadMemberModel.from_dict(data)
     
-    async def fetch_thread_members(self, limit: int = 100, after: int = None, with_member: bool = False) -> list[ThreadMemberModel]:
+    async def fetch_thread_members(self, limit: int = 100, after: Snowflake = None, with_member: bool = False) -> list[ThreadMemberModel]:
         """Fetch all members of this thread.
 
         !!! warning
@@ -257,7 +259,7 @@ class Channel(BaseResource):
 
         Args:
             limit (int, optional): Max number of thread members to return. Range 0 - 100. Defaults to `100`.
-            after (int, optional): members after this user ID
+            after (Snowflake, optional): members after this user ID
             with_member (bool, optional): whether to include the member object. Defaults to `False`.
 
         Returns:
@@ -274,13 +276,13 @@ class Channel(BaseResource):
 
         return [ThreadMemberModel.from_dict(n) for n in data]
 
-    async def create_thread_from_message(self, message_id: int, thread: ThreadFromMessagePart) -> ChannelModel:
+    async def create_thread_from_message(self, message_id: Snowflake, thread: ThreadFromMessagePart) -> ChannelModel:
         """Create a thread from a message (attached to the message). 
         Fires [`ThreadCreateEvent`][scurrypy.events.thread_events.ThreadCreateEvent] 
         and [`MessageUpdateEvent`][scurrypy.events.message_events.MessageUpdateEvent].
 
         Args:
-            message_id (int): ID of the message to attach the thread
+            message_id (Snowflake): ID of the message to attach the thread
             thread (ThreadFromMessagePart): thread to attach
 
         Returns:
@@ -346,21 +348,21 @@ class Channel(BaseResource):
         """
         await self._http.request('DELETE', f'/channels/{self.id}/thread-members/@me')
 
-    async def add_thread_member(self, user_id: int) -> None:
+    async def add_thread_member(self, user_id: Snowflake) -> None:
         """Add a user to this thread.
         Fires [`ThreadMembersUpdateEvent`][scurrypy.events.thread_events.ThreadMembersUpdateEvent].
 
         Args:
-            user_id (int): ID of the user to add
+            user_id (Snowflake): ID of the user to add
         """
         await self._http.request('PUT', f'/channels/{self.id}/thread-members/{user_id}')
 
-    async def remove_thread_member(self, user_id: int) -> None:
+    async def remove_thread_member(self, user_id: Snowflake) -> None:
         """Remove a user to this thread.
         Fires [`ThreadMembersUpdateEvent`][scurrypy.events.thread_events.ThreadMembersUpdateEvent].
 
         Args:
-            user_id (int): ID of the user to remove
+            user_id (Snowflake): ID of the user to remove
         """
         await self._http.request('DELETE', f'/channels/{self.id}/thread-members/{user_id}')
 

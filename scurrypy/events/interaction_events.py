@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 from .base_event import Event
 
 from typing import Optional
@@ -17,26 +18,26 @@ from ..models.attachment import AttachmentModel
 class ResolvedData(DataModel):
     """Represents the resolved data object."""
 
-    users: Optional[dict[int, UserModel]]
+    users: Optional[dict[Snowflake, UserModel]]
     """Map of user snowflakes to user objects."""
 
-    members: Optional[dict[int, GuildMemberModel]]
+    members: Optional[dict[Snowflake, GuildMemberModel]]
     """Map of member snowflakes to partial guild member objects.
 
     !!! note "Missing Fields"
         `user`, `deaf`, and `mute`.
     """
 
-    roles: Optional[dict[int, RoleModel]]
+    roles: Optional[dict[Snowflake, RoleModel]]
     """Map of role snowflakes to role objects."""
 
-    channels: Optional[dict[int, ChannelModel]]
+    channels: Optional[dict[Snowflake, ChannelModel]]
     """Map of channel snowflakes to partial channel objects."""
 
-    messages: Optional[dict[int, MessageModel]]
+    messages: Optional[dict[Snowflake, MessageModel]]
     """Map of message snowflakes to partial message objects."""
 
-    attachments: Optional[dict[int, AttachmentModel]]
+    attachments: Optional[dict[Snowflake, AttachmentModel]]
     """Map of attachment snowflakes to attachment objects."""
 
 # ----- Command Interaction -----
@@ -69,7 +70,7 @@ class ApplicationCommandOptionData(DataModel):
 class ApplicationCommandData(DataModel):
     """Represents the response from a command."""
 
-    id: int
+    id: Snowflake
     """ID of the command."""
 
     name: str
@@ -78,10 +79,10 @@ class ApplicationCommandData(DataModel):
     type: int
     """Type of command (e.g., message, user, slash)."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """ID of guild from which the command was invoked."""
 
-    target_id: Optional[int]
+    target_id: Optional[Snowflake]
     """ID of the user or message from which the command was invoked (message/user commands only)."""
 
     resolved: Optional[ResolvedData]

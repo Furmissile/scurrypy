@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional, Literal
 
@@ -80,7 +81,7 @@ class TagPart(DataModel):
     moderated: bool = None
     """Whether the tag can only be added/removed by a member with `MANAGE_THREADS`."""
     
-    emoji_id: int = None
+    emoji_id: Snowflake = None
     """ID of a guild's custom emoji."""
     
     emoji_name: str = None
@@ -109,7 +110,7 @@ class GuildChannelPart(DataModel):
         Only works for `GUILD_TEXT` and `GUILD_FORUM`.
     """
 
-    parent_id: Optional[int] = None
+    parent_id: Optional[Snowflake] = None
     """Category ID of the channel.
     
     !!! note

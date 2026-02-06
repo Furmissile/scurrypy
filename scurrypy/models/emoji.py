@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from urllib.parse import quote
 
@@ -14,7 +15,7 @@ class EmojiModel(DataModel):
     name: str
     """Name of emoji."""
 
-    id: int = 0
+    id: Snowflake = 0
     """ID of the emoji (if custom)."""
 
     animated: bool = False

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional, TypedDict, Unpack
 
@@ -54,10 +55,10 @@ class MessageReferenceTypes:
 class MessageReferencePart(DataModel):
     """Represents the Message Reference object."""
 
-    message_id: int = None
+    message_id: Snowflake = None
     """ID of the originating message."""
 
-    channel_id: int = None
+    channel_id: Snowflake = None
     """
         Channel ID of the originating message.
         !!! note

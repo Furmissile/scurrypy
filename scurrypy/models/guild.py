@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -21,7 +22,7 @@ class GuildFeatures:
 class ReadyGuildModel(DataModel):
     """Guild info from Ready event."""
     
-    id: int
+    id: Snowflake
     """ID of the associated guild."""
 
     unavailable: bool
@@ -31,7 +32,7 @@ class ReadyGuildModel(DataModel):
 class UnavailableGuildModel(DataModel):
     """Guild info during an outage or before bot bootup."""
 
-    id: int
+    id: Snowflake
     """ID of the associated guild."""
 
     unavailable: bool
@@ -41,7 +42,7 @@ class UnavailableGuildModel(DataModel):
 class GuildModel(DataModel):
     """Represents a Discord guild."""
 
-    id: int
+    id: Snowflake
     """ID of the guild."""
     
     name: str
@@ -56,7 +57,7 @@ class GuildModel(DataModel):
     owner: Optional[bool]
     """If the member is the owner."""
 
-    owner_id: int
+    owner_id: Snowflake
     """OD of the owner of the guild."""
 
     roles: list[int]
@@ -71,16 +72,16 @@ class GuildModel(DataModel):
     mfa_level: int
     """Required MFA level of the guild."""
 
-    application_id: int
+    application_id: Snowflake
     """ID of the application if the guild is created by a bot."""
 
-    system_channel_id: int
+    system_channel_id: Snowflake
     """Channel ID where system messages go (e.g., welcome messages, boost events)."""
 
     system_channel_flags: int
     """System channel flags."""
 
-    rules_channel_id: int
+    rules_channel_id: Snowflake
     """Channel ID where rules are posted."""
 
     max_members: Optional[int]
@@ -95,7 +96,7 @@ class GuildModel(DataModel):
     preferred_locale: str
     """Preferred locale of the guild."""
 
-    public_updates_channel_id: int
+    public_updates_channel_id: Snowflake
     """Channel ID of announcement or public updates."""
 
     approximate_member_count: int
@@ -104,7 +105,7 @@ class GuildModel(DataModel):
     nsfw_level: int
     """NSFW level of the guild."""
 
-    safety_alerts_channel_id: int
+    safety_alerts_channel_id: Snowflake
     """Channel ID for safety alerts."""
 
 @dataclass
@@ -121,23 +122,23 @@ class GuildBanModel(DataModel):
 class BulkGuildBanModel(DataModel):
     """Response body for creating bulk guild bans."""
 
-    banned_users: list[int]
+    banned_users: list[Snowflake]
     """IDs of successfully banned users."""
 
-    failed_users: list[int]
+    failed_users: list[Snowflake]
     """IDs of users not banned."""
 
 @dataclass
 class GuildWelcomeChannelModel(DataModel):
     """Represents channels shown on a welcome screen."""
 
-    channel_id: int
+    channel_id: Snowflake
     """ID of the channel."""
 
     description: str
     """Description for the channel."""
 
-    emoji_id: int
+    emoji_id: Snowflake
     """Emoji ID for the welcome screen (if custom)."""
 
     emoji_name: str
@@ -157,19 +158,19 @@ class GuildWelcomeScreenModel(DataModel):
 class OnboardingPromptOptionModel(DataModel):
     """Represents a guild's prompt option for onboarding."""
 
-    id: int
+    id: Snowflake
     """ID of the prompt option."""
 
-    channel_ids: list[int]
+    channel_ids: list[Snowflake]
     """Channel IDs a member is added to when selected."""
 
-    role_ids: list[int]
+    role_ids: list[Snowflake]
     """Role IDs a member is given when selected."""
 
     emoji: Optional[EmojiModel]
     """Emoji for the option."""
 
-    emoji_id: Optional[int]
+    emoji_id: Optional[Snowflake]
     """ID for the emoji of the option."""
 
     emoji_name: Optional[str]
@@ -188,7 +189,7 @@ class OnboardingPromptOptionModel(DataModel):
 class OnboardingPromptModel(DataModel):
     """Represents a guild's prompt for onboarding."""
 
-    id: int
+    id: Snowflake
     """ID of the prompt."""
 
     type: int
@@ -213,13 +214,13 @@ class OnboardingPromptModel(DataModel):
 class GuildOnboadingModel(DataModel):
     """Represents a guild's onboarding flow."""
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild for onboarding."""
 
     prompts: list[OnboardingPromptModel]
     """Prompts shown during onboarding."""
 
-    default_channel_ids: list[int]
+    default_channel_ids: list[Snowflake]
     """Channel IDs members are opted into by default."""
 
     enabled: bool

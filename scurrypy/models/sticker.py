@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -9,10 +10,10 @@ from .user import UserModel
 class StickerModel(DataModel):
     """Represents the sticker object."""
 
-    id: int
+    id: Snowflake
     """ID of the sticker."""
 
-    pack_id: Optional[int]
+    pack_id: Optional[Snowflake]
     """ID of the pack the sticker is from (if standard)."""
 
     name: str
@@ -37,7 +38,7 @@ class StickerModel(DataModel):
         May be `False` due to loss of Server Boosts
     """
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """ID of the guild that owns this sticker."""
     
     user: Optional[UserModel]
@@ -50,7 +51,7 @@ class StickerModel(DataModel):
 class StickerItemModel(DataModel):
     """Represents a minimal sticker item."""
     
-    id: int
+    id: Snowflake
     """ID of the sticker."""
 
     name: str
@@ -63,7 +64,7 @@ class StickerItemModel(DataModel):
 class StickerPackModel(DataModel):
     """Represents a pack of standard stickers."""
 
-    id: int
+    id: Snowflake
     """ID of the sticker pack."""
 
     stickers: list[StickerModel]
@@ -72,14 +73,14 @@ class StickerPackModel(DataModel):
     name: str
     """Name of the sticker pack."""
 
-    sku_id: int
+    sku_id: Snowflake
     """ID of the pack's SKU."""
 
-    cover_sticker_id: Optional[int]
+    cover_sticker_id: Optional[Snowflake]
     """ID of a sticker in the pack which is shown as the pack's icon."""
 
     description: str
     """Description of the sticker pack."""
 
-    banner_asset_id: Optional[int]
+    banner_asset_id: Optional[Snowflake]
     """ID of the sticker pack's banner image."""

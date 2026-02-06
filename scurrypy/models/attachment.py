@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -7,7 +8,7 @@ from typing import Optional
 class AttachmentModel(DataModel):
     """Represents an attachment object."""
 
-    id: int
+    id: Snowflake
     """Attachment ID."""
 
     filename: str

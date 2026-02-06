@@ -140,8 +140,7 @@ class HTTPClient:
         # return promise
         try:
             return await future
-        except DiscordError as e:
-            logger.error(e)
+        except DiscordError:
             raise # surface the error
 
     async def _worker(self, endpoint: str):

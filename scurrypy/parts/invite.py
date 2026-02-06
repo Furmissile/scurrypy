@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -29,7 +30,7 @@ class InvitePart(DataModel):
     Defaults to `False`.
     """
 
-    role_ids: Optional[list[int]] = field(default_factory=list)
+    role_ids: Optional[list[Snowflake]] = field(default_factory=list)
     """Role IDs to be given when the user accept this invite.
     
     !!! important "Permissions"

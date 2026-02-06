@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from ..core.snowflake import Snowflake
+
 from ..models.application import ApplicationModel
 
 from .base_resource import BaseResource
@@ -8,7 +10,7 @@ from .base_resource import BaseResource
 class Application(BaseResource):
     """Represents a Discord application."""
 
-    id: int
+    id: Snowflake
     """ID of the application."""
 
     async def fetch(self) -> ApplicationModel:

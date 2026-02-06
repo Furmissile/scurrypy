@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -7,7 +8,7 @@ from typing import Optional
 class BulkGuildBanPart(DataModel):
     """Represents fields for creating a bulk ban."""
 
-    user_ids: list[int] = field(default_factory=list)
+    user_ids: list[Snowflake] = field(default_factory=list)
     """List of user IDs to ban. Max `200`."""
 
     delete_message_seconds: Optional[int] = 0
@@ -17,13 +18,13 @@ class BulkGuildBanPart(DataModel):
 class WelcomeScreenChannelPart(DataModel):
     """Represents fields for creating a welcome screen channel."""
 
-    channel_id: int = None
+    channel_id: Snowflake = None
     """ID of the channel to display."""
 
     description: str = None
     """Description for the channel to display."""
 
-    emoji_id: int = None
+    emoji_id: Snowflake = None
     """ID of the emoji (if custom)."""
 
     emoji_name: str = None
@@ -41,13 +42,13 @@ class OnboardingModes:
 class OnboardingPromptOptionPart(DataModel):
     """Represents fields for creating an onboarding prompt option."""
 
-    channel_ids: list[int] = field(default_factory=list)
+    channel_ids: list[Snowflake] = field(default_factory=list)
     """	IDs for channels a member is added to when the option is selected."""
 
-    role_ids: list[int] = field(default_factory=list)
+    role_ids: list[Snowflake] = field(default_factory=list)
     """IDs for roles assigned to a member when the option is selected."""
 
-    wmoji_id: Optional[int] = None
+    wmoji_id: Optional[Snowflake] = None
     """	Emoji ID of the option."""
 
     emoji_name: Optional[str] = None

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -17,7 +18,7 @@ class GuildMemberFlags:
 class UserModel(DataModel):
     """Represents the User object."""
 
-    id: int
+    id: Snowflake
     """ID of the user."""
 
     username: str
@@ -54,7 +55,7 @@ class UserModel(DataModel):
 class GuildMemberModel(DataModel):
     """Represents a guild member."""
 
-    roles: list[int]
+    roles: list[Snowflake]
     """List of roles registered to the guild member."""
 
     user: UserModel

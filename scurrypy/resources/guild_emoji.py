@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Unpack
 
+from ..core.snowflake import Snowflake
+
 from .base_resource import BaseResource
 
 from ..models.emoji import EmojiModel
@@ -13,14 +15,14 @@ from ..params.guild_emoji import EditGuildEmojiParams
 class GuildEmoji(BaseResource):
     """Represents a Discord Guild Emoji."""
 
-    guild_id: int
+    guild_id: Snowflake
     """Guild ID of the emojis."""
 
-    async def fetch(self, emoji_id: int) -> EmojiModel:
+    async def fetch(self, emoji_id: Snowflake) -> EmojiModel:
         """Fetch an emoji from this guild.
 
         Args:
-            emoji_id (int): emoji ID
+            emoji_id (Snowflake): emoji ID
 
         Returns:
             (EmojiModel): queried guild emoji
@@ -57,12 +59,12 @@ class GuildEmoji(BaseResource):
 
         return EmojiModel.from_dict(data)
     
-    async def edit(self, emoji_id: int, **options: Unpack[EditGuildEmojiParams]) -> EmojiModel:
+    async def edit(self, emoji_id: Snowflake, **options: Unpack[EditGuildEmojiParams]) -> EmojiModel:
         """Edit a guild emoji in this guild.
         Fires [`GuildEmojisUpdateEvent`][scurrypy.events.guild_events.GuildEmojisUpdateEvent].
 
         Args:
-            emoji_id (int): ID of the emoji to edit
+            emoji_id (Snowflake): ID of the emoji to edit
             options (EditGuildEmojiParams): params for editing a guild's emoji
 
         Returns:
@@ -76,7 +78,7 @@ class GuildEmoji(BaseResource):
 
         return EmojiModel.from_dict(data)
 
-    async def delete(self, emoji_id: int) -> None:
+    async def delete(self, emoji_id: Snowflake) -> None:
         """Delete an emoji from this guild.
         Fires [`GuildEmojisUpdateEvent`][scurrypy.events.guild_events.GuildEmojisUpdateEvent].
 
@@ -85,6 +87,6 @@ class GuildEmoji(BaseResource):
             * `MANAGE_GUILD_EXPRESSIONS` → required for other emojis
 
         Args:
-            emoji_id (int): ID of the emoji
+            emoji_id (Snowflake): ID of the emoji
         """
         await self._http.request('DELETE', f'/guilds/{self.guild_id}/emojis/{emoji_id}')

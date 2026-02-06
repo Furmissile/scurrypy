@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -102,16 +103,16 @@ class ApplicationCommandOptionModel(DataModel):
 class ApplicationCommandModel(DataModel):
     """Represents the application command object."""
 
-    id: int
+    id: Snowflake
     """Unique ID of command."""
 
     type: Optional[int]
     """Type of command. Defaults to `ApplicationCommandTypes.CHAT_INPUT`. See [`ApplicationCommandTypes`][scurrypy.models.command.ApplicationCommandTypes]."""
 
-    application_id: int
+    application_id: Snowflake
     """ID of the parent application."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """Guild ID of the command, if not global."""
 
     name: str

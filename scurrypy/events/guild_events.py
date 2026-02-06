@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 from typing import Optional
 from .base_event import Event
 
@@ -38,7 +39,7 @@ class GuildCreateEvent(Event, GuildModel):
 class GuildUpdateEvent(Event, DataModel):
     """Received when a guild has been edited."""
 
-    id: int
+    id: Snowflake
     """ID of the guild."""
 
     name: str
@@ -71,7 +72,7 @@ class GuildDeleteEvent(Event, UnavailableGuildModel):
 class GuildBanAddEvent(Event, DataModel):
     """Received when a user is banned from a guild."""
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild in which the ban took place."""
 
     user: UserModel
@@ -81,7 +82,7 @@ class GuildBanAddEvent(Event, DataModel):
 class GuildBanRemoveEvent(Event, DataModel):
     """Received when a user is unbanned from a guild."""
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild in which the ban took place."""
 
     user: UserModel
@@ -91,7 +92,7 @@ class GuildBanRemoveEvent(Event, DataModel):
 class GuildEmojisUpdateEvent(Event, DataModel):
     """Received when a guild updates their emojis."""
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild."""
 
     emojis: list[EmojiModel]
@@ -101,7 +102,7 @@ class GuildEmojisUpdateEvent(Event, DataModel):
 class GuildStickersUpdateEvent(Event, DataModel):
     """Received when a guild's stickers have been updated."""
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild."""
 
     stickers: list[StickerModel]

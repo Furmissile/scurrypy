@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 from ..core.permissions import Permissions
 
 from typing import Optional
@@ -36,10 +37,10 @@ from .user import GuildMemberModel
 class ThreadMemberModel(DataModel):
     """Represents a user that has joined a thread."""
 
-    id: Optional[int]
+    id: Optional[Snowflake]
     """ID of the thread."""
 
-    user_id: Optional[int]
+    user_id: Optional[Snowflake]
     """ID of the user."""
 
     join_timestamp: str
@@ -56,7 +57,7 @@ class ThreadMemberModel(DataModel):
 class TagModel(DataModel):
     """Represents the tag object found in `GUILD_FORUM` channels."""
     
-    id: int
+    id: Snowflake
     """ID of the tag."""
 
     name: str
@@ -65,7 +66,7 @@ class TagModel(DataModel):
     moderated: bool
     """Whether the tag can only be added/removed by a member with `MANAGE_THREADS`."""
     
-    emoji_id: int
+    emoji_id: Snowflake
     """ID of a guild's custom emoji."""
     
     emoji_name: str
@@ -75,7 +76,7 @@ class TagModel(DataModel):
 class DefaultReactionModel(DataModel):
     """Represents the default reaction for a `GUILD_FORUM` post."""
 
-    emoji_id: int
+    emoji_id: Snowflake
     """ID of the guild's custom emoji."""
 
     emoji_name: str
@@ -87,16 +88,16 @@ from .user import UserModel
 class ChannelModel(DataModel):
     """Represents a Discord guild channel."""
 
-    id: int
+    id: Snowflake
     """ID of the channel."""
 
     type: int
     """Type of channel."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """Guild ID of the channel."""
 
-    parent_id: Optional[int]
+    parent_id: Optional[Snowflake]
     """Category ID of the channel."""
 
     position: Optional[int]
@@ -111,7 +112,7 @@ class ChannelModel(DataModel):
     nsfw: Optional[bool]
     """If the channel is flagged NSFW."""
 
-    last_message_id: Optional[int]
+    last_message_id: Optional[Snowflake]
     """ID of the last message sent in the channel."""
 
     rate_limit_per_user: Optional[int]
@@ -123,10 +124,10 @@ class ChannelModel(DataModel):
     icon: Optional[str]
     """Icon hash of the group DM."""
 
-    owner_id: Optional[int]
+    owner_id: Optional[Snowflake]
     """ID of the creator of the group DM or thread."""
 
-    application_id: Optional[int]
+    application_id: Optional[Snowflake]
     """ID of the application that created the DM or thread."""
 
     last_pin_timestamp: Optional[str]
@@ -152,7 +153,7 @@ class ChannelModel(DataModel):
     available_tags: Optional[list[TagModel]]
     """Set of tags that can be applied to a `GUILD_FORUM` post."""
 
-    applied_tags: Optional[list[int]]
+    applied_tags: Optional[list[Snowflake]]
     """Set of tags applied to a `GUILD_FORUM` post."""
 
     default_reaction_emoji: Optional[DefaultReactionModel]
@@ -191,10 +192,10 @@ class ChannelModel(DataModel):
 class FollowedChannelModel(DataModel):
     """Represents the followed channel object."""
 
-    channel_id: int
+    channel_id: Snowflake
     """ID of the source channel."""
 
-    webhook_id: int
+    webhook_id: Snowflake
     """Target webhook ID created."""
 
 @dataclass

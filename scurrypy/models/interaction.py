@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 from ..core.permissions import Permissions
 
 from typing import Optional
@@ -70,7 +71,7 @@ class InteractionCallbackTypes:
 class InteractionCallbackDataModel(DataModel):
     """Represents the interaction callback object."""
 
-    id: int
+    id: Snowflake
     """ID of the interaction."""
 
     type: int
@@ -81,7 +82,7 @@ class InteractionCallbackDataModel(DataModel):
     activity_instance_id: str
     """Instance ID of activity if an activity was launched or joined."""
 
-    response_message_id: int
+    response_message_id: Snowflake
     """ID of the message created by the interaction."""
 
     response_message_loading: bool
@@ -106,16 +107,16 @@ class InteractionModel(DataModel):
         See [`InteractionTypes`][scurrypy.models.interaction.InteractionTypes].
     """
 
-    id: int
+    id: Snowflake
     """ID of interaction."""
 
     token: str
     """token of interaction."""
 
-    channel_id: int
+    channel_id: Snowflake
     """ID of the channel where the interaction was sent."""
 
-    application_id: int
+    application_id: Snowflake
     """ID of the application that owns the interaction."""
 
     app_permissions: int
@@ -133,7 +134,7 @@ class InteractionModel(DataModel):
     guild_locale: str
     """Locale of the guild the interaction was invoked (if invoked in a guild)."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """ID of guild the interaction was invoked (if invoked in a guild)."""
 
     guild: Optional[GuildModel]

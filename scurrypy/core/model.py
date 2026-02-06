@@ -1,6 +1,8 @@
 from dataclasses import dataclass, fields, is_dataclass
 from typing import get_args, get_origin, Union
 
+from .snowflake import Snowflake
+
 """Extract the type from Optional[t]."""
 unwrap_optional = lambda t: get_args(t)[0] if get_origin(t) is Union else t
 
@@ -35,6 +37,8 @@ class DataModel:
                 return v in ('true', 'True', True)
             
             if is_dataclass(t):
+                if t is Snowflake:
+                    return Snowflake(int(v))
                 return t.from_dict(v)
             
             if o is dict:

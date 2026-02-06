@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Unpack
 
+from ..core.snowflake import Snowflake
+
 from .base_resource import BaseResource
 
 from ..parts.image_data import ImageAssetPart
@@ -23,7 +25,7 @@ from ..params.user import EditGuildMemberParams
 class Guild(BaseResource):
     """Represents a Discord guild."""
     
-    id: int
+    id: Snowflake
     """ID of the guild."""
 
     # GUILD
@@ -113,14 +115,14 @@ class Guild(BaseResource):
         return ChannelModel.from_dict(data)
 
     # --- GUILD MEMBERS ---
-    async def fetch_member(self, user_id: int) -> GuildMemberModel:
+    async def fetch_member(self, user_id: Snowflake) -> GuildMemberModel:
         """Fetch a member in this guild.
 
         !!! warning "Important"
             Requires the `GUILD_MEMBERS` privileged intent!
 
         Args:
-            user_id (int): user ID of the member to fetch
+            user_id (Snowflake): user ID of the member to fetch
 
         Returns:
             (GuildMemberModel): queried guild member
@@ -129,7 +131,7 @@ class Guild(BaseResource):
 
         return GuildMemberModel.from_dict(data)
 
-    async def fetch_members(self, limit: int = 1, after: int = None) -> list[GuildMemberModel]:
+    async def fetch_members(self, limit: int = 1, after: Snowflake = None) -> list[GuildMemberModel]:
         """Fetch guild members in this guild.
 
         !!! warning "Important"
@@ -137,7 +139,7 @@ class Guild(BaseResource):
 
         Args:
             limit (int, optional): Max number of members to return Range 1 - 1000. Default `1`.
-            after (int, optional): highest user ID in previous page
+            after (Snowflake, optional): highest user ID in previous page
 
         Returns:
             (list[GuildMemberModel]): queried list of guild members
@@ -151,7 +153,7 @@ class Guild(BaseResource):
 
         return [GuildMemberModel.from_dict(member) for member in data]
 
-    async def add_member_role(self, user_id: int, role_id: int) -> None:
+    async def add_member_role(self, user_id: Snowflake, role_id: Snowflake) -> None:
         """Append a role to a guild member of this guild.
         Fires [`GuildMemberUpdateEvent`][scurrypy.events.user_events.GuildMemberUpdateEvent].
 
@@ -159,12 +161,12 @@ class Guild(BaseResource):
             Requires `MANAGE_ROLES`
         
         Args:
-            user_id (int): ID of the member for the role
-            role_id (int): ID of the role to append
+            user_id (Snowflake): ID of the member for the role
+            role_id (Snowflake): ID of the role to append
         """
         await self._http.request('PUT', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
     
-    async def remove_member_role(self, user_id: int, role_id: int) -> None:
+    async def remove_member_role(self, user_id: Snowflake, role_id: Snowflake) -> None:
         """Remove a role from a guild member of this guild.
         Fires [`GuildMemberUpdateEvent`][scurrypy.events.user_events.GuildMemberUpdateEvent].
 
@@ -172,8 +174,8 @@ class Guild(BaseResource):
             Requires `MANAGE_ROLES`
 
         Args:
-            user_id (int): ID of the member with the role
-            role_id (int): ID of the role to remove
+            user_id (Snowflake): ID of the member with the role
+            role_id (Snowflake): ID of the role to remove
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
 
@@ -198,12 +200,12 @@ class Guild(BaseResource):
 
         return [GuildMemberModel.from_dict(m) for m in data]
 
-    async def edit_member(self, user_id: int, **options: Unpack[EditGuildMemberParams]) -> GuildMemberModel:
+    async def edit_member(self, user_id: Snowflake, **options: Unpack[EditGuildMemberParams]) -> GuildMemberModel:
         """Edit a guild member's attributes.
         Fires [`GuildMemberUpdateEvent`][scurrypy.events.user_events.GuildMemberUpdateEvent].
 
         Args:
-            user_id (int): ID of the member to edit
+            user_id (Snowflake): ID of the member to edit
 
         Returns:
             (GuildMemberModel): edited guid member
@@ -212,7 +214,7 @@ class Guild(BaseResource):
 
         return GuildMemberModel.from_dict(data)
 
-    async def remove_member(self, user_id: int) -> None:
+    async def remove_member(self, user_id: Snowflake) -> None:
         """Remove a member from this guild.
         Fires [`GuildMemberRemoveEvent`][scurrypy.events.user_events.GuildMemberRemoveEvent].
 
@@ -220,19 +222,19 @@ class Guild(BaseResource):
             Requires `KICK_MEMBERS`
 
         Args:
-            user_id (int): ID of the user to kick
+            user_id (Snowflake): ID of the user to kick
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/members/{user_id}')
 
     # --- BANS ---
-    async def fetch_ban(self, user_id: int) -> GuildBanModel:
+    async def fetch_ban(self, user_id: Snowflake) -> GuildBanModel:
         """Fetch a guild ban for the given user ID.
 
         !!! important "Permissions"
             Requires `BAN_MEMBERS`
 
         Args:
-            user_id (int): ID of the user to fetch
+            user_id (Snowflake): ID of the user to fetch
 
         Returns:
             (GuildBan): queried ban
@@ -241,7 +243,7 @@ class Guild(BaseResource):
 
         return GuildBanModel.from_dict(data)
 
-    async def fetch_bans(self, limit: int = 1000, before: int = None, after: int = None) -> list[GuildBanModel]:
+    async def fetch_bans(self, limit: int = 1000, before: Snowflake = None, after: Snowflake = None) -> list[GuildBanModel]:
         """Fetch bans in this guild.
 
         !!! important "Permissions"
@@ -249,8 +251,8 @@ class Guild(BaseResource):
 
         Args:
             limit (int, optional): max number of users to return. Defaults to `1000`.
-            before (int, optional): fetch users before this ID
-            after (int, optional): fetch users after this ID
+            before (Snowflake, optional): fetch users before this ID
+            after (Snowflake, optional): fetch users after this ID
 
         Returns:
             (list[GuildBan]): queried list of guild bans
@@ -267,7 +269,7 @@ class Guild(BaseResource):
 
         return [GuildBanModel.from_dict(i) for i in data]
 
-    async def create_ban(self, user_id: int, delete_message_seconds: int = 0) -> None:
+    async def create_ban(self, user_id: Snowflake, delete_message_seconds: int = 0) -> None:
         """Create a guild ban and optionally delete messages sent by the banned user.
         Fires [`GuildBanAddEvent`][scurrypy.events.guild_events.GuildBanAddEvent].
         
@@ -275,7 +277,7 @@ class Guild(BaseResource):
             Requires `BAN_MEMBERS`
 
         Args:
-            user_id (int): ID of the user to ban
+            user_id (Snowflake): ID of the user to ban
             delete_message_seconds (int, optional): seconds back to delete messages. Max `604800` (7 days). Defaults to `0`.
         """
         await self._http.request(
@@ -284,7 +286,7 @@ class Guild(BaseResource):
             params={'delete_message_seconds': delete_message_seconds}
         )
 
-    async def remove_ban(self, user_id: int) -> None:
+    async def remove_ban(self, user_id: Snowflake) -> None:
         """Remove the ban for a user.
         Fires [`GuildBanRemoveEvent`][scurrypy.events.guild_events.GuildBanRemoveEvent].
 
@@ -292,7 +294,7 @@ class Guild(BaseResource):
             Requires `BAN_MEMBERS`
 
         Args:
-            user_id (int): ID of the user in which to remove the ban
+            user_id (Snowflake): ID of the user in which to remove the ban
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/bans/{user_id}')
 
@@ -324,11 +326,11 @@ class Guild(BaseResource):
         """
         return await self._http.request('GET', f'/guilds/{self.id}/roles/member-counts')
 
-    async def fetch_role(self, role_id: int) -> RoleModel:
+    async def fetch_role(self, role_id: Snowflake) -> RoleModel:
         """Fetch a role in this guild.
 
         Args:
-            role_id (int): ID of the role to fetch
+            role_id (Snowflake): ID of the role to fetch
 
         Returns:
             (RoleModel): queried guild role
@@ -364,7 +366,7 @@ class Guild(BaseResource):
 
         return RoleModel.from_dict(data)
 
-    async def edit_role(self, role_id: int, **options: Unpack[EditGuildRoleParams]) -> RoleModel:
+    async def edit_role(self, role_id: Snowflake, **options: Unpack[EditGuildRoleParams]) -> RoleModel:
         """Edit a role in this guild.
         Fires [`RoleUpdateEvent`][scurrypy.events.role_events.RoleUpdateEvent].
 
@@ -372,7 +374,7 @@ class Guild(BaseResource):
             Requires `MANAGE_ROLES`
 
         Args:
-            role_id (int): ID of role to edit
+            role_id (Snowflake): ID of role to edit
             options (EditGuildRoleParams): role with fields to edit
 
         Returns:
@@ -388,7 +390,7 @@ class Guild(BaseResource):
 
         return RoleModel.from_dict(data)
 
-    async def delete_role(self, role_id: int) -> None:
+    async def delete_role(self, role_id: Snowflake) -> None:
         """Delete a role in this guild.
         Fires [`RoleDeleteEvent`][scurrypy.events.role_events.RoleDeleteEvent].
 
@@ -396,7 +398,7 @@ class Guild(BaseResource):
             Requires `MANAGE_ROLES`
 
         Args:
-            role_id (int): ID of role to delete
+            role_id (Snowflake): ID of role to delete
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/roles/{role_id}')
 
@@ -441,7 +443,7 @@ class Guild(BaseResource):
 
         return [IntegrationModel.from_dict(i) for i in data]
 
-    async def delete_integration(self, integration_id: int) -> None:
+    async def delete_integration(self, integration_id: Snowflake) -> None:
         """Delete the attached integration object for this guild.
         Fires [`GuildIntegrationUpdateEvent`][scurrypy.events.integration_events.GuildIntegrationUpdateEvent] 
         and [`GuildIntegrationDeleteEvent`][scurrypy.events.integration_events.GuildIntegrationDeleteEvent].
@@ -450,7 +452,7 @@ class Guild(BaseResource):
             Requires `MANAGE_GUILD`
 
         Args:
-            integration_id (int): ID of the integration to delete
+            integration_id (Snowflake): ID of the integration to delete
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/integrations/{integration_id}')
 
@@ -526,7 +528,7 @@ class Guild(BaseResource):
         return GuildOnboadingModel.from_dict(data)
 
     # --- STICKERS ---
-    async def fetch_sticker(self, sticker_id: int) -> StickerModel:
+    async def fetch_sticker(self, sticker_id: Snowflake) -> StickerModel:
         """Fetch a sticker from this guild.
 
         !!! note
@@ -534,7 +536,7 @@ class Guild(BaseResource):
             `CREATE_GUILD_EXPRESSIONS` and `MANAGE_GUILD_EXPRESSIONS`
 
         Args:
-            sticker_id (int): ID of the sticker to fetch
+            sticker_id (Snowflake): ID of the sticker to fetch
 
         Returns:
             (StickerModel): queried sticker
@@ -581,7 +583,7 @@ class Guild(BaseResource):
     
         return StickerModel.from_dict(data)
 
-    async def edit_sticker(self, sticker_id: int, **options: Unpack[EditGuildStickerParams]) -> StickerModel:
+    async def edit_sticker(self, sticker_id: Snowflake, **options: Unpack[EditGuildStickerParams]) -> StickerModel:
         """Edit a sticker from this guild.
         Fires [`GuildStickersUpdateEvent`][scurrypy.events.guild_events.GuildStickersUpdateEvent].
 
@@ -590,14 +592,14 @@ class Guild(BaseResource):
             Requires `MANAGE_GUILD_EXPRESSIONS` if not created by the bot.
 
         Args:
-            sticker_id (int): ID of the sticker to delete
+            sticker_id (Snowflake): ID of the sticker to delete
             options (EditGuildStickerParams): fields to edit
         """
         data = await self._http.request('PATCH', f'/guilds/{self.id}/stickers/{sticker_id}', data=options)
 
         return StickerModel.from_dict(data)
 
-    async def delete_sticker(self, sticker_id: int) -> None:
+    async def delete_sticker(self, sticker_id: Snowflake) -> None:
         """Delete a sticker from this guild.
         Fires [`GuildStickersUpdateEvent`][scurrypy.events.guild_events.GuildStickersUpdateEvent].
 
@@ -606,6 +608,6 @@ class Guild(BaseResource):
             Requires `MANAGE_GUILD_EXPRESSIONS` if not created by the bot.
 
         Args:
-            sticker_id (int): ID of the sticker to delete
+            sticker_id (Snowflake): ID of the sticker to delete
         """
         await self._http.request('DELETE', f'/guilds/{self.id}/stickers/{sticker_id}')

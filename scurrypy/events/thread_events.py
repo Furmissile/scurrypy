@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 from .base_event import Event
 
 from typing import Optional
@@ -26,13 +27,13 @@ class ThreadUpdateEvent(Event, ChannelModel):
 class ThreadDeleteEvent(Event, DataModel):
     """Received when a thread is deleted."""
 
-    id: int
+    id: Snowflake
     """ID of the thread."""
     
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """Guild ID of the thread."""
     
-    parent_id: int
+    parent_id: Snowflake
     """ID of the parent channel."""
     
     type: int
@@ -42,7 +43,7 @@ class ThreadDeleteEvent(Event, DataModel):
 class ThreadMemberUpdateEvent(Event, ThreadMemberModel):
     """Received when a thread member for the bot is updated."""
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild."""
 
 @dataclass
@@ -54,10 +55,10 @@ class ThreadMembersUpdateEvent(Event, DataModel):
         bot was added or removed from a thread.
     """
 
-    id: int
+    id: Snowflake
     """ID of the thread."""
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild."""
 
     member_count: int
@@ -66,17 +67,17 @@ class ThreadMembersUpdateEvent(Event, DataModel):
     added_members: Optional[list[ThreadMemberModel]]
     """Users who were added to the thread"""
 
-    removed_member_ids: Optional[list[int]]
+    removed_member_ids: Optional[list[Snowflake]]
     """ID of the users who were removed from the thread."""
 
 @dataclass
 class ThreadListSyncEvent(Event, DataModel):
     """Received when the bot gains access to a channel."""
 
-    guild_id: int
+    guild_id: Snowflake
     """ID of the guild."""
 
-    channel_ids: Optional[list[int]]
+    channel_ids: Optional[list[Snowflake]]
     """Parent channel IDs of the threads being synced."""
 
     threads: list[ChannelModel]

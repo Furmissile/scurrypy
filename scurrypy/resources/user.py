@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Unpack
 
+from ..core.snowflake import Snowflake
+
 from .base_resource import BaseResource
 
 from ..models.channel import ChannelModel
@@ -13,11 +15,11 @@ from ..params.user import EditUserParams
 class User(BaseResource):
     """A Discord user."""
 
-    async def fetch(self, user_id: int) -> UserModel:
+    async def fetch(self, user_id: Snowflake) -> UserModel:
         """Fetch this user by ID.
 
         Args:
-            user_id (int): ID of user to fetch
+            user_id (Snowflake): ID of user to fetch
 
         Returns:
             (UserModel): queried user
@@ -26,12 +28,12 @@ class User(BaseResource):
 
         return UserModel.from_dict(data)
 
-    async def fetch_guild_member(self, guild_id: int, user_id: int) -> GuildMemberModel:
+    async def fetch_guild_member(self, guild_id: Snowflake, user_id: Snowflake) -> GuildMemberModel:
         """Fetch this user's guild member data.
 
         Args:
-            guild_id (int): ID of guild to fetch data from
-            user_id (int): ID of user to fetch
+            guild_id (Snowflake): ID of guild to fetch data from
+            user_id (Snowflake): ID of user to fetch
 
         Returns:
             (GuildMemberModel): queried guild member for the user
@@ -60,21 +62,21 @@ class User(BaseResource):
 
         return UserModel.from_dict(data)
 
-    async def leave_guild(self, guild_id: int) -> None:
+    async def leave_guild(self, guild_id: Snowflake) -> None:
         """Make the bot leave a guild.
         Fires [`GuildDeleteEvent`][scurrypy.events.guild_events.GuildDeleteEvent]
         and [`GuildMemberRemoveEvent`][scurrypy.events.user_events.GuildMemberRemoveEvent].
 
         Args:
-            guild_id (int): ID of the guild to leave
+            guild_id (Snowflake): ID of the guild to leave
         """
         await self._http.request('DELETE', f'/users/@me/guilds/{guild_id}')
 
-    async def create_dm(self, user_id: int) -> ChannelModel:
+    async def create_dm(self, user_id: Snowflake) -> ChannelModel:
         """Create a DM between the bot and this user.
 
         Args:
-            user_id (int): ID of user to create DM with
+            user_id (Snowflake): ID of user to create DM with
         
         Returns:
             (ChannelModel): created or existing DM channel

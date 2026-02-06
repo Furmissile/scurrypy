@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from ..core.model import DataModel
+from ..core.snowflake import Snowflake
 
 from typing import Optional
 
@@ -34,7 +35,7 @@ class ApplicationFlags:
 class ApplicationModel(DataModel):
     """Represents a Discord application."""
 
-    id: int
+    id: Snowflake
     """ID of the application."""
 
     name: str
@@ -64,7 +65,7 @@ class ApplicationModel(DataModel):
     owner: Optional[UserModel]
     """Partial user object of the owner of the application."""
 
-    guild_id: Optional[int]
+    guild_id: Optional[Snowflake]
     """Guild ID associated with the application."""
 
     guild: Optional[GuildModel]

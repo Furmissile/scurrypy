@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from ..core.snowflake import Snowflake
+
 from .base_resource import BaseResource
 
 from ..models.sticker import StickerModel, StickerPackModel
@@ -8,11 +10,11 @@ from ..models.sticker import StickerModel, StickerPackModel
 class Sticker(BaseResource):
     """Represents the Sticker resource."""
 
-    async def fetch(self, sticker_id: int) -> StickerModel:
+    async def fetch(self, sticker_id: Snowflake) -> StickerModel:
         """Fetch a sticker.
         
         Args:
-            sticker_id (int): ID of the sticker to fetch
+            sticker_id (Snowflake): ID of the sticker to fetch
 
         Returns:
             (StickerModel): queried sticker
@@ -21,11 +23,11 @@ class Sticker(BaseResource):
 
         return StickerModel.from_dict(data)
 
-    async def fetch_sticker_pack(self, pack_id: int) -> StickerPackModel:
+    async def fetch_sticker_pack(self, pack_id: Snowflake) -> StickerPackModel:
         """Fetch a sticker pack.
 
         Args:
-            pack_id (int): ID of the pack to fetch
+            pack_id (Snowflake): ID of the pack to fetch
 
         Returns:
             (StickerPackModel): queried sticker pack

@@ -5,6 +5,7 @@ from .core.intents import Intents
 from .core.http import HTTPClient
 from .core.gateway import GatewayClient
 from .core.error import DiscordError
+from .core.snowflake import Snowflake
 
 from .events.gateway_events import GatewayEvent
 
@@ -116,11 +117,11 @@ class Client:
 
         self.shutdown_hooks.append(handler)
 
-    def application(self, application_id: int):
+    def application(self, application_id: Snowflake):
         """Creates an interactable application resource.
 
         Args:
-            application_id (int): ID of target application
+            application_id (Snowflake): ID of target application
 
         Returns:
             (Application): the Application resource
@@ -129,11 +130,11 @@ class Client:
 
         return Application(self._http, id=application_id, context=None)
     
-    def bot_emoji(self, application_id: int):
+    def bot_emoji(self, application_id: Snowflake):
         """Creates an interactable bot emoji resource.
 
         Args:
-            application_id (int): ID of target application
+            application_id (Snowflake): ID of target application
 
         Returns:
             (BotEmojis): the BotEmoji resource
@@ -142,11 +143,11 @@ class Client:
 
         return BotEmoji(self._http, None, application_id)
     
-    def guild_emoji(self, guild_id: int):
+    def guild_emoji(self, guild_id: Snowflake):
         """Creates an interactable emoji resource.
 
         Args:
-            guild_id (int): guild ID of target emojis
+            guild_id (Snowflake): guild ID of target emojis
 
         Returns:
             (GuildEmoji): the GuildEmoji resource
@@ -155,11 +156,11 @@ class Client:
 
         return GuildEmoji(self._http, None, guild_id)
 
-    def guild(self, guild_id: int, *, context = None):
+    def guild(self, guild_id: Snowflake, *, context = None):
         """Creates an interactable guild resource.
 
         Args:
-            guild_id (int): ID of target guild
+            guild_id (Snowflake): ID of target guild
             context (Any, optional): associated data 
 
         Returns:
@@ -169,11 +170,11 @@ class Client:
 
         return Guild(self._http, context, guild_id)
 
-    def channel(self, channel_id: int, *, context = None):
+    def channel(self, channel_id: Snowflake, *, context = None):
         """Creates an interactable guild channel resource.
 
         Args:
-            channel_id (int): ID of target channel
+            channel_id (Snowflake): ID of target channel
             context (Any, optional): associated data
 
         Returns:
@@ -194,11 +195,11 @@ class Client:
 
         return Invite(self._http, context, code)
     
-    def global_command(self, application_id: int, *, context = None):
+    def global_command(self, application_id: Snowflake, *, context = None):
         """Creates an interactable command resource.
 
         Args:
-            application_id (int): bot's user ID
+            application_id (Snowflake): bot's user ID
             context (Any, optional): associated data
 
         Returns:
@@ -208,12 +209,12 @@ class Client:
 
         return GlobalCommand(self._http, context, application_id)
     
-    def guild_command(self, application_id: int, guild_id: int = None, *, context = None):
+    def guild_command(self, application_id: Snowflake, guild_id: Snowflake = None, *, context = None):
         """Creates an interactable command resource.
 
         Args:
-            application_id (int): bot's user ID
-            guild_id (int, optional): ID of guild if command is in guild scope
+            application_id (Snowflake): bot's user ID
+            guild_id (Snowflake, optional): ID of guild if command is in guild scope
             context (Any, optional): associated data
 
         Returns:
@@ -223,12 +224,12 @@ class Client:
 
         return GuildCommand(self._http, context, application_id, guild_id)
 
-    def message(self, channel_id: int, message_id: int, *, context = None):
+    def message(self, channel_id: Snowflake, message_id: Snowflake, *, context = None):
         """Creates an interactable message resource.
 
         Args:
-            message_id (int): ID of target message
-            channel_id (int): channel ID of target message
+            message_id (Snowflake): ID of target message
+            channel_id (Snowflake): channel ID of target message
             context (Any, optional): associated data
 
         Returns:
@@ -238,11 +239,11 @@ class Client:
 
         return Message(self._http, context, message_id, channel_id)
     
-    def interaction(self, id: int, token: str, *, context = None):
+    def interaction(self, id: Snowflake, token: str, *, context = None):
         """Creates an interactable interaction resource.
 
         Args:
-            id (int): ID of the interaction
+            id (Snowflake): ID of the interaction
             token (str): interaction token
             context (Any, optional): associated data
 
@@ -376,6 +377,8 @@ class Client:
             
         except asyncio.CancelledError:
             logger.info("Connection cancelled via KeyboardInterrupt.")
+        except DiscordError as e:
+            logger.error(e)
         except Exception:
             logger.exception(f"Unhandled client start exception.")
         finally:

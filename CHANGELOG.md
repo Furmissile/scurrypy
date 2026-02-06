@@ -2,7 +2,16 @@
 
 This changelog documents all notable and breaking changes to ScurryPy.
 
-## [0.20.3] - Feb 2026
+## [1.0.0] - 6 Feb 2026
+
+ScurryPy’s core architecture and API surface are now officially *stable* 🎉
+
+### Changed
+
+* `HTTPClient` now only raises `DiscordError` and does not log
+* All IDs are now of type `Snowflake`. IDs still behave like normal integers!
+
+## [0.20.3] - 5 Feb 2026
 
 ### Changed
 
@@ -10,7 +19,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 * Added: Debug log for what hooks are running
 * Improved error logging
 
-## [0.20.2] - Feb 2026
+## [0.20.2] - 3 Feb 2026
 
 ### Changed
 
@@ -22,7 +31,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
     * Now you can access the error you see in the console
 * Fixed: `DataModel.from_dict` now accepts raw booleans, not just string
 
-## [0.20.1] - Feb 2026
+## [0.20.1] - 1 Feb 2026
 
 ### Changed
 
@@ -32,7 +41,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 * Fixed: when passing `MessagePart` to a function like `Channel.send` and then using the `flags` param, flags were not set.
 * Fixed: `Channel.send` now accepts flags.
 
-## [0.20.0] - Jan 2026
+## [0.20.0] - 30 Jan 2026
 
 ### Breaking Changes
 
@@ -46,7 +55,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 
 * Bug fix: Parameters with objects now get converted to a dict if used.
 
-## [0.19.0] - Jan 2026
+## [0.19.0] - 27 Jan 2026
 
 ### Breaking Changes
 
@@ -75,7 +84,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
     * `User.leave_guild`
     * `User.create_dm`
 
-## [0.18.0] - Jan 2026
+## [0.18.0] - 25 Jan 2026
 
 ### Breaking Changes
 
@@ -104,7 +113,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
     -- with the exception of a few endpoints, this completes the `Guild` resource
 * New part: `ImageAssetPart` - currently only used for creating guild stickers
 
-## [0.17.0] - Jan 2026
+## [0.17.0] - 23 Jan 2026
 
 ### Breaking Changes
 
@@ -171,7 +180,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
     * `InvitePart`
     
 
-## [0.16.0] - Jan 2026
+## [0.16.0] - 20 Jan 2026
 
 ### Breaking Changes
 
@@ -185,7 +194,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 
 * Moving forward, params are for modifying, function parameters are for querying, and parts are for creating.
 
-## [0.15.0] - Jan 2026
+## [0.15.0] - 19 Jan 2026
 
 ### Breaking Changes
 
@@ -214,7 +223,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 
 * Moved: `PinnedMessageModel` from `scurrypy.models.channel` -> `scurrypy.models.message`
 
-## [0.14.0] - Jan 2026
+## [0.14.0] - 14 Jan 2026
 
 ### Changed
 
@@ -237,7 +246,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 
 * Merged ComponentTypes + ComponentV2Types to ComponentTypes
 
-## [0.13.0] - Dec 2025
+## [0.13.0] - 30 Dec 2025
 
 ### Breaking Changes
 
@@ -259,7 +268,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
             await client.command(APP_ID, GUILD_ID).create_command(command)
         ```
 
-## [0.12.0] - Dec 2025
+## [0.12.0] - 22 Dec 2025
 
 ### Changed
 
@@ -271,7 +280,7 @@ This changelog documents all notable and breaking changes to ScurryPy.
 
 * Bug fix: Boolean conversion in DataModel (string "false" now correctly converts to False)
 
-## [0.11.0] - Dec 2025
+## [0.11.0] - 21 Dec 2025
 
 ### Breaking Changes
 
@@ -284,7 +293,7 @@ User was patched to be more bot specific. Some endpoints are not accessible to b
 
 * Bug fix: `User.fetch_guild_member` endpoint corrected
 
-## [0.10.1] - Dec 2025
+## [0.10.1]
 
 ### Changes
 
@@ -292,7 +301,7 @@ Logging has been improved for finer grained control.
 
 * Gateway heartbeat logs are now emitted at `DEBUG` level.
 
-## [0.10.0] - Dec 2025
+## [0.10.0]
 
 ### Changes
 
@@ -300,7 +309,7 @@ Logging has been improved for finer grained control.
 
 * Events not registered by the user are now `DEBUG` messages.
 
-## [0.9.0] - Dec 2025
+## [0.9.0] - 20 Dec 2025
 
 ### Breaking Changes
 
@@ -340,7 +349,7 @@ The handling of `application_id` has been refactored and is now passed explicitl
         client.add_event_listener(EventTypes.MESSAGE_CREATE, on_message_create)
         ```
 
-## [0.8.8.2] - Dec 2025
+## [0.8.8.2] - 13 Dec 2025
 
 ### Changed
 * Corrected `FileUpload`: `component: LabelChild` is supposed to be `custom_id: str`.
