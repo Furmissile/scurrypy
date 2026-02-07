@@ -80,6 +80,7 @@ class ReactionRemoveEmojiEvent(Event, DataModel):
     guild_id: Optional[Snowflake]
     """ID of the guild where the reaction emoji was removed. (if in a guild)"""
 
+@dataclass
 class ReactionRemoveAllEvent(Event, DataModel):
     """Remove all reactions event."""
 
