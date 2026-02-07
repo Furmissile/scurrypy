@@ -648,6 +648,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#q-why-dont-events-autocreate-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q. Why don't events autocreate resources?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#q-should-i-switch-from-discordpy-to-scurrypy" class="md-nav__link">
     <span class="md-ellipsis">
       Q. Should I switch from discord.py to ScurryPy?
@@ -3001,6 +3010,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#q-why-dont-events-autocreate-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q. Why don't events autocreate resources?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#q-should-i-switch-from-discordpy-to-scurrypy" class="md-nav__link">
     <span class="md-ellipsis">
       Q. Should I switch from discord.py to ScurryPy?
@@ -3111,6 +3129,9 @@ Check out examples of addons <a href="https://scurry-works.github.io/scurrypy/ad
   " href="../api/snowflake/#scurrypy.core.snowflake.Snowflake"><code>Snowflake</code></a> class?<a class="headerlink" href="#q-what-is-scurrypys-snowflake-class" title="Permanent link">&para;</a></h2>
 <p>The <code>Snowflake</code> class is, as described by its docstring, a wrapper class over Discord's snowflake IDs. These values hold some additional useful information like timestamp, worker/process ID, and increment. <code>Snowflake</code> is meant to be treated and set like an integer. </p>
 <p>For example, a field or parameter like <code>id: Snowflake</code> can be set like <code>id = Snowflake(123)</code> or just <code>id = 123</code>.</p>
+<h2 id="q-why-dont-events-autocreate-resources">Q. Why don't events autocreate resources?<a class="headerlink" href="#q-why-dont-events-autocreate-resources" title="Permanent link">&para;</a></h2>
+<p>This is a consequence, and a feature, of separation of concerns. Events expose <em>data</em>, not <em>capabilities</em>. This separation avoids hidden side effects and keeps behavior predictable.</p>
+<p>If you prefer ergonomic helpers, ScurryPy supports addons that bridge events to resources explicitly. See the <a href="../getting_started/addons/#upgrading-events-to-resources">addon example</a>.</p>
 <h2 id="q-should-i-switch-from-discordpy-to-scurrypy">Q. Should I switch from discord.py to ScurryPy?<a class="headerlink" href="#q-should-i-switch-from-discordpy-to-scurrypy" title="Permanent link">&para;</a></h2>
 <p>If you're happy with discord.py's abstractions and don't feel constrained by them, probably not. ScurryPy is most useful when you want explicit control over how your bot is structured or when you're building your own patterns on top of Discord’s API.</p>
 <h2 id="q-what-is-scurrykit">Q. What is ScurryKit?<a class="headerlink" href="#q-what-is-scurrykit" title="Permanent link">&para;</a></h2>
