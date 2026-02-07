@@ -731,6 +731,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../getting_started/mindset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    New Mindset
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../getting_started/patterns/" class="md-nav__link">
         
   
@@ -1094,6 +1117,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scurrypy.client.Client.shard_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;shard_type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.client.Client.events" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;events
@@ -1265,9 +1297,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scurrypy.client.Client.start_shards" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;start_shards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.client.Client.start" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;start
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.client.Client.close" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;close
     </span>
   </a>
   
@@ -3153,6 +3203,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scurrypy.client.Client.shard_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;shard_type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.client.Client.events" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;events
@@ -3324,9 +3383,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scurrypy.client.Client.start_shards" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;start_shards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.client.Client.start" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;start
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.client.Client.close" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;close
     </span>
   </a>
   
@@ -3424,6 +3501,26 @@ Ties together the moving parts: gateway, HTTP and event dispatching.</p>
           –
           <div class="doc-md-description">
             <p>number of shards to spawn. Defaults to <code>0</code> or recommended shard count.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>http</code></b>
+              (<code><span title="scurrypy.core.http.HTTPClientProtocol">HTTPClientProtocol</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>HTTP protocol implementation. Leave blank for default client.</p>
+          </div>
+        </li>
+        <li class="doc-section-item field-body">
+            <b><code>gateway_impl</code></b>
+              (<code><span title="scurrypy.core.gateway.GatewayClientProtocol">GatewayClientProtocol</span></code>, default:
+                  <code>None</code>
+)
+          –
+          <div class="doc-md-description">
+            <p>Gateway protocol implementation. Leave blank for default client.</p>
           </div>
         </li>
     </ul>
@@ -3537,7 +3634,7 @@ Ties together the moving parts: gateway, HTTP and event dispatching.</p>
 
 
 <h3 id="scurrypy.client.Client.shards" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">shards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">GatewayClient</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">shards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">GatewayClientProtocol</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -3549,6 +3646,26 @@ Ties together the moving parts: gateway, HTTP and event dispatching.</p>
     <div class="doc doc-contents ">
 
         <p>Shards as a list of gateways.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="scurrypy.client.Client.shard_type" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">shard_type</span> <span class="o">=</span> <span class="n">gateway_impl</span> <span class="ow">or</span> <span class="n">GatewayClient</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#scurrypy.client.Client.shard_type" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
 
     </div>
 
@@ -4444,6 +4561,28 @@ Ties together the moving parts: gateway, HTTP and event dispatching.</p>
 <div class="doc doc-object doc-function">
 
 
+<h3 id="scurrypy.client.Client.start_shards" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">start_shards</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+<a href="#scurrypy.client.Client.start_shards" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Starts all shards batching by max_concurrency.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h3 id="scurrypy.client.Client.start" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">start</span></code>
 
@@ -4457,6 +4596,28 @@ Ties together the moving parts: gateway, HTTP and event dispatching.</p>
     <div class="doc doc-contents ">
 
         <p>Starts the HTTP/Websocket client, run startup logic, and registers commands.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="scurrypy.client.Client.close" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">close</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+<a href="#scurrypy.client.Client.close" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Gracefully close HTTP session, websocket connections, and run shutdown logic.</p>
 
 
     </div>

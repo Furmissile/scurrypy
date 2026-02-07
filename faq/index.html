@@ -612,6 +612,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#q-how-can-i-get-a-feel-for-scurrypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q. How can I get a feel for ScurryPy?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#q-what-does-scurrypy-offer-over-other-frameworks" class="md-nav__link">
     <span class="md-ellipsis">
       Q. What does ScurryPy offer over other frameworks?
@@ -630,9 +639,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#q-whats-an-addon" class="md-nav__link">
+  <a href="#q-what-is-an-addon" class="md-nav__link">
     <span class="md-ellipsis">
-      Q. What's an addon?
+      Q. What is an addon?
     </span>
   </a>
   
@@ -875,6 +884,29 @@
   
   <span class="md-ellipsis">
     Migrations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting_started/mindset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    New Mindset
     
   </span>
   
@@ -2974,6 +3006,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#q-how-can-i-get-a-feel-for-scurrypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q. How can I get a feel for ScurryPy?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#q-what-does-scurrypy-offer-over-other-frameworks" class="md-nav__link">
     <span class="md-ellipsis">
       Q. What does ScurryPy offer over other frameworks?
@@ -2992,9 +3033,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#q-whats-an-addon" class="md-nav__link">
+  <a href="#q-what-is-an-addon" class="md-nav__link">
     <span class="md-ellipsis">
-      Q. What's an addon?
+      Q. What is an addon?
     </span>
   </a>
   
@@ -3108,18 +3149,14 @@
 <p>If you have a question, consult this page first. Not answered? Ask in the <a href="https://discord.gg/D4SdHxcujM">support server</a>!</p>
 <h2 id="q-what-is-scurrypy">Q. What is ScurryPy?<a class="headerlink" href="#q-what-is-scurrypy" title="Permanent link">&para;</a></h2>
 <p>ScurryPy is a wrapper. NOT a framework. It wraps Discord's protocol for Gateway connection, rate limiting and HTTP logic, and sharding. It does NOT route commands, hide or reinvent Discord's structures, or impose internal state or execution models. </p>
+<h2 id="q-how-can-i-get-a-feel-for-scurrypy">Q. How can I get a feel for ScurryPy?<a class="headerlink" href="#q-how-can-i-get-a-feel-for-scurrypy" title="Permanent link">&para;</a></h2>
+<p>If you're looking for a guide to help set expectations for the library, see <a href="../getting_started/mindset/">setup</a>.</p>
 <h2 id="q-what-does-scurrypy-offer-over-other-frameworks">Q. What does ScurryPy offer over other frameworks?<a class="headerlink" href="#q-what-does-scurrypy-offer-over-other-frameworks" title="Permanent link">&para;</a></h2>
 <p>ScurryPy is NOT a framework. Trying to compare ScurryPy to frameworks like discord.py, hikari, or disnake is a category mismatch — they solve different problems. But it still offers some features that other frameworks do not. Keep reading!</p>
 <h2 id="q-why-would-i-use-a-wrapper-when-other-frameworks-do-more-for-me">Q. Why would I use a wrapper when other frameworks do more for me?<a class="headerlink" href="#q-why-would-i-use-a-wrapper-when-other-frameworks-do-more-for-me" title="Permanent link">&para;</a></h2>
 <p>This hits the core of ScurryPy's value. Unlike a framework (not just other discord frameworks), ScurryPy is customizable. It doesn't try to meet the needs of everyone nor does it pretend to. It puts architectural control back in the bot dev's hands. </p>
-<p>The only contract you have is with the Client:</p>
-<ul>
-<li>hooks receive (self)</li>
-<li>events receive (self, event)</li>
-</ul>
-<p>Beyond that, addons are free to define their own contracts and patterns. The rest is up to you.
-For more details on how ScurryPy compares to other frameworks, see the <a href="../getting_started/migrating/">Migration Guide</a></p>
-<h2 id="q-whats-an-addon">Q. What's an addon?<a class="headerlink" href="#q-whats-an-addon" title="Permanent link">&para;</a></h2>
+<p>For more details on how ScurryPy compares to other frameworks, see the <a href="../getting_started/migrating/">Migration Guide</a></p>
+<h2 id="q-what-is-an-addon">Q. What is an addon?<a class="headerlink" href="#q-what-is-an-addon" title="Permanent link">&para;</a></h2>
 <p>Addons are "subscribers" to the main client. You can pass the client to the addon, and the addon registers hooks and events to its own functions for the client to call when the event/hook runs. The only contract you have is with the Client such that hooks have params (self) and events have params (self, event). That's all! The rest us up to you!
 Check out examples of addons <a href="https://scurry-works.github.io/scurrypy/addons">here</a>. </p>
 <h2 id="q-what-is-scurrypys-snowflake-class">Q. What is ScurryPy's <a class="autorefs autorefs-internal" title="              Snowflake
