@@ -11,15 +11,11 @@ width="450"
 alt="Fire-breathing squirrel"
 />
 
-✨ **Clarity over magic**: a sandbox for Discord's API where you control everything ✨
-
-ScurryPy is a fully extensible foundation for building bots, frameworks, and tools. You design the architecture.
+✨ **Clarity over magic**: build a bot that lasts ✨
 
 </div>
 
 ## Features
-
-The following are baked into ScurryPy:
 
 * Lightweight core
 * Rate limit handling
@@ -31,10 +27,6 @@ Your focus is building what you want.
 
 See the [manifesto](https://scurry-works.github.io/scurrypy/manifesto) section for details!
 
-## Who ScurryPy is for
-
-ScurryPy is for developers who want full control of Discord API usage, design their own frameworks, or learn how bots work under the hood. If you want ready-made commands, consider using ScurryKit or another framework.
-
 ## Installation
 
 Install ScurryPy with pip:
@@ -43,35 +35,71 @@ Install ScurryPy with pip:
 pip install scurrypy
 ```
 
-## Quick Start
+## Examples
+
+The following examples are quick drop-in starters if you wish to try ScurryPy.
+
+> [!TIP]
+> It is recommended to use a `.env` file. More details about using a `.env` file [here](https://scurry-works.github.io/scurrypy/getting_started/start_here/)
+
+### Slash Command
 
 ```python
+# Replace with your bot token, bot user ID, and guild ID for the command
+TOKEN = "your-token"
+APP_ID = 0
+GUILD_ID = 0
+
 # --- Core library imports ---
-from scurrypy import Client, ReadyEvent
+from scurrypy import Client, EventTypes, InteractionEvent, SlashCommandPart
 
 # --- Setup bot ---
-client = Client(token=TOKEN)
+client = Client(TOKEN)
 
-async def on_ready(event: ReadyEvent):
-    print("Bot is online!")
+async def on_greet(event: InteractionEvent):
+    if event.data.name != "greet":
+        return
 
-client.add_event_listener("READY", on_ready)
+    await client.interaction(event.id, event.token).respond("Hello!")
+
+async def create_commands():
+    await client.guild_command(APP_ID, GUILD_ID).create(
+        SlashCommandPart("greet", "Greet the bot!")
+    )
+
+client.add_startup_hook(create_commands)
+client.add_event_listener(EventTypes.INTERACTION_CREATE, on_greet)
 
 # --- Run the bot ---
 client.run()
 ```
 
-## What You Can Build
+### Prefix Command (Legacy)
 
-ScurryPy's clean architecture supports:
-- Custom command frameworks
-- Multi-bot orchestration systems
-- Discord API explorers and tools
-- Bots with complex state management
-- Your own discord.py alternative
+```python
+# Replace with your bot token
+TOKEN = "your-token"
 
-Check out [ScurryKit](https://github.com/scurry-works/scurry-kit) - 
-a batteries-included framework built entirely on ScurryPy.
+# --- Core library imports ---
+from scurrypy import Client, Intents, EventTypes, MessageCreateEvent
+
+client = Client(TOKEN, Intents.set(message_content=True))
+
+# --- Setup bot ---
+async def on_ping(event: MessageCreateEvent):
+    if not event.content:
+        return
+
+    if not event.content.startswith('!ping'):
+        return
+
+    await client.channel(event.channel_id).send("Pong!")
+
+client.add_event_listener(EventTypes.MESSAGE_CREATE, on_ping)
+
+# --- Run the bot ---
+client.run()
+```
 
 ## Dependencies
 
@@ -80,7 +108,6 @@ ScurryPy has exactly 3 required dependencies:
 - websockets (Gateway connection)  
 - aiofiles (Async file operations)
 
-That's it. No bloat, no surprises, no supply-chain concerns.
 These dependencies are automatically installed with ScurryPy's pip package.
 
 ## Like What You See?
