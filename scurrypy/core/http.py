@@ -49,7 +49,24 @@ class Bucket:
     reset_on: float
     sleep_task: asyncio.Task = None
 
-class HTTPClient:
+from typing import Protocol
+
+class HTTPClientProtocol(Protocol):
+    """Internal contract for the HTTPClient used by the Client. Meant for testing."""
+    async def start(self, token: str): ...
+    async def close(self): ...
+    async def request(
+        self,
+        method: str,
+        endpoint: str,
+        *,
+        data: dict | None = None,
+        params: dict | None = None,
+        files: Any | None = None,
+        assets: dict | None = None
+    ) -> Any: ...
+
+class HTTPClient(HTTPClientProtocol):
     BASE = "https://discord.com/api/v10"
     MAX_RETRIES = 3
 

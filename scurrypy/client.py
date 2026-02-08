@@ -2,8 +2,8 @@ import asyncio
 import inspect
 
 from .core.intents import Intents
-from .core.http import HTTPClient
-from .core.gateway import GatewayClient
+from .core.http import HTTPClient, HTTPClientProtocol
+from .core.gateway import GatewayClient, GatewayClientProtocol
 from .core.error import DiscordError
 from .core.snowflake import Snowflake
 
@@ -30,7 +30,7 @@ class Client:
     http: HTTPClient
     """Public HTTP session (ref to `_http`) for requests."""
 
-    shards: list[GatewayClient]
+    shards: GatewayClientProtocol
     """Shards as a list of gateways."""
 
     events: dict[str: list[callable]]
@@ -45,13 +45,18 @@ class Client:
     def __init__(self,
         token: str,
         intents: int = Intents.DEFAULT,
-        shard_count: int = 0
+        *,
+        shard_count: int = 0,
+        http: HTTPClientProtocol = None,
+        gateway_impl: GatewayClientProtocol = None
     ):
         """
         Args:
             token (str): the bot's token
             intents (int, optional): gateway intents. Defaults to `Intents.DEFAULT`.
             shard_count (int, optional): number of shards to spawn. Defaults to `0` or recommended shard count.
+            http (HTTPClientProtocol, optional): HTTP protocol implementation. Leave blank for default client.
+            gateway_impl (GatewayClientProtocol, optional): Gateway protocol implementation. Leave blank for default client.
         """
         if not isinstance(intents, int):
             raise ValueError("Intents must be an integer.")
@@ -60,10 +65,11 @@ class Client:
         self.intents = intents
         self.shard_count = shard_count
         
-        self._http = HTTPClient()
+        self._http = http or HTTPClient()
         self.http = self._http
 
-        self.shards: list[GatewayClient] = []
+        self.shards: list[GatewayClientProtocol] = []
+        self.shard_type = gateway_impl or GatewayClient
 
         self.events = {}
         self.startup_hooks = []
@@ -322,7 +328,7 @@ class Client:
                 logger.exception(f"SHARD ID {shard.shard_id}: Dispatcher error")
                 continue
 
-    async def _start_shards(self, gateway: GatewayEvent):
+    async def start_shards(self, gateway: GatewayEvent):
         """Starts all shards batching by max_concurrency."""
 
         # pull important values for easier access
@@ -337,11 +343,11 @@ class Client:
             logger.debug(f"Starting shards {batch_start}-{batch_end} of {total_shards}")
 
             for shard_id in range(batch_start, batch_end):
-                shard = GatewayClient(gateway.url, shard_id, total_shards)
+                shard = self.shard_type()
                 self.shards.append(shard)
 
                 # fire and forget
-                tasks.append(asyncio.create_task(shard.start(self.token, self.intents)))
+                tasks.append(asyncio.create_task(shard.start(self.token, self.intents, shard_id, total_shards)))
                 tasks.append(asyncio.create_task(self.listen_shard(shard)))
 
             # wait before next batch to respect identify rate limit
@@ -371,7 +377,7 @@ class Client:
                 except Exception:
                     logger.exception("Error in shartup hook")
 
-            tasks = await asyncio.create_task(self._start_shards(gateway))
+            tasks = await asyncio.create_task(self.start_shards(gateway))
 
             await asyncio.gather(*tasks)
             
@@ -382,9 +388,9 @@ class Client:
         except Exception:
             logger.exception(f"Unhandled client start exception.")
         finally:
-            await self._close()
+            await self.close()
 
-    async def _close(self):
+    async def close(self):
         """Gracefully close HTTP session, websocket connections, and run shutdown logic."""  
 
         for hook in self.shutdown_hooks:

@@ -19,17 +19,24 @@ class GatewayMetrics:
     _last_heartbeat_sent: float
     heartbeat_rrt: float
 
-class GatewayClient:
-    def __init__(self, gateway_url: str, shard_id: int, total_shards: int):
-        """Initialize this websocket.
+from typing import Protocol
 
-        Args:
-            gateway_url (str): gateway URL provided by GET /gateway/bot endpoint
-            shard_id (int): assigned shard ID
-            total_shards (int): total shard count provided by GET /gateway/bot endpoint
-        """
-        self.shard_id = shard_id
-        self.total_shards = total_shards
+class EventQueueProtocol(Protocol):
+    """Internal contract for the GatewayClient's event queue used by the Client. Meant for testing."""
+    async def put(self, item) -> None: ...
+    async def get(self): ...
+
+class GatewayClientProtocol(Protocol):
+    """Internal contract for the GatewayClient used by the Client. Meant for testing."""
+    event_queue: EventQueueProtocol
+
+    async def start(self, token: str, intents: int, shard_id: int, total_shards: int): ...
+    async def close_ws(self): ...
+
+class GatewayClient(GatewayClientProtocol):
+    def __init__(self):
+        self.shard_id = None
+        self.total_shards = None
         self.ws = None
         self.seq = None
         self.session_id = None
@@ -42,7 +49,7 @@ class GatewayClient:
         self.heartbeat_interval = None
         self.event_queue = asyncio.Queue()
 
-        self.base_url = gateway_url
+        self.base_url = "wss://gateway.discord.gg"
         self.url_params = "?v=10&encoding=json"
 
     async def wait_reconnect(self):
@@ -53,13 +60,16 @@ class GatewayClient:
 
         self.backoff = min(self.backoff * 2, 60)
 
-    async def start(self, token: str, intents: int):
+    async def start(self, token: str, intents: int, shard_id: int, total_shards: int):
         """Start this websocket's connection.
 
         Args:
             token (str): the bot's token
             intents (int): the bot's intents
         """
+        self.shard_id = shard_id
+        self.total_shards = total_shards
+
         while True:
             try:
                 await self.connect_ws()
