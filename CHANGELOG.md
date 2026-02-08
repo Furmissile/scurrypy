@@ -1,6 +1,22 @@
 # Changelog
 
-This changelog documents all notable and breaking changes to ScurryPy.
+This changelog documents all notable and breaking changes to the ScurryPy PyPi package.
+
+## [1.1.0] - 8 Feb 2026
+
+### Changed
+
+* `HTTPClient` and `GatewayClient` now inherit from respective protocols
+    * This is only available for testing
+
+* `Client`'s `shard_count` is now a positional kwarg and `Client.__init__` has two new optional parameters:
+    * `http` - HTTP Client (instantiated)
+    * `gateway_impl` - Gateway implementation (uninstantiated)
+
+* `ReactionRemoveAllEvent` missing `@dataclass` decorator
+
+* Bug fix: `Snowflake` now subclasses `int`
+    * now, `Snowflake` *is* `int`
 
 ## [1.0.0] - 6 Feb 2026
 
