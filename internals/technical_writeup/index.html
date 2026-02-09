@@ -3092,9 +3092,13 @@
 <ol>
 <li>Connect to the gateway with the URL provided by the <code>GET /gateway/bot</code> request.</li>
 <li>Await the HELLO event Discord sends upon connection.<ul>
-<li>Use this to set heartbeat intervals and initialize the sequence number.
-    !!! note "Adding a Jitter"
-        When sending the first heartbeat interval, add a "jitter" so that Discord is not overwhelmed with a heartbeat from every spawned shard at once.</li>
+<li>Use this to set heartbeat intervals and initialize the sequence number.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Adding a Jitter</p>
+<p>Add a "jitter" for the first heartbeat so that Discord is not overwhelmed with a heartbeat from every spawned shard at once.</p>
+</div>
+<ul>
 <li>This is when the heartbeat task is started to keep the session alive.</li>
 </ul>
 </li>
