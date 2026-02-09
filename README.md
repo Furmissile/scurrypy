@@ -23,9 +23,7 @@ alt="Fire-breathing squirrel"
 * Automatic sharding
 * Predictable event models and resource classes
 
-Your focus is building what you want.
-
-See the [manifesto](https://scurry-works.github.io/scurrypy/manifesto) section for details!
+Your focus is building what you want instead of fighting a framework.
 
 ## Installation
 
@@ -40,34 +38,34 @@ pip install scurrypy
 The following examples are quick drop-in starters if you wish to try ScurryPy.
 
 > [!TIP]
-> It is recommended to use a `.env` file. More details about using a `.env` file [here](https://scurry-works.github.io/scurrypy/getting_started/start_here/)
+> It is recommended to use a `.env` file for bot tokens. More details about using a `.env` file [here](https://scurry-works.github.io/scurrypy/getting_started/start_here/).
 
 ### Slash Command
 
 ```python
-# Replace with your bot token, bot user ID, and guild ID for the command
-TOKEN = "your-token"
-APP_ID = 0
-GUILD_ID = 0
+# Set TOKEN, APP_ID (bot user ID), and GUILD_ID (for guild command)
 
 # --- Core library imports ---
 from scurrypy import Client, EventTypes, InteractionEvent, SlashCommandPart
 
-# --- Setup bot ---
 client = Client(TOKEN)
 
-async def on_greet(event: InteractionEvent):
-    if event.data.name != "greet":
-        return
-
-    await client.interaction(event.id, event.token).respond("Hello!")
-
+# --- Setup bot ---
 async def create_commands():
+    """Create a command for the bot APP_ID in guild GUILD_ID."""
     await client.guild_command(APP_ID, GUILD_ID).create(
         SlashCommandPart("greet", "Greet the bot!")
     )
 
 client.add_startup_hook(create_commands)
+
+async def on_greet(event: InteractionEvent):
+    """Respond to the created slash command."""
+    if event.data.name != "greet":
+        return
+
+    await client.interaction(event.id, event.token).respond("Hello!")
+
 client.add_event_listener(EventTypes.INTERACTION_CREATE, on_greet)
 
 # --- Run the bot ---
@@ -77,21 +75,21 @@ client.run()
 ### Prefix Command (Legacy)
 
 ```python
-# Replace with your bot token
-TOKEN = "your-token"
+# Set TOKEN
 
 # --- Core library imports ---
 from scurrypy import Client, Intents, EventTypes, MessageCreateEvent
 
-client = Client(TOKEN, Intents.set(message_content=True))
+client = Client(TOKEN, Intents.set(message_content=True)) # requires MESSAGE_CONTENT intent
 
 # --- Setup bot ---
 async def on_ping(event: MessageCreateEvent):
+    """Respond to the '!ping' command."""
     if not event.content:
-        return
+        return # ignore empty messages
 
     if not event.content.startswith('!ping'):
-        return
+        return # ignore messages that are not the command
 
     await client.channel(event.channel_id).send("Pong!")
 
@@ -110,9 +108,11 @@ ScurryPy has exactly 3 required dependencies:
 
 These dependencies are automatically installed with ScurryPy's pip package.
 
-## Like What You See?
+## Learn More
 
 Explore the full [documentation](https://scurry-works.github.io/scurrypy) for more examples, guides, and API reference.
+
+See the [manifesto](https://scurry-works.github.io/scurrypy/manifesto) section for details!
 
 **Switching from discord.py?** 
 Check out the [Migration Guide](https://scurry-works.github.io/scurrypy/getting_started/migrating) to see the difference.
