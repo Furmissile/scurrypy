@@ -3039,117 +3039,131 @@
   <h1>Technical Writeup</h1>
 
 <div class="reading-paragraph">
-<p>ScurryPy is a discord API wrapper written in Python that aims to provide clarity over magic. While this may seem straightforward at first glance, especially when other libraries have already implemented it, there are plenty of technical accomplishments that help ScurryPy stand out from other trending libraries; most notably, the core is under 1000 lines of code.</p>
+<p>This document is an explanation and reference for ScurryPy's internal architecture. It assumes familiarity with Discord bots, async Python, and Discord's API surface. ScurryPy is a discord API wrapper written in Python that aims to provide clarity over magic. Even though other libraries have already implemented it, there are plenty of technical accomplishments that help ScurryPy stand out from other trending libraries; most notably, the core implementation is intentionally small (under 1000 lines of code).</p>
 </div>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
-<p>So what makes ScurryPy so effective? Caching? No. ScurryPy does not assume what the user needs nor does it try to <em>guess</em> what the user wants to do. Avoiding circular imports with annotations? Nope. All classes have clearly set boundaries for what they do so there is no need for annotations. As a result, ScurryPy is <em>modular</em> in that it provides you with the building blocks, and you do what you want with them (guided by Discord’s API). These are just the highlights of what <em>clarity over magic</em> can bring to the table. </p>
-<p>This writeup will cover the main parts of ScurryPy including the HTTP and rate limiting, Gateway logic and sharding, and how the Client glues this all together without being a god object. Don’t let the terms intimidate you. Each section will have a mental map to help visualize steps. By the end of this writeup, you'll understand how clarity over magic leads to better software - and how to implement Discord's most notoriously difficult features.</p>
+<p>ScurryPy is effective because it does not assume what the user needs nor does it try to <em>guess</em> what the user wants to do. All classes have clearly set boundaries for what they do so there is no need for annotations. As a result, ScurryPy is <em>modular</em> in that it provides the building blocks (guided by Discord's API). These are just the highlights of what <em>clarity over magic</em> can bring to the table. </p>
+<p>This writeup will cover the main parts of ScurryPy including the HTTP and rate limiting, Gateway logic and sharding, the role of the Bot Client, and the role of <code>DataModel</code>. Each section will have a mental map to help visualize steps. The goal of this writeup is that the reader walks away with a better understanding how clarity over magic leads to better software and how to implement Discord's difficult features.</p>
 </div>
 <h2 id="http-client">HTTP Client<a class="headerlink" href="#http-client" title="Permanent link">&para;</a></h2>
-<p>Before digging in with the HTTP Client, this section, and future sections, will lead with a mental map to help guide the explanation.</p>
+<div class="reading-paragraph">
+<p>The HTTP client is responsible for queuing, sending, and returning requests. This involves executing requests while proactively respecting Discord's rate limits. No fancy abstractions or layers of indirection. The client does this by working through the following steps:</p>
+</div>
 <div class="center">
 <p><img alt="HTTP Mental Map" src="../../assets/http_mental_map.png" title="HTTP Mental Map" /></p>
 <p><em>Figure 1: HTTP Client Mental Map</em></p>
 </div>
-<div class="reading-paragraph">
-<p>The HTTP Client is responsible for queuing and sending requests. That’s it. No fancy abstractions. No layers of indirection. Just. Sending and documenting the requests. This sets up independence such that when adding an endpoint, fire a request and think of nothing else. If it’s a GET request, expect data to return. ScurryPy marks all GET endpoints with <code>fetch_{object}</code>. The client takes the parameters you’d <em>expect</em> to need to make a request, like endpoint and method, and spits back out the JSON object from Discord. </p>
-</div>
-<p>Now, let’s go through the map step by step:</p>
 <div class="reading-list">
 <ol>
-<li>Send request via GET to endpoint, say, “channels/123/messages”</li>
-<li>The request is put into a queue based on this endpoint with a lock.<ul>
-<li>A lock coordinates updates to the dictionary that maps endpoints to their queues.</li>
+<li>Send request with a method (GET, POST, PUT, PATCH, or DELETE) to a route path (e.g., "/channels/123/messages").</li>
+<li>The request is put into a queue based on this route path.<ul>
+<li>A lock coordinates updates to the dictionary that maps route paths to their queues.</li>
 <li>Each queue has a dedicated worker to handle the request.</li>
 </ul>
 </li>
 <li>The worker sends the HTTP request and waits for Discord's response.</li>
-<li>Using the bucket ID from Discord's response, update or create the bucket's rate limit info (with proper lock coordination).<ul>
-<li>A lock coordinates lock access itself and then a lock per bucket ID.</li>
-<li>If the rate limit is exhausted (no remaining requests), then create a sleep task. This is <em>proactive</em> rate limiting so no 429 is returned.</li>
+<li>Using the bucket ID from Discord's response, update or create the bucket's rate limit info.<ul>
+<li>A global lock guards the bucket registry, with a dedicated lock per bucket ID for updates.</li>
+<li>If the rate limit is exhausted (no remaining requests), then create a sleep task. This is <em>proactive</em> rate limiting to prevent 429s from ever occurring.</li>
 <li>If another request targets the same bucket, it waits for the sleep task to finish.</li>
 </ul>
 </li>
 </ol>
 </div>
-<p>Done.</p>
-<p><strong>Key Idea</strong>: Each endpoint gets its own queue and worker, and each worker enforces proactive rate limiting using Discord’s bucket replies.</p>
+<div class="admonition tip">
+<p class="admonition-title">Key Idea</p>
+<p>Each route path gets its own queue and worker, and each worker enforces proactive rate limiting using Discord's bucket replies.</p>
+</div>
 <h2 id="gateway-client">Gateway Client<a class="headerlink" href="#gateway-client" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
-<p>Gateway is more straightforward. Let’s start with the mental map.</p>
+<p>The Gateway Client is responsible for maintaining a connection to Discord's gateway and sending/receiving payloads. This includes the entire gateway lifecycle including connecting, receiving HELLO, identifying, receiving and queueing events, and reconnection. Because the gateway client handles reconnection, all that's needed when applying this class is spawning the needed number of shards at the rate of the max concurrency as recommended by Discord. Each shard runs as an independent asyncio task on the same event loop (not a thread or process).</p>
+<div class="admonition note">
+<p class="admonition-title">Shard Coordination</p>
+<p>Need to know what shard an event came from? Use Discord's <a href="https://discord.com/developers/docs/events/gateway#sharding-sharding-formula">formula</a>: <code>(guild_id &gt;&gt; 22) % shard_count</code>.</p>
+</div>
 </div>
 <div class="center">
 <p><img alt="Gateway Mental Map" src="../../assets/gateway_mental_map.png" title="Gateway Mental Map" /></p>
 <p><em>Figure 2: Gateway Client Mental Map</em></p>
 </div>
-<div class="reading-paragraph">
-<p>The Gateway Client is self-sufficient in that it handles its own connection (or shard) to the Gateway. That is <em>all</em> this client is for. The beauty of this design is that sharding is the matter of spawning the needed number of shards at the rate of the max concurrency as recommended by Discord. What if you need to access a specific shard or know what event a shard came from? Not a problem! Use Discord’s formula: <code>(guild_id &gt;&gt; 22) % shard_count</code>. </p>
-</div>
-<p>Let’s dig into the steps of the mental map:</p>
+<p>Let's dig into the steps of the mental map:</p>
 <div class="reading-list">
 <ol>
-<li>Connect to the gateway with the URL provided by the GET /gateway/bot endpoint and use the URL params “?v=10&amp;encoding=json”. URL params set the stage for how Discord should send its data packets. In this case, the URL signals using JSON encoding: Discord <em>serializes</em> events as JSON strings to be <em>deserialized</em> into Python dictionaries.</li>
-<li>Await the HELLO event Discord sends back when you connect.<ul>
-<li>Use this to set heartbeat intervals and initialize the sequence number.</li>
-<li>This is when the heartbeat task is started to keep the session alive. Fire-and-forget.</li>
+<li>Connect to the gateway with the URL provided by the <code>GET /gateway/bot</code> request.</li>
+<li>Await the HELLO event Discord sends upon connection.<ul>
+<li>Use this to set heartbeat intervals and initialize the sequence number.
+    !!! note "Adding a Jitter"
+        When sending the first heartbeat interval, add a "jitter" so that Discord is not overwhelmed with a heartbeat from every spawned shard at once.</li>
+<li>This is when the heartbeat task is started to keep the session alive.</li>
 </ul>
 </li>
 <li>Send IDENTIFY through the websocket.</li>
-<li>That’s it for new shards or connections. At this point, it’s about listening to certain OP codes. <em>Only OP codes that impact the connection state are listed</em>.<ul>
-<li>OP 0: dispatch. Enqueue this for the Client to pick up.</li>
-<li>OP 7: a disconnect occurred and Discord wants you to RESUME.</li>
-<li>OP 9: a disconnect occurred causing the session to be invalid. Discord wants you to start fresh.</li>
+<li>Now, it's about listening to certain OP codes. <em>Only OP codes that impact the connection state are listed</em>.<ul>
+<li>OP 0: dispatch. Enqueue this for the core Bot Client event dispatcher to pick up.</li>
+<li>OP 7: a disconnect occurred and Discord wants to RESUME.</li>
+<li>OP 9: a disconnect occurred causing the session to be invalid. Discord wants to start fresh and re-identify.</li>
+</ul>
+</li>
+<li>If Discord requests a reconnect, there are multiple conditions to consider:<ul>
+<li>receiving an OP 7 as described in step 4</li>
+<li>disconnected with a close code that allows reconnection</li>
+<li>disconnected with <em>no</em> close code</li>
+<li>OP 9 with <code>d</code> set to <code>True</code></li>
 </ul>
 </li>
 </ol>
 </div>
-<p>Done. This is the minimal set of logic required to maintain a stable gateway connection.</p>
-<p><strong>Key Idea:</strong> Each connection or shard gets its own task to connect, identify, reconnect or re-identify if needed, listen to events, and eventually close.</p>
+<div class="admonition tip">
+<p class="admonition-title">Key Idea</p>
+<p>Each connection or shard gets its own task to connect, identify, reconnect or re-identify if needed, listen to events, and eventually close.</p>
+</div>
 <h2 id="bot-client">Bot Client<a class="headerlink" href="#bot-client" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
-<p>Almost there, if you’ve read this far, you’re doing great! Know that from here on out, it’s dead simple. The mental map for the Bot Client looks something like:</p>
+<p>The Bot Client is responsible for orchestrating HTTP and gateway clients or shards, and running startup and shutdown hooks. It also provides thin helpers to create resources from events or models. The Bot Client is intentionally not a god object.</p>
 </div>
 <div class="center">
 <p><img alt="Bot Client Mental Map" src="../../assets/client_mental_map.png" title="Bot Client Mental Map" /></p>
 <p><em>Figure 3: Bot Client Mental Map</em></p>
 </div>
-<div class="reading-paragraph">
-<p>The Bot Client is intentionally not a god object. It is really just an orchestrator - it uses the HTTP and Gateway clients you've already seen. Let’s go through the mental map step by step:</p>
-</div>
 <div class="reading-list">
 <ol>
-<li>Start the HTTP Client. No strings attached.</li>
-<li>Run setup hooks. This is an array of callable functions that the user can set using <code>add_startup_hook</code>. These hooks run once for the entire life cycle of the bot. Need to start a database? This is where you do it!</li>
-<li>Fetch the gateway info. This is where important start up info is located such as the total number of recommended shards, how many shards can be started concurrently, and the recommended gateway connect URL.</li>
-<li>Then based on the gateway info, as shards start up, fire a task to listen to <em>each</em> shard. This is a task <em>per shard</em> and each shard has its own event queue so the listener doesn’t need to know anything about what shard it is, just direct the event accordingly. Listening and starting occur concurrently. So as shards are starting up, the shards already started can start taking in events as soon as they’re ready. The “sleep 5 seconds” is waiting per batch to not spam Discord’s gateway.</li>
+<li>Start the HTTP Client.</li>
+<li>Run setup hooks (an array of callable functions). These hooks run once for the entire life cycle of the bot (even after reconnects).</li>
+<li>Fetch the gateway info. This is where important start up info is obtained such as the total number of recommended shards, how many shards can be started concurrently, and the recommended gateway connect URL.</li>
+<li>Based on the gateway info from step 3, fire an asyncio task to listen to <em>each</em> shard's event queue. Shards already started can start taking in events as soon as they are ready. A short delay per batch (currently 5 seconds) to respect Discord's gateway concurrency limits.</li>
 </ol>
 </div>
-<p>Done.</p>
-<p><strong>Key Idea:</strong> The Client's sole purpose is to provide a thin abstraction layer between internals and the user-facing API.</p>
+<div class="admonition tip">
+<p class="admonition-title">Key Idea</p>
+<p>The Bot Client's sole purpose is to provide a thin abstraction layer between internals and the user-facing API.</p>
+</div>
 <h2 id="data-model">Data Model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
-<p>The final piece: how to turn Discord's JSON into clean, type-safe Python objects. DataModel is a class that transforms Discord's JSON into usable Python objects and back again when needed. A user could just access the dictionary itself, sure. But, what if dictionaries could be represented as a class so instead of <code>event[‘data’]</code>, it looks like <code>event.data</code>? This is where the DataModel class comes in. Let’s take a look at the mental map</p>
+<p>ScurryPy uses a custom <code>DataModel</code> instead of third-party serialization libraries to retain explicit control over field handling, defaults, and Discord-specific quirks. The <code>DataModel</code> class is responsible for turning Discord's JSON into clean, type-safe Python objects, and back to a dictionary when needed. This gives Discord payloads a more OOP feel. Instead of saying <code>event['data']</code>, it's just <code>event.data</code>. This class also serves technical use in that the user no longer has to worry about key errors. Keys that appear in the model but not in the payload are set to <code>None</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Discord Payloads</p>
+<p>URL parameters when connecting to Discord's gateway set the stage for how Discord should send its payloads. ScurryPy defaults to <code>?v=10&amp;encoding=json</code> to receive a string formatted like a JSON. Then the payload is converted to a dictionary with <code>json.loads</code>.</p>
+</div>
 </div>
 <div class="center">
 <p><img alt="Data Model Mental Map" src="../../assets/data_model_mental_map.png" title="Data Model Mental Map" /></p>
 <p><em>Figure 4: Data Model Mental Map</em></p>
 </div>
-<p>This one is straightforward. Let’s dig into the step by step:</p>
 <div class="reading-list">
 <ol>
-<li>The <code>from_dict</code> function hydrates a dataclass by iterating over its fields and pulling matching values from Discord's JSON payload. If a field isn't in the payload, it's skipped; no guessing. The result? Clean dot notation (<code>event.data</code>) instead of dictionary access (<code>event['data']</code>).</li>
-<li>When you need to send data back to Discord, <code>to_dict</code> does the reverse: converts the dataclass attributes back into a dictionary.</li>
+<li>The <code>from_dict</code> function hydrates a dataclass by iterating over its fields and pulling matching values from Discord's JSON payload.</li>
+<li>If data has to be sent to Discord (in the form of a dictionary), <code>to_dict</code> does the reverse: recursively converts the dataclass attributes (and dataclasses within) back into a dictionary.</li>
 </ol>
 </div>
-<p>Done.</p>
-<div class="reading-paragraph">
-<p>You might be wondering: what about nested objects like a <code>Message</code> containing a <code>User</code>? <code>DataModel</code> handles that recursively. It calls <code>from_dict</code> or <code>to_dict</code> on child DataModels automatically.</p>
+<div class="reading-paragraph"></div>
+<div class="admonition tip">
+<p class="admonition-title">Key Idea</p>
+<p>This <code>DataModel</code> class exists to deserialize Discord's payloads and serialize dataclasses for fluent communication between ScurryPy and Discord.</p>
 </div>
-<p><strong>Key Idea:</strong> This <code>DataModel</code> class exists to deserialize Discord's payloads and serialize dataclasses for fluent communication between ScurryPy and Discord.</p>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
 <div class="reading-paragraph">
-<p>Because every subsystem is small, explicit, and self-contained, extending ScurryPy is almost trivial: add a model, add a resource, and use the HTTP client directly. You can prototype new Discord features the day they release, build custom caching, or omit caching entirely. The library never fights you; it never assumes what you want. That’s the benefit of clarity over magic.</p>
+<p>Because every subsystem is small, explicit, and self-contained, extending ScurryPy is almost trivial: add a model, add a resource, and use the HTTP client directly. Users can prototype new Discord features the day they release, build custom caching, or omit caching entirely. The library does not fight the user. That's the benefit of clarity over magic.</p>
 </div>
 
 
