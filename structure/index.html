@@ -581,7 +581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/examples/" class="md-nav__link">
+      <a href="../getting_started/quickstart/" class="md-nav__link">
         
   
   
@@ -673,7 +673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/patterns/" class="md-nav__link">
+      <a href="../getting_started/advanced/" class="md-nav__link">
         
   
   
@@ -696,12 +696,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/optional_layers/" class="md-nav__link">
+      <a href="../getting_started/core_examples/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Optional Layers
+    Core Examples
     
   </span>
   
@@ -3901,7 +3901,9 @@
 <span class="normal"><a href="#__codelineno-0-144">144</a></span>
 <span class="normal"><a href="#__codelineno-0-145">145</a></span>
 <span class="normal"><a href="#__codelineno-0-146">146</a></span>
-<span class="normal"><a href="#__codelineno-0-147">147</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>scurrypy
+<span class="normal"><a href="#__codelineno-0-147">147</a></span>
+<span class="normal"><a href="#__codelineno-0-148">148</a></span>
+<span class="normal"><a href="#__codelineno-0-149">149</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>scurrypy
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>├── __init__.py
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a>├── api
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a>│   ├── __init__.py
@@ -3963,91 +3965,93 @@
 <a id="__codelineno-0-60" name="__codelineno-0-60"></a>├── config.py
 <a id="__codelineno-0-61" name="__codelineno-0-61"></a>├── core
 <a id="__codelineno-0-62" name="__codelineno-0-62"></a>│   ├── __init__.py
-<a id="__codelineno-0-63" name="__codelineno-0-63"></a>│   ├── error.py
-<a id="__codelineno-0-64" name="__codelineno-0-64"></a>│   ├── events.py
-<a id="__codelineno-0-65" name="__codelineno-0-65"></a>│   ├── gateway.py
-<a id="__codelineno-0-66" name="__codelineno-0-66"></a>│   ├── http.py
-<a id="__codelineno-0-67" name="__codelineno-0-67"></a>│   ├── model.py
-<a id="__codelineno-0-68" name="__codelineno-0-68"></a>│   └── snowflake.py
-<a id="__codelineno-0-69" name="__codelineno-0-69"></a>├── enums
-<a id="__codelineno-0-70" name="__codelineno-0-70"></a>│   ├── __init__.py
-<a id="__codelineno-0-71" name="__codelineno-0-71"></a>│   ├── application.py
-<a id="__codelineno-0-72" name="__codelineno-0-72"></a>│   ├── channel.py
-<a id="__codelineno-0-73" name="__codelineno-0-73"></a>│   ├── command.py
-<a id="__codelineno-0-74" name="__codelineno-0-74"></a>│   ├── components.py
-<a id="__codelineno-0-75" name="__codelineno-0-75"></a>│   ├── emoji.py
-<a id="__codelineno-0-76" name="__codelineno-0-76"></a>│   ├── enum_types.py
-<a id="__codelineno-0-77" name="__codelineno-0-77"></a>│   ├── events.py
-<a id="__codelineno-0-78" name="__codelineno-0-78"></a>│   ├── guild.py
-<a id="__codelineno-0-79" name="__codelineno-0-79"></a>│   ├── integration.py
-<a id="__codelineno-0-80" name="__codelineno-0-80"></a>│   ├── interaction.py
-<a id="__codelineno-0-81" name="__codelineno-0-81"></a>│   ├── invite.py
-<a id="__codelineno-0-82" name="__codelineno-0-82"></a>│   ├── message.py
-<a id="__codelineno-0-83" name="__codelineno-0-83"></a>│   ├── permissions.py
-<a id="__codelineno-0-84" name="__codelineno-0-84"></a>│   └── user.py
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a>├── events
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>│   ├── __init__.py
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>│   ├── base_event.py
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>│   ├── channel_events.py
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>│   ├── gateway_events.py
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>│   ├── guild_events.py
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>│   ├── integration_events.py
-<a id="__codelineno-0-92" name="__codelineno-0-92"></a>│   ├── interaction_events.py
-<a id="__codelineno-0-93" name="__codelineno-0-93"></a>│   ├── invite_events.py
-<a id="__codelineno-0-94" name="__codelineno-0-94"></a>│   ├── message_events.py
-<a id="__codelineno-0-95" name="__codelineno-0-95"></a>│   ├── reaction_events.py
-<a id="__codelineno-0-96" name="__codelineno-0-96"></a>│   ├── ready_event.py
-<a id="__codelineno-0-97" name="__codelineno-0-97"></a>│   ├── role_events.py
-<a id="__codelineno-0-98" name="__codelineno-0-98"></a>│   ├── thread_events.py
-<a id="__codelineno-0-99" name="__codelineno-0-99"></a>│   └── user_events.py
-<a id="__codelineno-0-100" name="__codelineno-0-100"></a>├── ext
-<a id="__codelineno-0-101" name="__codelineno-0-101"></a>│   ├── __init__.py
-<a id="__codelineno-0-102" name="__codelineno-0-102"></a>│   ├── cache
-<a id="__codelineno-0-103" name="__codelineno-0-103"></a>│   │   ├── __init__.py
-<a id="__codelineno-0-104" name="__codelineno-0-104"></a>│   │   ├── application_emojis.py
-<a id="__codelineno-0-105" name="__codelineno-0-105"></a>│   │   ├── channels.py
-<a id="__codelineno-0-106" name="__codelineno-0-106"></a>│   │   ├── guild_emojis.py
-<a id="__codelineno-0-107" name="__codelineno-0-107"></a>│   │   └── guild_roles.py
-<a id="__codelineno-0-108" name="__codelineno-0-108"></a>│   ├── commands
-<a id="__codelineno-0-109" name="__codelineno-0-109"></a>│   │   ├── __init__.py
-<a id="__codelineno-0-110" name="__codelineno-0-110"></a>│   │   ├── addon.py
-<a id="__codelineno-0-111" name="__codelineno-0-111"></a>│   │   └── ctx.py
-<a id="__codelineno-0-112" name="__codelineno-0-112"></a>│   ├── components
-<a id="__codelineno-0-113" name="__codelineno-0-113"></a>│   │   ├── __init__.py
-<a id="__codelineno-0-114" name="__codelineno-0-114"></a>│   │   ├── addon.py
-<a id="__codelineno-0-115" name="__codelineno-0-115"></a>│   │   └── ctx.py
-<a id="__codelineno-0-116" name="__codelineno-0-116"></a>│   ├── events
-<a id="__codelineno-0-117" name="__codelineno-0-117"></a>│   │   ├── __init__.py
-<a id="__codelineno-0-118" name="__codelineno-0-118"></a>│   │   └── addon.py
-<a id="__codelineno-0-119" name="__codelineno-0-119"></a>│   ├── interactions
-<a id="__codelineno-0-120" name="__codelineno-0-120"></a>│   │   ├── __init__.py
-<a id="__codelineno-0-121" name="__codelineno-0-121"></a>│   │   └── ctx.py
-<a id="__codelineno-0-122" name="__codelineno-0-122"></a>│   └── prefixes
-<a id="__codelineno-0-123" name="__codelineno-0-123"></a>│       ├── __init__.py
-<a id="__codelineno-0-124" name="__codelineno-0-124"></a>│       ├── addon.py
-<a id="__codelineno-0-125" name="__codelineno-0-125"></a>│       └── ctx.py
-<a id="__codelineno-0-126" name="__codelineno-0-126"></a>├── intents.py
-<a id="__codelineno-0-127" name="__codelineno-0-127"></a>├── params
-<a id="__codelineno-0-128" name="__codelineno-0-128"></a>│   ├── __init__.py
-<a id="__codelineno-0-129" name="__codelineno-0-129"></a>│   ├── channel.py
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>│   ├── command.py
-<a id="__codelineno-0-131" name="__codelineno-0-131"></a>│   ├── emoji.py
-<a id="__codelineno-0-132" name="__codelineno-0-132"></a>│   ├── guild.py
-<a id="__codelineno-0-133" name="__codelineno-0-133"></a>│   ├── message.py
-<a id="__codelineno-0-134" name="__codelineno-0-134"></a>│   └── user.py
-<a id="__codelineno-0-135" name="__codelineno-0-135"></a>└── resources
-<a id="__codelineno-0-136" name="__codelineno-0-136"></a>    ├── __init__.py
-<a id="__codelineno-0-137" name="__codelineno-0-137"></a>    ├── application.py
-<a id="__codelineno-0-138" name="__codelineno-0-138"></a>    ├── base_resource.py
-<a id="__codelineno-0-139" name="__codelineno-0-139"></a>    ├── channel.py
-<a id="__codelineno-0-140" name="__codelineno-0-140"></a>    ├── command.py
-<a id="__codelineno-0-141" name="__codelineno-0-141"></a>    ├── emoji.py
-<a id="__codelineno-0-142" name="__codelineno-0-142"></a>    ├── guild.py
-<a id="__codelineno-0-143" name="__codelineno-0-143"></a>    ├── interaction.py
-<a id="__codelineno-0-144" name="__codelineno-0-144"></a>    ├── invite.py
-<a id="__codelineno-0-145" name="__codelineno-0-145"></a>    ├── message.py
-<a id="__codelineno-0-146" name="__codelineno-0-146"></a>    ├── sticker.py
-<a id="__codelineno-0-147" name="__codelineno-0-147"></a>    └── user.py
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>│   ├── color.py
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>│   ├── error.py
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>│   ├── events.py
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>│   ├── gateway.py
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>│   ├── http.py
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>│   ├── model.py
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>│   ├── serialization.py
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>│   └── snowflake.py
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>├── enums
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a>│   ├── __init__.py
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a>│   ├── application.py
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a>│   ├── channel.py
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a>│   ├── command.py
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a>│   ├── components.py
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>│   ├── emoji.py
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a>│   ├── enum_types.py
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>│   ├── events.py
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>│   ├── guild.py
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a>│   ├── integration.py
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a>│   ├── interaction.py
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>│   ├── invite.py
+<a id="__codelineno-0-84" name="__codelineno-0-84"></a>│   ├── message.py
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a>│   ├── permissions.py
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>│   └── user.py
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>├── events
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>│   ├── __init__.py
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>│   ├── base_event.py
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>│   ├── channel_events.py
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>│   ├── gateway_events.py
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>│   ├── guild_events.py
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>│   ├── integration_events.py
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>│   ├── interaction_events.py
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>│   ├── invite_events.py
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>│   ├── message_events.py
+<a id="__codelineno-0-97" name="__codelineno-0-97"></a>│   ├── reaction_events.py
+<a id="__codelineno-0-98" name="__codelineno-0-98"></a>│   ├── ready_event.py
+<a id="__codelineno-0-99" name="__codelineno-0-99"></a>│   ├── role_events.py
+<a id="__codelineno-0-100" name="__codelineno-0-100"></a>│   ├── thread_events.py
+<a id="__codelineno-0-101" name="__codelineno-0-101"></a>│   └── user_events.py
+<a id="__codelineno-0-102" name="__codelineno-0-102"></a>├── ext
+<a id="__codelineno-0-103" name="__codelineno-0-103"></a>│   ├── __init__.py
+<a id="__codelineno-0-104" name="__codelineno-0-104"></a>│   ├── cache
+<a id="__codelineno-0-105" name="__codelineno-0-105"></a>│   │   ├── __init__.py
+<a id="__codelineno-0-106" name="__codelineno-0-106"></a>│   │   ├── application_emojis.py
+<a id="__codelineno-0-107" name="__codelineno-0-107"></a>│   │   ├── channels.py
+<a id="__codelineno-0-108" name="__codelineno-0-108"></a>│   │   ├── guild_emojis.py
+<a id="__codelineno-0-109" name="__codelineno-0-109"></a>│   │   └── guild_roles.py
+<a id="__codelineno-0-110" name="__codelineno-0-110"></a>│   ├── commands
+<a id="__codelineno-0-111" name="__codelineno-0-111"></a>│   │   ├── __init__.py
+<a id="__codelineno-0-112" name="__codelineno-0-112"></a>│   │   ├── addon.py
+<a id="__codelineno-0-113" name="__codelineno-0-113"></a>│   │   └── ctx.py
+<a id="__codelineno-0-114" name="__codelineno-0-114"></a>│   ├── components
+<a id="__codelineno-0-115" name="__codelineno-0-115"></a>│   │   ├── __init__.py
+<a id="__codelineno-0-116" name="__codelineno-0-116"></a>│   │   ├── addon.py
+<a id="__codelineno-0-117" name="__codelineno-0-117"></a>│   │   └── ctx.py
+<a id="__codelineno-0-118" name="__codelineno-0-118"></a>│   ├── events
+<a id="__codelineno-0-119" name="__codelineno-0-119"></a>│   │   ├── __init__.py
+<a id="__codelineno-0-120" name="__codelineno-0-120"></a>│   │   └── addon.py
+<a id="__codelineno-0-121" name="__codelineno-0-121"></a>│   ├── interactions
+<a id="__codelineno-0-122" name="__codelineno-0-122"></a>│   │   ├── __init__.py
+<a id="__codelineno-0-123" name="__codelineno-0-123"></a>│   │   └── ctx.py
+<a id="__codelineno-0-124" name="__codelineno-0-124"></a>│   └── prefixes
+<a id="__codelineno-0-125" name="__codelineno-0-125"></a>│       ├── __init__.py
+<a id="__codelineno-0-126" name="__codelineno-0-126"></a>│       ├── addon.py
+<a id="__codelineno-0-127" name="__codelineno-0-127"></a>│       └── ctx.py
+<a id="__codelineno-0-128" name="__codelineno-0-128"></a>├── intents.py
+<a id="__codelineno-0-129" name="__codelineno-0-129"></a>├── params
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>│   ├── __init__.py
+<a id="__codelineno-0-131" name="__codelineno-0-131"></a>│   ├── channel.py
+<a id="__codelineno-0-132" name="__codelineno-0-132"></a>│   ├── command.py
+<a id="__codelineno-0-133" name="__codelineno-0-133"></a>│   ├── emoji.py
+<a id="__codelineno-0-134" name="__codelineno-0-134"></a>│   ├── guild.py
+<a id="__codelineno-0-135" name="__codelineno-0-135"></a>│   ├── message.py
+<a id="__codelineno-0-136" name="__codelineno-0-136"></a>│   └── user.py
+<a id="__codelineno-0-137" name="__codelineno-0-137"></a>└── resources
+<a id="__codelineno-0-138" name="__codelineno-0-138"></a>    ├── __init__.py
+<a id="__codelineno-0-139" name="__codelineno-0-139"></a>    ├── application.py
+<a id="__codelineno-0-140" name="__codelineno-0-140"></a>    ├── base_resource.py
+<a id="__codelineno-0-141" name="__codelineno-0-141"></a>    ├── channel.py
+<a id="__codelineno-0-142" name="__codelineno-0-142"></a>    ├── command.py
+<a id="__codelineno-0-143" name="__codelineno-0-143"></a>    ├── emoji.py
+<a id="__codelineno-0-144" name="__codelineno-0-144"></a>    ├── guild.py
+<a id="__codelineno-0-145" name="__codelineno-0-145"></a>    ├── interaction.py
+<a id="__codelineno-0-146" name="__codelineno-0-146"></a>    ├── invite.py
+<a id="__codelineno-0-147" name="__codelineno-0-147"></a>    ├── message.py
+<a id="__codelineno-0-148" name="__codelineno-0-148"></a>    ├── sticker.py
+<a id="__codelineno-0-149" name="__codelineno-0-149"></a>    └── user.py
 </code></pre></div></td></tr></table></div>
 
 
