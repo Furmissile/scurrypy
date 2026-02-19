@@ -37,6 +37,9 @@ class PrefixAddon(Addon):
     def _register(self, name: str, func: callable):
         import inspect
 
+        if not inspect.iscoroutinefunction(func):
+            raise TypeError(f"Prefix handler '{func.__name__}' must be async.")
+
         params_len = len(inspect.signature(func).parameters)
         if params_len != 1:
             raise TypeError(

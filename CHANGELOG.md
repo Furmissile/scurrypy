@@ -2,7 +2,11 @@
 
 This changelog documents all notable and breaking changes to the ScurryPy PyPi package.
 
-## [2.0.0] - Feb 2026
+## [2.1] - 19 Feb 2026
+
+* Error handling improvements new properties in `scurrypy.ext`
+
+## [2.0] - 18 Feb 2026
 
 ScurryPy 2.0 refines core architecture following 1.0 stabilization. 
 This release simplifies flag handling, restructures interaction models,

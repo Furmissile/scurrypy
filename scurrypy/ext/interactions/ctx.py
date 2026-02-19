@@ -15,6 +15,11 @@ class InteractionContext(Interaction):
     def user(self):
         """The invoking user."""
         return self.event.member.user
+
+    @property
+    def member(self):
+        """The invoking user's member."""
+        return self.event.member
     
     @property
     def channel(self):

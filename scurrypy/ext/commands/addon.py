@@ -23,13 +23,14 @@ from .ctx import ApplicationCommandContext, AutocompleteApplicationCommandContex
 
 def _check_func_params(func: callable):
     import inspect
+
+    if not inspect.iscoroutinefunction(func):
+        raise TypeError(f"Command handler '{func.__name__}' must be async.")
     
     params_len = len(inspect.signature(func).parameters)
 
     if params_len != 1:
-        raise TypeError(
-            f"Command handler '{func.__name__}' must accept exactly one parameter (ctx)."
-        )
+        raise TypeError(f"Command handler '{func.__name__}' must accept exactly one parameter (ctx).")
 
 class CommandsAddon(Addon):
     """Addon that implements automatic registering and decorating command interactions."""

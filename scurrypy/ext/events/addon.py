@@ -10,6 +10,9 @@ from scurrypy.events import Event
 
 def _check_func_params(func: callable):
     import inspect
+
+    if not inspect.iscoroutinefunction(func):
+        raise TypeError(f"Event handler '{func.__name__}' must be async.")
     
     params_len = len(inspect.signature(func).parameters)
 
@@ -64,11 +67,11 @@ class EventsAddon(Addon):
 
         if not handlers:
             return
-    
-        try:
-            for handler in handlers:
+        
+        for handler in handlers:
+            try:
                 await handler(self.bot, event)
-        except DiscordError as e:
-            logger.error(f"Error in event '{handler}': {e}")
-        except Exception as e:
-            logger.exception(f"Unhandled error in event '{handler.__name__}': {e}")
+            except DiscordError as e:
+                logger.error(f"Error in event '{handler}': {e}")
+            except Exception as e:
+                logger.exception(f"Unhandled error in event '{handler.__name__}': {e}")

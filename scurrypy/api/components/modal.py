@@ -23,7 +23,7 @@ class TextInput(DataModel, Component, LabelChild):
     """ID for the input."""
 
     style: TextInputStyle | None = None
-    """Text input style. Discord defaults to `TextInputStyle.SHORT`."""
+    """Text input style."""
 
     min_length: int | None = None
     """Minimum input length for a text input."""
