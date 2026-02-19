@@ -679,6 +679,42 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#handling-command-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handling Command Errors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#role-restricted-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Role Restricted Command
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Background Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#more-examples" class="md-nav__link">
     <span class="md-ellipsis">
       More Examples...
@@ -709,29 +745,6 @@
   
   <span class="md-ellipsis">
     Addons
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../logging/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Logging
     
   </span>
   
@@ -3868,6 +3881,42 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#handling-command-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handling Command Errors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#role-restricted-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Role Restricted Command
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Background Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#more-examples" class="md-nav__link">
     <span class="md-ellipsis">
       More Examples...
@@ -4142,6 +4191,211 @@
 <a id="__codelineno-4-28" name="__codelineno-4-28"></a>
 <a id="__codelineno-4-29" name="__codelineno-4-29"></a><span class="c1"># --- Run the bot ---</span>
 <a id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="handling-command-errors">Handling Command Errors<a class="headerlink" href="#handling-command-errors" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Demonstrates handling invalid user input inside a prefix command.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>By default, ScurryPy catches unhandled command errors and logs a traceback. 
+The bot will not crash.</p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">Intents</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy.ext.prefixes</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrefixAddon</span><span class="p">,</span> <span class="n">PrefixCommandContext</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">TOKEN</span><span class="p">,</span> <span class="n">intents</span><span class="o">=</span><span class="n">Intents</span><span class="o">.</span><span class="n">DEFAULT</span> <span class="o">|</span> <span class="n">Intents</span><span class="o">.</span><span class="n">MESSAGE_CONTENT</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="n">prefixes</span> <span class="o">=</span> <span class="n">PrefixAddon</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">APP_ID</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="nd">@prefixes</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="s1">&#39;divide&#39;</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">PrefixCommandContext</span><span class="p">):</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a>        <span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>        <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a>        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a>    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a>        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;The second value cannot be zero!&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a>        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;This command requires 2 numbers! Try `!divide 6 3`&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a>    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a>        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Command args must be integers!&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="role-restricted-command">Role Restricted Command<a class="headerlink" href="#role-restricted-command" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Demonstrates a command needing a certain role to use.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy.ext.commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">CommandsAddon</span><span class="p">,</span> <span class="n">ApplicationCommandContext</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="c1"># Set EXCLUSIVE_ROLE_ID to ID of role in which command is available.</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">TOKEN</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="n">commands</span> <span class="o">=</span> <span class="n">CommandsAddon</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">APP_ID</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="nd">@commands</span><span class="o">.</span><span class="n">slash_command</span><span class="p">(</span><span class="s1">&#39;exclusive&#39;</span><span class="p">,</span> <span class="s1">&#39;Only certain roles can use this command!&#39;</span><span class="p">,</span> <span class="n">guild_ids</span><span class="o">=</span><span class="p">[</span><span class="n">GUILD_ID</span><span class="p">])</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_exclusive</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">ApplicationCommandContext</span><span class="p">):</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">EXCLUSIVE_ROLE_ID</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">member</span><span class="o">.</span><span class="n">roles</span><span class="p">:</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a>        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You need the &lt;@&amp;</span><span class="si">{</span><span class="n">EXCLUSIVE_ROLE_ID</span><span class="si">}</span><span class="s2">&gt; role to use this command!&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a>        <span class="k">return</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a>    <span class="c1"># ephemeral because its a secret!</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a>    <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s2">&quot;Welsh Myth Secret: Corgis were once ridden by faries!&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="background-task">Background Task<a class="headerlink" href="#background-task" title="Permanent link">&para;</a></h2>
+<hr />
+<p>ScurryPy uses standard <code>asyncio</code> tasks for background jobs.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">TOKEN</span><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_task</span><span class="p">():</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running background task...&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start_my_task</span><span class="p">():</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a>    <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">my_task</span><span class="p">())</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="n">client</span><span class="o">.</span><span class="n">add_startup_hook</span><span class="p">(</span><span class="n">start_my_task</span><span class="p">)</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="modals">Modals<a class="headerlink" href="#modals" title="Permanent link">&para;</a></h2>
+<hr />
+<p>Demonstrates submitting feedback with the modal.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span>
+<span class="normal"><a href="#__codelineno-8-35">35</a></span>
+<span class="normal"><a href="#__codelineno-8-36">36</a></span>
+<span class="normal"><a href="#__codelineno-8-37">37</a></span>
+<span class="normal"><a href="#__codelineno-8-38">38</a></span>
+<span class="normal"><a href="#__codelineno-8-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextInputStyle</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy.api.interactions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModalPart</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy.api.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">Label</span><span class="p">,</span> <span class="n">TextInput</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy.ext.commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">CommandsAddon</span><span class="p">,</span> <span class="n">ApplicationCommandContext</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scurrypy.ext.components</span><span class="w"> </span><span class="kn">import</span> <span class="n">ComponentsAddon</span><span class="p">,</span> <span class="n">ComponentModalContext</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">TOKEN</span><span class="p">)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="n">commands</span> <span class="o">=</span> <span class="n">CommandsAddon</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">APP_ID</span><span class="p">)</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="n">components</span> <span class="o">=</span> <span class="n">ComponentsAddon</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="nd">@components</span><span class="o">.</span><span class="n">modal</span><span class="p">(</span><span class="s2">&quot;feedback_modal&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">on_feedback</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">ComponentModalContext</span><span class="p">):</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>    <span class="n">feedback</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_modal_data</span><span class="p">(</span><span class="s2">&quot;feedback_input&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a>    <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thanks for your feedback:</span><span class="se">\n</span><span class="si">{</span><span class="n">feedback</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="nd">@commands</span><span class="o">.</span><span class="n">slash_command</span><span class="p">(</span><span class="s2">&quot;feedback&quot;</span><span class="p">,</span> <span class="s2">&quot;Send feedback&quot;</span><span class="p">,</span> <span class="n">guild_ids</span><span class="o">=</span><span class="p">[</span><span class="n">GUILD_ID</span><span class="p">])</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">feedback</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">ApplicationCommandContext</span><span class="p">):</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a>    <span class="n">feedback_input</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a>        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Your feedback&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a>        <span class="n">component</span><span class="o">=</span><span class="n">TextInput</span><span class="p">(</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a>            <span class="n">custom_id</span><span class="o">=</span><span class="s2">&quot;feedback_input&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a>            <span class="n">style</span><span class="o">=</span><span class="n">TextInputStyle</span><span class="o">.</span><span class="n">PARAGRAPH</span><span class="p">,</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a>            <span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;Type something...&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a>            <span class="n">required</span><span class="o">=</span><span class="kc">True</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28"></a>        <span class="p">)</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29"></a>    <span class="p">)</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30"></a>
+<a id="__codelineno-8-31" name="__codelineno-8-31"></a>    <span class="n">modal</span> <span class="o">=</span> <span class="n">ModalPart</span><span class="p">(</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32"></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Feedback Form&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33"></a>        <span class="n">custom_id</span><span class="o">=</span><span class="s2">&quot;feedback_modal&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34"></a>        <span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="n">feedback_input</span><span class="p">]</span>
+<a id="__codelineno-8-35" name="__codelineno-8-35"></a>    <span class="p">)</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36"></a>
+<a id="__codelineno-8-37" name="__codelineno-8-37"></a>    <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">respond_modal</span><span class="p">(</span><span class="n">modal</span><span class="p">)</span>
+<a id="__codelineno-8-38" name="__codelineno-8-38"></a>
+<a id="__codelineno-8-39" name="__codelineno-8-39"></a><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="more-examples">More Examples...<a class="headerlink" href="#more-examples" title="Permanent link">&para;</a></h2>
 <hr />
