@@ -65,7 +65,7 @@ client.run()
 ### Prefix Command (Legacy)
 
 ```python
-# Set TOKEN
+# Set TOKEN and APP_ID (bot user ID)
 
 # --- Core library imports ---
 from scurrypy import Client, Intents
