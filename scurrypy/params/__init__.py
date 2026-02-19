@@ -1,9 +1,15 @@
 # scurrypy/params
 
-from .bot_emoji import EditBotEmojiParams
-from .channel import EditGuildChannelParams, EditThreadChannelParams
-from .command import EditGuildCommandParams, EditGlobalCommandParams
-from .guild_emoji import EditGuildEmojiParams
+from .emoji import EditApplicationEmojiParams
+from .channel import (
+    EditGuildChannelParams, 
+    EditThreadChannelParams
+)
+from .command import (
+    EditGuildCommandParams, 
+    EditGlobalCommandParams
+)
+from .emoji import EditGuildEmojiParams
 from .guild import (
     EditGuildRoleParams, 
     EditGuildParams, 
@@ -12,15 +18,31 @@ from .guild import (
     EditGuildStickerParams
 )
 from .message import EditMessageParams
-from .user import EditGuildMemberParams, EditUserParams
+from .user import (
+    EditGuildMemberParams, 
+    EditUserParams
+)
 
 __all__ = [
-    "EditBotEmojiParams",
-    "EditGuildChannelParams", "EditThreadChannelParams",
-    "EditGuildCommandParams", "EditGlobalCommandParams",
+    "EditApplicationEmojiParams",
+
+    "EditGuildChannelParams", 
+    "EditThreadChannelParams",
+
+    "EditGuildCommandParams", 
+    "EditGlobalCommandParams",
+
     "EditGuildEmojiParams",
-    "EditGuildRoleParams", "EditGuildParams", "EditGuildWelcomeScreenParams", "EditOnboardingParams",
+
+    "EditGuildRoleParams", 
+    "EditGuildParams", 
+    "EditGuildWelcomeScreenParams", 
+    "EditOnboardingParams",
+
     "EditGuildStickerParams",
+
     "EditMessageParams",
-    "EditGuildMemberParams", "EditUserParams"
+
+    "EditGuildMemberParams", 
+    "EditUserParams"
 ]

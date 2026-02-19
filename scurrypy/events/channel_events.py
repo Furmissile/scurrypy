@@ -1,12 +1,11 @@
 from dataclasses import dataclass
+
 from ..core.model import DataModel
 from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
-from typing import Optional
-
-from ..models.channel import ChannelModel
+from ..api.channels.channel import ChannelModel
 
 @dataclass
 class ChannelCreateEvent(Event, ChannelModel):
@@ -34,10 +33,10 @@ class ChannelPinsUpdateEvent(Event, DataModel):
     channel_id: Snowflake
     """ID of channel where the pins were updated."""
 
-    guild_id: Optional[Snowflake]
+    guild_id: Snowflake | None
     """ID of the guild where the pins were updated."""
 
-    last_pin_timestamp: Optional[str]
+    last_pin_timestamp: str | None
     """ISO8601 formatted timestamp of the last pinned message in the channel."""
 
 @dataclass

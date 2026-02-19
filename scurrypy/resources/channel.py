@@ -1,17 +1,17 @@
 from dataclasses import dataclass
 from typing import Unpack
 
-from ..core.snowflake import Snowflake
-
 from .base_resource import BaseResource
 
-from ..models.message import MessageModel, PinnedMessageModel
-from ..models.channel import ChannelModel, ThreadMemberModel, FollowedChannelModel, ArchivedThreadsModel
-from ..models.invite import InviteModel, InviteWithMetadataModel
+from ..core.snowflake import Snowflake
+from ..core.serialization import serialize
 
-from ..parts.message import MessagePart, MessageFlagParams
-from ..parts.channel import ThreadFromMessagePart, ThreadWithoutMessagePart
-from ..parts.invite import InvitePart
+from ..api.messages.message import MessageModel, PinnedMessageModel, MessagePart
+from ..api.channels.channel import ChannelModel
+from ..api.channels.followed import FollowedChannelModel
+from ..api.channels.threads import ThreadMemberModel, ArchivedThreadsModel, ThreadFromMessagePart, ThreadWithoutMessagePart
+
+from ..api.invite import InviteModel, InvitePart, InviteWithMetadataModel
 
 from ..params.channel import EditGuildChannelParams, EditThreadChannelParams
 
@@ -29,7 +29,7 @@ class Channel(BaseResource):
         Returns:
             (ChannelModel): queried channel
         """
-        data = await self._http.request("GET", f"/channels/{self.id}")
+        data = await self.http.request("GET", f"/channels/{self.id}")
 
         return ChannelModel.from_dict(data)
 
@@ -42,7 +42,7 @@ class Channel(BaseResource):
         !!! important "Permissions"
             Requires `MANAGE_CHANNELS` and `MANAGE_THREADS`
         """
-        await self._http.request("DELETE", f"/channels/{self.id}")
+        await self.http.request("DELETE", f"/channels/{self.id}")
 
     async def follow(self, webhook_channel_id: Snowflake) -> FollowedChannelModel:
         """Follow announcement channel to send messages to a target channel.
@@ -54,7 +54,7 @@ class Channel(BaseResource):
         Returns:
             (FollowedChannelModel): followed channel
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'POST', 
             f'/channels/{self.id}/followers', 
             params={'webhook_channel_id': webhook_channel_id}
@@ -79,14 +79,9 @@ class Channel(BaseResource):
         Returns:
             (ChannelModel): updated channel
         """
+        options = serialize(options)
 
-        if options.get('default_reaction_emoji'):
-            options['default_reaction_emoji'] = options['default_reaction_emoji'].to_dict()
-
-        if options.get('available_tags'):
-            options['available_tags'] = [i.to_dict() for i in options['available_tags']]
-
-        data = await self._http.request('PATCH', f'/channels/{self.id}', data=options)
+        data = await self.http.request('PATCH', f'/channels/{self.id}', data=options)
 
         return ChannelModel.from_dict(data)
     
@@ -113,7 +108,7 @@ class Channel(BaseResource):
             "around": around
         }
 
-        data = await self._http.request('GET', f'/channels/{self.id}/messages', params=params)
+        data = await self.http.request('GET', f'/channels/{self.id}/messages', params=params)
 
         return [MessageModel.from_dict(msg) for msg in data]
 
@@ -135,7 +130,7 @@ class Channel(BaseResource):
             limit (int, optional): Max number of pinned messages to return. Range 1 - 50. Defaults to `50`.
         
         Returns:
-            (list[PinnedMessage]): queried list of pinned messages
+            (list[PinnedMessageModel]): queried list of pinned messages
         """
         # Set default limit if user didn't supply one
         params = {
@@ -143,11 +138,11 @@ class Channel(BaseResource):
             "before": before
         }
 
-        data = await self._http.request('GET', f'/channels/{self.id}/pins', params=params)
+        data = await self.http.request('GET', f'/channels/{self.id}/pins', params=params)
 
         return [PinnedMessageModel.from_dict(item) for item in data]
 
-    async def send(self, message: str | MessagePart, **flags: Unpack[MessageFlagParams]) -> MessageModel:
+    async def send(self, message: str | MessagePart) -> MessageModel:
         """Send a message to this channel.
         Fires [`MessageCreateEvent`][scurrypy.events.message_events.MessageCreateEvent].
 
@@ -156,23 +151,21 @@ class Channel(BaseResource):
 
         Args:
             message (str | MessagePart): content as a string or MessagePart
-            flags (MessageFlagParams): flags to set
 
         Returns:
             (MessageModel): created message
         """
         if isinstance(message, str):
-            message = MessagePart(content=message).set_flags(**flags)
-        elif flags:
-            message.set_flags(**flags)
+            message = MessagePart(content=message)
 
-        message = message._prepare()
-
-        data = await self._http.request(
+        if message.attachments:
+            message = message._prepare()
+        
+        data = await self.http.request(
             "POST", 
             f"/channels/{self.id}/messages", 
-            data=message._prepare().to_dict(),
-            files=[fp.path for fp in message.attachments]
+            data=message.to_dict(),
+            files=[fp.path for fp in message.attachments] if message.attachments else None
         )
 
         return MessageModel.from_dict(data)
@@ -193,7 +186,7 @@ class Channel(BaseResource):
         Args:
             message_ids (list[Snowflake]): IDs of the messages to delete range(2, 100)
         """
-        await self._http.request(
+        await self.http.request(
             'POST', 
             f'/channels/{self.id}/messages/bulk-delete', 
             data={'messages': message_ids}
@@ -212,7 +205,7 @@ class Channel(BaseResource):
         Returns:
             list[InviteWithMetadataModel]: queried list of invites
         """
-        data = await self._http.request('GET', f'/channels/{self.id}/invites')
+        data = await self.http.request('GET', f'/channels/{self.id}/invites')
 
         return [InviteWithMetadataModel.from_dict(i) for i in data]
 
@@ -229,7 +222,7 @@ class Channel(BaseResource):
         Returns:
             (InviteModel): created invite object 
         """
-        data = await self._http.request('POST', f'/channels/{self.id}/invites', data=invite.to_dict())
+        data = await self.http.request('POST', f'/channels/{self.id}/invites', data=invite.to_dict())
 
         return InviteModel.from_dict(data)
 
@@ -247,7 +240,7 @@ class Channel(BaseResource):
 
         params = { 'with_member': with_member }
 
-        data = await self._http.request('GET', f'/channels/{self.id}/thread-members/{user_id}', params=params)
+        data = await self.http.request('GET', f'/channels/{self.id}/thread-members/{user_id}', params=params)
 
         return ThreadMemberModel.from_dict(data)
     
@@ -272,7 +265,7 @@ class Channel(BaseResource):
             'limit': limit
         }
 
-        data = await self._http.request('GET', f"/channels/{self.id}/thread-members", params=params)
+        data = await self.http.request('GET', f"/channels/{self.id}/thread-members", params=params)
 
         return [ThreadMemberModel.from_dict(n) for n in data]
 
@@ -289,7 +282,7 @@ class Channel(BaseResource):
             ChannelModel: new thread
         """
 
-        data = await self._http.request('POST', f"channels/{self.id}/messages/{message_id}/threads", data=thread.to_dict())
+        data = await self.http.request('POST', f"channels/{self.id}/messages/{message_id}/threads", data=thread.to_dict())
 
         return ChannelModel.from_dict(data)
 
@@ -304,7 +297,7 @@ class Channel(BaseResource):
             ChannelModel: new thread
         """
 
-        data = await self._http.request('POST', f'/channels/{self.id}/threads', data=thread.to_dict())
+        data = await self.http.request('POST', f'/channels/{self.id}/threads', data=thread.to_dict())
 
         return ChannelModel.from_dict(data)
 
@@ -325,7 +318,7 @@ class Channel(BaseResource):
             (ChannelModel): updated channel
         """
 
-        data = await self._http.request('PATCH', f'/channels/{self.id}', data=options)
+        data = await self.http.request('PATCH', f'/channels/{self.id}', data=options)
 
         return ChannelModel.from_dict(data)
 
@@ -337,7 +330,7 @@ class Channel(BaseResource):
         !!! important
             Required the thread NOT be archived.
         """
-        await self._http.request('PUT', f'/channels/{self.id}/thread-members/@me')
+        await self.http.request('PUT', f'/channels/{self.id}/thread-members/@me')
 
     async def leave_thread(self) -> None:
         """Remove the bot from a thread.
@@ -346,7 +339,7 @@ class Channel(BaseResource):
         !!! important
             Required the thread NOT be archived.
         """
-        await self._http.request('DELETE', f'/channels/{self.id}/thread-members/@me')
+        await self.http.request('DELETE', f'/channels/{self.id}/thread-members/@me')
 
     async def add_thread_member(self, user_id: Snowflake) -> None:
         """Add a user to this thread.
@@ -355,7 +348,7 @@ class Channel(BaseResource):
         Args:
             user_id (Snowflake): ID of the user to add
         """
-        await self._http.request('PUT', f'/channels/{self.id}/thread-members/{user_id}')
+        await self.http.request('PUT', f'/channels/{self.id}/thread-members/{user_id}')
 
     async def remove_thread_member(self, user_id: Snowflake) -> None:
         """Remove a user to this thread.
@@ -364,7 +357,7 @@ class Channel(BaseResource):
         Args:
             user_id (Snowflake): ID of the user to remove
         """
-        await self._http.request('DELETE', f'/channels/{self.id}/thread-members/{user_id}')
+        await self.http.request('DELETE', f'/channels/{self.id}/thread-members/{user_id}')
 
     async def fetch_public_archived_threads(self, before: str = None, limit: int = None) -> ArchivedThreadsModel:
         """Fetch archived public threads in this channel.
@@ -386,7 +379,7 @@ class Channel(BaseResource):
         Returns:
             (ArchivedThreadsModel): queried public archived threads
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'GET', 
             f'/channels/{self.id}/threads/archived/public', 
             params={
@@ -413,7 +406,7 @@ class Channel(BaseResource):
         Returns:
             (ArchivedThreadsModel): queried private archived threads
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'GET', 
             f'/channels/{self.id}/threads/archived/private', 
             params={
@@ -440,7 +433,7 @@ class Channel(BaseResource):
         Returns:
             (ArchivedThreadsModel): queried private archived threads
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'GET', 
             f'/channels/{self.id}/users/@me/threads/archived/private', 
             params={

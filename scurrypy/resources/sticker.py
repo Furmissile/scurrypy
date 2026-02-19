@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-from ..core.snowflake import Snowflake
-
 from .base_resource import BaseResource
 
-from ..models.sticker import StickerModel, StickerPackModel
+from ..core.snowflake import Snowflake
+
+from ..api.messages.sticker import StickerModel, StickerPackModel
 
 @dataclass
 class Sticker(BaseResource):
@@ -19,7 +19,7 @@ class Sticker(BaseResource):
         Returns:
             (StickerModel): queried sticker
         """
-        data = await self._http.request('GET', f'/stickers/{sticker_id}')
+        data = await self.http.request('GET', f'/stickers/{sticker_id}')
 
         return StickerModel.from_dict(data)
 
@@ -32,7 +32,7 @@ class Sticker(BaseResource):
         Returns:
             (StickerPackModel): queried sticker pack
         """
-        data = await self._http.request('GET', f'/sticker-packs/{pack_id}')
+        data = await self.http.request('GET', f'/sticker-packs/{pack_id}')
 
         return StickerPackModel.from_dict(data)
 
@@ -42,7 +42,7 @@ class Sticker(BaseResource):
         Returns:
             list[StickerPackModel]: queried list of sticker packs.
         """
-        data = await self._http.request('GET', '/sticker-packs')
+        data = await self.http.request('GET', '/sticker-packs')
 
         stickers = data.get('sticker_packs')
 

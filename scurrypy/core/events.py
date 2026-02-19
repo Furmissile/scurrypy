@@ -1,71 +1,70 @@
 from ..events import *
-
-from ..events.event_types import EventTypes
+from ..enums.events import EventType
 
 EVENTS = {
     # startup events
-    EventTypes.READY: ReadyEvent,
+    EventType.READY: ReadyEvent,
 
     # channel events
-    EventTypes.CHANNEL_CREATE: ChannelCreateEvent,
-    EventTypes.CHANNEL_UPDATE: ChannelUpdateEvent,
-    EventTypes.CHANNEL_DELETE: ChannelDeleteEvent,
+    EventType.CHANNEL_CREATE: ChannelCreateEvent,
+    EventType.CHANNEL_UPDATE: ChannelUpdateEvent,
+    EventType.CHANNEL_DELETE: ChannelDeleteEvent,
     
-    EventTypes.CHANNEL_PINS_UPDATE: ChannelPinsUpdateEvent,
+    EventType.CHANNEL_PINS_UPDATE: ChannelPinsUpdateEvent,
 
-    EventTypes.THREAD_CREATE: ThreadCreateEvent,
-    EventTypes.THREAD_UPDATE: ThreadUpdateEvent,
-    EventTypes.THREAD_DELETE: ThreadDeleteEvent,
-    EventTypes.THREAD_MEMBER_UPDATE: ThreadMemberUpdateEvent,
-    EventTypes.THREAD_MEMBERS_UPDATE: ThreadMembersUpdateEvent,
-    EventTypes.THREAD_LIST_SYNC: ThreadListSyncEvent,
+    EventType.THREAD_CREATE: ThreadCreateEvent,
+    EventType.THREAD_UPDATE: ThreadUpdateEvent,
+    EventType.THREAD_DELETE: ThreadDeleteEvent,
+    EventType.THREAD_MEMBER_UPDATE: ThreadMemberUpdateEvent,
+    EventType.THREAD_MEMBERS_UPDATE: ThreadMembersUpdateEvent,
+    EventType.THREAD_LIST_SYNC: ThreadListSyncEvent,
 
-    EventTypes.BULK_MESSAGE_DELETE: BulkMessageDeleteEvent,
+    EventType.BULK_MESSAGE_DELETE: BulkMessageDeleteEvent,
     
-    EventTypes.WEBHOOKS_UPDATE: WebhooksUpdateEvent,
+    EventType.WEBHOOKS_UPDATE: WebhooksUpdateEvent,
 
     # invite events
-    EventTypes.INVITE_CREATE: InviteCreateEvent,
-    EventTypes.INVITE_DELETE: InviteDeleteEvent,
+    EventType.INVITE_CREATE: InviteCreateEvent,
+    EventType.INVITE_DELETE: InviteDeleteEvent,
 
     # guild events
-    EventTypes.GUILD_CREATE: GuildCreateEvent,
-    EventTypes.GUILD_UPDATE: GuildUpdateEvent,
-    EventTypes.GUILD_DELETE: GuildDeleteEvent,
+    EventType.GUILD_CREATE: GuildCreateEvent,
+    EventType.GUILD_UPDATE: GuildUpdateEvent,
+    EventType.GUILD_DELETE: GuildDeleteEvent,
 
-    EventTypes.GUILD_MEMBER_ADD: GuildMemberAddEvent,
-    EventTypes.GUILD_MEMBER_UPDATE: GuildMemberUpdateEvent,
-    EventTypes.GUILD_MEMBER_REMOVE: GuildMemberRemoveEvent,
+    EventType.GUILD_MEMBER_ADD: GuildMemberAddEvent,
+    EventType.GUILD_MEMBER_UPDATE: GuildMemberUpdateEvent,
+    EventType.GUILD_MEMBER_REMOVE: GuildMemberRemoveEvent,
 
-    EventTypes.GUILD_EMOJIS_UPDATE: GuildEmojisUpdateEvent,
+    EventType.GUILD_EMOJIS_UPDATE: GuildEmojisUpdateEvent,
 
-    EventTypes.GUILD_STICKERS_UPDATE: GuildStickersUpdateEvent,
+    EventType.GUILD_STICKERS_UPDATE: GuildStickersUpdateEvent,
 
-    EventTypes.GUILD_BAN_ADD: GuildBanAddEvent,
-    EventTypes.GUILD_BAN_REMOVE: GuildBanRemoveEvent,
+    EventType.GUILD_BAN_ADD: GuildBanAddEvent,
+    EventType.GUILD_BAN_REMOVE: GuildBanRemoveEvent,
 
     # integration events
-    EventTypes.INTEGRATION_CREATE: GuildIntegrationCreateEvent,
-    EventTypes.GUILD_INTEGRATIONS_UPDATE: GuildIntegrationsUpdateEvent,
-    EventTypes.INTEGRATION_UPDATE: GuildIntegrationUpdateEvent,
-    EventTypes.INTEGRATION_DELETE: GuildIntegrationDeleteEvent,
+    EventType.INTEGRATION_CREATE: GuildIntegrationCreateEvent,
+    EventType.GUILD_INTEGRATIONS_UPDATE: GuildIntegrationsUpdateEvent,
+    EventType.INTEGRATION_UPDATE: GuildIntegrationUpdateEvent,
+    EventType.INTEGRATION_DELETE: GuildIntegrationDeleteEvent,
 
     # interaction events
-    EventTypes.INTERACTION_CREATE: InteractionEvent,
+    EventType.INTERACTION_CREATE: InteractionEvent,
 
     # message events
-    EventTypes.MESSAGE_CREATE: MessageCreateEvent,
-    EventTypes.MESSAGE_UPDATE: MessageUpdateEvent,
-    EventTypes.MESSAGE_DELETE: MessageDeleteEvent,
+    EventType.MESSAGE_CREATE: MessageCreateEvent,
+    EventType.MESSAGE_UPDATE: MessageUpdateEvent,
+    EventType.MESSAGE_DELETE: MessageDeleteEvent,
 
     # reaction events
-    EventTypes.MESSAGE_REACTION_ADD: ReactionAddEvent,
-    EventTypes.MESSAGE_REACTION_REMOVE: ReactionRemoveEvent,
-    EventTypes.MESSAGE_REACTION_REMOVE_ALL: ReactionRemoveAllEvent,
-    EventTypes.MESSAGE_REACTION_REMOVE_EMOJI: ReactionRemoveEmojiEvent,
+    EventType.MESSAGE_REACTION_ADD: ReactionAddEvent,
+    EventType.MESSAGE_REACTION_REMOVE: ReactionRemoveEvent,
+    EventType.MESSAGE_REACTION_REMOVE_ALL: ReactionRemoveAllEvent,
+    EventType.MESSAGE_REACTION_REMOVE_EMOJI: ReactionRemoveEmojiEvent,
 
     # role events
-    EventTypes.ROLE_CREATE: RoleCreateEvent,
-    EventTypes.ROLE_UPDATE: RoleUpdateEvent,
-    EventTypes.ROLE_DELETE: RoleDeleteEvent
+    EventType.ROLE_CREATE: RoleCreateEvent,
+    EventType.ROLE_UPDATE: RoleUpdateEvent,
+    EventType.ROLE_DELETE: RoleDeleteEvent
 }

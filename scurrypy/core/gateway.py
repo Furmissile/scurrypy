@@ -4,7 +4,8 @@ import websockets
 
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("scurrypy.gateway")
+logger.addHandler(logging.NullHandler())
 
 from ..config import GATEWAY_PROPERTIES
 

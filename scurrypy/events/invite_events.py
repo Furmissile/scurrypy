@@ -1,11 +1,11 @@
 from dataclasses import dataclass
+
 from ..core.model import DataModel
 from ..core.snowflake import Snowflake
+
 from .base_event import Event
 
-from typing import Optional
-
-from ..models.user import UserModel
+from ..api.user import UserModel
 
 @dataclass
 class InviteCreateEvent(Event, DataModel):
@@ -17,10 +17,10 @@ class InviteCreateEvent(Event, DataModel):
     code: str
     """Invite code (unique ID)."""
 
-    guild_id: Optional[Snowflake]
+    guild_id: Snowflake | None
     """Guild ID in which the invite belongs."""
 
-    inviter: Optional[UserModel]
+    inviter: UserModel | None
     """User who created invite."""
 
     uses: int
@@ -46,7 +46,7 @@ class InviteDeleteEvent(Event, DataModel):
     channel_id: Snowflake
     """Channel ID in which the invite belongs."""
 
-    guild_id: Optional[Snowflake]
+    guild_id: Snowflake | None
     """Guild ID in which the invite belongs."""
 
     code: str

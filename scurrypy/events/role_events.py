@@ -1,10 +1,11 @@
 from dataclasses import dataclass
+
 from ..core.model import DataModel
 from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
-from ..models.role import RoleModel
+from ..api.guilds.role import GuildRoleModel
 
 @dataclass
 class RoleCreateEvent(Event, DataModel):
@@ -13,7 +14,7 @@ class RoleCreateEvent(Event, DataModel):
     guild_id: Snowflake
     """Guild ID of the role."""
 
-    role: RoleModel
+    role: GuildRoleModel
     """The new role."""
 
 @dataclass
@@ -23,7 +24,7 @@ class RoleUpdateEvent(Event, DataModel):
     guild_id: Snowflake
     """Guild ID of the role."""
 
-    role: RoleModel
+    role: GuildRoleModel
     """The new role."""
 
 @dataclass

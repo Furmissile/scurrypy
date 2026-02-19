@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from .base_resource import BaseResource
 
-from ..models.invite import InviteModel
+from ..api.invite import InviteModel
 
 @dataclass
 class Invite(BaseResource):
@@ -20,7 +20,7 @@ class Invite(BaseResource):
         Returns:
             (InviteModel): queried invite object
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'GET', 
             f'/invites/{self.code}', 
             params={'with_counts': with_counts}
@@ -39,6 +39,6 @@ class Invite(BaseResource):
         Returns:
             (InviteModel): deleted invite object
         """
-        data = await self._http.request('DELETE', f'/invites/{self.code}')
+        data = await self.http.request('DELETE', f'/invites/{self.code}')
 
         return InviteModel.from_dict(data)

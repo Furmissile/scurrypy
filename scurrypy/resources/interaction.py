@@ -1,20 +1,25 @@
 from dataclasses import dataclass
 from typing import Unpack
 
-from ..core.snowflake import Snowflake
-
 from .base_resource import BaseResource
 
-from ..models.interaction import InteractionCallbackModel, InteractionCallbackTypes
+from ..core.snowflake import Snowflake
+from ..core.serialization import serialize
 
-from ..parts.modal import ModalPart
-from ..parts.message import MessagePart, MessageFlagParams, MessageFlags
-from ..parts.command import CommandOptionChoicePart
+from ..enums.message import MessageFlags
+from ..enums.interaction import InteractionCallbackType
+
+from ..api.interactions.modal import ModalPart
+from ..api.interactions.interaction import InteractionCallbackModel
+from ..api.messages.message import MessagePart
+from ..api.commands.slash import CommandOptionChoicePart
 
 from ..params.message import EditMessageParams
 
+from .message import _EditMessageMixin
+
 @dataclass
-class Interaction(BaseResource):
+class Interaction(BaseResource, _EditMessageMixin):
     """Represents a Discord Interaction object."""
 
     id: Snowflake
@@ -23,7 +28,14 @@ class Interaction(BaseResource):
     token: str
     """Continuation token for responding to the interaction."""
 
-    async def respond(self, message: str | MessagePart, with_response: bool = False, **flags: Unpack[MessageFlagParams]) -> InteractionCallbackModel | None:
+    async def respond(
+        self, 
+        message: str | MessagePart, 
+        *, 
+        with_response: bool = False, 
+        ephemeral: bool = None, 
+        suppress_embeds: bool = None
+    ) -> InteractionCallbackModel | None:
         """Create a message in response to an interaction.
         Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent]
         and [`MessageCreateEvent`][scurrypy.events.message_events.MessageCreateEvent].
@@ -31,51 +43,66 @@ class Interaction(BaseResource):
         Args:
             message (str | MessagePart): content as a string or MessagePart
             with_response (bool, optional): if the interaction data should be returned. Defaults to `False`.
-            flags (MessageFlagParams): message flags to set
+            ephemeral (optional, bool): whether the response should be ephemeral
+            suppress_embeds (optional, bool): whether the response's embeds should be removed
 
         Returns:
             (InteractionCallbackModel | None): interaction callback object (if `with_response` is toggled) else None
         """
         if isinstance(message, str):
-            message = MessagePart(content=message).set_flags(**flags)
-        elif flags:
-            message.set_flags(**flags)
+            message = MessagePart(content=message)
+
+        message.flags = MessageFlags.NO_FLAGS
+
+        if ephemeral:
+            message.flags |= MessageFlags.EPHEMERAL
+
+        if suppress_embeds:
+            message.flags |= MessageFlags.SUPPRESS_EMBEDS
 
         content = {
-            'type': InteractionCallbackTypes.CHANNEL_MESSAGE_WITH_SOURCE, 
+            'type': InteractionCallbackType.CHANNEL_MESSAGE_WITH_SOURCE, 
             'data': message._prepare().to_dict()
         }
         
-        data = await self._http.request(
+        data = await self.http.request(
             'POST', 
             f'/interactions/{self.id}/{self.token}/callback', 
             data=content, 
-            files=[fp.path for fp in message.attachments],
+            files=[fp.path for fp in message.attachments] if message.attachments else None,
             params={'with_response': with_response}
         )
 
         if with_response:
             return InteractionCallbackModel.from_dict(data)
         
-    async def update(self, **options: Unpack[EditMessageParams]) -> None:
-        """Update a message in response to an interaction.
-        Fires [`MessageUpdateEvent`][scurrypy.events.message_events.MessageUpdateEvent].
+    async def update(
+        self,
+        *,
+        suppress_embeds: bool = None,
+        **options: Unpack[EditMessageParams]
+    ) -> None:
+        """Edits the initial Interaction response.
 
         Args:
             options (EditMessageParams): fields to edit
+            suppress_embeds (optional, bool): whether the response's embeds should be removed
         """
-        message = MessagePart(**options)
+        options = serialize(options)
+        self._apply_suppress_embeds(options, suppress_embeds)
+        files = self._prepare_attachments(options)
 
         content = {
-            'type': InteractionCallbackTypes.UPDATE_MESSAGE, 
-            'data': message._prepare().to_dict()
+            "type": InteractionCallbackType.UPDATE_MESSAGE,
+            "data": options,
         }
 
-        await self._http.request(
-            'POST', 
-            f'/interactions/{self.id}/{self.token}/callback', 
-            data=content, 
-            files=[fp.path for fp in message.attachments])
+        await self.http.request(
+            "POST",
+            f"/interactions/{self.id}/{self.token}/callback",
+            data=content,
+            files=files
+        )
 
     async def respond_modal(self, modal: ModalPart) -> None:
         """Create a modal in response to an interaction.
@@ -85,11 +112,11 @@ class Interaction(BaseResource):
             modal (ModalPart): modal data
         """
         content = {
-            'type': InteractionCallbackTypes.MODAL,
+            'type': InteractionCallbackType.MODAL,
             'data': modal.to_dict()
         }
 
-        await self._http.request(
+        await self.http.request(
             'POST', 
             f'/interactions/{self.id}/{self.token}/callback', 
             data=content)
@@ -102,59 +129,59 @@ class Interaction(BaseResource):
             choices (list[CommandOptionChoicePart]): list of choices to autocomplete
         """
         content = {
-            'type': InteractionCallbackTypes.APPLICATION_COMMAND_AUTOCOMPLETE_RESULT,
+            'type': InteractionCallbackType.APPLICATION_COMMAND_AUTOCOMPLETE_RESULT,
             'data': {
                 'choices': [choice.to_dict() for choice in choices]
             }
         }
 
-        await self._http.request(
+        await self.http.request(
             'POST',
             f'/interactions/{self.id}/{self.token}/callback',
             data=content
         )
 
-    async def defer_respond(self, ephemeral: bool) -> None:
+    async def defer_respond(self, ephemeral: bool = None) -> None:
         """Defer creating a message in response to an interaction.
         Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent].
 
         Args:
-            ephemeral (bool): whether thinking + deferred interaction response is ephemeral
+            ephemeral (bool, optional): whether thinking + deferred interaction response is ephemeral
         """
         content = {
-            'type': InteractionCallbackTypes.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+            'type': InteractionCallbackType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
             'data': {
-                'flags': MessageFlags.EPHEMERAL if ephemeral else 0
+                'flags': MessageFlags.EPHEMERAL if ephemeral else MessageFlags.NO_FLAGS
             }
         }
 
-        await self._http.request(
+        await self.http.request(
             'POST',
             f'/interactions/{self.id}/{self.token}/callback',
             data=content
         )
 
-    async def defer_update(self, ephemeral: bool) -> None:
+    async def defer_update(self) -> None:
         """Defer updating a message in response to an interaction.
         Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent].
-
-        Args:
-            ephemeral (bool): whether the deferred interaction response is ephemeral
         """
         content = {
-            'type': InteractionCallbackTypes.DEFERRED_UPDATE_MESSAGE,
-            'data': {
-                'flags': MessageFlags.EPHEMERAL if ephemeral else 0
-            }
+            'type': InteractionCallbackType.DEFERRED_UPDATE_MESSAGE,
         }
 
-        await self._http.request(
+        await self.http.request(
             'POST',
             f'/interactions/{self.id}/{self.token}/callback',
             data=content
         )
 
-    async def followup(self, application_id: Snowflake, message: str | MessagePart, **flags: Unpack[MessageFlagParams]) -> None:
+    async def followup(
+        self, 
+        application_id: Snowflake, 
+        message: str | MessagePart, 
+        ephemeral: bool = None,
+        suppress_embeds: bool = None
+    ) -> None:
         """Create a new message to respond to a deferred interaction.
         Fires [`MessageCreateEvent`][scurrypy.events.message_events.MessageCreateEvent].
 
@@ -163,34 +190,50 @@ class Interaction(BaseResource):
 
         Args:
             application_id (Snowflake): ID of the application
-            message (str | MessagePart): content as a string or MessagePart  
-            flags (MessageFlagParams): message flags to set
+            message (str | MessagePart): content as a string or MessagePart
+            ephemeral (optional, bool): whether the followup should be ephemeral
+            suppress_embeds (optional, bool): whether the followup's embeds should be removed
         """
         if isinstance(message, str):
-            message = MessagePart(content=message).set_flags(**flags)
-        elif flags:
-            message.set_flags(**flags)
+            message = MessagePart(content=message)
+
+        message.flags = MessageFlags.NO_FLAGS
+
+        if ephemeral:
+            message.flags |= MessageFlags.EPHEMERAL
+
+        if suppress_embeds:
+            message.flags |= MessageFlags.SUPPRESS_EMBEDS
 
         content = message._prepare().to_dict()
 
-        await self._http.request(
+        await self.http.request(
             'POST',
             f'/webhooks/{application_id}/{self.token}',
             data=content
         )
 
-    async def edit_original(self, application_id: Snowflake, message: str | MessagePart) -> None:
-        """Update the original interaction response from a deferred update interaction.
+    async def edit_original(
+        self,
+        application_id: Snowflake,
+        *,
+        suppress_embeds: bool = None,
+        **options: Unpack[EditMessageParams]
+    ) -> None:
+        """Edits the initial Interaction response.
 
         Args:
-            application_id (Snowflake): ID of the application
-            message (str | MessagePart): content as a string or MessagePart
+            application_id (Snowflake): bot's user ID
+            options (EditMessageParams): fields to edit
+            suppress_embeds (optional, bool): whether the response's embeds should be removed
         """
-        if isinstance(message, str):
-            message = MessagePart(content=message)
+        options = serialize(options)
+        self._apply_suppress_embeds(options, suppress_embeds)
+        files = self._prepare_attachments(options)
 
-        await self._http.request(
-            'PATCH',
-            f'/webhooks/{application_id}/{self.token}/messages/@original',
-            data=message._prepare().to_dict()
+        await self.http.request(
+            "PATCH",
+            f"/webhooks/{application_id}/{self.token}/messages/@original",
+            data=options,
+            files=files
         )

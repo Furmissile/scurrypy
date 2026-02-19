@@ -1,10 +1,11 @@
 from typing import TypedDict
 
-from ..parts.embed import EmbedPart
-from ..parts.components import ActionRowPart
-from ..parts.components_v2 import ContainerPart
-from ..parts.attachment import AttachmentPart
-from ..parts.message import MessageReferencePart
+from ..enums.message import MessageFlags
+
+from ..api.components.layout import ActionRow, Container
+from ..api.messages.attachment import AttachmentPart
+from ..api.messages.embed import Embed
+from ..api.messages.message import MessageReferencePart
 
 class EditMessageParams(TypedDict, total=False):
     """Parameters for editing a message"""
@@ -12,20 +13,22 @@ class EditMessageParams(TypedDict, total=False):
     content: str
     """Message text content."""
 
-    flags: int
-    """Message flags. See [`MessageFlags`][scurrypy.parts.message.MessageFlags].
+    flags: MessageFlags
+    """Message flags.
     
     !!! note
-        Can only set `SUPPRESS_EMBEDS` and `IS_COMPONENTS_V2`
+        If omitted, existing message flags are not preserved automatically.
+        Passing endpoint flags without explicitly setting `flags`
+        will construct a new flags value.
     """
 
-    components: list[ActionRowPart | ContainerPart]
+    components: list[ActionRow | Container]
     """Components to be attached to this message."""
 
     attachments: list[AttachmentPart]
     """Attachments to be attached to this message."""
 
-    embeds: list[EmbedPart]
+    embeds: list[Embed]
     """Embeds to be attached to this message."""
 
     message_reference: MessageReferencePart

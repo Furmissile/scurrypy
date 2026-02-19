@@ -48,24 +48,23 @@ The following examples are quick drop-in starters if you wish to try ScurryPy.
 # --- Core library imports ---
 from scurrypy import Client, EventTypes, InteractionEvent, SlashCommandPart
 
-client = Client(TOKEN)
-
 # --- Setup bot ---
-async def create_commands():
-    """Create a command for the bot APP_ID in guild GUILD_ID."""
-    await client.guild_command(APP_ID, GUILD_ID).create(
-        SlashCommandPart("greet", "Greet the bot!")
-    )
-
-client.add_startup_hook(create_commands)
+client = Client(token=TOKEN)
 
 async def on_greet(event: InteractionEvent):
-    """Respond to the created slash command."""
+    """Respond to /greet"""
     if event.data.name != "greet":
         return
 
     await client.interaction(event.id, event.token).respond("Hello!")
 
+async def register_commands():
+    """Register slash commands on startup (before READY)."""
+    await client.guild_command(APP_ID, GUILD_ID).create(
+        SlashCommandPart("greet", "Greet the bot!")
+    )
+
+client.add_startup_hook(register_commands)
 client.add_event_listener(EventTypes.INTERACTION_CREATE, on_greet)
 
 # --- Run the bot ---
@@ -80,17 +79,16 @@ client.run()
 # --- Core library imports ---
 from scurrypy import Client, Intents, EventTypes, MessageCreateEvent
 
-client = Client(TOKEN, Intents.set(message_content=True)) # requires MESSAGE_CONTENT intent
+client = Client(token=TOKEN, intents=Intents.DEFAULT | Intents.MESSAGE_CONTENT)
 
 # --- Setup bot ---
 async def on_ping(event: MessageCreateEvent):
-    """Respond to the '!ping' command."""
     if not event.content:
-        return # ignore empty messages
-
+        return
+    
     if not event.content.startswith('!ping'):
-        return # ignore messages that are not the command
-
+        return
+    
     await client.channel(event.channel_id).send("Pong!")
 
 client.add_event_listener(EventTypes.MESSAGE_CREATE, on_ping)

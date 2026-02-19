@@ -1,7 +1,7 @@
 import asyncio
 import inspect
 
-from .core.intents import Intents
+from .intents import Intents
 from .core.http import HTTPClient, HTTPClientProtocol
 from .core.gateway import GatewayClient, GatewayClientProtocol
 from .core.error import DiscordError
@@ -11,7 +11,8 @@ from .events.gateway_events import GatewayEvent
 
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("scurrypy.client")
+logger.addHandler(logging.NullHandler())
 
 class Client:
     """Main entry point for Discord bots.
@@ -21,14 +22,11 @@ class Client:
     token: str
     """Bot's token."""
 
-    intents: int
+    intents: Intents
     """Bot intents for listening to events."""
 
-    _http: HTTPClient
-    """HTTP session for requests."""
-
-    http: HTTPClient
-    """Public HTTP session (ref to `_http`) for requests."""
+    http: HTTPClientProtocol
+    """Public HTTP session for requests."""
 
     shards: GatewayClientProtocol
     """Shards as a list of gateways."""
@@ -43,9 +41,9 @@ class Client:
     """Handlers to call once after the bot shuts down."""
 
     def __init__(self,
-        token: str,
-        intents: int = Intents.DEFAULT,
         *,
+        token: str,
+        intents: Intents = Intents.DEFAULT,
         shard_count: int = 0,
         http: HTTPClientProtocol = None,
         gateway_impl: GatewayClientProtocol = None
@@ -53,20 +51,19 @@ class Client:
         """
         Args:
             token (str): the bot's token
-            intents (int, optional): gateway intents. Defaults to `Intents.DEFAULT`.
+            intents (Intents, optional): gateway intents. Defaults to `Intents.DEFAULT`.
             shard_count (int, optional): number of shards to spawn. Defaults to `0` or recommended shard count.
             http (HTTPClientProtocol, optional): HTTP protocol implementation. Leave blank for default client.
             gateway_impl (GatewayClientProtocol, optional): Gateway protocol implementation. Leave blank for default client.
         """
-        if not isinstance(intents, int):
-            raise ValueError("Intents must be an integer.")
+        if not isinstance(intents, Intents):
+            raise ValueError("Invalid intents type.")
         
         self.token = token
         self.intents = intents
         self.shard_count = shard_count
         
-        self._http = http or HTTPClient()
-        self.http = self._http
+        self.http = http or HTTPClient()
 
         self.shards: list[GatewayClientProtocol] = []
         self.shard_type = gateway_impl or GatewayClient
@@ -82,6 +79,9 @@ class Client:
             event (str): name of the event to listen
             handler (callable): listener function
         """
+        if not callable(handler):
+            raise TypeError(f"{handler} is not a callable function.")
+        
         params_len = len(inspect.signature(handler).parameters)
 
         if params_len != 1:
@@ -98,6 +98,9 @@ class Client:
         Args:
             handler (callable): startup function
         """
+        if not callable(handler):
+            raise TypeError(f"{handler} is not a callable function.")
+        
         params_len = len(inspect.signature(handler).parameters)
 
         if params_len != 0:
@@ -114,6 +117,9 @@ class Client:
         Args:
             handler (callable): shutdown function
         """
+        if not callable(handler):
+            raise TypeError(f"{handler} is not a callable function.")
+        
         params_len = len(inspect.signature(handler).parameters)
 
         if params_len != 0:
@@ -134,7 +140,7 @@ class Client:
         """
         from .resources.application import Application
 
-        return Application(self._http, id=application_id, context=None)
+        return Application(self.http, id=application_id, context=None)
     
     def bot_emoji(self, application_id: Snowflake):
         """Creates an interactable bot emoji resource.
@@ -145,9 +151,9 @@ class Client:
         Returns:
             (BotEmojis): the BotEmoji resource
         """
-        from .resources.bot_emoji import BotEmoji
+        from .resources.emoji import ApplicationEmoji
 
-        return BotEmoji(self._http, None, application_id)
+        return ApplicationEmoji(self.http, None, application_id)
     
     def guild_emoji(self, guild_id: Snowflake):
         """Creates an interactable emoji resource.
@@ -158,133 +164,120 @@ class Client:
         Returns:
             (GuildEmoji): the GuildEmoji resource
         """
-        from .resources.guild_emoji import GuildEmoji
+        from .resources.emoji import GuildEmoji
 
-        return GuildEmoji(self._http, None, guild_id)
+        return GuildEmoji(self.http, None, guild_id)
 
-    def guild(self, guild_id: Snowflake, *, context = None):
+    def guild(self, guild_id: Snowflake):
         """Creates an interactable guild resource.
 
         Args:
             guild_id (Snowflake): ID of target guild
-            context (Any, optional): associated data 
 
         Returns:
             (Guild): the Guild resource
         """
         from .resources.guild import Guild
 
-        return Guild(self._http, context, guild_id)
+        return Guild(self.http, guild_id)
 
-    def channel(self, channel_id: Snowflake, *, context = None):
+    def channel(self, channel_id: Snowflake):
         """Creates an interactable guild channel resource.
 
         Args:
             channel_id (Snowflake): ID of target channel
-            context (Any, optional): associated data
 
         Returns:
             (GuildChannel): the GuildChannel resource
         """
         from .resources.channel import Channel
 
-        return Channel(self._http, context, channel_id)
+        return Channel(self.http, channel_id)
     
-    def invite(self, code: str, *, context = None):
+    def invite(self, code: str):
         """Creates an interactable invite resource.
 
         Args:
             code (str): unique invite code
-            context (_type_, optional): associated data
         """
         from .resources.invite import Invite
 
-        return Invite(self._http, context, code)
+        return Invite(self.http, code)
     
-    def global_command(self, application_id: Snowflake, *, context = None):
+    def global_command(self, application_id: Snowflake):
         """Creates an interactable command resource.
 
         Args:
             application_id (Snowflake): bot's user ID
-            context (Any, optional): associated data
 
         Returns:
             (GlobalCommand): the GlobalCommand resource
         """
         from .resources.command import GlobalCommand
 
-        return GlobalCommand(self._http, context, application_id)
+        return GlobalCommand(self.http, application_id)
     
-    def guild_command(self, application_id: Snowflake, guild_id: Snowflake = None, *, context = None):
+    def guild_command(self, application_id: Snowflake, guild_id: Snowflake = None):
         """Creates an interactable command resource.
 
         Args:
             application_id (Snowflake): bot's user ID
             guild_id (Snowflake, optional): ID of guild if command is in guild scope
-            context (Any, optional): associated data
 
         Returns:
             (GuildCommand): the GuildCommand resource
         """
         from .resources.command import GuildCommand
 
-        return GuildCommand(self._http, context, application_id, guild_id)
+        return GuildCommand(self.http, application_id, guild_id)
 
-    def message(self, channel_id: Snowflake, message_id: Snowflake, *, context = None):
+    def message(self, channel_id: Snowflake, message_id: Snowflake):
         """Creates an interactable message resource.
 
         Args:
             message_id (Snowflake): ID of target message
             channel_id (Snowflake): channel ID of target message
-            context (Any, optional): associated data
 
         Returns:
             (Message): the Message resource
         """
         from .resources.message import Message
 
-        return Message(self._http, context, message_id, channel_id)
+        return Message(self.http, message_id, channel_id)
     
-    def interaction(self, id: Snowflake, token: str, *, context = None):
+    def interaction(self, id: Snowflake, token: str):
         """Creates an interactable interaction resource.
 
         Args:
             id (Snowflake): ID of the interaction
             token (str): interaction token
-            context (Any, optional): associated data
 
         Returns:
             (Interaction): the Interaction resource
         """
         from .resources.interaction import Interaction
 
-        return Interaction(self._http, context, id, token)
+        return Interaction(self.http, id, token)
     
-    def sticker(self, *, context = None):
+    def sticker(self):
         """Creates an interactable sticker resource
-
-        Args:
-            context (Any, optional): associated data
 
         Returns:
             (Sticker): the Sticker resource
         """
         from .resources.sticker import Sticker
 
-        return Sticker(self._http, context)
+        return Sticker(self.http)
     
-    def user(self, *, context = None):
+    def user(self):
         """Creates an interactable user resource.
-
-        Args:
-            context (Any, optional): associated data
 
         Returns:
             (User): the User resource
         """
         from .resources.user import User
 
-        return User(self._http, context)
+        return User(self.http)
 
     async def listen_shard(self, shard: GatewayClient):
         """Consume a GatewayClient's event queue.
@@ -292,8 +285,6 @@ class Client:
         Args:
             shard (GatewayClient): gateway to listen on
         """
-
-        from .core.events import EVENTS
 
         while True:
             try:
@@ -304,6 +295,7 @@ class Client:
                 else:
                     logger.info(f"SHARD ID {shard.shard_id} DISPATCH -> {dispatch_type}")
 
+                from .core.events import EVENTS
                 event_model = EVENTS.get(dispatch_type)
                 if not event_model:
                     logger.warning(f"Event {dispatch_type} is not implemented.")
@@ -355,27 +347,30 @@ class Client:
 
         return tasks
     
+    async def run_startup_hooks(self):
+        for hook in self.startup_hooks:
+            try:
+                logger.debug(f"Running hook {hook.__qualname__}...")
+                result = hook()
+                if inspect.isawaitable(result):
+                    await asyncio.wait_for(result, timeout=60)
+            except Exception:
+                logger.exception("Error in shartup hook")
+    
     async def start(self):
         """Starts the HTTP/Websocket client, run startup logic, and registers commands."""
         
         try:
-            await self._http.start(self.token)
+            await self.http.start(self.token)
 
-            data = await self._http.request('GET', '/gateway/bot')
+            data = await self.http.request('GET', '/gateway/bot')
 
             if not data:
                 return
 
             gateway = GatewayEvent.from_dict(data)
 
-            for hook in self.startup_hooks:
-                try:
-                    logger.debug(f"Running hook {hook.__qualname__}...")
-                    result = hook()
-                    if inspect.isawaitable(result):
-                        await asyncio.wait_for(result, timeout=60)
-                except Exception:
-                    logger.exception("Error in shartup hook")
+            await self.run_startup_hooks()
 
             tasks = await asyncio.create_task(self.start_shards(gateway))
 
@@ -390,9 +385,7 @@ class Client:
         finally:
             await self.close()
 
-    async def close(self):
-        """Gracefully close HTTP session, websocket connections, and run shutdown logic."""  
-
+    async def run_shutdown_hooks(self):
         for hook in self.shutdown_hooks:
             try:
                 logger.debug(f"Running hook {hook.__qualname__}...")
@@ -402,6 +395,11 @@ class Client:
             except Exception:
                 logger.exception("Error in shutdown hook")
 
+    async def close(self):
+        """Gracefully close HTTP session, websocket connections, and run shutdown logic."""  
+
+        await self.run_shutdown_hooks()
+
         # close each connection or shard BEFORE HTTP
         await asyncio.gather(
             *(shard.close_ws() for shard in self.shards),
@@ -409,7 +407,7 @@ class Client:
         )
 
         logger.info("Closing HTTP session...")
-        await self._http.close()
+        await self.http.close()
     
     def run(self):
         """User-facing entry point for starting the client."""  

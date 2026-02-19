@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scurrypy"
-version = "1.1.0"
+version = "2.0.0"
 
 description = "Dataclass-driven Discord API Wrapper in Python"
 readme = "README.md"
 authors = [{ name = "Furmissile" }]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
   "aiohttp>=3.8.0",
   "websockets>=11.0.0",
@@ -19,10 +19,24 @@ dependencies = [
 [tool.setuptools]
 packages = [
   "scurrypy",
-  "scurrypy.events",
-  "scurrypy.resources",
-  "scurrypy.parts", 
+  "scurrypy.api",
+  "scurrypy.api.channels",
+  "scurrypy.api.commands",
+  "scurrypy.api.components",
+  "scurrypy.api.guilds",
+  "scurrypy.api.interactions",
+  "scurrypy.api.messages",
+  "scurrypy.bases",
   "scurrypy.core",
-  "scurrypy.models",
-  "scurrypy.params"
+  "scurrypy.enums",
+  "scurrypy.events",
+  "scurrypy.ext",
+  "scurrypy.ext.cache",
+  "scurrypy.ext.commands",
+  "scurrypy.ext.components",
+  "scurrypy.ext.events",
+  "scurrypy.ext.interactions",
+  "scurrypy.ext.prefixes",
+  "scurrypy.params",
+  "scurrypy.resources"
 ]

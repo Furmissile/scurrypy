@@ -1,13 +1,14 @@
 from dataclasses import dataclass
 from typing import Unpack
 
-from ..core.snowflake import Snowflake
-
 from .base_resource import BaseResource
 
-from ..models.channel import ChannelModel
-from ..models.user import GuildMemberModel
-from ..models.user import UserModel
+from ..core.snowflake import Snowflake
+from ..core.serialization import serialize
+
+from ..api.channels.channel import ChannelModel
+
+from ..api.user import UserModel, GuildMemberModel
 
 from ..params.user import EditUserParams
 
@@ -24,7 +25,7 @@ class User(BaseResource):
         Returns:
             (UserModel): queried user
         """
-        data = await self._http.request('GET', f'/users/{user_id}')
+        data = await self.http.request('GET', f'/users/{user_id}')
 
         return UserModel.from_dict(data)
 
@@ -38,7 +39,7 @@ class User(BaseResource):
         Returns:
             (GuildMemberModel): queried guild member for the user
         """
-        data = await self._http.request('GET', f'/guilds/{guild_id}/members/{user_id}')
+        data = await self.http.request('GET', f'/guilds/{guild_id}/members/{user_id}')
 
         return GuildMemberModel.from_dict(data)
 
@@ -52,13 +53,9 @@ class User(BaseResource):
         Returns:
             (UserModel): edited user
         """
-        if options.get('avatar'):
-            options['avatar'] = options['avatar'].to_dict()
+        options = serialize(options)
 
-        if options.get('banner'):
-            options['banner'] = options['banner'].to_dict()
-
-        data = await self._http.request('PATCH', '/users/@me', data=options)
+        data = await self.http.request('PATCH', '/users/@me', data=options)
 
         return UserModel.from_dict(data)
 
@@ -70,7 +67,7 @@ class User(BaseResource):
         Args:
             guild_id (Snowflake): ID of the guild to leave
         """
-        await self._http.request('DELETE', f'/users/@me/guilds/{guild_id}')
+        await self.http.request('DELETE', f'/users/@me/guilds/{guild_id}')
 
     async def create_dm(self, user_id: Snowflake) -> ChannelModel:
         """Create a DM between the bot and this user.
@@ -81,7 +78,7 @@ class User(BaseResource):
         Returns:
             (ChannelModel): created or existing DM channel
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'POST', 
             '/users/@me/channels', 
             data={'recipient_id': user_id}

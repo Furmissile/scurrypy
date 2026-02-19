@@ -1,14 +1,16 @@
 from dataclasses import dataclass
+
 from ..core.model import DataModel
 from ..core.snowflake import Snowflake
-from typing import Optional
+
 from .base_event import Event
 
-from ..models.user import UserModel, GuildMemberModel
-from ..models.channel import ChannelModel
-from ..models.guild import UnavailableGuildModel, GuildModel
-from ..models.sticker import StickerModel
-from ..models.emoji import EmojiModel
+from ..api.channels.channel import ChannelModel
+from ..api.guilds.guild import UnavailableGuildModel, GuildModel
+from ..api.messages.sticker import StickerModel
+
+from ..api.emoji import EmojiModel
+from ..api.user import UserModel, GuildMemberModel
 
 @dataclass
 class GuildCreateEvent(Event, GuildModel):
@@ -32,7 +34,7 @@ class GuildCreateEvent(Event, GuildModel):
     threads: list[ChannelModel]
     """All active threads in the guild that are viewable."""
 
-    unavailable: Optional[bool]
+    unavailable: bool | None
     """`True` if the guild is unavailable due to an outage."""
 
 @dataclass

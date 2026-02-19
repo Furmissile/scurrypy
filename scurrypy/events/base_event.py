@@ -5,4 +5,4 @@ class Event:
     """Dispatch name of event."""
 
     raw: dict
-    """Event's raw JSON payload. NOT A DATACLASS."""
+    """Event's raw JSON payload."""

@@ -1,12 +1,12 @@
 from dataclasses import dataclass
+
 from ..core.model import DataModel
 from ..core.snowflake import Snowflake
+
 from .base_event import Event
 
-from typing import Optional
-
-from ..models.user import GuildMemberModel
-from ..models.emoji import EmojiModel
+from ..api.user import GuildMemberModel
+from ..api.emoji import EmojiModel
 
 @dataclass
 class ReactionAddEvent(Event, DataModel):
@@ -27,16 +27,16 @@ class ReactionAddEvent(Event, DataModel):
     message_id: Snowflake
     """ID of the message where the reaction took place."""
 
-    guild_id: Optional[Snowflake]
+    guild_id: Snowflake | None
     """ID of the guild where the reaction took place (if in a guild)."""
 
     burst: bool
     """Whether the emoji is super."""
 
-    member: Optional[GuildMemberModel]
+    member: GuildMemberModel | None
     """Partial member object of the guild member that added the emoji (if in a guild)."""
 
-    message_author_id: Optional[Snowflake]
+    message_author_id: Snowflake | None
     """ID of the user who sent the message where the reaction was added."""
 
 @dataclass
@@ -58,7 +58,7 @@ class ReactionRemoveEvent(Event, DataModel):
     message_id: Snowflake
     """ID of the message where the reaction was removed."""
 
-    guild_id: Optional[Snowflake]
+    guild_id: Snowflake | None
     """ID of the guild where the reaction was removed (if in a guild)."""
 
     burst: bool
@@ -77,7 +77,7 @@ class ReactionRemoveEmojiEvent(Event, DataModel):
     message_id: Snowflake
     """ID of the message where the reaction emoji was removed."""
 
-    guild_id: Optional[Snowflake]
+    guild_id: Snowflake | None
     """ID of the guild where the reaction emoji was removed. (if in a guild)"""
 
 @dataclass
@@ -90,5 +90,5 @@ class ReactionRemoveAllEvent(Event, DataModel):
     message_id: Snowflake
     """ID of the message where all reaction were removed."""
 
-    guild_id: Optional[Snowflake]
+    guild_id: Snowflake | None
     """ID of the guild where all reaction were removed (if in a guild)."""

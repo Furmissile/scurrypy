@@ -1,10 +1,6 @@
-from dataclasses import dataclass, fields, is_dataclass
-from typing import get_args, get_origin, Union
+from dataclasses import dataclass, fields
 
-from .snowflake import Snowflake
-
-"""Extract the type from Optional[t]."""
-unwrap_optional = lambda t: get_args(t)[0] if get_origin(t) is Union else t
+from .serialization import convert, serialize
 
 @dataclass
 class DataModel:    
@@ -22,43 +18,16 @@ class DataModel:
         Returns:
             (cls): hydrated dataclass
         """
-        if not data:
+        if data is None:
             return None
         
-        def convert(t, v):
-            t = unwrap_optional(t)
-            o = get_origin(t)
-            
-            # missing field
-            if v is None:
-                return None
-            
-            if t is bool:
-                return v in ('true', 'True', True)
-            
-            if is_dataclass(t):
-                if t is Snowflake:
-                    return Snowflake(int(v))
-                return t.from_dict(v)
-            
-            if o is dict:
-                vt = get_args(t)[1]
-                return {
-                    int(k): convert(vt, x) 
-                    for k, x in v.items()
-                }
-            
-            if o is list:
-                lt = get_args(t)[0]
-                return [convert(lt, x) for x in v]
-            
-            # primitive / fallback
-            return t(v)
-        
-        kwargs = {
-            f.name: convert(f.type, data.get(f.name)) 
-            for f in fields(cls)
-        }
+        kwargs = {}
+
+        for f in fields(cls):
+            if not f.init: # ignore init=False fields
+                continue
+
+            kwargs[f.name] = convert(f.type, data.get(f.name))
 
         return cls(**kwargs)
         
@@ -68,18 +37,12 @@ class DataModel:
         Returns:
             (dict): serialized dataclasss
         """
-        def serialize(val):
-            if isinstance(val, list):
-                return [serialize(v) for v in val if v is not None]
-            if isinstance(val, DataModel):
-                return val.to_dict()
-            return val
-
         result = {}
         for f in fields(self):
             if f.name.startswith('_'):
                 continue
             val = getattr(self, f.name)
-            # if val not in (None, [], {}, "", 0):
-            result[f.name] = serialize(val)
+            # only include real values
+            if val is not None:
+                result[f.name] = serialize(val)
         return result

@@ -1,7 +1,6 @@
 # scurrypy/events
 
 from .base_event import Event
-
 from .channel_events import (
     ChannelCreateEvent,
     ChannelUpdateEvent,
@@ -9,14 +8,10 @@ from .channel_events import (
     ChannelPinsUpdateEvent,
     WebhooksUpdateEvent
 )
-
-from .event_types import EventTypes
-
 from .gateway_events import (
     SessionStartLimit,
     GatewayEvent
 )
-
 from .guild_events import (
     GuildCreateEvent,
     GuildUpdateEvent,
@@ -28,49 +23,35 @@ from .guild_events import (
     GuildEmojisUpdateEvent,
     GuildStickersUpdateEvent
 )
-
 from .integration_events import (
     GuildIntegrationCreateEvent,
     GuildIntegrationUpdateEvent,
     GuildIntegrationsUpdateEvent,
     GuildIntegrationDeleteEvent
 )
-
-from .interaction_events import (
-    ResolvedData,
-    ApplicationCommandOptionData,
-    ApplicationCommandData,
-    MessageComponentData,
-    ModalComponentData,
-    ModalComponent,
-    ModalData,
-    InteractionEvent
+from .interaction_events import InteractionEvent
+from .invite_events import (
+    InviteCreateEvent, 
+    InviteDeleteEvent
 )
-
-from .invite_events import InviteCreateEvent, InviteDeleteEvent
-
 from .message_events import (
     MessageCreateEvent,
     MessageUpdateEvent,
     MessageDeleteEvent,
     BulkMessageDeleteEvent
 )
-
 from .reaction_events import (
     ReactionAddEvent,
     ReactionRemoveEvent,
     ReactionRemoveEmojiEvent,
     ReactionRemoveAllEvent
 )
-
 from .ready_event import ReadyEvent
-
 from .role_events import (
     RoleCreateEvent,
     RoleUpdateEvent,
     RoleDeleteEvent
 )
-
 from .thread_events import (
     ThreadCreateEvent,
     ThreadUpdateEvent,
@@ -79,7 +60,6 @@ from .thread_events import (
     ThreadMembersUpdateEvent,
     ThreadListSyncEvent
 )
-
 from .user_events import (
     UserUpdateEvent,
     GuildMemberAddEvent,
@@ -95,8 +75,6 @@ __all__ = [
     "ChannelDeleteEvent",
     "ChannelPinsUpdateEvent",
     "WebhooksUpdateEvent",
-
-    "EventTypes",
 
     "SessionStartLimit",
     "GatewayEvent",
@@ -115,13 +93,6 @@ __all__ = [
     "GuildIntegrationsUpdateEvent",
     "GuildIntegrationDeleteEvent",
 
-    "ResolvedData",
-    "ApplicationCommandOptionData",
-    "ApplicationCommandData",
-    "MessageComponentData",
-    "ModalComponentData",
-    "ModalComponent",
-    "ModalData",
     "InteractionEvent",
 
     "InviteCreateEvent", 

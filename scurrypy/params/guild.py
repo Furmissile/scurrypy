@@ -1,8 +1,11 @@
 from typing import TypedDict, Optional
 
-from ..parts.role import GuildRoleColorsPart
-from ..parts.image_data import ImageDataPart
-from ..parts.guild import WelcomeScreenChannelPart, OnboardingPromptPart
+from ..enums.guild import OnboardingMode
+
+from ..api.guilds.welcome_screen import WelcomeScreenChannelPart
+from ..api.guilds.onboarding import OnboardingPromptPart
+from ..api.guilds.role import GuildRoleColorsPart
+from ..api.image_data import ImageDataPart
 
 class EditGuildParams(TypedDict, total=False):
     """Represents fields for editing a guild."""
@@ -41,9 +44,6 @@ class EditGuildParams(TypedDict, total=False):
 
     public_updates_channel_id: int
     """Channel ID for receiving notices from Discord."""
-
-    features: list[str]
-    """Enabled guild features. See [`GuildFeatures`][scurrypy.models.guild.GuildFeatures]."""
 
     description: str
     """Description for the guild."""
@@ -102,8 +102,8 @@ class EditOnboardingParams(TypedDict, total=False):
     enabled: bool
     """Whether onboarding is enabled in the guild."""
     
-    mode: int
-    """Current mode of onboarding. See [`OnboardingModes`][scurrypy.parts.guild.OnboardingModes]."""
+    mode: OnboardingMode
+    """Current mode of onboarding."""
 
 class EditGuildStickerParams(TypedDict, total=False):
     """Represents fields for editing a guild sticker."""

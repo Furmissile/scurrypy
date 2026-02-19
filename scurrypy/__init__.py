@@ -1,16 +1,9 @@
 # scurrypy
 
 from .client import Client
+from .intents import Intents
 
 __all__ = [
-    # top-level modules
-    "Client"
+    "Client",
+    "Intents"
 ]
-
-# imports listed  __all__ libs
-from .events import *
-from .parts import *
-from .resources import *
-from .models import *
-from .core import *
-from .params import *

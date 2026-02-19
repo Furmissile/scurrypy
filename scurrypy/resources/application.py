@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
+from .base_resource import BaseResource
+
 from ..core.snowflake import Snowflake
 
-from ..models.application import ApplicationModel
-
-from .base_resource import BaseResource
+from ..api.application import ApplicationModel
 
 @dataclass
 class Application(BaseResource):
@@ -19,6 +19,6 @@ class Application(BaseResource):
         Returns:
             (Application): queried application
         """
-        data = await self._http.request('GET', '/applications/@me')
+        data = await self.http.request('GET', '/applications/@me')
 
         return ApplicationModel.from_dict(data)

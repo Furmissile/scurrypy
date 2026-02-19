@@ -30,7 +30,8 @@ from .error import DiscordError
 
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("scurrypy.http")
+logger.addHandler(logging.NullHandler())
 
 @dataclass
 class RequestItem:
@@ -196,7 +197,7 @@ class HTTPClient(HTTPClientProtocol):
         logger.warning(f"Bucket {endpoint} rate limit is active. Sleeping for {bucket.reset_after}s...")
         await asyncio.sleep(bucket.reset_after)
         bucket.sleep_task = None
-        logger.info(f"Bucket {endpoint} reset after {bucket.reset_after}s")
+        logger.info(f"Bucket {endpoint} reset after {bucket.reset_after}s.")
 
     async def _check_global_rate_limit(self):
         """Checks if the global rate limit is after now (active)."""
@@ -205,7 +206,7 @@ class HTTPClient(HTTPClientProtocol):
             async with self.global_lock:
                 logger.warning(f"Global reset is active. Sleeping for {self.global_reset - now}s...")
                 await asyncio.sleep(self.global_reset - now)
-                logger.info(f"Global has reset after {self.global_reset - now}s...")
+                logger.info(f"Global has reset after {self.global_reset - now}s.")
 
     async def _parse_response(self, resp: aiohttp.ClientResponse):
         """Parse the request's response for response details.

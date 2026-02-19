@@ -1,0 +1,104 @@
+import logging
+
+logger = logging.getLogger('scurrypy')
+
+from scurrypy import Client, Intents
+from scurrypy.bases import Addon
+from scurrypy.enums import EventType
+from scurrypy.core import DiscordError, Snowflake
+from scurrypy.events import MessageCreateEvent
+
+from .ctx import PrefixCommandContext
+
+class PrefixAddon(Addon):
+    """Addon that implements automatic registering and decorating prefix commands."""
+
+    def __init__(self, client: Client, application_id: Snowflake, prefix: str):
+        """
+        Args:
+            client (Client): the Client object
+            application_id (Snowflake): ID of the bot
+            prefix (str): message prefix for commands
+        """
+        if not Intents.MESSAGE_CONTENT in client.intents:
+            raise ValueError("Missing Intent.MESSAGE_CONTENT for scanning messages.")
+        
+        self.bot = client
+
+        self.application_id = application_id
+
+        self._prefix = prefix
+
+        self._commands = {}
+        """Maps prefix command names to handler."""
+        
+        client.add_event_listener(EventType.MESSAGE_CREATE, self.dispatch)
+
+    def _register(self, name: str, func: callable):
+        import inspect
+
+        params_len = len(inspect.signature(func).parameters)
+        if params_len != 1:
+            raise TypeError(
+                f"Prefix handler '{func.__name__}' must accept exactly one parameter (ctx)."
+            )
+
+        self._commands[name.lower()] = func
+        logger.info(f"Prefix command '{self._prefix + name}' registered.")
+
+    def listen(self, name: str, *, handler: callable = None):
+        """Listen for a prefix command.
+
+        Args:
+            name (str): name of the command
+                !!! warning "Important"
+                    Prefix commands are CASE-INSENSITIVE.
+            handler (callable): callback for the command (if not a decorator)
+
+        Raises:
+            (TypeError): invalid handler signature
+        """
+        if handler is not None:
+            self._register(name, handler)
+        else:
+            def decorator(func):
+                self._register(name, func)
+                return func
+            return decorator
+
+    async def dispatch(self, event: MessageCreateEvent):
+        """Dispatch event to user-defined handler.
+            Ignore bot responding to self and messages without the desired prefix.
+
+        Args:
+            event (MessageCreateEvent): message create event object
+        """
+        if not event.content:
+            return # ignore empty messages
+        
+        if event.author.id == self.application_id:
+            return # ignore bot responding to itself
+        
+        has_prefix = event.content.lower().startswith(self._prefix.lower())
+
+        if not has_prefix:
+            return # ignore messages without prefix
+        
+        command, *args = event.content[len(self._prefix):].strip().lower().split()
+        handler = self._commands.get(command)
+
+        # warn if this command doesnt have a known handler
+        if not handler:
+            logger.warning(f"Prefix Event '{command}' not found.")
+            return
+
+        # now prefix info can be confidently set
+        try:
+            ctx = PrefixCommandContext(self.bot, event, list(args))
+            await handler(ctx)
+            
+            logger.info(f"Prefix Event '{self._prefix + command}' acknowledged with args: {ctx.args or 'No args'}")
+        except DiscordError as e:
+            logger.error(f"Error in prefix command '{self._prefix + command}': {e}")        
+        except Exception as e:
+            logger.exception(f"Unhandled error in prefix command '{self._prefix + command}': {e}")

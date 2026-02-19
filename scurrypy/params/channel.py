@@ -1,6 +1,9 @@
 from typing import TypedDict, Optional, Literal
 
-from ..parts.channel import DefaultReactionPart, TagPart
+from ..enums.channel import ChannelType, ChannelFlags, SortOrderType, ForumLayoutType
+
+from ..api.channels.default_reaction import DefaultReactionPart
+from ..api.channels.tag import TagPart
 
 class EditGuildChannelParams(TypedDict, total=False):
     """Parameters for editing a guild channel."""
@@ -8,8 +11,8 @@ class EditGuildChannelParams(TypedDict, total=False):
     name: str
     """Name of the channel."""
 
-    type: Optional[int]
-    """Type of channel. See [`ChannelTypes`][scurrypy.parts.channel.ChannelTypes].
+    type: Optional[ChannelType]
+    """Type of channel.
     
     !!! important
         Only conversion between text and announcement is supported in guilds with `NEWS` feature.
@@ -33,8 +36,8 @@ class EditGuildChannelParams(TypedDict, total=False):
     default_auto_archive_duration: Optional[int]
     """Default duration in minutes threads will be hidden after period of inactivity."""
 
-    flags: Optional[int]
-    """Channel flags. See [`ChannelFlags`][scurrypy.parts.channel.ChannelFlags]."""
+    flags: Optional[ChannelFlags]
+    """Channel flags."""
 
     default_reaction_emoji: Optional[DefaultReactionPart]
     """Emoji to show in the add reaction button in a `GUILD_FORUM` post."""
@@ -42,11 +45,11 @@ class EditGuildChannelParams(TypedDict, total=False):
     available_tags: Optional[list[TagPart]]
     """Set of tags that can be applied to a `GUILD_FORUM` post."""
 
-    default_sort_order: Optional[int]
-    """Default forum sort order. See [`SortOrderTypes`][scurrypy.parts.channel.SortOrderTypes]."""
+    default_sort_order: Optional[SortOrderType]
+    """Default forum sort order."""
 
-    default_forum_layout: Optional[int]
-    """Default forum layout view. See [`ForumLayoutTypes`][scurrypy.parts.channel.ForumLayoutTypes]."""
+    default_forum_layout: Optional[ForumLayoutType]
+    """Default forum layout view."""
 
     default_thread_rate_limit_per_user: Optional[int]
     """Rate limit per user set on newly created threads.
@@ -80,8 +83,8 @@ class EditThreadChannelParams(TypedDict, total=False):
     rate_limit_per_user: Optional[int]
     """Seconds user must wait between sending messages in the channel."""
 
-    flags: Optional[int]
-    """Channel flags. See [`ChannelFlags`][scurrypy.parts.channel.ChannelFlags]."""
+    flags: Optional[ChannelFlags]
+    """Channel flags."""
 
     applied_tags: Optional[list[int]]
     """Set of tags applied to a `GUILD_FORUM` post."""

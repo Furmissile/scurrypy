@@ -1,25 +1,23 @@
 from dataclasses import dataclass
-from typing import Optional, Unpack
-
-from ..core.snowflake import Snowflake
+from typing import Unpack
 
 from .base_resource import BaseResource
 
-from ..models.command import ApplicationCommandModel
+from ..core.snowflake import Snowflake
+from ..core.serialization import serialize
 
-from ..parts.command import SlashCommandPart, UserCommandPart, MessageCommandPart
+from ..api.commands.application_command import ApplicationCommandModel
+from ..api.commands.slash import SlashCommandPart
+from ..api.commands.context import UserCommandPart, MessageCommandPart
 
 from ..params.command import EditGlobalCommandParams, EditGuildCommandParams
 
 @dataclass
-class Command(BaseResource):
-    """Represents a Discord command."""
+class GlobalCommand(BaseResource):
+    """Represents a global command."""
 
     application_id: Snowflake
     """Application ID of the commands."""
-
-@dataclass
-class GlobalCommand(Command):
 
     async def fetch(self, command_id: Snowflake) -> ApplicationCommandModel:
         """Fetches a command object.
@@ -30,7 +28,7 @@ class GlobalCommand(Command):
         Returns:
             (ApplicationCommandModel): queried application command
         """
-        data = await self._http.request('GET', f"applications/{self.application_id}/commands/{command_id}")
+        data = await self.http.request('GET', f"applications/{self.application_id}/commands/{command_id}")
 
         return ApplicationCommandModel.from_dict(data)
     
@@ -40,12 +38,12 @@ class GlobalCommand(Command):
         Returns:
             (list[ApplicationCommandModel]): queried list of application commands
         """
-        data = await self._http.request('GET', f"applications/{self.application_id}/commands")
+        data = await self.http.request('GET', f"applications/{self.application_id}/commands")
 
         return [ApplicationCommandModel.from_dict(cmd) for cmd in data]
 
     async def create(self, command: SlashCommandPart | UserCommandPart | MessageCommandPart) -> ApplicationCommandModel:
-        """Add command to the client.
+        """Add a command to the client.
 
         !!! danger
             Creating a command with the same name as an existing command in the same scope will overwrite the old command.
@@ -56,12 +54,12 @@ class GlobalCommand(Command):
         Returns:
             (ApplicationCommandModel): created command
         """
-        data = await self._http.request('POST', f"applications/{self.application_id}/commands", data=command.to_dict())
+        data = await self.http.request('POST', f"applications/{self.application_id}/commands", data=command.to_dict())
 
         return ApplicationCommandModel.from_dict(data)
 
     async def edit(self, command_id: Snowflake, **options: Unpack[EditGlobalCommandParams]) -> ApplicationCommandModel:
-        """Edit this command.
+        """Edit a command.
 
         Args:
             command_id (Snowflake): ID of command to edit
@@ -70,13 +68,9 @@ class GlobalCommand(Command):
         Returns:
             (ApplicationCommandModel): updated application command
         """
-        if not self.id:
-            raise ValueError("No command ID to fetch.")
-        
-        if options.get('options'):
-            options['options'] = [i.to_dict() for i in options['options']]
+        options = serialize(options)
 
-        data = await self._http.request('PATCH', f"applications/{self.application_id}/commands/{command_id}", data=options)
+        data = await self.http.request('PATCH', f"applications/{self.application_id}/commands/{command_id}", data=options)
 
         return ApplicationCommandModel.from_dict(data)
 
@@ -86,10 +80,10 @@ class GlobalCommand(Command):
         Args:
             command_id (Snowflake): ID of the command to delete
         """
-        await self._http.request('DELETE', f"applications/{self.application_id}/commands/{command_id}")
+        await self.http.request('DELETE', f"applications/{self.application_id}/commands/{command_id}")
 
     async def bulk_overwrite(self, commands: list[SlashCommandPart | UserCommandPart | MessageCommandPart]) -> list[ApplicationCommandModel]:
-        """Takes a list of application commands, overwriting the existing global command list for this application. 
+        """Takes a list of application commands, overwriting existing commands list for this application. 
         
         !!! warning
             Commands that do not already exist will count toward daily application command create limits.
@@ -104,7 +98,7 @@ class GlobalCommand(Command):
             (list[ApplicationCommandModel]): created application commands
         """
 
-        data = await self._http.request(
+        data = await self.http.request(
             'PUT', 
             f"applications/{self.application_id}/commands", 
             data=[cmd.to_dict() for cmd in commands]
@@ -114,10 +108,13 @@ class GlobalCommand(Command):
 
 
 @dataclass
-class GuildCommand(Command):
+class GuildCommand(BaseResource):
     """Represents a guild command."""
 
-    guild_id: Optional[Snowflake]
+    application_id: Snowflake
+    """Application ID of the commands."""
+
+    guild_id: Snowflake
     "Guild ID of command."
 
     async def fetch(self, command_id: Snowflake) -> ApplicationCommandModel:
@@ -129,7 +126,7 @@ class GuildCommand(Command):
         Returns:
             (ApplicationCommandModel): queried application command
         """
-        data = await self._http.request('GET', f"applications/{self.application_id}/guilds/{self.guild_id}/commands/{command_id}")
+        data = await self.http.request('GET', f"applications/{self.application_id}/guilds/{self.guild_id}/commands/{command_id}")
 
         return ApplicationCommandModel.from_dict(data)
     
@@ -139,12 +136,12 @@ class GuildCommand(Command):
         Returns:
             (list[ApplicationCommandModel]): queried list of application commands
         """
-        data = await self._http.request('GET', f"applications/{self.application_id}/guilds/{self.guild_id}/commands" )
+        data = await self.http.request('GET', f"applications/{self.application_id}/guilds/{self.guild_id}/commands" )
 
         return [ApplicationCommandModel.from_dict(cmd) for cmd in data]
 
     async def create(self, command: SlashCommandPart | UserCommandPart | MessageCommandPart) -> ApplicationCommandModel:
-        """Add command to the client.
+        """Add a command to the client.
 
         !!! danger
             Creating a command with the same name as an existing command in the same scope will overwrite the old command.
@@ -155,7 +152,7 @@ class GuildCommand(Command):
         Returns:
             (ApplicationCommandModel): created command
         """
-        data = await self._http.request('POST', f"applications/{self.application_id}/guilds/{self.guild_id}/commands", data=command.to_dict())
+        data = await self.http.request('POST', f"applications/{self.application_id}/guilds/{self.guild_id}/commands", data=command.to_dict())
 
         return ApplicationCommandModel.from_dict(data)
 
@@ -169,10 +166,9 @@ class GuildCommand(Command):
         Returns:
             (ApplicationCommandModel): updated application command
         """
-        if options.get('options'):
-            options['options'] = [i.to_dict() for i in options['options']]
-
-        data = await self._http.request(
+        options = serialize(options)
+        
+        data = await self.http.request(
             'PATCH', 
             f"applications/{self.application_id}/guilds/{self.guild_id}/commands/{command_id}", 
             data=options
@@ -186,10 +182,10 @@ class GuildCommand(Command):
         Args:
             command_id (Snowflake): ID of command to delete
         """
-        await self._http.request('DELETE', f"applications/{self.application_id}/guilds/{self.guild_id}/commands/{command_id}")
+        await self.http.request('DELETE', f"applications/{self.application_id}/guilds/{self.guild_id}/commands/{command_id}")
 
     async def bulk_overwrite(self, commands: list[SlashCommandPart | UserCommandPart | MessageCommandPart]) -> list[ApplicationCommandModel]:
-        """Takes a list of application commands, overwriting the existing global or guild command list for this application. 
+        """Takes a list of application commands, overwriting existing commands list for this guild. 
         
         !!! warning
             Commands that do not already exist will count toward daily application command create limits.
@@ -203,7 +199,7 @@ class GuildCommand(Command):
         Returns:
             (list[ApplicationCommandModel]): created application commands
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'PUT', 
             f"applications/{self.application_id}/guilds/{self.guild_id}/commands", 
             data=[cmd.to_dict() for cmd in commands]

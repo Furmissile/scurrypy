@@ -1,22 +1,26 @@
 from dataclasses import dataclass
 from typing import Unpack
 
-from ..core.snowflake import Snowflake
-
 from .base_resource import BaseResource
 
-from ..parts.image_data import ImageAssetPart
-from ..parts.guild import BulkGuildBanPart, GuildStickerPart
-from ..parts.channel import GuildChannelPart
-from ..parts.role import GuildRolePart
+from ..core.snowflake import Snowflake
+from ..core.serialization import serialize
 
-from ..models.role import RoleModel
-from ..models.guild import GuildModel, GuildBanModel, BulkGuildBanModel, GuildWelcomeScreenModel, GuildOnboadingModel
-from ..models.user import GuildMemberModel
-from ..models.channel import ChannelModel, ActiveThreadsModel
-from ..models.invite import InviteModel, InviteWithMetadataModel
-from ..models.integration import IntegrationModel
-from ..models.sticker import StickerModel
+from ..bases.channel import GuildChannelCreate
+
+from ..api.guilds.guild import GuildModel, GuildRoleModel
+from ..api.guilds.ban import BulkGuildBanPart, GuildBanModel, BulkGuildBanModel
+from ..api.guilds.welcome_screen import GuildWelcomeScreenModel
+from ..api.guilds.onboarding import GuildOnboadingModel
+from ..api.guilds.role import GuildRolePart
+from ..api.channels.channel import ChannelModel
+from ..api.channels.threads import ActiveThreadsModel
+from ..api.messages.sticker import StickerModel, StickerPart
+
+from ..api.invite import InviteModel, InviteWithMetadataModel
+from ..api.integration import IntegrationModel
+from ..api.user import GuildMemberModel
+from ..api.image_data import ImageAssetPart
 
 from ..params.guild import EditGuildRoleParams, EditGuildParams, EditGuildWelcomeScreenParams, EditOnboardingParams, EditGuildStickerParams
 from ..params.user import EditGuildMemberParams
@@ -40,7 +44,7 @@ class Guild(BaseResource):
         """
         params = {'with_counts': with_counts}
 
-        data = await self._http.request('GET', f'/guilds/{self.id}', params=params)
+        data = await self.http.request('GET', f'/guilds/{self.id}', params=params)
 
         return GuildModel.from_dict(data)
 
@@ -54,19 +58,9 @@ class Guild(BaseResource):
         Returns:
             (GuildModel): edited guild
         """
-        if options.get('banner'):
-            options['banner'] = options['banner'].to_dict()
-        
-        if options.get('discovery_splash'):
-            options['discovery_splash'] = options['discovery_splash'].to_dict()
+        options = serialize(options)
 
-        if options.get('icon'):
-            options['icon'] = options['icon'].to_dict()
-
-        if options.get('splash'):
-            options['splash'] = options['splash'].to_dict()
-
-        data = await self._http.request('PATCH', f'/guilds/{self.id}', data=options)
+        data = await self.http.request('PATCH', f'/guilds/{self.id}', data=options)
 
         return GuildModel.from_dict(data)
 
@@ -80,7 +74,7 @@ class Guild(BaseResource):
         Returns:
             (list[ChannelModel]): queried list of the guild's channels
         """
-        data = await self._http.request('GET', f'guilds/{self.id}/channels')
+        data = await self.http.request('GET', f'guilds/{self.id}/channels')
 
         return [ChannelModel.from_dict(channel) for channel in data]
     
@@ -93,11 +87,11 @@ class Guild(BaseResource):
         Returns:
             (ActiveThreadsModel): active guild threads
         """
-        data = await self._http.request('GET', f'/guilds/{self.id}/threads/active')
+        data = await self.http.request('GET', f'/guilds/{self.id}/threads/active')
 
         return ActiveThreadsModel.from_dict(data)
 
-    async def create_channel(self, channel: GuildChannelPart) -> ChannelModel:
+    async def create_channel(self, channel: GuildChannelCreate) -> ChannelModel:
         """Create a channel in this guild.
         Fires [`ChannelCreateEvent`][scurrypy.events.channel_events.ChannelCreateEvent].
 
@@ -105,12 +99,12 @@ class Guild(BaseResource):
             Requires `MANAGE_CHANNELS`
 
         Args:
-            channel (GuildChannelPart): the guild channel to create
+            channel (GuildChannelCreate): the guild channel to create
 
         Returns:
             (ChannelModel): created channel
         """
-        data = await self._http.request('POST', f'/guilds/{self.id}/channels', data=channel.to_dict())
+        data = await self.http.request('POST', f'/guilds/{self.id}/channels', data=channel.to_dict())
 
         return ChannelModel.from_dict(data)
 
@@ -127,7 +121,7 @@ class Guild(BaseResource):
         Returns:
             (GuildMemberModel): queried guild member
         """
-        data = await self._http.request('GET', f'/guilds/{self.id}/members/{user_id}')
+        data = await self.http.request('GET', f'/guilds/{self.id}/members/{user_id}')
 
         return GuildMemberModel.from_dict(data)
 
@@ -149,7 +143,7 @@ class Guild(BaseResource):
             "after": after
         }
 
-        data = await self._http.request('GET', f'/guilds/{self.id}/members', params=params)
+        data = await self.http.request('GET', f'/guilds/{self.id}/members', params=params)
 
         return [GuildMemberModel.from_dict(member) for member in data]
 
@@ -164,7 +158,7 @@ class Guild(BaseResource):
             user_id (Snowflake): ID of the member for the role
             role_id (Snowflake): ID of the role to append
         """
-        await self._http.request('PUT', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
+        await self.http.request('PUT', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
     
     async def remove_member_role(self, user_id: Snowflake, role_id: Snowflake) -> None:
         """Remove a role from a guild member of this guild.
@@ -177,7 +171,7 @@ class Guild(BaseResource):
             user_id (Snowflake): ID of the member with the role
             role_id (Snowflake): ID of the role to remove
         """
-        await self._http.request('DELETE', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
+        await self.http.request('DELETE', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
 
     async def search_members(self, query: str = None, limit: int = 1) -> list[GuildMemberModel]:
         """Fetch guild members whose username or nickname starts with the provided query.
@@ -189,7 +183,7 @@ class Guild(BaseResource):
         Returns:
             list[GuildMemberModel]: queried list of guild members
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'GET', 
             f'guild/{self.id}/members/search',
             params={
@@ -210,7 +204,7 @@ class Guild(BaseResource):
         Returns:
             (GuildMemberModel): edited guid member
         """
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/members/{user_id}', data=options)
+        data = await self.http.request('PATCH', f'/guilds/{self.id}/members/{user_id}', data=options)
 
         return GuildMemberModel.from_dict(data)
 
@@ -224,7 +218,7 @@ class Guild(BaseResource):
         Args:
             user_id (Snowflake): ID of the user to kick
         """
-        await self._http.request('DELETE', f'/guilds/{self.id}/members/{user_id}')
+        await self.http.request('DELETE', f'/guilds/{self.id}/members/{user_id}')
 
     # --- BANS ---
     async def fetch_ban(self, user_id: Snowflake) -> GuildBanModel:
@@ -239,7 +233,7 @@ class Guild(BaseResource):
         Returns:
             (GuildBan): queried ban
         """
-        data = self._http.request('GET', f'/guild/{self.id}/bans/{user_id}')
+        data = self.http.request('GET', f'/guild/{self.id}/bans/{user_id}')
 
         return GuildBanModel.from_dict(data)
 
@@ -257,7 +251,7 @@ class Guild(BaseResource):
         Returns:
             (list[GuildBan]): queried list of guild bans
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'GET',
             f'/guilds/{self.id}/bans',
             params={
@@ -280,7 +274,7 @@ class Guild(BaseResource):
             user_id (Snowflake): ID of the user to ban
             delete_message_seconds (int, optional): seconds back to delete messages. Max `604800` (7 days). Defaults to `0`.
         """
-        await self._http.request(
+        await self.http.request(
             'PUT',
             f'/guilds/{self.id}/bans/{user_id}',
             params={'delete_message_seconds': delete_message_seconds}
@@ -296,7 +290,7 @@ class Guild(BaseResource):
         Args:
             user_id (Snowflake): ID of the user in which to remove the ban
         """
-        await self._http.request('DELETE', f'/guilds/{self.id}/bans/{user_id}')
+        await self.http.request('DELETE', f'/guilds/{self.id}/bans/{user_id}')
 
     async def bulk_create_ban(self, bulk_ban: BulkGuildBanPart) -> BulkGuildBanModel:
         """Create guild bans and optionally delete messages sent by the banned users.
@@ -310,7 +304,7 @@ class Guild(BaseResource):
         Returns:
             (BulkGuildBanModel): bulk ban response
         """
-        data = await self._http.request('POST', f'/guilds/{self.id}/bulk-ban', data=bulk_ban.to_dict())
+        data = await self.http.request('POST', f'/guilds/{self.id}/bulk-ban', data=bulk_ban.to_dict())
 
         return BulkGuildBanModel.from_dict(data)
 
@@ -324,32 +318,32 @@ class Guild(BaseResource):
         Returns:
             (dict): map of role IDs to member count
         """
-        return await self._http.request('GET', f'/guilds/{self.id}/roles/member-counts')
+        return await self.http.request('GET', f'/guilds/{self.id}/roles/member-counts')
 
-    async def fetch_role(self, role_id: Snowflake) -> RoleModel:
+    async def fetch_role(self, role_id: Snowflake) -> GuildRoleModel:
         """Fetch a role in this guild.
 
         Args:
             role_id (Snowflake): ID of the role to fetch
 
         Returns:
-            (RoleModel): queried guild role
+            (GuildRoleModel): queried guild role
         """
-        data = await self._http.request('GET', f'/guilds/{self.id}/roles/{role_id}')
+        data = await self.http.request('GET', f'/guilds/{self.id}/roles/{role_id}')
         
-        return RoleModel.from_dict(data)
+        return GuildRoleModel.from_dict(data)
     
-    async def fetch_roles(self) -> list[RoleModel]:
+    async def fetch_roles(self) -> list[GuildRoleModel]:
         """Fetch all roles in this guild.
 
         Returns:
-            (list[RoleModel]): queried list of guild roles
+            (list[GuildRoleModel]): queried list of guild roles
         """
-        data = await self._http.request('GET', f'/guilds/{self.id}/roles')
+        data = await self.http.request('GET', f'/guilds/{self.id}/roles')
         
-        return [RoleModel.from_dict(role) for role in data]
+        return [GuildRoleModel.from_dict(role) for role in data]
 
-    async def create_role(self, role: GuildRolePart) -> RoleModel:
+    async def create_role(self, role: GuildRolePart) -> GuildRoleModel:
         """Create a role in this guild.
         Fires [`RoleCreateEvent`][scurrypy.events.role_events.RoleCreateEvent].
 
@@ -360,13 +354,13 @@ class Guild(BaseResource):
             role (GuildRolePart): fields to create a role
 
         Returns:
-            (RoleModel): created role
+            (GuildRoleModel): created role
         """
-        data = await self._http.request('POST', f'/guilds/{self.id}/roles', data=role.to_dict())
+        data = await self.http.request('POST', f'/guilds/{self.id}/roles', data=role.to_dict())
 
-        return RoleModel.from_dict(data)
+        return GuildRoleModel.from_dict(data)
 
-    async def edit_role(self, role_id: Snowflake, **options: Unpack[EditGuildRoleParams]) -> RoleModel:
+    async def edit_role(self, role_id: Snowflake, **options: Unpack[EditGuildRoleParams]) -> GuildRoleModel:
         """Edit a role in this guild.
         Fires [`RoleUpdateEvent`][scurrypy.events.role_events.RoleUpdateEvent].
 
@@ -378,17 +372,13 @@ class Guild(BaseResource):
             options (EditGuildRoleParams): role with fields to edit
 
         Returns:
-            (RoleModel): edited role
+            (GuildRoleModel): edited role
         """
-        if options.get('colors'):
-            options['colors'] = options['colors'].to_dict()
+        options = serialize(options)
 
-        if options.get('icon'):
-            options['icon'] = options['icon'].to_dict()
+        data = await self.http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=options)
 
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=options)
-
-        return RoleModel.from_dict(data)
+        return GuildRoleModel.from_dict(data)
 
     async def delete_role(self, role_id: Snowflake) -> None:
         """Delete a role in this guild.
@@ -400,7 +390,7 @@ class Guild(BaseResource):
         Args:
             role_id (Snowflake): ID of role to delete
         """
-        await self._http.request('DELETE', f'/guilds/{self.id}/roles/{role_id}')
+        await self.http.request('DELETE', f'/guilds/{self.id}/roles/{role_id}')
 
     # --- INVITES ---
     async def fetch_invites(self) -> list[InviteModel]:
@@ -412,7 +402,7 @@ class Guild(BaseResource):
         Returns:
             (list[InviteModel]): queried list of invites without metadata
         """
-        data = await self._http.request('GET', f'/guild/{self.id}/invites')
+        data = await self.http.request('GET', f'/guild/{self.id}/invites')
 
         return [InviteModel.from_dict(i) for i in data]
 
@@ -425,7 +415,7 @@ class Guild(BaseResource):
         Returns:
             (list[InviteModel]): queried list of invites with metadata
         """
-        data = await self._http.request('GET', f'/guild/{self.id}/invites')
+        data = await self.http.request('GET', f'/guild/{self.id}/invites')
 
         return [InviteWithMetadataModel.from_dict(i) for i in data]
 
@@ -439,7 +429,7 @@ class Guild(BaseResource):
         Returns:
             (list[IntegrationModel]): queried integrations
         """
-        data = await self._http.request('GET', f'/guild/{self.id}/integrations')
+        data = await self.http.request('GET', f'/guild/{self.id}/integrations')
 
         return [IntegrationModel.from_dict(i) for i in data]
 
@@ -454,7 +444,7 @@ class Guild(BaseResource):
         Args:
             integration_id (Snowflake): ID of the integration to delete
         """
-        await self._http.request('DELETE', f'/guilds/{self.id}/integrations/{integration_id}')
+        await self.http.request('DELETE', f'/guilds/{self.id}/integrations/{integration_id}')
 
     # --- WELCOME SCREEN ---
     async def fetch_welcome_screen(self) -> GuildWelcomeScreenModel:
@@ -466,7 +456,7 @@ class Guild(BaseResource):
         Returns:
             (GuildWelcomeScreenModel): queried welcome screen
         """
-        data = await self._http.request('GET', f'/guilds/{self.id}/welcome-screen')
+        data = await self.http.request('GET', f'/guilds/{self.id}/welcome-screen')
 
         return GuildWelcomeScreenModel.from_dict(data)
 
@@ -483,10 +473,9 @@ class Guild(BaseResource):
         Returns:
             (GuildWelcomeScreenModel): edited welcome screen
         """
-        if options.get('welcome_channels'):
-            options['welcome_channels'] = [i.to_dict() for i in options['welcome_channels']]
+        options = serialize(options)
 
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/welcome-screen', data=options)
+        data = await self.http.request('PATCH', f'/guilds/{self.id}/welcome-screen', data=options)
 
         return GuildWelcomeScreenModel.from_dict(data)
 
@@ -497,7 +486,7 @@ class Guild(BaseResource):
         Returns:
             (GuildOnboadingModel): queried onboarding flow
         """
-        data = await self._http.request('GET', f'/guilds/{self.id}/onboarding')
+        data = await self.http.request('GET', f'/guilds/{self.id}/onboarding')
 
         return GuildOnboadingModel.from_dict(data)
 
@@ -517,10 +506,9 @@ class Guild(BaseResource):
         Returns:
             (GuildOnboadingModel): edited onboarding flow
         """
-        if options.get('prompts'):
-            options['prompts'] = [i.to_dict() for i in options['prompts']]
+        options = serialize(options)
             
-        data = await self._http.request(
+        data = await self.http.request(
             'PUT',
             f'/guilds/{self.id}/onboarding',
             params=options
@@ -541,7 +529,7 @@ class Guild(BaseResource):
         Returns:
             (StickerModel): queried sticker
         """
-        data = await self._http.request('GET', f'/guilds/{self.id}/stickers/{sticker_id}')
+        data = await self.http.request('GET', f'/guilds/{self.id}/stickers/{sticker_id}')
 
         return StickerModel.from_dict(data)
 
@@ -555,11 +543,11 @@ class Guild(BaseResource):
         Returns:
             list[StickerModel]: queried guild stickers
         """
-        data = await self._http.request('GET', f'/guilds/{self.id}/stickers')
+        data = await self.http.request('GET', f'/guilds/{self.id}/stickers')
 
         return [StickerModel.from_dict(i) for i in data]
 
-    async def create_sticker(self, sticker: GuildStickerPart, file: ImageAssetPart) -> StickerModel:
+    async def create_sticker(self, sticker: StickerPart, file: ImageAssetPart) -> StickerModel:
         """Add a sticker to this guild.
         Fires [`GuildStickersUpdateEvent`][scurrypy.events.guild_events.GuildStickersUpdateEvent].
 
@@ -575,7 +563,7 @@ class Guild(BaseResource):
         Returns:
             (StickerModel): created sticker
         """
-        data = await self._http.request(
+        data = await self.http.request(
             'POST', f'/guilds/{self.id}/stickers', 
             data=sticker.to_dict(),
             assets=file.to_dict()
@@ -595,7 +583,7 @@ class Guild(BaseResource):
             sticker_id (Snowflake): ID of the sticker to delete
             options (EditGuildStickerParams): fields to edit
         """
-        data = await self._http.request('PATCH', f'/guilds/{self.id}/stickers/{sticker_id}', data=options)
+        data = await self.http.request('PATCH', f'/guilds/{self.id}/stickers/{sticker_id}', data=options)
 
         return StickerModel.from_dict(data)
 
@@ -610,4 +598,4 @@ class Guild(BaseResource):
         Args:
             sticker_id (Snowflake): ID of the sticker to delete
         """
-        await self._http.request('DELETE', f'/guilds/{self.id}/stickers/{sticker_id}')
+        await self.http.request('DELETE', f'/guilds/{self.id}/stickers/{sticker_id}')

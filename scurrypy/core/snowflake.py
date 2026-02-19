@@ -34,3 +34,7 @@ class Snowflake(int):
     def increment(self) -> int:
         """Increment associated with the ID."""
         return self & 0xFFF
+
+    @classmethod
+    def from_dict(cls, v):
+        return cls(int(v))

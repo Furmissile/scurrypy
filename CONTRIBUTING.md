@@ -12,7 +12,7 @@ ScurryPy is officially in its "maintenance" stage, meaning add and modify only w
 
 **Not Accepting:**
 
-* Auto-caching (architectural decision)
+* Auto-caching (opt-in only. See `scurrypy.ext.cache`)
 * Voice support and *Group* DM (out of scope)
 * Sub-commands and automodding (lots of overhead for not enough gain)
 * Auditing (includes many unsupported features)
@@ -32,8 +32,6 @@ While ScurryPy itself may not offer these features by default, you are more than
 from dataclasses import dataclass
 from .model import DataModel
 
-from typing import Optional # only if you need it
-
 @dataclass
 class YourModel(DataModel):
     """Your model's description."""
@@ -41,11 +39,25 @@ class YourModel(DataModel):
     field_1: type
     """This is a mandatory field."""
 
-    field_2: Optional[type]
+    field_2: type | None
     """This is an optional field. It might be omitted."""
 ```
 > [!NOTE]
 > Objects must be unique (no partial copies) with their fields replicating Discord's and be fully documented.
+
+### Parts
+
+```python
+@dataclass
+class YourPart(DataModel):
+    """Your model's description."""
+
+    field_1: type | None = None
+    """This is a field that must be filled out at some point."""
+
+    field_2: type | None = None
+    """This is an optional field. It can be omitted."""
+```
 
 ### Resources
 
@@ -76,27 +88,13 @@ def your_resource(self, some_id: int, etc, *, context = None):
     """
     from .resources.me import YourResource
 
-    return YourResource(self._http, context, some_id, etc...)
-```
-
-### Parts
-
-```python
-@dataclass
-class YourPart(DataModel):
-    """Your model's description."""
-
-    field_1: type = None
-    """This is a field that must be filled out at some point."""
-
-    field_2: Optional[type] = None
-    """This is an optional field. It can be omitted."""
+    return YourResource(self._http, some_id, etc...)
 ```
 
 ### Parameters
 
 ```python
-from typing import TypedDict, Optional
+from typing import TypedDict
 
 class MyParams(TypedDict, total=False):
     """Your params description."""
@@ -104,7 +102,7 @@ class MyParams(TypedDict, total=False):
     field_1: type
     """This field must be filled out."""
 
-    field_2: Optional[type]
+    field_2: type | None
     """This field is optional and may be omitted."""
 ```
 > [!NOTE]

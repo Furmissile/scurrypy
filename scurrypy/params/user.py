@@ -1,6 +1,6 @@
 from typing import TypedDict
 
-from ..parts.image_data import ImageDataPart
+from ..api.image_data import ImageDataPart
 
 class EditGuildMemberParams(TypedDict, total=False):
     """Parameters for editing a guild member."""

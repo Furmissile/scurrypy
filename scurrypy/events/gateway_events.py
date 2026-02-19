@@ -1,5 +1,7 @@
 from dataclasses import dataclass
+
 from ..core.model import DataModel
+
 from .base_event import Event
 
 @dataclass

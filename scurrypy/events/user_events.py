@@ -1,10 +1,11 @@
 from dataclasses import dataclass
+
 from ..core.model import DataModel
 from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
-from ..models.user import UserModel, GuildMemberModel
+from ..api.user import UserModel, GuildMemberModel
 
 @dataclass
 class UserUpdateEvent(Event, UserModel):

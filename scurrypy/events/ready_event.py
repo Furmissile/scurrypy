@@ -1,10 +1,13 @@
 from dataclasses import dataclass
+
 from ..core.model import DataModel
+
 from .base_event import Event
 
-from ..models.user import UserModel
-from ..models.guild import ReadyGuildModel
-from ..models.application import ApplicationModel
+from ..api.guilds.guild import ReadyGuildModel
+
+from ..api.user import UserModel
+from ..api.application import ApplicationModel
 
 @dataclass
 class ReadyEvent(Event, DataModel):
