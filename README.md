@@ -46,26 +46,17 @@ The following examples are quick drop-in starters if you wish to try ScurryPy.
 # Set TOKEN, APP_ID (bot user ID), and GUILD_ID (for guild command)
 
 # --- Core library imports ---
-from scurrypy import Client, EventTypes, InteractionEvent, SlashCommandPart
+from scurrypy import Client
+
+from scurrypy.ext.commands import CommandsAddon, ApplicationCommandContext
 
 # --- Setup bot ---
 client = Client(token=TOKEN)
+commands = CommandsAddon(client, APP_ID)
 
-async def on_greet(event: InteractionEvent):
-    """Respond to /greet"""
-    if event.data.name != "greet":
-        return
-
-    await client.interaction(event.id, event.token).respond("Hello!")
-
-async def register_commands():
-    """Register slash commands on startup (before READY)."""
-    await client.guild_command(APP_ID, GUILD_ID).create(
-        SlashCommandPart("greet", "Greet the bot!")
-    )
-
-client.add_startup_hook(register_commands)
-client.add_event_listener(EventTypes.INTERACTION_CREATE, on_greet)
+@commands.slash_command('greet', 'Greet the bot!', guild_ids=[GUILD_ID])
+async def on_greet(ctx: ApplicationCommandContext):
+    await ctx.respond("Hello!")
 
 # --- Run the bot ---
 client.run()
@@ -77,21 +68,17 @@ client.run()
 # Set TOKEN
 
 # --- Core library imports ---
-from scurrypy import Client, Intents, EventTypes, MessageCreateEvent
+from scurrypy import Client, Intents
+
+from scurrypy.ext.prefixes import PrefixAddon, PrefixCommandContext
 
 client = Client(token=TOKEN, intents=Intents.DEFAULT | Intents.MESSAGE_CONTENT)
+prefixes = PrefixAddon(client, APP_ID, '!')
 
 # --- Setup bot ---
-async def on_ping(event: MessageCreateEvent):
-    if not event.content:
-        return
-    
-    if not event.content.startswith('!ping'):
-        return
-    
-    await client.channel(event.channel_id).send("Pong!")
-
-client.add_event_listener(EventTypes.MESSAGE_CREATE, on_ping)
+@prefixes.listen('ping')
+async def on_ping(ctx: PrefixCommandContext):
+    await ctx.send("Pong!")
 
 # --- Run the bot ---
 client.run()
@@ -111,9 +98,6 @@ These dependencies are automatically installed with ScurryPy's pip package.
 Explore the full [documentation](https://scurry-works.github.io/scurrypy) for more examples, guides, and API reference.
 
 See the [manifesto](https://scurry-works.github.io/scurrypy/manifesto) section for details!
-
-**Switching from discord.py?** 
-Check out the [Migration Guide](https://scurry-works.github.io/scurrypy/getting_started/migrating) to see the difference.
 
 **Got some questions?**
 Check out the [FAQ](https://scurry-works.github.io/scurrypy/faq) page for commonly asked questions!
