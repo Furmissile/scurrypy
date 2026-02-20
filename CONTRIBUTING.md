@@ -26,25 +26,6 @@ While ScurryPy itself may not offer these features by default, you are more than
 
 ## Reference
 
-### Models
-
-```python
-from dataclasses import dataclass
-from .model import DataModel
-
-@dataclass
-class YourModel(DataModel):
-    """Your model's description."""
-
-    field_1: type
-    """This is a mandatory field."""
-
-    field_2: type | None
-    """This is an optional field. It might be omitted."""
-```
-> [!NOTE]
-> Objects must be unique (no partial copies) with their fields replicating Discord's and be fully documented.
-
 ### API (Parts and Models)
 
 ```python
@@ -68,6 +49,8 @@ class YourModel(DataModel):
     field_2: type | None
     """This field might be hydrated by Discord."""
 ```
+> [!NOTE]
+> Objects must be unique (no partial copies) with their fields replicating Discord's and be fully documented.
 
 ### Resources
 
