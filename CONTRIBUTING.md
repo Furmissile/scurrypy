@@ -45,7 +45,7 @@ class YourModel(DataModel):
 > [!NOTE]
 > Objects must be unique (no partial copies) with their fields replicating Discord's and be fully documented.
 
-### Parts
+### API (Parts and Models)
 
 ```python
 @dataclass
@@ -57,6 +57,16 @@ class YourPart(DataModel):
 
     field_2: type | None = None
     """This is an optional field. It can be omitted."""
+
+@dataclass
+class YourModel(DataModel):
+    """Your model's description."""
+
+    field_1: type
+    """This field will always be hydrated by Discord."""
+
+    field_2: type | None
+    """This field might be hydrated by Discord."""
 ```
 
 ### Resources
