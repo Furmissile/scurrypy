@@ -2,6 +2,10 @@
 
 This changelog documents all notable and breaking changes to the ScurryPy PyPi package.
 
+## [2.1.1] - 19 Feb 2026
+
+* Fixed client resource creation
+
 ## [2.1] - 19 Feb 2026
 
 * Error handling improvements new properties in `scurrypy.ext`

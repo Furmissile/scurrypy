@@ -140,7 +140,7 @@ class Client:
         """
         from .resources.application import Application
 
-        return Application(self.http, id=application_id, context=None)
+        return Application(self.http, application_id)
     
     def bot_emoji(self, application_id: Snowflake):
         """Creates an interactable bot emoji resource.
@@ -153,7 +153,7 @@ class Client:
         """
         from .resources.emoji import ApplicationEmoji
 
-        return ApplicationEmoji(self.http, None, application_id)
+        return ApplicationEmoji(self.http, application_id)
     
     def guild_emoji(self, guild_id: Snowflake):
         """Creates an interactable emoji resource.
@@ -166,7 +166,7 @@ class Client:
         """
         from .resources.emoji import GuildEmoji
 
-        return GuildEmoji(self.http, None, guild_id)
+        return GuildEmoji(self.http, guild_id)
 
     def guild(self, guild_id: Snowflake):
         """Creates an interactable guild resource.
