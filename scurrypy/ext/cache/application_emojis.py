@@ -16,7 +16,7 @@ class ApplicationEmojisCacheAddon(Addon):
 
     async def load_bot_emojis(self):
         """Fetch all bot's emojis and add them to the cache."""
-        emojis = await self.bot.bot_emoji(self.application_id).fetch_all()
+        emojis = await self.bot.application_emoji(self.application_id).fetch_all()
 
         for emoji in emojis:
             self.emojis[emoji.name] = emoji
