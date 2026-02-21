@@ -108,7 +108,7 @@ class MessagePart(DataModel):
     content: str | None = None
     """Message text content."""
 
-    flags: MessageFlags = None
+    flags: MessageFlags | None = None
     """Message flags. Discord defaults to `MessageFlags.NO_FLAGS`."""
 
     components: list[ActionRow | Container] | None = None

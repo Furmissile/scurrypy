@@ -1,5 +1,7 @@
 # scurrypy/api/interactions
 
+from ...enums.interaction import InteractionCallbackType, InteractionType
+
 from .interaction import (
     InteractionCallbackDataModel, 
     InteractionCallbackModel, 
@@ -17,6 +19,9 @@ from .modal import ModalPart
 from .resolved import ResolvedDataModel
 
 __all__ = [
+    "InteractionCallbackType", 
+    "InteractionType",
+
     "InteractionCallbackDataModel", 
     "InteractionCallbackModel", 
     "InteractionModel", 

@@ -10,6 +10,8 @@ from .guild import (
     UnavailableGuildModel, 
     GuildModel
 )
+
+from ...enums.guild import OnboardingMode, PromptType
 from .onboarding import (
     OnboardingPromptOptionModel, 
     OnboardingPromptModel, 
@@ -17,6 +19,7 @@ from .onboarding import (
     OnboardingPromptOptionPart, 
     OnboardingPromptPart
 )
+
 from .role import (
     GuildRoleColorModel, 
     GuildRoleModel, 
@@ -38,6 +41,8 @@ __all__ = [
     "UnavailableGuildModel", 
     "GuildModel",
 
+    "OnboardingMode", 
+    "PromptType",
     "OnboardingPromptOptionModel", 
     "OnboardingPromptModel", 
     "GuildOnboadingModel", 

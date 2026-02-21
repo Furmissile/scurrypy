@@ -1,5 +1,7 @@
 # scurrypy/api/channels
 
+from ...enums.channel import ChannelType, SortOrderType, ForumLayoutType, AutoArchiveDurationType
+
 from .announcement import GuildAnnouncementChannelPart
 from .channel import ChannelModel
 from .default_reaction import (
@@ -28,6 +30,11 @@ from .threads import (
 )
 
 __all__ = [
+    "ChannelType", 
+    "SortOrderType", 
+    "ForumLayoutType", 
+    "AutoArchiveDurationType",
+
     "GuildAnnouncementChannelPart",
 
     "ChannelModel",

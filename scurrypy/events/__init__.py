@@ -1,5 +1,6 @@
 # scurrypy/events
 
+from ..enums.events import EventType
 from .base_event import Event
 from .channel_events import (
     ChannelCreateEvent,
@@ -68,6 +69,7 @@ from .user_events import (
 )
 
 __all__ = [
+    "EventType",
     "Event",
 
     "ChannelCreateEvent",

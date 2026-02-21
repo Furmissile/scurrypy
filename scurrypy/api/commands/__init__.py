@@ -1,5 +1,7 @@
 # scurrypy/api/commands
 
+from ...enums.command import CommandType, CommandOptionType
+
 from .application_command import (
     ApplicationCommandOptionChoiceModel, 
     ApplicationCommandOptionModel,
@@ -16,6 +18,9 @@ from .slash import (
 )
 
 __all__ = [
+    "CommandType", 
+    "CommandOptionType",
+
     "ApplicationCommandOptionChoiceModel", 
     "ApplicationCommandOptionModel", 
     "ApplicationCommandModel",

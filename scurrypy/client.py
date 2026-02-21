@@ -142,14 +142,14 @@ class Client:
 
         return Application(self.http, application_id)
     
-    def bot_emoji(self, application_id: Snowflake):
-        """Creates an interactable bot emoji resource.
+    def application_emoji(self, application_id: Snowflake):
+        """Creates an interactable application emoji resource.
 
         Args:
             application_id (Snowflake): ID of target application
 
         Returns:
-            (BotEmojis): the BotEmoji resource
+            (ApplicationEmoji): the ApplicationEmoji resource
         """
         from .resources.emoji import ApplicationEmoji
 
@@ -182,13 +182,13 @@ class Client:
         return Guild(self.http, guild_id)
 
     def channel(self, channel_id: Snowflake):
-        """Creates an interactable guild channel resource.
+        """Creates an interactable channel resource.
 
         Args:
             channel_id (Snowflake): ID of target channel
 
         Returns:
-            (GuildChannel): the GuildChannel resource
+            (Channel): the Channel resource
         """
         from .resources.channel import Channel
 

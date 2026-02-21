@@ -64,7 +64,7 @@ class Message(BaseResource, _EditMessageMixin):
     """Channel ID of the message."""
 
     async def fetch(self) -> MessageModel:
-        """Fetches the message data based on the given channel ID and message id.
+        """Fetches the message data based on the given channel ID and message ID.
 
         Returns:
             (MessageModel): queried message

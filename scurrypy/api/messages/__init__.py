@@ -12,16 +12,21 @@ from .embed import (
     EmbedFooter, 
     Embed
 )
+
+from ...enums.message import MessageType, MessageFlags, MessageReferenceType
 from .message import (
     MessageModel, 
     PinnedMessageModel, 
     MessageReferencePart, 
     MessagePart
 )
+
 from .reaction import (
     ReactionCountDetailsModel, 
     ReactionModel
 )
+
+from ...enums.guild import StickerType, StickerFormatType
 from .sticker import (
     StickerModel, 
     StickerItemModel, 
@@ -40,6 +45,9 @@ __all__ = [
     "EmbedFooter", 
     "Embed",
 
+    "MessageType", 
+    "MessageFlags", 
+    "MessageReferenceType",
     "MessageModel", 
     "PinnedMessageModel", 
     "MessageReferencePart", 
@@ -48,6 +56,8 @@ __all__ = [
     "ReactionCountDetailsModel", 
     "ReactionModel",
 
+    "StickerType", 
+    "StickerFormatType",
     "StickerModel", 
     "StickerItemModel", 
     "StickerPackModel",

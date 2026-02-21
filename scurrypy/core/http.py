@@ -1,21 +1,3 @@
-"""
-R = request
-EP = endpoint
-L = Lock
-Q = Queue
-H = header
-B = Bucket
-A + B = {A:B}
-
-[R + EP]--|L|-->[Q + EP]--|send R|-->[add/update H + B]
-    1. request by endpoint
-    2. push request to queue with lock
-    3. add/update header by bucket ID with send request
-
-    * Queue by ENDPOINT/REQUEST
-    * Bucket by HEADER
-"""
-
 import asyncio
 import aiohttp
 import aiofiles

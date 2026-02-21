@@ -2,6 +2,20 @@
 
 This changelog documents all notable and breaking changes to the ScurryPy PyPi package.
 
+## [2.2] - 20 Feb 2026
+
+* Associated enum imports are also available under `scurrypy.api`
+    * Ex.
+    ```py
+        from scurrypy.api.components import Button, ButtonStyle
+
+        # OR
+
+        from scurrypy.enums import ButtonStyle
+        from scurrypy.api.components import Button
+    ```
+* Renamed `client.bot_emoji()` to `client.application_emoji()` to match the ApplicationEmoji class rename from 2.0
+
 ## [2.1.1] - 19 Feb 2026
 
 * Fixed client resource creation

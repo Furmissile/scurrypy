@@ -15,6 +15,9 @@ class DataModel:
         Args:
             data (dict): the JSON data
 
+        Raises:
+            (TypeError): ambiguous type
+
         Returns:
             (cls): hydrated dataclass
         """
