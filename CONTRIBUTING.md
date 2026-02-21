@@ -99,7 +99,7 @@ class MyParams(TypedDict, total=False):
     """This field is optional and may be omitted."""
 ```
 > [!NOTE]
-> If including a dataclass, please prepare to convert it to a dictionary using `DataModel.to_dict` in the resource endpoint.
+> If a DataModel is included, please use `scurrypy.core.serialization.serialize` before passing to `HTTPClient.request`.
 
 ## Questions?
 Open an issue or discussion!
