@@ -104,7 +104,7 @@ class GuildRoleCacheAddon(Addon):
             return role
         
         try:
-            role = await self.bot.guild(guild_id).fetch_guild_role(role_id)
+            role = await self.bot.guild(guild_id).fetch_role(role_id)
         except DiscordError:
             return None
         
