@@ -4088,7 +4088,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4120,6 +4120,56 @@
       dataclass
    (scurrypy.api.integration.IntegrationModel)" href="../objects/#scurrypy.api.integration.IntegrationModel">IntegrationModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildIntegrationCreateEvent
+
+  
+      dataclass
+   (scurrypy.events.integration_events.GuildIntegrationCreateEvent)" href="#scurrypy.events.integration_events.GuildIntegrationCreateEvent" id="mermaid-link-scurrypy.events.integration_events.GuildIntegrationCreateEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              IntegrationModel
+
+  
+      dataclass
+   (scurrypy.api.integration.IntegrationModel)" href="../objects/#scurrypy.api.integration.IntegrationModel" id="mermaid-link-scurrypy.api.integration.IntegrationModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.integration_events.GuildIntegrationCreateEvent">
+              flowchart TD
+              scurrypy.events.integration_events.GuildIntegrationCreateEvent[GuildIntegrationCreateEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.api.integration.IntegrationModel[IntegrationModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.integration_events.GuildIntegrationCreateEvent
+                
+                scurrypy.api.integration.IntegrationModel --> scurrypy.events.integration_events.GuildIntegrationCreateEvent
+                                scurrypy.core.model.DataModel --> scurrypy.api.integration.IntegrationModel
+                
+
+
+
+              click scurrypy.events.integration_events.GuildIntegrationCreateEvent href "" "scurrypy.events.integration_events.GuildIntegrationCreateEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.api.integration.IntegrationModel href "" "scurrypy.api.integration.IntegrationModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.integration_events.GuildIntegrationCreateEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when an integration is created.</p>
 
@@ -4133,7 +4183,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4196,6 +4246,56 @@
       dataclass
    (scurrypy.api.integration.IntegrationModel)" href="../objects/#scurrypy.api.integration.IntegrationModel">IntegrationModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildIntegrationUpdateEvent
+
+  
+      dataclass
+   (scurrypy.events.integration_events.GuildIntegrationUpdateEvent)" href="#scurrypy.events.integration_events.GuildIntegrationUpdateEvent" id="mermaid-link-scurrypy.events.integration_events.GuildIntegrationUpdateEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              IntegrationModel
+
+  
+      dataclass
+   (scurrypy.api.integration.IntegrationModel)" href="../objects/#scurrypy.api.integration.IntegrationModel" id="mermaid-link-scurrypy.api.integration.IntegrationModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.integration_events.GuildIntegrationUpdateEvent">
+              flowchart TD
+              scurrypy.events.integration_events.GuildIntegrationUpdateEvent[GuildIntegrationUpdateEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.api.integration.IntegrationModel[IntegrationModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.integration_events.GuildIntegrationUpdateEvent
+                
+                scurrypy.api.integration.IntegrationModel --> scurrypy.events.integration_events.GuildIntegrationUpdateEvent
+                                scurrypy.core.model.DataModel --> scurrypy.api.integration.IntegrationModel
+                
+
+
+
+              click scurrypy.events.integration_events.GuildIntegrationUpdateEvent href "" "scurrypy.events.integration_events.GuildIntegrationUpdateEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.api.integration.IntegrationModel href "" "scurrypy.api.integration.IntegrationModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.integration_events.GuildIntegrationUpdateEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when an integration is created.</p>
 
@@ -4209,7 +4309,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4272,6 +4372,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildIntegrationsUpdateEvent
+
+  
+      dataclass
+   (scurrypy.events.integration_events.GuildIntegrationsUpdateEvent)" href="#scurrypy.events.integration_events.GuildIntegrationsUpdateEvent" id="mermaid-link-scurrypy.events.integration_events.GuildIntegrationsUpdateEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.integration_events.GuildIntegrationsUpdateEvent">
+              flowchart TD
+              scurrypy.events.integration_events.GuildIntegrationsUpdateEvent[GuildIntegrationsUpdateEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.integration_events.GuildIntegrationsUpdateEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.integration_events.GuildIntegrationsUpdateEvent
+                
+
+
+              click scurrypy.events.integration_events.GuildIntegrationsUpdateEvent href "" "scurrypy.events.integration_events.GuildIntegrationsUpdateEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.integration_events.GuildIntegrationsUpdateEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when a guild's integration is updated.</p>
 
@@ -4285,7 +4426,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4348,6 +4489,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildIntegrationDeleteEvent
+
+  
+      dataclass
+   (scurrypy.events.integration_events.GuildIntegrationDeleteEvent)" href="#scurrypy.events.integration_events.GuildIntegrationDeleteEvent" id="mermaid-link-scurrypy.events.integration_events.GuildIntegrationDeleteEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.integration_events.GuildIntegrationDeleteEvent">
+              flowchart TD
+              scurrypy.events.integration_events.GuildIntegrationDeleteEvent[GuildIntegrationDeleteEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.integration_events.GuildIntegrationDeleteEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.integration_events.GuildIntegrationDeleteEvent
+                
+
+
+              click scurrypy.events.integration_events.GuildIntegrationDeleteEvent href "" "scurrypy.events.integration_events.GuildIntegrationDeleteEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.integration_events.GuildIntegrationDeleteEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when a guild's integration is deleted.</p>
 
@@ -4361,7 +4543,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

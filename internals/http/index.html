@@ -4443,6 +4443,36 @@
 <p>Users should interact with <a href="../../api/client/">Client</a> and other public <a href="../../api/">API</a> classes instead.</p>
 </div>
 <hr />
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>R = request
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>EP = endpoint
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>L = Lock
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>Q = Queue
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>H = header
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>B = Bucket
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>A + B = {A:B}
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>[R + EP]--|L|--&gt;[Q + EP]--|send R|--&gt;[add/update H + B]
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>    1. request by endpoint
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>    2. push request to queue with lock
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>    3. add/update header by bucket ID with send request
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>    * Queue by ENDPOINT/REQUEST
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>    * Bucket by HEADER
+</code></pre></div></td></tr></table></div>
 
 
 <div class="doc doc-object doc-module">
@@ -4457,21 +4487,6 @@
 
     <div class="doc doc-contents first">
 
-        <p>R = request
-EP = endpoint
-L = Lock
-Q = Queue
-H = header
-B = Bucket
-A + B = {A:B}</p>
-<p>[R + EP]--|L|--&gt;[Q + EP]--|send R|--&gt;[add/update H + B]
-    1. request by endpoint
-    2. push request to queue with lock
-    3. add/update header by bucket ID with send request</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>* Queue by ENDPOINT/REQUEST
-* Bucket by HEADER
-</code></pre></div></td></tr></table></div>
 
 
 
@@ -4481,8 +4496,7 @@ A + B = {A:B}</p>
 
 
 
-
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4539,7 +4553,8 @@ A + B = {A:B}</p>
 
 
 
-  <div class="doc doc-children">
+
+<div class="doc doc-children">
 
 
 
@@ -4730,7 +4745,8 @@ A + B = {A:B}</p>
 
 
 
-  <div class="doc doc-children">
+
+<div class="doc doc-children">
 
 
 
@@ -4845,6 +4861,29 @@ A + B = {A:B}</p>
             <p class="doc doc-class-bases">
               Bases: <code><span title="typing.Protocol">Protocol</span></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            HTTPClientProtocol (scurrypy.core.http.HTTPClientProtocol)" href="#scurrypy.core.http.HTTPClientProtocol" id="mermaid-link-scurrypy.core.http.HTTPClientProtocol"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.http.HTTPClientProtocol">
+              flowchart TD
+              scurrypy.core.http.HTTPClientProtocol[HTTPClientProtocol]
+
+              
+
+              click scurrypy.core.http.HTTPClientProtocol href "" "scurrypy.core.http.HTTPClientProtocol"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.http.HTTPClientProtocol');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Internal contract for the HTTPClient used by the Client. Meant for testing.</p>
 
@@ -4858,7 +4897,7 @@ A + B = {A:B}</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4951,6 +4990,33 @@ A + B = {A:B}</p>
             <p class="doc doc-class-bases">
               Bases: <code><a class="autorefs autorefs-internal" title="            HTTPClientProtocol (scurrypy.core.http.HTTPClientProtocol)" href="#scurrypy.core.http.HTTPClientProtocol">HTTPClientProtocol</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              HTTPClient (scurrypy.core.http.HTTPClient)" href="#scurrypy.core.http.HTTPClient" id="mermaid-link-scurrypy.core.http.HTTPClient"></a>
+                  <a class="autorefs autorefs-internal" title="            HTTPClientProtocol (scurrypy.core.http.HTTPClientProtocol)" href="#scurrypy.core.http.HTTPClientProtocol" id="mermaid-link-scurrypy.core.http.HTTPClientProtocol"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.http.HTTPClient">
+              flowchart TD
+              scurrypy.core.http.HTTPClient[HTTPClient]
+              scurrypy.core.http.HTTPClientProtocol[HTTPClientProtocol]
+
+                              scurrypy.core.http.HTTPClientProtocol --> scurrypy.core.http.HTTPClient
+                
+
+
+              click scurrypy.core.http.HTTPClient href "" "scurrypy.core.http.HTTPClient"
+              click scurrypy.core.http.HTTPClientProtocol href "" "scurrypy.core.http.HTTPClientProtocol"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.http.HTTPClient');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
 
 
 
@@ -4962,7 +5028,8 @@ A + B = {A:B}</p>
 
 
 
-  <div class="doc doc-children">
+
+<div class="doc doc-children">
 
 
 

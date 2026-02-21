@@ -3926,7 +3926,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -3958,6 +3958,42 @@
       dataclass
    (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource">BaseResource</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Application
+
+  
+      dataclass
+   (scurrypy.resources.application.Application)" href="#scurrypy.resources.application.Application" id="mermaid-link-scurrypy.resources.application.Application"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.resources.application.Application">
+              flowchart TD
+              scurrypy.resources.application.Application[Application]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+
+                              scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.application.Application
+                
+
+
+              click scurrypy.resources.application.Application href "" "scurrypy.resources.application.Application"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.resources.application.Application');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents a Discord application.</p>
 
@@ -3971,7 +4007,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

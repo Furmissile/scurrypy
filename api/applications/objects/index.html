@@ -4160,7 +4160,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4192,6 +4192,42 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ApplicationModel
+
+  
+      dataclass
+   (scurrypy.api.application.ApplicationModel)" href="#scurrypy.api.application.ApplicationModel" id="mermaid-link-scurrypy.api.application.ApplicationModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.application.ApplicationModel">
+              flowchart TD
+              scurrypy.api.application.ApplicationModel[ApplicationModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.application.ApplicationModel
+                
+
+
+              click scurrypy.api.application.ApplicationModel href "" "scurrypy.api.application.ApplicationModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.application.ApplicationModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents a Discord application.</p>
 
@@ -4205,7 +4241,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

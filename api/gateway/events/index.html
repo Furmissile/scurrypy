@@ -4036,7 +4036,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4068,6 +4068,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ReadyEvent
+
+  
+      dataclass
+   (scurrypy.events.ready_event.ReadyEvent)" href="#scurrypy.events.ready_event.ReadyEvent" id="mermaid-link-scurrypy.events.ready_event.ReadyEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.ready_event.ReadyEvent">
+              flowchart TD
+              scurrypy.events.ready_event.ReadyEvent[ReadyEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.ready_event.ReadyEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.ready_event.ReadyEvent
+                
+
+
+              click scurrypy.events.ready_event.ReadyEvent href "" "scurrypy.events.ready_event.ReadyEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.ready_event.ReadyEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when bot goes online.</p>
 
@@ -4081,7 +4122,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

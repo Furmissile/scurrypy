@@ -4142,7 +4142,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4174,6 +4174,47 @@
       dataclass
    (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource">BaseResource</a></code>, <code><span title="scurrypy.resources.message._EditMessageMixin">_EditMessageMixin</span></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Message
+
+  
+      dataclass
+   (scurrypy.resources.message.Message)" href="#scurrypy.resources.message.Message" id="mermaid-link-scurrypy.resources.message.Message"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+                  <span title="scurrypy.resources.message._EditMessageMixin"></span>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.resources.message.Message">
+              flowchart TD
+              scurrypy.resources.message.Message[Message]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+              scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
+
+                              scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.message.Message
+                
+                scurrypy.resources.message._EditMessageMixin --> scurrypy.resources.message.Message
+                
+
+
+              click scurrypy.resources.message.Message href "" "scurrypy.resources.message.Message"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+              click scurrypy.resources.message._EditMessageMixin href "" "scurrypy.resources.message._EditMessageMixin"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.resources.message.Message');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>A Discord message.</p>
 
@@ -4187,7 +4228,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4257,7 +4298,7 @@
 
     <div class="doc doc-contents ">
 
-        <p>Fetches the message data based on the given channel ID and message id.</p>
+        <p>Fetches the message data based on the given channel ID and message ID.</p>
 
 
 <p><span class="doc-section-title">Returns:</span></p>

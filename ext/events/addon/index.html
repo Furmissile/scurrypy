@@ -3959,7 +3959,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4003,6 +4003,34 @@
             <p class="doc doc-class-bases">
               Bases: <code><a class="autorefs autorefs-internal" title="            Addon (scurrypy.bases.Addon)" href="../../../api/addon/#scurrypy.bases.addon.Addon">Addon</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              EventsAddon (scurrypy.ext.events.addon.EventsAddon)" href="#scurrypy.ext.events.addon.EventsAddon" id="mermaid-link-scurrypy.ext.events.addon.EventsAddon"></a>
+                  <a class="autorefs autorefs-internal" title="            Addon (scurrypy.bases.addon.Addon)" href="../../../api/addon/#scurrypy.bases.addon.Addon" id="mermaid-link-scurrypy.bases.addon.Addon"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.events.addon.EventsAddon">
+              flowchart TD
+              scurrypy.ext.events.addon.EventsAddon[EventsAddon]
+              scurrypy.bases.addon.Addon[Addon]
+
+                              scurrypy.bases.addon.Addon --> scurrypy.ext.events.addon.EventsAddon
+                
+
+
+              click scurrypy.ext.events.addon.EventsAddon href "" "scurrypy.ext.events.addon.EventsAddon"
+              click scurrypy.bases.addon.Addon href "" "scurrypy.bases.addon.Addon"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.ext.events.addon.EventsAddon');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Addon that implements automatic registering and decorating events.</p>
 
@@ -4030,7 +4058,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

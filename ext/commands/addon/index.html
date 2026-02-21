@@ -4139,7 +4139,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4183,6 +4183,34 @@
             <p class="doc doc-class-bases">
               Bases: <code><a class="autorefs autorefs-internal" title="            Addon (scurrypy.bases.Addon)" href="../../../api/addon/#scurrypy.bases.addon.Addon">Addon</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              CommandsAddon (scurrypy.ext.commands.addon.CommandsAddon)" href="#scurrypy.ext.commands.addon.CommandsAddon" id="mermaid-link-scurrypy.ext.commands.addon.CommandsAddon"></a>
+                  <a class="autorefs autorefs-internal" title="            Addon (scurrypy.bases.addon.Addon)" href="../../../api/addon/#scurrypy.bases.addon.Addon" id="mermaid-link-scurrypy.bases.addon.Addon"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.commands.addon.CommandsAddon">
+              flowchart TD
+              scurrypy.ext.commands.addon.CommandsAddon[CommandsAddon]
+              scurrypy.bases.addon.Addon[Addon]
+
+                              scurrypy.bases.addon.Addon --> scurrypy.ext.commands.addon.CommandsAddon
+                
+
+
+              click scurrypy.ext.commands.addon.CommandsAddon href "" "scurrypy.ext.commands.addon.CommandsAddon"
+              click scurrypy.bases.addon.Addon href "" "scurrypy.bases.addon.Addon"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.ext.commands.addon.CommandsAddon');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Addon that implements automatic registering and decorating command interactions.</p>
 
@@ -4220,7 +4248,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

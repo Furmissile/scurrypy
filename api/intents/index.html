@@ -4127,7 +4127,7 @@ Otherwise, your bot needs to be verified to use these intents.</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4152,6 +4152,34 @@ Otherwise, your bot needs to be verified to use these intents.</p>
             <p class="doc doc-class-bases">
               Bases: <code><a class="autorefs autorefs-internal" title="            DiscordFlags (scurrypy.enums.enum_types.DiscordFlags)" href="../../internals/enum_types/#scurrypy.enums.enum_types.DiscordFlags">DiscordFlags</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            Intents (scurrypy.intents.Intents)" href="#scurrypy.intents.Intents" id="mermaid-link-scurrypy.intents.Intents"></a>
+                  <a class="autorefs autorefs-internal" title="            DiscordFlags (scurrypy.enums.enum_types.DiscordFlags)" href="../../internals/enum_types/#scurrypy.enums.enum_types.DiscordFlags" id="mermaid-link-scurrypy.enums.enum_types.DiscordFlags"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.intents.Intents">
+              flowchart TD
+              scurrypy.intents.Intents[Intents]
+              scurrypy.enums.enum_types.DiscordFlags[DiscordFlags]
+
+                              scurrypy.enums.enum_types.DiscordFlags --> scurrypy.intents.Intents
+                
+
+
+              click scurrypy.intents.Intents href "" "scurrypy.intents.Intents"
+              click scurrypy.enums.enum_types.DiscordFlags href "" "scurrypy.enums.enum_types.DiscordFlags"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.intents.Intents');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Gateway intent flags (bitwise).  </p>
 <p>For an exhaustive list what intents let your bot listen to what events, 
@@ -4171,7 +4199,7 @@ see the <a href="https://discord.com/developers/docs/events/gateway#list-of-inte
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

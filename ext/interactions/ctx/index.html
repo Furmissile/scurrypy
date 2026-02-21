@@ -4013,7 +4013,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4041,6 +4041,52 @@
       dataclass
    (scurrypy.resources.Interaction)" href="../../../api/interactions/resources/#scurrypy.resources.interaction.Interaction">Interaction</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="#scurrypy.ext.interactions.ctx.InteractionContext" id="mermaid-link-scurrypy.ext.interactions.ctx.InteractionContext"></a>
+                  <a class="autorefs autorefs-internal" title="              Interaction
+
+  
+      dataclass
+   (scurrypy.resources.interaction.Interaction)" href="../../../api/interactions/resources/#scurrypy.resources.interaction.Interaction" id="mermaid-link-scurrypy.resources.interaction.Interaction"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+                  <span title="scurrypy.resources.message._EditMessageMixin"></span>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.interactions.ctx.InteractionContext">
+              flowchart TD
+              scurrypy.ext.interactions.ctx.InteractionContext[InteractionContext]
+              scurrypy.resources.interaction.Interaction[Interaction]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+              scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
+
+                              scurrypy.resources.interaction.Interaction --> scurrypy.ext.interactions.ctx.InteractionContext
+                                scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.interaction.Interaction
+                
+                scurrypy.resources.message._EditMessageMixin --> scurrypy.resources.interaction.Interaction
+                
+
+
+
+              click scurrypy.ext.interactions.ctx.InteractionContext href "" "scurrypy.ext.interactions.ctx.InteractionContext"
+              click scurrypy.resources.interaction.Interaction href "" "scurrypy.resources.interaction.Interaction"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+              click scurrypy.resources.message._EditMessageMixin href "" "scurrypy.resources.message._EditMessageMixin"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.ext.interactions.ctx.InteractionContext');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Useful interaction event info.</p>
 
@@ -4054,7 +4100,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

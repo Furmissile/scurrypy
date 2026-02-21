@@ -725,9 +725,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mental-map" class="md-nav__link">
+  <a href="#what-is-a-context" class="md-nav__link">
     <span class="md-ellipsis">
-      Mental Map
+      What is a context?
     </span>
   </a>
   
@@ -3845,9 +3845,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mental-map" class="md-nav__link">
+  <a href="#what-is-a-context" class="md-nav__link">
     <span class="md-ellipsis">
-      Mental Map
+      What is a context?
     </span>
   </a>
   
@@ -3912,19 +3912,20 @@ If you wish to make any of these actions, make a resource from the model!</p>
 <p>Events do <em>not</em> possess any capabilities like fetching, creating, modifying, or deleting.
 If you wish to make any of these actions, make a resource from the event!</p>
 <p><em>Q. How do I respond to an event?</em></p>
-<p>A: Event -&gt; Resource -&gt; Request. ScurryPy will never do this for you.</p>
+<p>A: Event -&gt; Resource -&gt; Request. ScurryPy will never do this for you (unless you use <code>scurrypy.ext</code>).</p>
 <h2 id="what-is-a-parameter">What is a Parameter?<a class="headerlink" href="#what-is-a-parameter" title="Permanent link">&para;</a></h2>
 <hr />
 <p>Parameters model the user's contract with <em>modifying</em> endpoints. Use these classes when you want to <em>modify</em> something.</p>
 <p>Parameters are <code>TypedDict</code>s that are meant to be <code>Unpack</code>ed by endpoint functions. 
 They are constructed via keyword arguments rather than manual instantiation.</p>
-<h2 id="mental-map">Mental Map<a class="headerlink" href="#mental-map" title="Permanent link">&para;</a></h2>
+<h2 id="what-is-a-context">What is a context?<a class="headerlink" href="#what-is-a-context" title="Permanent link">&para;</a></h2>
 <hr />
-<p>Below is a figure for picturing these objects in sequence.</p>
-<div class="center">
-<p><img alt="Setup Mental Map" src="../../assets/setup_mental_map.png" title="Setup Mental Map" /></p>
-<p><em>Figure 1: Setup Client Mental Map</em></p>
-</div>
+<p>Contexts are part of the <code>scurrypy.ext</code> module. They group properties associated with the events the addon dispatches.</p>
+<p>For example, <a class="autorefs autorefs-internal" title="              ApplicationCommandContext
+
+  
+      dataclass
+  " href="../../ext/commands/ctx/#scurrypy.ext.commands.ctx.ApplicationCommandContext"><code>ApplicationCommandContext</code></a> contains commonly needed properties from the <code>INTERACTION_CREATE</code> event including bot, event, event data, and various helper properties.</p>
 
 
 

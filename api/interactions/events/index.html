@@ -3908,7 +3908,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -3940,6 +3940,55 @@
       dataclass
    (scurrypy.api.interactions.interaction.InteractionModel)" href="../objects/#scurrypy.api.interactions.interaction.InteractionModel">InteractionModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              InteractionEvent
+
+  
+      dataclass
+   (scurrypy.events.interaction_events.InteractionEvent)" href="#scurrypy.events.interaction_events.InteractionEvent" id="mermaid-link-scurrypy.events.interaction_events.InteractionEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              InteractionModel
+
+  
+      dataclass
+   (scurrypy.api.interactions.interaction.InteractionModel)" href="../objects/#scurrypy.api.interactions.interaction.InteractionModel" id="mermaid-link-scurrypy.api.interactions.interaction.InteractionModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.interaction_events.InteractionEvent">
+              flowchart TD
+              scurrypy.events.interaction_events.InteractionEvent[InteractionEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.api.interactions.interaction.InteractionModel[InteractionModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.interaction_events.InteractionEvent
+                
+                scurrypy.api.interactions.interaction.InteractionModel --> scurrypy.events.interaction_events.InteractionEvent
+                                scurrypy.core.model.DataModel --> scurrypy.api.interactions.interaction.InteractionModel
+                
+
+
+
+              click scurrypy.events.interaction_events.InteractionEvent href "" "scurrypy.events.interaction_events.InteractionEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.api.interactions.interaction.InteractionModel href "" "scurrypy.api.interactions.interaction.InteractionModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.interaction_events.InteractionEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
 
 
 
@@ -3951,7 +4000,8 @@
 
 
 
-  <div class="doc doc-children">
+
+<div class="doc doc-children">
 
 
 

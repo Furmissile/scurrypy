@@ -3995,7 +3995,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4023,6 +4023,47 @@
       dataclass
    (scurrypy.resources.Channel)" href="../../../api/channels/resources/#scurrypy.resources.channel.Channel">Channel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              PrefixCommandContext (scurrypy.ext.prefixes.ctx.PrefixCommandContext)" href="#scurrypy.ext.prefixes.ctx.PrefixCommandContext" id="mermaid-link-scurrypy.ext.prefixes.ctx.PrefixCommandContext"></a>
+                  <a class="autorefs autorefs-internal" title="              Channel
+
+  
+      dataclass
+   (scurrypy.resources.channel.Channel)" href="../../../api/channels/resources/#scurrypy.resources.channel.Channel" id="mermaid-link-scurrypy.resources.channel.Channel"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.prefixes.ctx.PrefixCommandContext">
+              flowchart TD
+              scurrypy.ext.prefixes.ctx.PrefixCommandContext[PrefixCommandContext]
+              scurrypy.resources.channel.Channel[Channel]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+
+                              scurrypy.resources.channel.Channel --> scurrypy.ext.prefixes.ctx.PrefixCommandContext
+                                scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.channel.Channel
+                
+
+
+
+              click scurrypy.ext.prefixes.ctx.PrefixCommandContext href "" "scurrypy.ext.prefixes.ctx.PrefixCommandContext"
+              click scurrypy.resources.channel.Channel href "" "scurrypy.resources.channel.Channel"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.ext.prefixes.ctx.PrefixCommandContext');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Useful message prefix event info.</p>
 
@@ -4036,7 +4077,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

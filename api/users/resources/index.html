@@ -3980,7 +3980,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4012,6 +4012,42 @@
       dataclass
    (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource">BaseResource</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              User
+
+  
+      dataclass
+   (scurrypy.resources.user.User)" href="#scurrypy.resources.user.User" id="mermaid-link-scurrypy.resources.user.User"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.resources.user.User">
+              flowchart TD
+              scurrypy.resources.user.User[User]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+
+                              scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.user.User
+                
+
+
+              click scurrypy.resources.user.User href "" "scurrypy.resources.user.User"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.resources.user.User');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>A Discord user.</p>
 
@@ -4025,7 +4061,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

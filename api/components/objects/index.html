@@ -6466,7 +6466,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -6498,6 +6498,57 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild">ActionRowChild</a></code>, <code><a class="autorefs autorefs-internal" title="            SectionAccessoryChild (scurrypy.bases.components.SectionAccessoryChild)" href="../bases/#scurrypy.bases.components.SectionAccessoryChild">SectionAccessoryChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Button
+
+  
+      dataclass
+   (scurrypy.api.components.button.Button)" href="#scurrypy.api.components.button.Button" id="mermaid-link-scurrypy.api.components.button.Button"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild" id="mermaid-link-scurrypy.bases.components.ActionRowChild"></a>
+                  <a class="autorefs autorefs-internal" title="            SectionAccessoryChild (scurrypy.bases.components.SectionAccessoryChild)" href="../bases/#scurrypy.bases.components.SectionAccessoryChild" id="mermaid-link-scurrypy.bases.components.SectionAccessoryChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.button.Button">
+              flowchart TD
+              scurrypy.api.components.button.Button[Button]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ActionRowChild[ActionRowChild]
+              scurrypy.bases.components.SectionAccessoryChild[SectionAccessoryChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.button.Button
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.button.Button
+                
+                scurrypy.bases.components.ActionRowChild --> scurrypy.api.components.button.Button
+                
+                scurrypy.bases.components.SectionAccessoryChild --> scurrypy.api.components.button.Button
+                
+
+
+              click scurrypy.api.components.button.Button href "" "scurrypy.api.components.button.Button"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ActionRowChild href "" "scurrypy.bases.components.ActionRowChild"
+              click scurrypy.bases.components.SectionAccessoryChild href "" "scurrypy.bases.components.SectionAccessoryChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.button.Button');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Button component.</p>
 <p>A pressable button!</p>
@@ -6512,7 +6563,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -6747,7 +6798,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -6779,6 +6830,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ActionRow
+
+  
+      dataclass
+   (scurrypy.api.components.layout.ActionRow)" href="#scurrypy.api.components.layout.ActionRow" id="mermaid-link-scurrypy.api.components.layout.ActionRow"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.ActionRow">
+              flowchart TD
+              scurrypy.api.components.layout.ActionRow[ActionRow]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.ActionRow
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.layout.ActionRow
+                
+
+
+              click scurrypy.api.components.layout.ActionRow href "" "scurrypy.api.components.layout.ActionRow"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.ActionRow');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents a container of interactable components.</p>
 
@@ -6792,7 +6884,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -6879,6 +6971,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild">ContainerChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Section
+
+  
+      dataclass
+   (scurrypy.api.components.layout.Section)" href="#scurrypy.api.components.layout.Section" id="mermaid-link-scurrypy.api.components.layout.Section"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild" id="mermaid-link-scurrypy.bases.components.ContainerChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.Section">
+              flowchart TD
+              scurrypy.api.components.layout.Section[Section]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ContainerChild[ContainerChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.Section
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.layout.Section
+                
+                scurrypy.bases.components.ContainerChild --> scurrypy.api.components.layout.Section
+                
+
+
+              click scurrypy.api.components.layout.Section href "" "scurrypy.api.components.layout.Section"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ContainerChild href "" "scurrypy.bases.components.ContainerChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.Section');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Section component.</p>
 <p>A Section contextually associates content with an accessory component.</p>
@@ -6893,7 +7031,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7005,6 +7143,57 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild">ContainerChild</a></code>, <code><a class="autorefs autorefs-internal" title="            SectionChild (scurrypy.bases.components.SectionChild)" href="../bases/#scurrypy.bases.components.SectionChild">SectionChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              TextDisplay
+
+  
+      dataclass
+   (scurrypy.api.components.layout.TextDisplay)" href="#scurrypy.api.components.layout.TextDisplay" id="mermaid-link-scurrypy.api.components.layout.TextDisplay"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild" id="mermaid-link-scurrypy.bases.components.ContainerChild"></a>
+                  <a class="autorefs autorefs-internal" title="            SectionChild (scurrypy.bases.components.SectionChild)" href="../bases/#scurrypy.bases.components.SectionChild" id="mermaid-link-scurrypy.bases.components.SectionChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.TextDisplay">
+              flowchart TD
+              scurrypy.api.components.layout.TextDisplay[TextDisplay]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ContainerChild[ContainerChild]
+              scurrypy.bases.components.SectionChild[SectionChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.TextDisplay
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.layout.TextDisplay
+                
+                scurrypy.bases.components.ContainerChild --> scurrypy.api.components.layout.TextDisplay
+                
+                scurrypy.bases.components.SectionChild --> scurrypy.api.components.layout.TextDisplay
+                
+
+
+              click scurrypy.api.components.layout.TextDisplay href "" "scurrypy.api.components.layout.TextDisplay"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ContainerChild href "" "scurrypy.bases.components.ContainerChild"
+              click scurrypy.bases.components.SectionChild href "" "scurrypy.bases.components.SectionChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.TextDisplay');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Text Display component.</p>
 <p>A Text Display adds markdown formatted text, including mentions (users, roles, etc) and emojis.</p>
@@ -7019,7 +7208,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7106,6 +7295,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            SectionAccessoryChild (scurrypy.bases.components.SectionAccessoryChild)" href="../bases/#scurrypy.bases.components.SectionAccessoryChild">SectionAccessoryChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Thumbnail
+
+  
+      dataclass
+   (scurrypy.api.components.layout.Thumbnail)" href="#scurrypy.api.components.layout.Thumbnail" id="mermaid-link-scurrypy.api.components.layout.Thumbnail"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            SectionAccessoryChild (scurrypy.bases.components.SectionAccessoryChild)" href="../bases/#scurrypy.bases.components.SectionAccessoryChild" id="mermaid-link-scurrypy.bases.components.SectionAccessoryChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.Thumbnail">
+              flowchart TD
+              scurrypy.api.components.layout.Thumbnail[Thumbnail]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.SectionAccessoryChild[SectionAccessoryChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.Thumbnail
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.layout.Thumbnail
+                
+                scurrypy.bases.components.SectionAccessoryChild --> scurrypy.api.components.layout.Thumbnail
+                
+
+
+              click scurrypy.api.components.layout.Thumbnail href "" "scurrypy.api.components.layout.Thumbnail"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.SectionAccessoryChild href "" "scurrypy.bases.components.SectionAccessoryChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.Thumbnail');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Thumbnail component.</p>
 <p>A Thumbnail displays visual media in a small form-factor.</p>
@@ -7120,7 +7355,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7253,6 +7488,42 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              MediaGalleryItem
+
+  
+      dataclass
+   (scurrypy.api.components.layout.MediaGalleryItem)" href="#scurrypy.api.components.layout.MediaGalleryItem" id="mermaid-link-scurrypy.api.components.layout.MediaGalleryItem"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.MediaGalleryItem">
+              flowchart TD
+              scurrypy.api.components.layout.MediaGalleryItem[MediaGalleryItem]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.MediaGalleryItem
+                
+
+
+              click scurrypy.api.components.layout.MediaGalleryItem href "" "scurrypy.api.components.layout.MediaGalleryItem"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.MediaGalleryItem');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Media Gallery Item component.</p>
 
@@ -7266,7 +7537,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7376,6 +7647,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild">ContainerChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              MediaGallery
+
+  
+      dataclass
+   (scurrypy.api.components.layout.MediaGallery)" href="#scurrypy.api.components.layout.MediaGallery" id="mermaid-link-scurrypy.api.components.layout.MediaGallery"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild" id="mermaid-link-scurrypy.bases.components.ContainerChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.MediaGallery">
+              flowchart TD
+              scurrypy.api.components.layout.MediaGallery[MediaGallery]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ContainerChild[ContainerChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.MediaGallery
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.layout.MediaGallery
+                
+                scurrypy.bases.components.ContainerChild --> scurrypy.api.components.layout.MediaGallery
+                
+
+
+              click scurrypy.api.components.layout.MediaGallery href "" "scurrypy.api.components.layout.MediaGallery"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ContainerChild href "" "scurrypy.bases.components.ContainerChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.MediaGallery');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Media Gallery component.</p>
 <p>A Media Gallery displays 1-10 media attachments in an organized gallery format.</p>
@@ -7390,7 +7707,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7477,6 +7794,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild">ContainerChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              File
+
+  
+      dataclass
+   (scurrypy.api.components.layout.File)" href="#scurrypy.api.components.layout.File" id="mermaid-link-scurrypy.api.components.layout.File"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild" id="mermaid-link-scurrypy.bases.components.ContainerChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.File">
+              flowchart TD
+              scurrypy.api.components.layout.File[File]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ContainerChild[ContainerChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.File
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.layout.File
+                
+                scurrypy.bases.components.ContainerChild --> scurrypy.api.components.layout.File
+                
+
+
+              click scurrypy.api.components.layout.File href "" "scurrypy.api.components.layout.File"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ContainerChild href "" "scurrypy.bases.components.ContainerChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.File');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the File component.</p>
 <p>A File displays an uploaded file as an attachment to the message and reference it in the component.</p>
@@ -7491,7 +7854,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7601,6 +7964,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild">ContainerChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Separator
+
+  
+      dataclass
+   (scurrypy.api.components.layout.Separator)" href="#scurrypy.api.components.layout.Separator" id="mermaid-link-scurrypy.api.components.layout.Separator"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ContainerChild (scurrypy.bases.components.ContainerChild)" href="../bases/#scurrypy.bases.components.ContainerChild" id="mermaid-link-scurrypy.bases.components.ContainerChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.Separator">
+              flowchart TD
+              scurrypy.api.components.layout.Separator[Separator]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ContainerChild[ContainerChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.Separator
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.layout.Separator
+                
+                scurrypy.bases.components.ContainerChild --> scurrypy.api.components.layout.Separator
+                
+
+
+              click scurrypy.api.components.layout.Separator href "" "scurrypy.api.components.layout.Separator"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ContainerChild href "" "scurrypy.bases.components.ContainerChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.Separator');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Separator component.</p>
 <p>A Separator adds vertical padding and visual division between other components.</p>
@@ -7615,7 +8024,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7725,6 +8134,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Container
+
+  
+      dataclass
+   (scurrypy.api.components.layout.Container)" href="#scurrypy.api.components.layout.Container" id="mermaid-link-scurrypy.api.components.layout.Container"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.Container">
+              flowchart TD
+              scurrypy.api.components.layout.Container[Container]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.Container
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.layout.Container
+                
+
+
+              click scurrypy.api.components.layout.Container href "" "scurrypy.api.components.layout.Container"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.Container');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents a container of display and interactable components.</p>
 <p>A Container visually encapsulates a collection of components.</p>
@@ -7739,7 +8189,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7873,6 +8323,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Label
+
+  
+      dataclass
+   (scurrypy.api.components.layout.Label)" href="#scurrypy.api.components.layout.Label" id="mermaid-link-scurrypy.api.components.layout.Label"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.layout.Label">
+              flowchart TD
+              scurrypy.api.components.layout.Label[Label]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.layout.Label
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.layout.Label
+                
+
+
+              click scurrypy.api.components.layout.Label href "" "scurrypy.api.components.layout.Label"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.layout.Label');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Discord Label component.</p>
 <p>Labels wrap modal components with text as a label and optional description.</p>
@@ -7887,7 +8378,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8031,7 +8522,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8063,6 +8554,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              TextInput
+
+  
+      dataclass
+   (scurrypy.api.components.modal.TextInput)" href="#scurrypy.api.components.modal.TextInput" id="mermaid-link-scurrypy.api.components.modal.TextInput"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.modal.TextInput">
+              flowchart TD
+              scurrypy.api.components.modal.TextInput[TextInput]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.modal.TextInput
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.modal.TextInput
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.modal.TextInput
+                
+
+
+              click scurrypy.api.components.modal.TextInput href "" "scurrypy.api.components.modal.TextInput"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.modal.TextInput');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Text Input component.</p>
 <p>A Text Input allows users to enter free-form text.</p>
@@ -8077,7 +8614,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8302,6 +8839,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              FileUpload
+
+  
+      dataclass
+   (scurrypy.api.components.modal.FileUpload)" href="#scurrypy.api.components.modal.FileUpload" id="mermaid-link-scurrypy.api.components.modal.FileUpload"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.modal.FileUpload">
+              flowchart TD
+              scurrypy.api.components.modal.FileUpload[FileUpload]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.modal.FileUpload
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.modal.FileUpload
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.modal.FileUpload
+                
+
+
+              click scurrypy.api.components.modal.FileUpload href "" "scurrypy.api.components.modal.FileUpload"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.modal.FileUpload');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the file upload component.</p>
 <p>File Upload allows users to upload files in modals.</p>
@@ -8316,7 +8899,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8472,6 +9055,42 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ListOption
+
+  
+      dataclass
+   (scurrypy.api.components.modal.ListOption)" href="#scurrypy.api.components.modal.ListOption" id="mermaid-link-scurrypy.api.components.modal.ListOption"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.modal.ListOption">
+              flowchart TD
+              scurrypy.api.components.modal.ListOption[ListOption]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.modal.ListOption
+                
+
+
+              click scurrypy.api.components.modal.ListOption href "" "scurrypy.api.components.modal.ListOption"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.modal.ListOption');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents an option in a group or checkbox group component.</p>
 
@@ -8485,7 +9104,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8618,6 +9237,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              RadioGroup
+
+  
+      dataclass
+   (scurrypy.api.components.modal.RadioGroup)" href="#scurrypy.api.components.modal.RadioGroup" id="mermaid-link-scurrypy.api.components.modal.RadioGroup"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.modal.RadioGroup">
+              flowchart TD
+              scurrypy.api.components.modal.RadioGroup[RadioGroup]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.modal.RadioGroup
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.modal.RadioGroup
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.modal.RadioGroup
+                
+
+
+              click scurrypy.api.components.modal.RadioGroup href "" "scurrypy.api.components.modal.RadioGroup"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.modal.RadioGroup');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the radio group component.</p>
 <p>A Radio Group is for selecting exactly one option from a defined list.</p>
@@ -8632,7 +9297,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8765,6 +9430,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              CheckboxGroup
+
+  
+      dataclass
+   (scurrypy.api.components.modal.CheckboxGroup)" href="#scurrypy.api.components.modal.CheckboxGroup" id="mermaid-link-scurrypy.api.components.modal.CheckboxGroup"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.modal.CheckboxGroup">
+              flowchart TD
+              scurrypy.api.components.modal.CheckboxGroup[CheckboxGroup]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.modal.CheckboxGroup
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.modal.CheckboxGroup
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.modal.CheckboxGroup
+                
+
+
+              click scurrypy.api.components.modal.CheckboxGroup href "" "scurrypy.api.components.modal.CheckboxGroup"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.modal.CheckboxGroup');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the checkbox group component.</p>
 <p>A Checkbox Group is for selecting one or many options via checkboxes.</p>
@@ -8779,7 +9490,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8958,6 +9669,52 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Checkbox
+
+  
+      dataclass
+   (scurrypy.api.components.modal.Checkbox)" href="#scurrypy.api.components.modal.Checkbox" id="mermaid-link-scurrypy.api.components.modal.Checkbox"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.modal.Checkbox">
+              flowchart TD
+              scurrypy.api.components.modal.Checkbox[Checkbox]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.modal.Checkbox
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.modal.Checkbox
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.modal.Checkbox
+                
+
+
+              click scurrypy.api.components.modal.Checkbox href "" "scurrypy.api.components.modal.Checkbox"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.modal.Checkbox');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents a checkbox component.</p>
 <p>A Checkbox is for simple yes/no style questions.</p>
@@ -8972,7 +9729,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9092,7 +9849,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9124,6 +9881,42 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              SelectOption
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.SelectOption)" href="#scurrypy.api.components.select_menu.SelectOption" id="mermaid-link-scurrypy.api.components.select_menu.SelectOption"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.select_menu.SelectOption">
+              flowchart TD
+              scurrypy.api.components.select_menu.SelectOption[SelectOption]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.select_menu.SelectOption
+                
+
+
+              click scurrypy.api.components.select_menu.SelectOption href "" "scurrypy.api.components.select_menu.SelectOption"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.select_menu.SelectOption');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Select Option component.</p>
 
@@ -9137,7 +9930,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9293,6 +10086,57 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild">ActionRowChild</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              StringSelect
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.StringSelect)" href="#scurrypy.api.components.select_menu.StringSelect" id="mermaid-link-scurrypy.api.components.select_menu.StringSelect"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild" id="mermaid-link-scurrypy.bases.components.ActionRowChild"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.select_menu.StringSelect">
+              flowchart TD
+              scurrypy.api.components.select_menu.StringSelect[StringSelect]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ActionRowChild[ActionRowChild]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.select_menu.StringSelect
+                
+                scurrypy.bases.components.Component --> scurrypy.api.components.select_menu.StringSelect
+                
+                scurrypy.bases.components.ActionRowChild --> scurrypy.api.components.select_menu.StringSelect
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.select_menu.StringSelect
+                
+
+
+              click scurrypy.api.components.select_menu.StringSelect href "" "scurrypy.api.components.select_menu.StringSelect"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ActionRowChild href "" "scurrypy.bases.components.ActionRowChild"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.select_menu.StringSelect');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the String Select component.</p>
 <p>A String Select allows users to select one or more provided options.</p>
@@ -9307,7 +10151,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9532,6 +10376,42 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              DefaultValue
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.DefaultValue)" href="#scurrypy.api.components.select_menu.DefaultValue" id="mermaid-link-scurrypy.api.components.select_menu.DefaultValue"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.select_menu.DefaultValue">
+              flowchart TD
+              scurrypy.api.components.select_menu.DefaultValue[DefaultValue]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.select_menu.DefaultValue
+                
+
+
+              click scurrypy.api.components.select_menu.DefaultValue href "" "scurrypy.api.components.select_menu.DefaultValue"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.select_menu.DefaultValue');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Default Value for Select components.</p>
 
@@ -9545,7 +10425,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9632,6 +10512,42 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              SelectMenu
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.SelectMenu)" href="#scurrypy.api.components.select_menu.SelectMenu" id="mermaid-link-scurrypy.api.components.select_menu.SelectMenu"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.select_menu.SelectMenu">
+              flowchart TD
+              scurrypy.api.components.select_menu.SelectMenu[SelectMenu]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.components.select_menu.SelectMenu
+                
+
+
+              click scurrypy.api.components.select_menu.SelectMenu href "" "scurrypy.api.components.select_menu.SelectMenu"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.select_menu.SelectMenu');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents common fields for Discord's select menus.</p>
 
@@ -9645,7 +10561,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9848,6 +10764,66 @@ Number of default values must be in the range of <code>min_values</code> to <cod
       dataclass
    (scurrypy.api.components.select_menu.SelectMenu)" href="#scurrypy.api.components.select_menu.SelectMenu">SelectMenu</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild">ActionRowChild</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              UserSelect
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.UserSelect)" href="#scurrypy.api.components.select_menu.UserSelect" id="mermaid-link-scurrypy.api.components.select_menu.UserSelect"></a>
+                  <a class="autorefs autorefs-internal" title="              SelectMenu
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.SelectMenu)" href="#scurrypy.api.components.select_menu.SelectMenu" id="mermaid-link-scurrypy.api.components.select_menu.SelectMenu"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild" id="mermaid-link-scurrypy.bases.components.ActionRowChild"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.select_menu.UserSelect">
+              flowchart TD
+              scurrypy.api.components.select_menu.UserSelect[UserSelect]
+              scurrypy.api.components.select_menu.SelectMenu[SelectMenu]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ActionRowChild[ActionRowChild]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.api.components.select_menu.SelectMenu --> scurrypy.api.components.select_menu.UserSelect
+                                scurrypy.core.model.DataModel --> scurrypy.api.components.select_menu.SelectMenu
+                
+
+                scurrypy.bases.components.Component --> scurrypy.api.components.select_menu.UserSelect
+                
+                scurrypy.bases.components.ActionRowChild --> scurrypy.api.components.select_menu.UserSelect
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.select_menu.UserSelect
+                
+
+
+              click scurrypy.api.components.select_menu.UserSelect href "" "scurrypy.api.components.select_menu.UserSelect"
+              click scurrypy.api.components.select_menu.SelectMenu href "" "scurrypy.api.components.select_menu.SelectMenu"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ActionRowChild href "" "scurrypy.bases.components.ActionRowChild"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.select_menu.UserSelect');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the User Select component.</p>
 <p>User Select allows users to select one or more users.</p>
@@ -9862,7 +10838,7 @@ Number of default values must be in the range of <code>min_values</code> to <cod
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9926,6 +10902,66 @@ Number of default values must be in the range of <code>min_values</code> to <cod
       dataclass
    (scurrypy.api.components.select_menu.SelectMenu)" href="#scurrypy.api.components.select_menu.SelectMenu">SelectMenu</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild">ActionRowChild</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              RoleSelect
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.RoleSelect)" href="#scurrypy.api.components.select_menu.RoleSelect" id="mermaid-link-scurrypy.api.components.select_menu.RoleSelect"></a>
+                  <a class="autorefs autorefs-internal" title="              SelectMenu
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.SelectMenu)" href="#scurrypy.api.components.select_menu.SelectMenu" id="mermaid-link-scurrypy.api.components.select_menu.SelectMenu"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild" id="mermaid-link-scurrypy.bases.components.ActionRowChild"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.select_menu.RoleSelect">
+              flowchart TD
+              scurrypy.api.components.select_menu.RoleSelect[RoleSelect]
+              scurrypy.api.components.select_menu.SelectMenu[SelectMenu]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ActionRowChild[ActionRowChild]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.api.components.select_menu.SelectMenu --> scurrypy.api.components.select_menu.RoleSelect
+                                scurrypy.core.model.DataModel --> scurrypy.api.components.select_menu.SelectMenu
+                
+
+                scurrypy.bases.components.Component --> scurrypy.api.components.select_menu.RoleSelect
+                
+                scurrypy.bases.components.ActionRowChild --> scurrypy.api.components.select_menu.RoleSelect
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.select_menu.RoleSelect
+                
+
+
+              click scurrypy.api.components.select_menu.RoleSelect href "" "scurrypy.api.components.select_menu.RoleSelect"
+              click scurrypy.api.components.select_menu.SelectMenu href "" "scurrypy.api.components.select_menu.SelectMenu"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ActionRowChild href "" "scurrypy.bases.components.ActionRowChild"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.select_menu.RoleSelect');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Role Select component.</p>
 <p>A Role Select allows users to select one or more roles</p>
@@ -9940,7 +10976,7 @@ Number of default values must be in the range of <code>min_values</code> to <cod
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -10004,6 +11040,66 @@ Number of default values must be in the range of <code>min_values</code> to <cod
       dataclass
    (scurrypy.api.components.select_menu.SelectMenu)" href="#scurrypy.api.components.select_menu.SelectMenu">SelectMenu</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild">ActionRowChild</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              MentionableSelect
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.MentionableSelect)" href="#scurrypy.api.components.select_menu.MentionableSelect" id="mermaid-link-scurrypy.api.components.select_menu.MentionableSelect"></a>
+                  <a class="autorefs autorefs-internal" title="              SelectMenu
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.SelectMenu)" href="#scurrypy.api.components.select_menu.SelectMenu" id="mermaid-link-scurrypy.api.components.select_menu.SelectMenu"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild" id="mermaid-link-scurrypy.bases.components.ActionRowChild"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.select_menu.MentionableSelect">
+              flowchart TD
+              scurrypy.api.components.select_menu.MentionableSelect[MentionableSelect]
+              scurrypy.api.components.select_menu.SelectMenu[SelectMenu]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ActionRowChild[ActionRowChild]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.api.components.select_menu.SelectMenu --> scurrypy.api.components.select_menu.MentionableSelect
+                                scurrypy.core.model.DataModel --> scurrypy.api.components.select_menu.SelectMenu
+                
+
+                scurrypy.bases.components.Component --> scurrypy.api.components.select_menu.MentionableSelect
+                
+                scurrypy.bases.components.ActionRowChild --> scurrypy.api.components.select_menu.MentionableSelect
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.select_menu.MentionableSelect
+                
+
+
+              click scurrypy.api.components.select_menu.MentionableSelect href "" "scurrypy.api.components.select_menu.MentionableSelect"
+              click scurrypy.api.components.select_menu.SelectMenu href "" "scurrypy.api.components.select_menu.SelectMenu"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ActionRowChild href "" "scurrypy.bases.components.ActionRowChild"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.select_menu.MentionableSelect');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Mentionable Select component.</p>
 <p>A Mentionable Select allows users to select one or more mentionables.</p>
@@ -10018,7 +11114,7 @@ Number of default values must be in the range of <code>min_values</code> to <cod
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -10082,6 +11178,66 @@ Number of default values must be in the range of <code>min_values</code> to <cod
       dataclass
    (scurrypy.api.components.select_menu.SelectMenu)" href="#scurrypy.api.components.select_menu.SelectMenu">SelectMenu</a></code>, <code><a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component">Component</a></code>, <code><a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild">ActionRowChild</a></code>, <code><a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild">LabelChild</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ChannelSelect
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.ChannelSelect)" href="#scurrypy.api.components.select_menu.ChannelSelect" id="mermaid-link-scurrypy.api.components.select_menu.ChannelSelect"></a>
+                  <a class="autorefs autorefs-internal" title="              SelectMenu
+
+  
+      dataclass
+   (scurrypy.api.components.select_menu.SelectMenu)" href="#scurrypy.api.components.select_menu.SelectMenu" id="mermaid-link-scurrypy.api.components.select_menu.SelectMenu"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            Component (scurrypy.bases.components.Component)" href="../bases/#scurrypy.bases.components.Component" id="mermaid-link-scurrypy.bases.components.Component"></a>
+                  <a class="autorefs autorefs-internal" title="            ActionRowChild (scurrypy.bases.components.ActionRowChild)" href="../bases/#scurrypy.bases.components.ActionRowChild" id="mermaid-link-scurrypy.bases.components.ActionRowChild"></a>
+                  <a class="autorefs autorefs-internal" title="            LabelChild (scurrypy.bases.components.LabelChild)" href="../bases/#scurrypy.bases.components.LabelChild" id="mermaid-link-scurrypy.bases.components.LabelChild"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.components.select_menu.ChannelSelect">
+              flowchart TD
+              scurrypy.api.components.select_menu.ChannelSelect[ChannelSelect]
+              scurrypy.api.components.select_menu.SelectMenu[SelectMenu]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.components.Component[Component]
+              scurrypy.bases.components.ActionRowChild[ActionRowChild]
+              scurrypy.bases.components.LabelChild[LabelChild]
+
+                              scurrypy.api.components.select_menu.SelectMenu --> scurrypy.api.components.select_menu.ChannelSelect
+                                scurrypy.core.model.DataModel --> scurrypy.api.components.select_menu.SelectMenu
+                
+
+                scurrypy.bases.components.Component --> scurrypy.api.components.select_menu.ChannelSelect
+                
+                scurrypy.bases.components.ActionRowChild --> scurrypy.api.components.select_menu.ChannelSelect
+                
+                scurrypy.bases.components.LabelChild --> scurrypy.api.components.select_menu.ChannelSelect
+                
+
+
+              click scurrypy.api.components.select_menu.ChannelSelect href "" "scurrypy.api.components.select_menu.ChannelSelect"
+              click scurrypy.api.components.select_menu.SelectMenu href "" "scurrypy.api.components.select_menu.SelectMenu"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.components.Component href "" "scurrypy.bases.components.Component"
+              click scurrypy.bases.components.ActionRowChild href "" "scurrypy.bases.components.ActionRowChild"
+              click scurrypy.bases.components.LabelChild href "" "scurrypy.bases.components.LabelChild"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.components.select_menu.ChannelSelect');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the Channel Select component.</p>
 <p>A Channel Select allows users to select one or more channels.</p>
@@ -10096,7 +11252,7 @@ Number of default values must be in the range of <code>min_values</code> to <cod
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

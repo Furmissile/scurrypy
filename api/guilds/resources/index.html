@@ -4556,7 +4556,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4588,6 +4588,42 @@
       dataclass
    (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource">BaseResource</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Guild
+
+  
+      dataclass
+   (scurrypy.resources.guild.Guild)" href="#scurrypy.resources.guild.Guild" id="mermaid-link-scurrypy.resources.guild.Guild"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.resources.guild.Guild">
+              flowchart TD
+              scurrypy.resources.guild.Guild[Guild]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+
+                              scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.guild.Guild
+                
+
+
+              click scurrypy.resources.guild.Guild href "" "scurrypy.resources.guild.Guild"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.resources.guild.Guild');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents a Discord guild.</p>
 
@@ -4601,7 +4637,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

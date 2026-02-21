@@ -4762,7 +4762,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4794,6 +4794,56 @@
       dataclass
    (scurrypy.api.messages.message.MessageModel)" href="../objects/#scurrypy.api.messages.message.MessageModel">MessageModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              MessageCreateEvent
+
+  
+      dataclass
+   (scurrypy.events.message_events.MessageCreateEvent)" href="#scurrypy.events.message_events.MessageCreateEvent" id="mermaid-link-scurrypy.events.message_events.MessageCreateEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              MessageModel
+
+  
+      dataclass
+   (scurrypy.api.messages.message.MessageModel)" href="../objects/#scurrypy.api.messages.message.MessageModel" id="mermaid-link-scurrypy.api.messages.message.MessageModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.message_events.MessageCreateEvent">
+              flowchart TD
+              scurrypy.events.message_events.MessageCreateEvent[MessageCreateEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.api.messages.message.MessageModel[MessageModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.message_events.MessageCreateEvent
+                
+                scurrypy.api.messages.message.MessageModel --> scurrypy.events.message_events.MessageCreateEvent
+                                scurrypy.core.model.DataModel --> scurrypy.api.messages.message.MessageModel
+                
+
+
+
+              click scurrypy.events.message_events.MessageCreateEvent href "" "scurrypy.events.message_events.MessageCreateEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.api.messages.message.MessageModel href "" "scurrypy.api.messages.message.MessageModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.message_events.MessageCreateEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when a message is created.</p>
 <div class="admonition note">
@@ -4811,7 +4861,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4896,6 +4946,56 @@
       dataclass
    (scurrypy.api.messages.message.MessageModel)" href="../objects/#scurrypy.api.messages.message.MessageModel">MessageModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              MessageUpdateEvent
+
+  
+      dataclass
+   (scurrypy.events.message_events.MessageUpdateEvent)" href="#scurrypy.events.message_events.MessageUpdateEvent" id="mermaid-link-scurrypy.events.message_events.MessageUpdateEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              MessageModel
+
+  
+      dataclass
+   (scurrypy.api.messages.message.MessageModel)" href="../objects/#scurrypy.api.messages.message.MessageModel" id="mermaid-link-scurrypy.api.messages.message.MessageModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.message_events.MessageUpdateEvent">
+              flowchart TD
+              scurrypy.events.message_events.MessageUpdateEvent[MessageUpdateEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.api.messages.message.MessageModel[MessageModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.message_events.MessageUpdateEvent
+                
+                scurrypy.api.messages.message.MessageModel --> scurrypy.events.message_events.MessageUpdateEvent
+                                scurrypy.core.model.DataModel --> scurrypy.api.messages.message.MessageModel
+                
+
+
+
+              click scurrypy.events.message_events.MessageUpdateEvent href "" "scurrypy.events.message_events.MessageUpdateEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.api.messages.message.MessageModel href "" "scurrypy.api.messages.message.MessageModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.message_events.MessageUpdateEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when a message is updated.</p>
 
@@ -4909,7 +5009,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4994,6 +5094,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              MessageDeleteEvent
+
+  
+      dataclass
+   (scurrypy.events.message_events.MessageDeleteEvent)" href="#scurrypy.events.message_events.MessageDeleteEvent" id="mermaid-link-scurrypy.events.message_events.MessageDeleteEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.message_events.MessageDeleteEvent">
+              flowchart TD
+              scurrypy.events.message_events.MessageDeleteEvent[MessageDeleteEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.message_events.MessageDeleteEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.message_events.MessageDeleteEvent
+                
+
+
+              click scurrypy.events.message_events.MessageDeleteEvent href "" "scurrypy.events.message_events.MessageDeleteEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.message_events.MessageDeleteEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when a message is deleted.</p>
 
@@ -5007,7 +5148,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -5114,6 +5255,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              BulkMessageDeleteEvent
+
+  
+      dataclass
+   (scurrypy.events.message_events.BulkMessageDeleteEvent)" href="#scurrypy.events.message_events.BulkMessageDeleteEvent" id="mermaid-link-scurrypy.events.message_events.BulkMessageDeleteEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.message_events.BulkMessageDeleteEvent">
+              flowchart TD
+              scurrypy.events.message_events.BulkMessageDeleteEvent[BulkMessageDeleteEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.message_events.BulkMessageDeleteEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.message_events.BulkMessageDeleteEvent
+                
+
+
+              click scurrypy.events.message_events.BulkMessageDeleteEvent href "" "scurrypy.events.message_events.BulkMessageDeleteEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.message_events.BulkMessageDeleteEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when bulk deleting messages.</p>
 
@@ -5127,7 +5309,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -5244,7 +5426,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -5276,6 +5458,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ReactionAddEvent
+
+  
+      dataclass
+   (scurrypy.events.reaction_events.ReactionAddEvent)" href="#scurrypy.events.reaction_events.ReactionAddEvent" id="mermaid-link-scurrypy.events.reaction_events.ReactionAddEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.reaction_events.ReactionAddEvent">
+              flowchart TD
+              scurrypy.events.reaction_events.ReactionAddEvent[ReactionAddEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.reaction_events.ReactionAddEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.reaction_events.ReactionAddEvent
+                
+
+
+              click scurrypy.events.reaction_events.ReactionAddEvent href "" "scurrypy.events.reaction_events.ReactionAddEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.reaction_events.ReactionAddEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Reaction added event.</p>
 
@@ -5289,7 +5512,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -5528,6 +5751,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ReactionRemoveEvent
+
+  
+      dataclass
+   (scurrypy.events.reaction_events.ReactionRemoveEvent)" href="#scurrypy.events.reaction_events.ReactionRemoveEvent" id="mermaid-link-scurrypy.events.reaction_events.ReactionRemoveEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.reaction_events.ReactionRemoveEvent">
+              flowchart TD
+              scurrypy.events.reaction_events.ReactionRemoveEvent[ReactionRemoveEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.reaction_events.ReactionRemoveEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.reaction_events.ReactionRemoveEvent
+                
+
+
+              click scurrypy.events.reaction_events.ReactionRemoveEvent href "" "scurrypy.events.reaction_events.ReactionRemoveEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.reaction_events.ReactionRemoveEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Reaction removed event.</p>
 
@@ -5541,7 +5805,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -5736,6 +6000,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ReactionRemoveEmojiEvent
+
+  
+      dataclass
+   (scurrypy.events.reaction_events.ReactionRemoveEmojiEvent)" href="#scurrypy.events.reaction_events.ReactionRemoveEmojiEvent" id="mermaid-link-scurrypy.events.reaction_events.ReactionRemoveEmojiEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.reaction_events.ReactionRemoveEmojiEvent">
+              flowchart TD
+              scurrypy.events.reaction_events.ReactionRemoveEmojiEvent[ReactionRemoveEmojiEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.reaction_events.ReactionRemoveEmojiEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.reaction_events.ReactionRemoveEmojiEvent
+                
+
+
+              click scurrypy.events.reaction_events.ReactionRemoveEmojiEvent href "" "scurrypy.events.reaction_events.ReactionRemoveEmojiEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.reaction_events.ReactionRemoveEmojiEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>All reactions of a specific emoji removed.</p>
 
@@ -5749,7 +6054,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -5878,6 +6183,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ReactionRemoveAllEvent
+
+  
+      dataclass
+   (scurrypy.events.reaction_events.ReactionRemoveAllEvent)" href="#scurrypy.events.reaction_events.ReactionRemoveAllEvent" id="mermaid-link-scurrypy.events.reaction_events.ReactionRemoveAllEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.reaction_events.ReactionRemoveAllEvent">
+              flowchart TD
+              scurrypy.events.reaction_events.ReactionRemoveAllEvent[ReactionRemoveAllEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.reaction_events.ReactionRemoveAllEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.reaction_events.ReactionRemoveAllEvent
+                
+
+
+              click scurrypy.events.reaction_events.ReactionRemoveAllEvent href "" "scurrypy.events.reaction_events.ReactionRemoveAllEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.reaction_events.ReactionRemoveAllEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Remove all reactions event.</p>
 
@@ -5891,7 +6237,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

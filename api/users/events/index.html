@@ -4130,7 +4130,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4162,6 +4162,56 @@
       dataclass
    (scurrypy.api.user.UserModel)" href="../objects/#scurrypy.api.user.UserModel">UserModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              UserUpdateEvent
+
+  
+      dataclass
+   (scurrypy.events.user_events.UserUpdateEvent)" href="#scurrypy.events.user_events.UserUpdateEvent" id="mermaid-link-scurrypy.events.user_events.UserUpdateEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              UserModel
+
+  
+      dataclass
+   (scurrypy.api.user.UserModel)" href="../objects/#scurrypy.api.user.UserModel" id="mermaid-link-scurrypy.api.user.UserModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.user_events.UserUpdateEvent">
+              flowchart TD
+              scurrypy.events.user_events.UserUpdateEvent[UserUpdateEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.api.user.UserModel[UserModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.user_events.UserUpdateEvent
+                
+                scurrypy.api.user.UserModel --> scurrypy.events.user_events.UserUpdateEvent
+                                scurrypy.core.model.DataModel --> scurrypy.api.user.UserModel
+                
+
+
+
+              click scurrypy.events.user_events.UserUpdateEvent href "" "scurrypy.events.user_events.UserUpdateEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.api.user.UserModel href "" "scurrypy.api.user.UserModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.user_events.UserUpdateEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when a user's settings are updated.</p>
 
@@ -4175,7 +4225,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4216,6 +4266,56 @@
       dataclass
    (scurrypy.api.user.GuildMemberModel)" href="../objects/#scurrypy.api.user.GuildMemberModel">GuildMemberModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildMemberAddEvent
+
+  
+      dataclass
+   (scurrypy.events.user_events.GuildMemberAddEvent)" href="#scurrypy.events.user_events.GuildMemberAddEvent" id="mermaid-link-scurrypy.events.user_events.GuildMemberAddEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              GuildMemberModel
+
+  
+      dataclass
+   (scurrypy.api.user.GuildMemberModel)" href="../objects/#scurrypy.api.user.GuildMemberModel" id="mermaid-link-scurrypy.api.user.GuildMemberModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.user_events.GuildMemberAddEvent">
+              flowchart TD
+              scurrypy.events.user_events.GuildMemberAddEvent[GuildMemberAddEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.api.user.GuildMemberModel[GuildMemberModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.user_events.GuildMemberAddEvent
+                
+                scurrypy.api.user.GuildMemberModel --> scurrypy.events.user_events.GuildMemberAddEvent
+                                scurrypy.core.model.DataModel --> scurrypy.api.user.GuildMemberModel
+                
+
+
+
+              click scurrypy.events.user_events.GuildMemberAddEvent href "" "scurrypy.events.user_events.GuildMemberAddEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.api.user.GuildMemberModel href "" "scurrypy.api.user.GuildMemberModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.user_events.GuildMemberAddEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when a member joins a guild the bot is in.</p>
 <div class="admonition warning">
@@ -4233,7 +4333,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4296,6 +4396,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildMemberUpdateEvent
+
+  
+      dataclass
+   (scurrypy.events.user_events.GuildMemberUpdateEvent)" href="#scurrypy.events.user_events.GuildMemberUpdateEvent" id="mermaid-link-scurrypy.events.user_events.GuildMemberUpdateEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.user_events.GuildMemberUpdateEvent">
+              flowchart TD
+              scurrypy.events.user_events.GuildMemberUpdateEvent[GuildMemberUpdateEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.user_events.GuildMemberUpdateEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.user_events.GuildMemberUpdateEvent
+                
+
+
+              click scurrypy.events.user_events.GuildMemberUpdateEvent href "" "scurrypy.events.user_events.GuildMemberUpdateEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.user_events.GuildMemberUpdateEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when a guild member is updated.</p>
 <div class="admonition warning">
@@ -4313,7 +4454,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -4486,6 +4627,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildMemberRemoveEvent
+
+  
+      dataclass
+   (scurrypy.events.user_events.GuildMemberRemoveEvent)" href="#scurrypy.events.user_events.GuildMemberRemoveEvent" id="mermaid-link-scurrypy.events.user_events.GuildMemberRemoveEvent"></a>
+                  <a class="autorefs autorefs-internal" title="            Event (scurrypy.events.base_event.Event)" href="../../../internals/model/#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.user_events.GuildMemberRemoveEvent">
+              flowchart TD
+              scurrypy.events.user_events.GuildMemberRemoveEvent[GuildMemberRemoveEvent]
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.events.base_event.Event --> scurrypy.events.user_events.GuildMemberRemoveEvent
+                
+                scurrypy.core.model.DataModel --> scurrypy.events.user_events.GuildMemberRemoveEvent
+                
+
+
+              click scurrypy.events.user_events.GuildMemberRemoveEvent href "" "scurrypy.events.user_events.GuildMemberRemoveEvent"
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.user_events.GuildMemberRemoveEvent');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Received when a member leaves or is kicked/banned from a guild the bot is in.</p>
 <div class="admonition warning">
@@ -4503,7 +4685,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 

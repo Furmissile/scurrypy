@@ -3935,7 +3935,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -3963,6 +3963,60 @@
             <p class="doc doc-class-bases">
               Bases: <code><a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext">InteractionContext</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ApplicationCommandContext
+
+  
+      dataclass
+   (scurrypy.ext.commands.ctx.ApplicationCommandContext)" href="#scurrypy.ext.commands.ctx.ApplicationCommandContext" id="mermaid-link-scurrypy.ext.commands.ctx.ApplicationCommandContext"></a>
+                  <a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext" id="mermaid-link-scurrypy.ext.interactions.ctx.InteractionContext"></a>
+                  <a class="autorefs autorefs-internal" title="              Interaction
+
+  
+      dataclass
+   (scurrypy.resources.interaction.Interaction)" href="../../../api/interactions/resources/#scurrypy.resources.interaction.Interaction" id="mermaid-link-scurrypy.resources.interaction.Interaction"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+                  <span title="scurrypy.resources.message._EditMessageMixin"></span>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.commands.ctx.ApplicationCommandContext">
+              flowchart TD
+              scurrypy.ext.commands.ctx.ApplicationCommandContext[ApplicationCommandContext]
+              scurrypy.ext.interactions.ctx.InteractionContext[InteractionContext]
+              scurrypy.resources.interaction.Interaction[Interaction]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+              scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
+
+                              scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.commands.ctx.ApplicationCommandContext
+                                scurrypy.resources.interaction.Interaction --> scurrypy.ext.interactions.ctx.InteractionContext
+                                scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.interaction.Interaction
+                
+                scurrypy.resources.message._EditMessageMixin --> scurrypy.resources.interaction.Interaction
+                
+
+
+
+
+              click scurrypy.ext.commands.ctx.ApplicationCommandContext href "" "scurrypy.ext.commands.ctx.ApplicationCommandContext"
+              click scurrypy.ext.interactions.ctx.InteractionContext href "" "scurrypy.ext.interactions.ctx.InteractionContext"
+              click scurrypy.resources.interaction.Interaction href "" "scurrypy.resources.interaction.Interaction"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+              click scurrypy.resources.message._EditMessageMixin href "" "scurrypy.resources.message._EditMessageMixin"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.ext.commands.ctx.ApplicationCommandContext');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
 
 
 
@@ -3974,7 +4028,8 @@
 
 
 
-  <div class="doc doc-children">
+
+<div class="doc doc-children">
 
 
 
@@ -4031,6 +4086,60 @@
             <p class="doc doc-class-bases">
               Bases: <code><a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext">InteractionContext</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              AutocompleteApplicationCommandContext
+
+  
+      dataclass
+   (scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext)" href="#scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext" id="mermaid-link-scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext"></a>
+                  <a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext" id="mermaid-link-scurrypy.ext.interactions.ctx.InteractionContext"></a>
+                  <a class="autorefs autorefs-internal" title="              Interaction
+
+  
+      dataclass
+   (scurrypy.resources.interaction.Interaction)" href="../../../api/interactions/resources/#scurrypy.resources.interaction.Interaction" id="mermaid-link-scurrypy.resources.interaction.Interaction"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+                  <span title="scurrypy.resources.message._EditMessageMixin"></span>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext">
+              flowchart TD
+              scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext[AutocompleteApplicationCommandContext]
+              scurrypy.ext.interactions.ctx.InteractionContext[InteractionContext]
+              scurrypy.resources.interaction.Interaction[Interaction]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+              scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
+
+                              scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext
+                                scurrypy.resources.interaction.Interaction --> scurrypy.ext.interactions.ctx.InteractionContext
+                                scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.interaction.Interaction
+                
+                scurrypy.resources.message._EditMessageMixin --> scurrypy.resources.interaction.Interaction
+                
+
+
+
+
+              click scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext href "" "scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext"
+              click scurrypy.ext.interactions.ctx.InteractionContext href "" "scurrypy.ext.interactions.ctx.InteractionContext"
+              click scurrypy.resources.interaction.Interaction href "" "scurrypy.resources.interaction.Interaction"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+              click scurrypy.resources.message._EditMessageMixin href "" "scurrypy.resources.message._EditMessageMixin"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
 
 
 
@@ -4042,7 +4151,8 @@
 
 
 
-  <div class="doc doc-children">
+
+<div class="doc doc-children">
 
 
 

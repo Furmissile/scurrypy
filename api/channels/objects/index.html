@@ -6514,7 +6514,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -6546,6 +6546,47 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate">GuildChannelCreate</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildAnnouncementChannelPart
+
+  
+      dataclass
+   (scurrypy.api.channels.announcement.GuildAnnouncementChannelPart)" href="#scurrypy.api.channels.announcement.GuildAnnouncementChannelPart" id="mermaid-link-scurrypy.api.channels.announcement.GuildAnnouncementChannelPart"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.announcement.GuildAnnouncementChannelPart">
+              flowchart TD
+              scurrypy.api.channels.announcement.GuildAnnouncementChannelPart[GuildAnnouncementChannelPart]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.channel.GuildChannelCreate[GuildChannelCreate]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.announcement.GuildAnnouncementChannelPart
+                
+                scurrypy.bases.channel.GuildChannelCreate --> scurrypy.api.channels.announcement.GuildAnnouncementChannelPart
+                
+
+
+              click scurrypy.api.channels.announcement.GuildAnnouncementChannelPart href "" "scurrypy.api.channels.announcement.GuildAnnouncementChannelPart"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.channel.GuildChannelCreate href "" "scurrypy.bases.channel.GuildChannelCreate"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.announcement.GuildAnnouncementChannelPart');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Parameters for creating a guild announcement channel.</p>
 
@@ -6559,7 +6600,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -6798,7 +6839,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -6830,6 +6871,42 @@
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ChannelModel
+
+  
+      dataclass
+   (scurrypy.api.channels.channel.ChannelModel)" href="#scurrypy.api.channels.channel.ChannelModel" id="mermaid-link-scurrypy.api.channels.channel.ChannelModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.channel.ChannelModel">
+              flowchart TD
+              scurrypy.api.channels.channel.ChannelModel[ChannelModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.channel.ChannelModel
+                
+
+
+              click scurrypy.api.channels.channel.ChannelModel href "" "scurrypy.api.channels.channel.ChannelModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.channel.ChannelModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents common channel fields.</p>
 
@@ -6843,7 +6920,7 @@
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7159,7 +7236,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7191,6 +7268,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              DefaultReactionModel
+
+  
+      dataclass
+   (scurrypy.api.channels.default_reaction.DefaultReactionModel)" href="#scurrypy.api.channels.default_reaction.DefaultReactionModel" id="mermaid-link-scurrypy.api.channels.default_reaction.DefaultReactionModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.default_reaction.DefaultReactionModel">
+              flowchart TD
+              scurrypy.api.channels.default_reaction.DefaultReactionModel[DefaultReactionModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.default_reaction.DefaultReactionModel
+                
+
+
+              click scurrypy.api.channels.default_reaction.DefaultReactionModel href "" "scurrypy.api.channels.default_reaction.DefaultReactionModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.default_reaction.DefaultReactionModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the default reaction for a <code>GUILD_FORUM</code> post.</p>
 
@@ -7204,7 +7317,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7289,6 +7402,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              DefaultReactionPart
+
+  
+      dataclass
+   (scurrypy.api.channels.default_reaction.DefaultReactionPart)" href="#scurrypy.api.channels.default_reaction.DefaultReactionPart" id="mermaid-link-scurrypy.api.channels.default_reaction.DefaultReactionPart"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.default_reaction.DefaultReactionPart">
+              flowchart TD
+              scurrypy.api.channels.default_reaction.DefaultReactionPart[DefaultReactionPart]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.default_reaction.DefaultReactionPart
+                
+
+
+              click scurrypy.api.channels.default_reaction.DefaultReactionPart href "" "scurrypy.api.channels.default_reaction.DefaultReactionPart"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.default_reaction.DefaultReactionPart');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the default reaction for a <code>GUILD_FORUM</code> post.</p>
 
@@ -7302,7 +7451,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7399,7 +7548,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7431,6 +7580,51 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.api.channels.channel.ChannelModel)" href="#scurrypy.api.channels.channel.ChannelModel">ChannelModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              DMChannelModel
+
+  
+      dataclass
+   (scurrypy.api.channels.dm.DMChannelModel)" href="#scurrypy.api.channels.dm.DMChannelModel" id="mermaid-link-scurrypy.api.channels.dm.DMChannelModel"></a>
+                  <a class="autorefs autorefs-internal" title="              ChannelModel
+
+  
+      dataclass
+   (scurrypy.api.channels.channel.ChannelModel)" href="#scurrypy.api.channels.channel.ChannelModel" id="mermaid-link-scurrypy.api.channels.channel.ChannelModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.dm.DMChannelModel">
+              flowchart TD
+              scurrypy.api.channels.dm.DMChannelModel[DMChannelModel]
+              scurrypy.api.channels.channel.ChannelModel[ChannelModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.api.channels.channel.ChannelModel --> scurrypy.api.channels.dm.DMChannelModel
+                                scurrypy.core.model.DataModel --> scurrypy.api.channels.channel.ChannelModel
+                
+
+
+
+              click scurrypy.api.channels.dm.DMChannelModel href "" "scurrypy.api.channels.dm.DMChannelModel"
+              click scurrypy.api.channels.channel.ChannelModel href "" "scurrypy.api.channels.channel.ChannelModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.dm.DMChannelModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents a DM channel.</p>
 
@@ -7444,7 +7638,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7583,7 +7777,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7615,6 +7809,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              FollowedChannelModel
+
+  
+      dataclass
+   (scurrypy.api.channels.followed.FollowedChannelModel)" href="#scurrypy.api.channels.followed.FollowedChannelModel" id="mermaid-link-scurrypy.api.channels.followed.FollowedChannelModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.followed.FollowedChannelModel">
+              flowchart TD
+              scurrypy.api.channels.followed.FollowedChannelModel[FollowedChannelModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.followed.FollowedChannelModel
+                
+
+
+              click scurrypy.api.channels.followed.FollowedChannelModel href "" "scurrypy.api.channels.followed.FollowedChannelModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.followed.FollowedChannelModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the followed channel object.</p>
 
@@ -7628,7 +7858,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7723,7 +7953,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7755,6 +7985,51 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.api.channels.channel.ChannelModel)" href="#scurrypy.api.channels.channel.ChannelModel">ChannelModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildForumChannelModel
+
+  
+      dataclass
+   (scurrypy.api.channels.forum.GuildForumChannelModel)" href="#scurrypy.api.channels.forum.GuildForumChannelModel" id="mermaid-link-scurrypy.api.channels.forum.GuildForumChannelModel"></a>
+                  <a class="autorefs autorefs-internal" title="              ChannelModel
+
+  
+      dataclass
+   (scurrypy.api.channels.channel.ChannelModel)" href="#scurrypy.api.channels.channel.ChannelModel" id="mermaid-link-scurrypy.api.channels.channel.ChannelModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.forum.GuildForumChannelModel">
+              flowchart TD
+              scurrypy.api.channels.forum.GuildForumChannelModel[GuildForumChannelModel]
+              scurrypy.api.channels.channel.ChannelModel[ChannelModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.api.channels.channel.ChannelModel --> scurrypy.api.channels.forum.GuildForumChannelModel
+                                scurrypy.core.model.DataModel --> scurrypy.api.channels.channel.ChannelModel
+                
+
+
+
+              click scurrypy.api.channels.forum.GuildForumChannelModel href "" "scurrypy.api.channels.forum.GuildForumChannelModel"
+              click scurrypy.api.channels.channel.ChannelModel href "" "scurrypy.api.channels.channel.ChannelModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.forum.GuildForumChannelModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the forum channel.</p>
 
@@ -7768,7 +8043,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -7919,6 +8194,47 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate">GuildChannelCreate</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildForumChannelPart
+
+  
+      dataclass
+   (scurrypy.api.channels.forum.GuildForumChannelPart)" href="#scurrypy.api.channels.forum.GuildForumChannelPart" id="mermaid-link-scurrypy.api.channels.forum.GuildForumChannelPart"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.forum.GuildForumChannelPart">
+              flowchart TD
+              scurrypy.api.channels.forum.GuildForumChannelPart[GuildForumChannelPart]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.channel.GuildChannelCreate[GuildChannelCreate]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.forum.GuildForumChannelPart
+                
+                scurrypy.bases.channel.GuildChannelCreate --> scurrypy.api.channels.forum.GuildForumChannelPart
+                
+
+
+              click scurrypy.api.channels.forum.GuildForumChannelPart href "" "scurrypy.api.channels.forum.GuildForumChannelPart"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.channel.GuildChannelCreate href "" "scurrypy.bases.channel.GuildChannelCreate"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.forum.GuildForumChannelPart');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Parameters for creating a guild forum channel.</p>
 
@@ -7932,7 +8248,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8286,7 +8602,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8318,6 +8634,47 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate">GuildChannelCreate</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildTextChannelPart
+
+  
+      dataclass
+   (scurrypy.api.channels.guild_text.GuildTextChannelPart)" href="#scurrypy.api.channels.guild_text.GuildTextChannelPart" id="mermaid-link-scurrypy.api.channels.guild_text.GuildTextChannelPart"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+                  <a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.guild_text.GuildTextChannelPart">
+              flowchart TD
+              scurrypy.api.channels.guild_text.GuildTextChannelPart[GuildTextChannelPart]
+              scurrypy.core.model.DataModel[DataModel]
+              scurrypy.bases.channel.GuildChannelCreate[GuildChannelCreate]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.guild_text.GuildTextChannelPart
+                
+                scurrypy.bases.channel.GuildChannelCreate --> scurrypy.api.channels.guild_text.GuildTextChannelPart
+                
+
+
+              click scurrypy.api.channels.guild_text.GuildTextChannelPart href "" "scurrypy.api.channels.guild_text.GuildTextChannelPart"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+              click scurrypy.bases.channel.GuildChannelCreate href "" "scurrypy.bases.channel.GuildChannelCreate"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.guild_text.GuildTextChannelPart');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Parameters for creating a guild text channel.</p>
 
@@ -8331,7 +8688,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8593,7 +8950,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8625,6 +8982,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              TagModel
+
+  
+      dataclass
+   (scurrypy.api.channels.tag.TagModel)" href="#scurrypy.api.channels.tag.TagModel" id="mermaid-link-scurrypy.api.channels.tag.TagModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.tag.TagModel">
+              flowchart TD
+              scurrypy.api.channels.tag.TagModel[TagModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.tag.TagModel
+                
+
+
+              click scurrypy.api.channels.tag.TagModel href "" "scurrypy.api.channels.tag.TagModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.tag.TagModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the tag object found in <code>GUILD_FORUM</code> channels.</p>
 
@@ -8638,7 +9031,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8789,6 +9182,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              TagPart
+
+  
+      dataclass
+   (scurrypy.api.channels.tag.TagPart)" href="#scurrypy.api.channels.tag.TagPart" id="mermaid-link-scurrypy.api.channels.tag.TagPart"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.tag.TagPart">
+              flowchart TD
+              scurrypy.api.channels.tag.TagPart[TagPart]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.tag.TagPart
+                
+
+
+              click scurrypy.api.channels.tag.TagPart href "" "scurrypy.api.channels.tag.TagPart"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.tag.TagPart');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the tag object found in <code>GUILD_FORUM</code> channels.</p>
 
@@ -8802,7 +9231,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8945,7 +9374,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -8977,6 +9406,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ThreadFromMessagePart
+
+  
+      dataclass
+   (scurrypy.api.channels.threads.ThreadFromMessagePart)" href="#scurrypy.api.channels.threads.ThreadFromMessagePart" id="mermaid-link-scurrypy.api.channels.threads.ThreadFromMessagePart"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.threads.ThreadFromMessagePart">
+              flowchart TD
+              scurrypy.api.channels.threads.ThreadFromMessagePart[ThreadFromMessagePart]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.threads.ThreadFromMessagePart
+                
+
+
+              click scurrypy.api.channels.threads.ThreadFromMessagePart href "" "scurrypy.api.channels.threads.ThreadFromMessagePart"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.threads.ThreadFromMessagePart');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Parameters for creating a thread attached to a message.</p>
 
@@ -8990,7 +9455,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9100,6 +9565,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ThreadWithoutMessagePart
+
+  
+      dataclass
+   (scurrypy.api.channels.threads.ThreadWithoutMessagePart)" href="#scurrypy.api.channels.threads.ThreadWithoutMessagePart" id="mermaid-link-scurrypy.api.channels.threads.ThreadWithoutMessagePart"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.threads.ThreadWithoutMessagePart">
+              flowchart TD
+              scurrypy.api.channels.threads.ThreadWithoutMessagePart[ThreadWithoutMessagePart]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.threads.ThreadWithoutMessagePart
+                
+
+
+              click scurrypy.api.channels.threads.ThreadWithoutMessagePart href "" "scurrypy.api.channels.threads.ThreadWithoutMessagePart"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.threads.ThreadWithoutMessagePart');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Parameters for creating a thread without a message.</p>
 
@@ -9113,7 +9614,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9269,6 +9770,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ThreadMetadataModel
+
+  
+      dataclass
+   (scurrypy.api.channels.threads.ThreadMetadataModel)" href="#scurrypy.api.channels.threads.ThreadMetadataModel" id="mermaid-link-scurrypy.api.channels.threads.ThreadMetadataModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.threads.ThreadMetadataModel">
+              flowchart TD
+              scurrypy.api.channels.threads.ThreadMetadataModel[ThreadMetadataModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.threads.ThreadMetadataModel
+                
+
+
+              click scurrypy.api.channels.threads.ThreadMetadataModel href "" "scurrypy.api.channels.threads.ThreadMetadataModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.threads.ThreadMetadataModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the thread metadata object.</p>
 
@@ -9282,7 +9819,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9459,6 +9996,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ThreadMemberModel
+
+  
+      dataclass
+   (scurrypy.api.channels.threads.ThreadMemberModel)" href="#scurrypy.api.channels.threads.ThreadMemberModel" id="mermaid-link-scurrypy.api.channels.threads.ThreadMemberModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.threads.ThreadMemberModel">
+              flowchart TD
+              scurrypy.api.channels.threads.ThreadMemberModel[ThreadMemberModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.threads.ThreadMemberModel
+                
+
+
+              click scurrypy.api.channels.threads.ThreadMemberModel href "" "scurrypy.api.channels.threads.ThreadMemberModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.threads.ThreadMemberModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents a user that has joined a thread.</p>
 
@@ -9472,7 +10045,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9631,6 +10204,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ArchivedThreadsModel
+
+  
+      dataclass
+   (scurrypy.api.channels.threads.ArchivedThreadsModel)" href="#scurrypy.api.channels.threads.ArchivedThreadsModel" id="mermaid-link-scurrypy.api.channels.threads.ArchivedThreadsModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.threads.ArchivedThreadsModel">
+              flowchart TD
+              scurrypy.api.channels.threads.ArchivedThreadsModel[ArchivedThreadsModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.threads.ArchivedThreadsModel
+                
+
+
+              click scurrypy.api.channels.threads.ArchivedThreadsModel href "" "scurrypy.api.channels.threads.ArchivedThreadsModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.threads.ArchivedThreadsModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Response body for fetching archived threads.</p>
 
@@ -9644,7 +10253,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9751,6 +10360,42 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ActiveThreadsModel
+
+  
+      dataclass
+   (scurrypy.api.channels.threads.ActiveThreadsModel)" href="#scurrypy.api.channels.threads.ActiveThreadsModel" id="mermaid-link-scurrypy.api.channels.threads.ActiveThreadsModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.threads.ActiveThreadsModel">
+              flowchart TD
+              scurrypy.api.channels.threads.ActiveThreadsModel[ActiveThreadsModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.api.channels.threads.ActiveThreadsModel
+                
+
+
+              click scurrypy.api.channels.threads.ActiveThreadsModel href "" "scurrypy.api.channels.threads.ActiveThreadsModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.threads.ActiveThreadsModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Response body for fetching active guild threads.</p>
 
@@ -9764,7 +10409,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
@@ -9849,6 +10494,51 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
       dataclass
    (scurrypy.api.channels.channel.ChannelModel)" href="#scurrypy.api.channels.channel.ChannelModel">ChannelModel</a></code></p>
 
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ThreadChannelModel
+
+  
+      dataclass
+   (scurrypy.api.channels.threads.ThreadChannelModel)" href="#scurrypy.api.channels.threads.ThreadChannelModel" id="mermaid-link-scurrypy.api.channels.threads.ThreadChannelModel"></a>
+                  <a class="autorefs autorefs-internal" title="              ChannelModel
+
+  
+      dataclass
+   (scurrypy.api.channels.channel.ChannelModel)" href="#scurrypy.api.channels.channel.ChannelModel" id="mermaid-link-scurrypy.api.channels.channel.ChannelModel"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.threads.ThreadChannelModel">
+              flowchart TD
+              scurrypy.api.channels.threads.ThreadChannelModel[ThreadChannelModel]
+              scurrypy.api.channels.channel.ChannelModel[ChannelModel]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.api.channels.channel.ChannelModel --> scurrypy.api.channels.threads.ThreadChannelModel
+                                scurrypy.core.model.DataModel --> scurrypy.api.channels.channel.ChannelModel
+                
+
+
+
+              click scurrypy.api.channels.threads.ThreadChannelModel href "" "scurrypy.api.channels.threads.ThreadChannelModel"
+              click scurrypy.api.channels.channel.ChannelModel href "" "scurrypy.api.channels.channel.ChannelModel"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.threads.ThreadChannelModel');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
 
         <p>Represents the thread channel.</p>
 
@@ -9862,7 +10552,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
 
 
 
