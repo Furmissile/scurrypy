@@ -11,7 +11,7 @@ class Invite(BaseResource):
     code: str
     """Invite code."""
 
-    async def fetch(self, with_counts: bool = None) -> InviteModel:
+    async def fetch(self, with_counts: bool | None = None) -> InviteModel:
         """Fetch the invite object for the given code.
 
         Args:
@@ -28,7 +28,7 @@ class Invite(BaseResource):
 
         return InviteModel.from_dict(data)
 
-    async def delete(self) -> None:
+    async def delete(self) -> InviteModel:
         """Delete the invite for the given code.
         Fires [`InviteDeleteEvent`][scurrypy.events.invite_events.InviteDeleteEvent].
         

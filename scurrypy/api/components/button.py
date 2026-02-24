@@ -1,7 +1,5 @@
 from dataclasses import dataclass, field
 
-from ...core.model import DataModel
-
 from ...bases.components import (
     Component,
     ActionRowChild, 
@@ -16,7 +14,7 @@ from ...enums.components import (
 from ..emoji import EmojiModel
 
 @dataclass
-class Button(DataModel, Component, ActionRowChild, SectionAccessoryChild):
+class Button(Component, ActionRowChild, SectionAccessoryChild):
     """Represents the Button component.
     
     A pressable button!

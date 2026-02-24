@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 
 from ...core.model import DataModel
+from ...core.exceptions import DataModelTypeError
+from ...core.types import Serialized
 
 from ..user import UserModel
 
@@ -10,7 +12,7 @@ from datetime import datetime, timezone
 class EmbedAuthor(DataModel):
     """Represents fields for creating an embed author."""
 
-    name: str = None
+    name: str | None = None
     """Name of the author."""
 
     url: str | None = None
@@ -87,7 +89,7 @@ class Embed(DataModel):
     footer: EmbedFooter | None = None
     """Embed's footer."""
 
-    def set_user_author(self, user: UserModel):
+    def set_user_author(self, user: UserModel) -> None:
         """Embed author builder.
 
         Args:
@@ -98,27 +100,35 @@ class Embed(DataModel):
             icon_url=f"https://cdn.discordapp.com/avatars/{user.id}/{user.avatar}.png"
         )
 
-    def set_timestamp(self, datetime: datetime = None):
+    def set_timestamp(self, dt: datetime | None = None) -> None:
         """Embed timestamp builder. Adheres to ISO8601 format.
 
         Args:
-            datetime (datetime, optional): datetime object
+            dt (datetime, optional): datetime object
         """
         dt = dt or datetime.now(timezone.utc)
 
         self.timestamp = dt.isoformat()
 
-    def to_dict(self):
+    def to_dict(self) -> Serialized:
+        """Serialize this embed.
+
+        Raises:
+            (DataModelTypeError): incorrect thumbnail part
+
+        Returns:
+            (Serialized): serialized embed
+        """
         from ..components import Thumbnail as V2Thumbnail
 
         if isinstance(self.thumbnail, V2Thumbnail):
-            raise TypeError(
+            raise DataModelTypeError(
                 "EmbedPart.thumbnail received a ComponentV2 Thumbnail.\n"
                 "Use scurrypy.EmbedThumbnail(url) for embed thumbnails."
             )
         
         if isinstance(self.image, V2Thumbnail):
-            raise TypeError(
+            raise DataModelTypeError(
                 "EmbedPart.image received a ComponentV2 Thumbnail.\n"
                 "Use scurrypy.EmbedImage(url) for embed thumbnails."
             )

@@ -13,6 +13,9 @@ class ChannelModel(DataModel):
     id: Snowflake
     """ID of the channel."""
 
+    flags: ChannelFlags
+    """Channel flags combined as a bitfield."""
+
     guild_id: Snowflake | None
     """Guild ID of the channel."""
 
@@ -44,6 +47,3 @@ class ChannelModel(DataModel):
     """Permissions for the invoking user in this channel.
         Includes role and overwrite calculations. [`INT_LIMIT`]
     """
-
-    flags: ChannelFlags
-    """Channel flags combined as a bitfield."""

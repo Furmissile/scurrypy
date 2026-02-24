@@ -13,7 +13,7 @@ from ...enums.components import (
 )
 
 @dataclass
-class TextInput(DataModel, Component, LabelChild):
+class TextInput(Component, LabelChild):
     """Represents the Text Input component.
     
     A Text Input allows users to enter free-form text.
@@ -45,7 +45,7 @@ class TextInput(DataModel, Component, LabelChild):
 
 
 @dataclass
-class FileUpload(DataModel, Component, LabelChild):
+class FileUpload(Component, LabelChild):
     """Represents the file upload component.
     
     File Upload allows users to upload files in modals.
@@ -83,7 +83,7 @@ class ListOption(DataModel):
     """Whether to show this option as selected by default."""
 
 @dataclass
-class RadioGroup(DataModel, Component, LabelChild):
+class RadioGroup(Component, LabelChild):
     """Represents the radio group component.
     
     A Radio Group is for selecting exactly one option from a defined list.
@@ -102,7 +102,7 @@ class RadioGroup(DataModel, Component, LabelChild):
     """Component type. Always `ComponentType.RADIO_GROUP` for this class."""
 
 @dataclass
-class CheckboxGroup(DataModel, Component, LabelChild):
+class CheckboxGroup(Component, LabelChild):
     """Represents the checkbox group component.
     
     A Checkbox Group is for selecting one or many options via checkboxes.
@@ -127,7 +127,7 @@ class CheckboxGroup(DataModel, Component, LabelChild):
     """Component type. Always `ComponentType.CHECKBOX_GROUP` for this class."""
 
 @dataclass
-class Checkbox(DataModel, Component, LabelChild):
+class Checkbox(Component, LabelChild):
     """Represents a checkbox component.
     
     A Checkbox is for simple yes/no style questions.

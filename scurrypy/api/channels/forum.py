@@ -1,6 +1,5 @@
 from dataclasses import dataclass, field
 
-from ...core.model import DataModel
 from ...core.snowflake import Snowflake
 
 from ...bases.channel import GuildChannelCreate
@@ -31,7 +30,7 @@ class GuildForumChannelModel(ChannelModel):
     """Default forum layout view. Discord defaults to `ForumLayoutTypes.NOT_SET`."""
 
 @dataclass
-class GuildForumChannelPart(DataModel, GuildChannelCreate):
+class GuildForumChannelPart(GuildChannelCreate):
     """Parameters for creating a guild forum channel."""
 
     name: str | None = None

@@ -33,7 +33,7 @@ class SelectOption(DataModel):
     """Whether this option is selected by default. Discord defaults to `False`."""
 
 @dataclass
-class StringSelect(DataModel, Component, ActionRowChild, LabelChild):
+class StringSelect(Component, ActionRowChild, LabelChild):
     """Represents the String Select component.
     
     A String Select allows users to select one or more provided options.
@@ -75,10 +75,10 @@ class DefaultValue(DataModel):
     """Type of value that `id` represents."""
 
 @dataclass
-class SelectMenu(DataModel):
+class SelectMenuMixin:
     """Represents common fields for Discord's select menus."""
 
-    custom_id: str = None
+    custom_id: str | None = None
     """ID for the select menu."""
 
     placeholder: str | None = None
@@ -103,7 +103,7 @@ class SelectMenu(DataModel):
     """Whether select menu is disabled in a message. Discord defaults to `False`."""
 
 @dataclass
-class UserSelect(SelectMenu, Component, ActionRowChild, LabelChild):
+class UserSelect(SelectMenuMixin, Component, ActionRowChild, LabelChild):
     """Represents the User Select component.
     
     User Select allows users to select one or more users.
@@ -113,7 +113,7 @@ class UserSelect(SelectMenu, Component, ActionRowChild, LabelChild):
     """Component type. Always `ComponentType.USER_SELECT` for this class."""
 
 @dataclass
-class RoleSelect(SelectMenu, Component, ActionRowChild, LabelChild):
+class RoleSelect(SelectMenuMixin, Component, ActionRowChild, LabelChild):
     """Represents the Role Select component.
     
     A Role Select allows users to select one or more roles
@@ -123,7 +123,7 @@ class RoleSelect(SelectMenu, Component, ActionRowChild, LabelChild):
     """Component type. Always `ComponentType.ROLE_SELECT` for this class."""
 
 @dataclass
-class MentionableSelect(SelectMenu, Component, ActionRowChild, LabelChild):
+class MentionableSelect(SelectMenuMixin, Component, ActionRowChild, LabelChild):
     """Represents the Mentionable Select component.
     
     A Mentionable Select allows users to select one or more mentionables.
@@ -133,7 +133,7 @@ class MentionableSelect(SelectMenu, Component, ActionRowChild, LabelChild):
     """Component type. Always `ComponentType.MENTIONABLE_SELECT` for this class."""
 
 @dataclass
-class ChannelSelect(SelectMenu, Component, ActionRowChild, LabelChild):
+class ChannelSelect(SelectMenuMixin, Component, ActionRowChild, LabelChild):
     """Represents the Channel Select component.
     
     A Channel Select allows users to select one or more channels.

@@ -36,9 +36,11 @@ class ApplicationEmoji(BaseResource):
             (list[EmojiModel]): queried list of bot emojis
         """
         data = await self.http.request("GET", f"/applications/{self.application_id}/emojis")
+        assert isinstance(data, dict)
 
         emojis = data.get("items")
 
+        assert isinstance(emojis, list)
         return [EmojiModel.from_dict(emoji) for emoji in emojis]
     
     async def create(self, emoji: ApplicationEmojiPart) -> EmojiModel:
@@ -68,10 +70,12 @@ class ApplicationEmoji(BaseResource):
         Returns:
             (EmojiModel): updated emoji
         """
+        opts = dict(options)
+
         data = await self.http.request(
             'PATCH', 
             f'/applications/{self.application_id}/emojis/{emoji_id}', 
-            data=options
+            data=opts
         )
 
         return EmojiModel.from_dict(data)
@@ -112,6 +116,7 @@ class GuildEmoji(BaseResource):
         """
         data = await self.http.request("GET", f"/guilds/{self.guild_id}/emojis")
 
+        assert isinstance(data, list)
         return [EmojiModel.from_dict(emoji) for emoji in data]
 
     async def create(self, emoji: GuildEmojiPart) -> EmojiModel:
@@ -143,10 +148,12 @@ class GuildEmoji(BaseResource):
         Returns:
             (EmojiModel): updated emoji
         """
+        opts = dict(options)
+
         data = await self.http.request(
             'PATCH', 
             f'/guilds/{self.guild_id}/emojis/{emoji_id}', 
-            data=options
+            data=opts
         )
 
         return EmojiModel.from_dict(data)

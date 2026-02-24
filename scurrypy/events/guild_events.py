@@ -5,6 +5,8 @@ from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
+from ..enums.events import EventType
+
 from ..api.channels.channel import ChannelModel
 from ..api.guilds.guild import UnavailableGuildModel, GuildModel
 from ..api.messages.sticker import StickerModel
@@ -15,6 +17,8 @@ from ..api.user import UserModel, GuildMemberModel
 @dataclass
 class GuildCreateEvent(Event, GuildModel):
     """Received when the bot has joined a guild."""
+
+    dispatch_name = EventType.GUILD_CREATE
     
     joined_at: str
     """ISO8601 timestamp of when app joined the guild."""
@@ -40,6 +44,8 @@ class GuildCreateEvent(Event, GuildModel):
 @dataclass
 class GuildUpdateEvent(Event, DataModel):
     """Received when a guild has been edited."""
+
+    dispatch_name = EventType.GUILD_UPDATE
 
     id: Snowflake
     """ID of the guild."""
@@ -68,11 +74,14 @@ class GuildUpdateEvent(Event, DataModel):
 @dataclass
 class GuildDeleteEvent(Event, UnavailableGuildModel):
     """Received when the bot has left a guild or the guild was deleted."""
-    pass
+    
+    dispatch_name = EventType.GUILD_DELETE
 
 @dataclass
 class GuildBanAddEvent(Event, DataModel):
     """Received when a user is banned from a guild."""
+
+    dispatch_name = EventType.GUILD_BAN_ADD
 
     guild_id: Snowflake
     """ID of the guild in which the ban took place."""
@@ -84,6 +93,8 @@ class GuildBanAddEvent(Event, DataModel):
 class GuildBanRemoveEvent(Event, DataModel):
     """Received when a user is unbanned from a guild."""
 
+    dispatch_name = EventType.GUILD_BAN_REMOVE
+
     guild_id: Snowflake
     """ID of the guild in which the ban took place."""
 
@@ -94,6 +105,8 @@ class GuildBanRemoveEvent(Event, DataModel):
 class GuildEmojisUpdateEvent(Event, DataModel):
     """Received when a guild updates their emojis."""
 
+    dispatch_name = EventType.GUILD_EMOJIS_UPDATE
+
     guild_id: Snowflake
     """ID of the guild."""
 
@@ -103,6 +116,8 @@ class GuildEmojisUpdateEvent(Event, DataModel):
 @dataclass
 class GuildStickersUpdateEvent(Event, DataModel):
     """Received when a guild's stickers have been updated."""
+
+    dispatch_name = EventType.GUILD_STICKERS_UPDATE
 
     guild_id: Snowflake
     """ID of the guild."""

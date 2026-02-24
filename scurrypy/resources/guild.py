@@ -5,14 +5,15 @@ from .base_resource import BaseResource
 
 from ..core.snowflake import Snowflake
 from ..core.serialization import serialize
+from ..core.types import JSON, Serialized
 
 from ..bases.channel import GuildChannelCreate
 
-from ..api.guilds.guild import GuildModel, GuildRoleModel
+from ..api.guilds.guild import GuildModel
 from ..api.guilds.ban import BulkGuildBanPart, GuildBanModel, BulkGuildBanModel
 from ..api.guilds.welcome_screen import GuildWelcomeScreenModel
 from ..api.guilds.onboarding import GuildOnboadingModel
-from ..api.guilds.role import GuildRolePart
+from ..api.guilds.role import GuildRolePart, GuildRoleModel
 from ..api.channels.channel import ChannelModel
 from ..api.channels.threads import ActiveThreadsModel
 from ..api.messages.sticker import StickerModel, StickerPart
@@ -58,9 +59,9 @@ class Guild(BaseResource):
         Returns:
             (GuildModel): edited guild
         """
-        options = serialize(options)
+        opts = serialize(dict(options))
 
-        data = await self.http.request('PATCH', f'/guilds/{self.id}', data=options)
+        data = await self.http.request('PATCH', f'/guilds/{self.id}', data=opts)
 
         return GuildModel.from_dict(data)
 
@@ -76,6 +77,7 @@ class Guild(BaseResource):
         """
         data = await self.http.request('GET', f'guilds/{self.id}/channels')
 
+        assert isinstance(data, list)
         return [ChannelModel.from_dict(channel) for channel in data]
     
     async def fetch_active_threads(self) -> ActiveThreadsModel:
@@ -125,7 +127,7 @@ class Guild(BaseResource):
 
         return GuildMemberModel.from_dict(data)
 
-    async def fetch_members(self, limit: int = 1, after: Snowflake = None) -> list[GuildMemberModel]:
+    async def fetch_members(self, limit: int = 1, after: Snowflake | None = None) -> list[GuildMemberModel]:
         """Fetch guild members in this guild.
 
         !!! warning "Important"
@@ -145,6 +147,7 @@ class Guild(BaseResource):
 
         data = await self.http.request('GET', f'/guilds/{self.id}/members', params=params)
 
+        assert isinstance(data, list)
         return [GuildMemberModel.from_dict(member) for member in data]
 
     async def add_member_role(self, user_id: Snowflake, role_id: Snowflake) -> None:
@@ -173,7 +176,7 @@ class Guild(BaseResource):
         """
         await self.http.request('DELETE', f'/guilds/{self.id}/members/{user_id}/roles/{role_id}')
 
-    async def search_members(self, query: str = None, limit: int = 1) -> list[GuildMemberModel]:
+    async def search_members(self, query: str | None = None, limit: int = 1) -> list[GuildMemberModel]:
         """Fetch guild members whose username or nickname starts with the provided query.
 
         Args:
@@ -192,6 +195,7 @@ class Guild(BaseResource):
             }
         )
 
+        assert isinstance(data, list)
         return [GuildMemberModel.from_dict(m) for m in data]
 
     async def edit_member(self, user_id: Snowflake, **options: Unpack[EditGuildMemberParams]) -> GuildMemberModel:
@@ -204,7 +208,9 @@ class Guild(BaseResource):
         Returns:
             (GuildMemberModel): edited guid member
         """
-        data = await self.http.request('PATCH', f'/guilds/{self.id}/members/{user_id}', data=options)
+        opts = dict(options)
+
+        data = await self.http.request('PATCH', f'/guilds/{self.id}/members/{user_id}', data=opts)
 
         return GuildMemberModel.from_dict(data)
 
@@ -233,11 +239,11 @@ class Guild(BaseResource):
         Returns:
             (GuildBan): queried ban
         """
-        data = self.http.request('GET', f'/guild/{self.id}/bans/{user_id}')
+        data = await self.http.request('GET', f'/guild/{self.id}/bans/{user_id}')
 
         return GuildBanModel.from_dict(data)
 
-    async def fetch_bans(self, limit: int = 1000, before: Snowflake = None, after: Snowflake = None) -> list[GuildBanModel]:
+    async def fetch_bans(self, limit: int = 1000, before: Snowflake | None = None, after: Snowflake | None = None) -> list[GuildBanModel]:
         """Fetch bans in this guild.
 
         !!! important "Permissions"
@@ -261,6 +267,7 @@ class Guild(BaseResource):
             }
         )
 
+        assert isinstance(data, list)
         return [GuildBanModel.from_dict(i) for i in data]
 
     async def create_ban(self, user_id: Snowflake, delete_message_seconds: int = 0) -> None:
@@ -309,16 +316,19 @@ class Guild(BaseResource):
         return BulkGuildBanModel.from_dict(data)
 
     # --- ROLES ---
-    async def fetch_role_member_counts(self) -> dict:
+    async def fetch_role_member_counts(self) -> JSON:
         """Fetch a map of role IDs to number of members with the role.
 
         !!! note
             Does not include `@everyone` role.
 
         Returns:
-            (dict): map of role IDs to member count
+            (JSON): map of role IDs to member count
         """
-        return await self.http.request('GET', f'/guilds/{self.id}/roles/member-counts')
+        data = await self.http.request('GET', f'/guilds/{self.id}/roles/member-counts')
+
+        assert isinstance(data, dict)
+        return data
 
     async def fetch_role(self, role_id: Snowflake) -> GuildRoleModel:
         """Fetch a role in this guild.
@@ -341,6 +351,7 @@ class Guild(BaseResource):
         """
         data = await self.http.request('GET', f'/guilds/{self.id}/roles')
         
+        assert isinstance(data, list)
         return [GuildRoleModel.from_dict(role) for role in data]
 
     async def create_role(self, role: GuildRolePart) -> GuildRoleModel:
@@ -374,9 +385,9 @@ class Guild(BaseResource):
         Returns:
             (GuildRoleModel): edited role
         """
-        options = serialize(options)
+        opts = serialize(dict(options))
 
-        data = await self.http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=options)
+        data = await self.http.request('PATCH', f'/guilds/{self.id}/roles/{role_id}', data=opts)
 
         return GuildRoleModel.from_dict(data)
 
@@ -404,6 +415,7 @@ class Guild(BaseResource):
         """
         data = await self.http.request('GET', f'/guild/{self.id}/invites')
 
+        assert isinstance(data, list)
         return [InviteModel.from_dict(i) for i in data]
 
     async def fetch_invites_with_metadata(self) -> list[InviteWithMetadataModel]:
@@ -417,6 +429,7 @@ class Guild(BaseResource):
         """
         data = await self.http.request('GET', f'/guild/{self.id}/invites')
 
+        assert isinstance(data, list)
         return [InviteWithMetadataModel.from_dict(i) for i in data]
 
     # --- INTEGRATIONS ---
@@ -431,6 +444,7 @@ class Guild(BaseResource):
         """
         data = await self.http.request('GET', f'/guild/{self.id}/integrations')
 
+        assert isinstance(data, list)
         return [IntegrationModel.from_dict(i) for i in data]
 
     async def delete_integration(self, integration_id: Snowflake) -> None:
@@ -473,9 +487,9 @@ class Guild(BaseResource):
         Returns:
             (GuildWelcomeScreenModel): edited welcome screen
         """
-        options = serialize(options)
+        opts = serialize(dict(options))
 
-        data = await self.http.request('PATCH', f'/guilds/{self.id}/welcome-screen', data=options)
+        data = await self.http.request('PATCH', f'/guilds/{self.id}/welcome-screen', data=opts)
 
         return GuildWelcomeScreenModel.from_dict(data)
 
@@ -506,12 +520,12 @@ class Guild(BaseResource):
         Returns:
             (GuildOnboadingModel): edited onboarding flow
         """
-        options = serialize(options)
+        opts = serialize(dict(options))
             
         data = await self.http.request(
             'PUT',
             f'/guilds/{self.id}/onboarding',
-            params=options
+            params=opts
         )
         return GuildOnboadingModel.from_dict(data)
 
@@ -545,6 +559,7 @@ class Guild(BaseResource):
         """
         data = await self.http.request('GET', f'/guilds/{self.id}/stickers')
 
+        assert isinstance(data, list)
         return [StickerModel.from_dict(i) for i in data]
 
     async def create_sticker(self, sticker: StickerPart, file: ImageAssetPart) -> StickerModel:
@@ -565,8 +580,8 @@ class Guild(BaseResource):
         """
         data = await self.http.request(
             'POST', f'/guilds/{self.id}/stickers', 
-            data=sticker.to_dict(),
-            assets=file.to_dict()
+            data=file.to_dict(),
+            assets=sticker.to_dict()
         )
     
         return StickerModel.from_dict(data)
@@ -583,7 +598,9 @@ class Guild(BaseResource):
             sticker_id (Snowflake): ID of the sticker to delete
             options (EditGuildStickerParams): fields to edit
         """
-        data = await self.http.request('PATCH', f'/guilds/{self.id}/stickers/{sticker_id}', data=options)
+        opts = dict(options)
+
+        data = await self.http.request('PATCH', f'/guilds/{self.id}/stickers/{sticker_id}', data=opts)
 
         return StickerModel.from_dict(data)
 

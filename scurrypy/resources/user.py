@@ -53,9 +53,9 @@ class User(BaseResource):
         Returns:
             (UserModel): edited user
         """
-        options = serialize(options)
+        opts = serialize(dict(options))
 
-        data = await self.http.request('PATCH', '/users/@me', data=options)
+        data = await self.http.request('PATCH', '/users/@me', data=opts)
 
         return UserModel.from_dict(data)
 

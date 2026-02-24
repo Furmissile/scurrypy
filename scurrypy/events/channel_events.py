@@ -5,12 +5,15 @@ from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
+from ..enums.events import EventType
+
 from ..api.channels.channel import ChannelModel
 
 @dataclass
 class ChannelCreateEvent(Event, ChannelModel):
     """Received when a guild channel has been created."""
-    pass
+    
+    dispatch_name = EventType.CHANNEL_CREATE
 
 @dataclass
 class ChannelUpdateEvent(Event, ChannelModel):
@@ -19,16 +22,20 @@ class ChannelUpdateEvent(Event, ChannelModel):
     !!! note
         Not send when `last_message_id` is changed.
     """
-    pass
+
+    dispatch_name = EventType.CHANNEL_UPDATE
 
 @dataclass
 class ChannelDeleteEvent(Event, ChannelModel):
     """Received when a guild channel has been deleted."""
-    pass
+
+    dispatch_name = EventType.CHANNEL_DELETE
 
 @dataclass
 class ChannelPinsUpdateEvent(Event, DataModel):
     """Pin update event."""
+
+    dispatch_name = EventType.CHANNEL_PINS_UPDATE
     
     channel_id: Snowflake
     """ID of channel where the pins were updated."""
@@ -42,6 +49,8 @@ class ChannelPinsUpdateEvent(Event, DataModel):
 @dataclass
 class WebhooksUpdateEvent(Event, DataModel):
     """Received when a guild's channel webhook is created, updated, or deleted."""
+
+    dispatch_name = EventType.WEBHOOKS_UPDATE
 
     guild_id: Snowflake
     """ID of the guild."""

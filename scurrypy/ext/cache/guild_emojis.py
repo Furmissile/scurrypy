@@ -1,6 +1,6 @@
 from scurrypy import Client, Intents
 from scurrypy.bases import Addon
-from scurrypy.core import Snowflake
+from scurrypy.core import Snowflake, MissingIntents, MissingField
 from scurrypy.enums import EventType
 from scurrypy.api import EmojiModel
 from scurrypy.events import GuildCreateEvent, GuildDeleteEvent, GuildEmojisUpdateEvent
@@ -16,7 +16,7 @@ class GuildEmojiCacheAddon(Addon):
         self.bot = client
 
         if not Intents.GUILD_EXPRESSIONS in client.intents:
-            raise ValueError("GuildEmojiCache requires Intents.GUILD_EXPRESSIONS for GUILD_EMOJIS_UPDATE event.")
+            raise MissingIntents("GuildEmojiCache requires Intents.GUILD_EXPRESSIONS for GUILD_EMOJIS_UPDATE event.")
 
         self.guild_emojis: dict[Snowflake, dict[Snowflake, EmojiModel]] = {}  # owns emoji objects
         self.guild_emoji_index: dict[Snowflake, EmojiModel] = {}        # index by ID (reference)
@@ -26,8 +26,11 @@ class GuildEmojiCacheAddon(Addon):
 
         client.add_event_listener(EventType.GUILD_EMOJIS_UPDATE, self.on_emojis_update)
 
-    def on_guild_create(self, event: GuildCreateEvent):
+    async def on_guild_create(self, event: GuildCreateEvent) -> None:
         """Append new guild emojis to cache. Also add emojis to index.
+
+        Raises:
+            (MissingField): missing emoji ID
 
         Args:
             event (GuildCreateEvent): the GUILD_CREATE event
@@ -36,11 +39,17 @@ class GuildEmojiCacheAddon(Addon):
 
         # event.emojis is already hydrated
         for emoji in event.emojis:
+            if emoji.id is None:
+                raise MissingField("Guild emoji missing ID")
+            
             guild_dict[emoji.id] = emoji
             self.guild_emoji_index[emoji.id] = emoji
 
-    def on_guild_delete(self, event: GuildDeleteEvent):
+    async def on_guild_delete(self, event: GuildDeleteEvent) -> None:
         """Remove guild emojis from cache. Also remove emojis from index
+
+        Raises:
+            (MissingField): missing emoji ID
 
         Args:
             event (GuildDeleteEvent): the GUILD_DELETE event
@@ -48,10 +57,15 @@ class GuildEmojiCacheAddon(Addon):
         removed = self.guild_emojis.pop(event.id, {})
 
         for emoji in removed.values():
+            if emoji.id is None:
+                raise MissingField("Guild emoji missing ID")
             self.guild_emoji_index.pop(emoji.id, None)
 
-    def on_emojis_update(self, event: GuildEmojisUpdateEvent):
+    async def on_emojis_update(self, event: GuildEmojisUpdateEvent) -> None:
         """Refresh guild emojis with new list. Also refresh the index
+
+        Raises:
+            (MissingField): missing emoji ID
 
         Args:
             event (GuildEmojisUpdateEvent): the GUILD_EMOJIS_UPDATE event
@@ -62,16 +76,20 @@ class GuildEmojiCacheAddon(Addon):
         removed = self.guild_emojis.pop(guild_id, {})
 
         for emoji in removed.values():
+            if emoji.id is None:
+                raise MissingField("Guild emoji missing ID")
             self.guild_emoji_index.pop(emoji.id, None)
 
         # add new emoji set (full replacement)
         guild_dict = self.guild_emojis.setdefault(guild_id, {})
 
         for emoji in event.emojis:
+            if emoji.id is None:
+                raise MissingField("Guild emoji missing ID")
             guild_dict[emoji.id] = emoji
             self.guild_emoji_index[emoji.id] = emoji
 
-    def get_emoji(self, emoji_id: Snowflake):
+    def get_emoji(self, emoji_id: Snowflake) -> EmojiModel | None:
         """Get an emoji from the cache.
 
         Args:

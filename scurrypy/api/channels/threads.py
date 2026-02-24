@@ -13,7 +13,7 @@ from .channel import ChannelModel
 class ThreadFromMessagePart(DataModel):
     """Parameters for creating a thread attached to a message."""
 
-    name: str = None
+    name: str | None = None
     """Name of the thread."""
 
     rate_limit_per_user: int | None = None
@@ -26,7 +26,7 @@ class ThreadFromMessagePart(DataModel):
 class ThreadWithoutMessagePart(DataModel):
     """Parameters for creating a thread without a message."""
 
-    name: str = None
+    name: str | None = None
     """Name of the thread."""
 
     rate_limit_per_user: int | None = None

@@ -5,11 +5,15 @@ from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
+from ..enums.events import EventType
+
 from ..api.user import UserModel
 
 @dataclass
 class InviteCreateEvent(Event, DataModel):
     """Received when an invite is created."""
+
+    dispatch_name = EventType.INVITE_CREATE
 
     channel_id: Snowflake
     """Channel ID in which the invite belongs."""
@@ -42,6 +46,8 @@ class InviteCreateEvent(Event, DataModel):
 @dataclass
 class InviteDeleteEvent(Event, DataModel):
     """Received when an invite is deleted."""
+
+    dispatch_name = EventType.INVITE_DELETE
 
     channel_id: Snowflake
     """Channel ID in which the invite belongs."""

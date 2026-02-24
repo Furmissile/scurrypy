@@ -40,6 +40,7 @@ class GlobalCommand(BaseResource):
         """
         data = await self.http.request('GET', f"applications/{self.application_id}/commands")
 
+        assert isinstance(data, list)
         return [ApplicationCommandModel.from_dict(cmd) for cmd in data]
 
     async def create(self, command: SlashCommandPart | UserCommandPart | MessageCommandPart) -> ApplicationCommandModel:
@@ -68,9 +69,9 @@ class GlobalCommand(BaseResource):
         Returns:
             (ApplicationCommandModel): updated application command
         """
-        options = serialize(options)
+        opts = serialize(dict(options))
 
-        data = await self.http.request('PATCH', f"applications/{self.application_id}/commands/{command_id}", data=options)
+        data = await self.http.request('PATCH', f"applications/{self.application_id}/commands/{command_id}", data=opts)
 
         return ApplicationCommandModel.from_dict(data)
 
@@ -104,6 +105,7 @@ class GlobalCommand(BaseResource):
             data=[cmd.to_dict() for cmd in commands]
         )
 
+        assert isinstance(data, list)
         return [ApplicationCommandModel.from_dict(cmd) for cmd in data]
 
 
@@ -138,6 +140,7 @@ class GuildCommand(BaseResource):
         """
         data = await self.http.request('GET', f"applications/{self.application_id}/guilds/{self.guild_id}/commands" )
 
+        assert isinstance(data, list)
         return [ApplicationCommandModel.from_dict(cmd) for cmd in data]
 
     async def create(self, command: SlashCommandPart | UserCommandPart | MessageCommandPart) -> ApplicationCommandModel:
@@ -166,12 +169,12 @@ class GuildCommand(BaseResource):
         Returns:
             (ApplicationCommandModel): updated application command
         """
-        options = serialize(options)
+        opts = serialize(dict(options))
         
         data = await self.http.request(
             'PATCH', 
             f"applications/{self.application_id}/guilds/{self.guild_id}/commands/{command_id}", 
-            data=options
+            data=opts
         )
 
         return ApplicationCommandModel.from_dict(data)
@@ -205,4 +208,5 @@ class GuildCommand(BaseResource):
             data=[cmd.to_dict() for cmd in commands]
         )
 
+        assert isinstance(data, list)
         return [ApplicationCommandModel.from_dict(cmd) for cmd in data]

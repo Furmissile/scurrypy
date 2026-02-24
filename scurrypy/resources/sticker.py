@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from .base_resource import BaseResource
 
 from ..core.snowflake import Snowflake
+from ..core.exceptions import MissingField
 
 from ..api.messages.sticker import StickerModel, StickerPackModel
 
@@ -39,11 +40,20 @@ class Sticker(BaseResource):
     async def fetch_sticker_packs(self) -> list[StickerPackModel]:
         """Fetch available sticker packs.
 
+        Raises:
+            (MissingField): no sticker packs field
+
         Returns:
             list[StickerPackModel]: queried list of sticker packs.
         """
         data = await self.http.request('GET', '/sticker-packs')
 
+        assert isinstance(data, dict)
+
         stickers = data.get('sticker_packs')
 
+        if not stickers:
+            raise MissingField("No sticker packs field is present.")
+        
+        assert isinstance(stickers, list)
         return [StickerPackModel.from_dict(i) for i in stickers]

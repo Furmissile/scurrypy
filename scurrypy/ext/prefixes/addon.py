@@ -5,10 +5,31 @@ logger = logging.getLogger('scurrypy')
 from scurrypy import Client, Intents
 from scurrypy.bases import Addon
 from scurrypy.enums import EventType
-from scurrypy.core import DiscordError, Snowflake
+from scurrypy.core import DiscordError, Snowflake, InvalidCallbackSignature, MissingIntents
 from scurrypy.events import MessageCreateEvent
 
 from .ctx import PrefixCommandContext
+
+from collections.abc import Callable, Awaitable
+from typing import TypeAlias, TypeVar, Any
+
+C = TypeVar("C", bound=PrefixCommandContext)
+
+_AddonHandler: TypeAlias = Callable[[C], Awaitable[None]]
+
+AddonHandler: TypeAlias = _AddonHandler[Any]
+
+AddonDecorator: TypeAlias = Callable[[AddonHandler], AddonHandler]
+
+def _check_func_params(handler: AddonHandler) -> None:
+    import inspect
+
+    if not inspect.iscoroutinefunction(handler):
+        raise InvalidCallbackSignature(f"Prefix handler '{handler.__name__}' must be async.")
+
+    params_len = len(inspect.signature(handler).parameters)
+    if params_len != 1:
+        raise InvalidCallbackSignature(f"Prefix handler '{handler.__name__}' must accept exactly one parameter (ctx).")
 
 class PrefixAddon(Addon):
     """Addon that implements automatic registering and decorating prefix commands."""
@@ -21,7 +42,7 @@ class PrefixAddon(Addon):
             prefix (str): message prefix for commands
         """
         if not Intents.MESSAGE_CONTENT in client.intents:
-            raise ValueError("Missing Intent.MESSAGE_CONTENT for scanning messages.")
+            raise MissingIntents("Missing Intent.MESSAGE_CONTENT for scanning messages.")
         
         self.bot = client
 
@@ -29,47 +50,35 @@ class PrefixAddon(Addon):
 
         self._prefix = prefix
 
-        self._commands = {}
+        self._commands: dict[str, AddonHandler] = {}
         """Maps prefix command names to handler."""
         
         client.add_event_listener(EventType.MESSAGE_CREATE, self.dispatch)
 
-    def _register(self, name: str, func: callable):
-        import inspect
-
-        if not inspect.iscoroutinefunction(func):
-            raise TypeError(f"Prefix handler '{func.__name__}' must be async.")
-
-        params_len = len(inspect.signature(func).parameters)
-        if params_len != 1:
-            raise TypeError(
-                f"Prefix handler '{func.__name__}' must accept exactly one parameter (ctx)."
-            )
-
-        self._commands[name.lower()] = func
-        logger.info(f"Prefix command '{self._prefix + name}' registered.")
-
-    def listen(self, name: str, *, handler: callable = None):
+    def listen(self, name: str, *, handler: AddonHandler | None = None) -> AddonDecorator | None:
         """Listen for a prefix command.
 
         Args:
             name (str): name of the command
                 !!! warning "Important"
                     Prefix commands are CASE-INSENSITIVE.
-            handler (callable): callback for the command (if not a decorator)
-
-        Raises:
-            (TypeError): invalid handler signature
+            handler (AddonHandler, optional): callback for the command (if not a decorator)
         """
-        if handler is not None:
-            self._register(name, handler)
-        else:
-            def decorator(func):
-                self._register(name, func)
+        name = name.lower()
+
+        if handler is None:
+            def decorator(func: AddonHandler) -> AddonHandler:
+                _check_func_params(func)
+                self._commands[name.lower()] = func
+                logger.info(f"Prefix command '{self._prefix + name}' registered.")
                 return func
             return decorator
-
-    async def dispatch(self, event: MessageCreateEvent):
+        
+        self._commands[name.lower()] = handler
+        logger.info(f"Prefix command '{self._prefix + name}' registered.")
+        return None
+    
+    async def dispatch(self, event: MessageCreateEvent) -> None:
         """Dispatch event to user-defined handler.
             Ignore bot responding to self and messages without the desired prefix.
 

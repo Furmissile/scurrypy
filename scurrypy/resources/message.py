@@ -5,6 +5,7 @@ from .base_resource import BaseResource
 
 from ..core.snowflake import Snowflake
 from ..core.serialization import serialize
+from ..core.types import JSON
 
 from ..enums.message import MessageFlags
 from ..enums.emoji import ReactionType
@@ -21,8 +22,8 @@ class _EditMessageMixin:
 
     def _apply_suppress_embeds(
         self,
-        payload: dict,
-        suppress_embeds: bool
+        payload: JSON,
+        suppress_embeds: bool | None
     ) -> None:
         if suppress_embeds is not None:
             flags = payload.get("flags", 0)
@@ -36,12 +37,14 @@ class _EditMessageMixin:
 
     def _prepare_attachments(
         self,
-        payload: dict
-    ) -> list[str] | None:
+        payload: JSON
+    ) -> list[str]:
         if "attachments" not in payload:
-            return None
+            return []
 
         attachments = payload["attachments"]
+
+        assert isinstance(attachments, list)
 
         for idx, attachment in enumerate(attachments):
             attachment.id = idx
@@ -76,7 +79,7 @@ class Message(BaseResource, _EditMessageMixin):
     async def edit(
         self,
         *,
-        suppress_embeds: bool = None,
+        suppress_embeds: bool | None = None,
         **options: Unpack[EditMessageParams]
     ) -> MessageModel:
         """Edits this message.
@@ -93,14 +96,14 @@ class Message(BaseResource, _EditMessageMixin):
             (MessageModel): updated message
         """
         
-        options = serialize(options)
-        self._apply_suppress_embeds(options, suppress_embeds)
-        files = self._prepare_attachments(options)
+        opts = serialize(dict(options))
+        self._apply_suppress_embeds(opts, suppress_embeds)
+        files = self._prepare_attachments(opts)
 
         data = await self.http.request(
             "PATCH",
             f"/channels/{self.channel_id}/messages/{self.id}",
-            data=options,
+            data=opts,
             files=files,
         )
 
@@ -121,7 +124,7 @@ class Message(BaseResource, _EditMessageMixin):
 
         return MessageModel.from_dict(data)
 
-    async def delete(self):
+    async def delete(self) -> None:
         """Deletes this message.
         Fires [`MessageDeleteEvent`][scurrypy.events.message_events.MessageDeleteEvent].
         """
@@ -142,7 +145,7 @@ class Message(BaseResource, _EditMessageMixin):
     async def fetch_emoji_reactions(self, 
         emoji: EmojiModel | str, 
         type: ReactionType = ReactionType.NORMAL, 
-        after: int = None, 
+        after: int | None = None, 
         limit: int = 25
     ) -> list[UserModel]:
         """Fetches users who reacted with the specified emoji parameters.
@@ -168,6 +171,7 @@ class Message(BaseResource, _EditMessageMixin):
                 'limit': limit
             }
         )
+        assert isinstance(data, list)
         return [UserModel.from_dict(user) for user in data]
 
     async def add_reaction(self, emoji: EmojiModel | str) -> None:

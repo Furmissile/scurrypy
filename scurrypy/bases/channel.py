@@ -1,4 +1,6 @@
-class GuildChannelCreate:
+from ..core.model import DataModel
+
+class GuildChannelCreate(DataModel):
     """Marker base for all guild channel creation payloads.
     
     !!! tip "Variants"
@@ -6,4 +8,4 @@ class GuildChannelCreate:
         [`GuildAnnouncementChannelPart`][scurrypy.api.channels.GuildAnnouncementChannelPart]
         [`GuildForumChannelPart`][scurrypy.api.channels.GuildForumChannelPart]
     """
-    __slots__ = ()
+    pass

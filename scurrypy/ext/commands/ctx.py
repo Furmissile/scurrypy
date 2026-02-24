@@ -5,8 +5,11 @@ from scurrypy.api.interactions import (
 
 from ..interactions.ctx import InteractionContext
 
-class ApplicationCommandContext(InteractionContext):
+class CommandContext(InteractionContext):
+    ...
+
+class ApplicationCommandContext(CommandContext):
     data: ApplicationCommandDataModel
 
-class AutocompleteApplicationCommandContext(InteractionContext):
+class AutocompleteApplicationCommandContext(CommandContext):
     data: AutocompleteApplicationCommandDataModel

@@ -29,7 +29,7 @@ class BulkGuildBanModel(DataModel):
 class BulkGuildBanPart(DataModel):
     """Represents fields for creating a bulk ban."""
 
-    user_ids: list[Snowflake] = None
+    user_ids: list[Snowflake] | None = None
     """List of user IDs to ban. Max `200`."""
 
     delete_message_seconds: int | None = None

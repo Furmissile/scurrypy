@@ -1,40 +1,44 @@
 from typing import get_args, get_origin, Union
 from types import UnionType
 
-from ..bases.components import Component
+from .exceptions import DataModelTypeError
+from .types import JSON
 
-def serialize(val) -> dict:
-    """Serialize the value.
-
-    Args:
-        val (Any): value to serialize
-
-    Returns:
-        (dict): serialized value
-    """
+def _serialize(val: JSON) -> JSON:
     if hasattr(val, "to_dict"):
-        return val.to_dict()
-    
+        return JSON(val.to_dict())
+
     if isinstance(val, list):
-        return [serialize(v) for v in val if v is not None]
-    
+        return [_serialize(v) for v in val if v is not None]
+
     if isinstance(val, dict):
-        return {k: serialize(v) for k, v in val.items()}
+        return {k: _serialize(v) for k, v in val.items()}
 
     return val
 
-def convert(t, v):
+def serialize(val: JSON) -> JSON:
+    """Serialize the value.
+
+    Args:
+        val (dict): value to serialize
+
+    Returns:
+        (JSON): serialized value
+    """
+    return _serialize(val)
+
+def convert(t: object, v: object) -> object:
     """Convert the given value to the given type.
 
     Args:
-        t (type): type in which to convert value
-        v (Any): value to be converted
+        t (type[Any] | Any): type in which to convert value
+        v (object): value to be converted
 
     Raises:
-        (TypeError): ambiguous type
+        (DataModelTypeError): ambiguous type
 
     Returns:
-        (type): converted value
+        (object): converted value
     """
     o = get_origin(t)
 
@@ -42,7 +46,7 @@ def convert(t, v):
         non_none = [a for a in get_args(t) if a is not type(None)]
 
         if len(non_none) > 1:
-            raise TypeError(f"Expected deterministic type; got {non_none}.")
+            raise DataModelTypeError(f"Expected deterministic type; got {non_none}.")
         
         return convert(non_none[0], v)
     
@@ -53,6 +57,7 @@ def convert(t, v):
         return v in ('true', 'True', True)
     
     if o is dict: # mappings
+        assert isinstance(v, dict)
         from .snowflake import Snowflake
         vt = get_args(t)[1]
         return {
@@ -61,10 +66,13 @@ def convert(t, v):
         }
     
     if o is list:
+        assert isinstance(v, list)
         lt = get_args(t)[0]
         return [convert(lt, x) for x in v]
     
+    from ..bases.components import Component
     if t is Component:
+        assert isinstance(v, dict)
         from ..api.components import MessageComponentFactory
         return MessageComponentFactory.from_dict(v)
 
@@ -72,4 +80,9 @@ def convert(t, v):
         return t.from_dict(v)
 
     # primitive / fallback
-    return t(v)
+    assert not isinstance(t, str)
+
+    if callable(t):
+        return t(v)
+
+    return v

@@ -79,14 +79,14 @@ class Channel(BaseResource):
         Returns:
             (ChannelModel): updated channel
         """
-        options = serialize(options)
+        opts = serialize(dict(options))
 
-        data = await self.http.request('PATCH', f'/channels/{self.id}', data=options)
+        data = await self.http.request('PATCH', f'/channels/{self.id}', data=opts)
 
         return ChannelModel.from_dict(data)
     
     # --- MESSAGES ---
-    async def fetch_messages(self, limit: int = 50, before: Snowflake = None, after: Snowflake = None, around: Snowflake = None) -> list[MessageModel]:
+    async def fetch_messages(self, limit: int = 50, before: Snowflake | None = None, after: Snowflake | None = None, around: Snowflake | None = None) -> list[MessageModel]:
         """Fetches this channel's messages.
 
         !!! important "Permissions"
@@ -110,9 +110,10 @@ class Channel(BaseResource):
 
         data = await self.http.request('GET', f'/channels/{self.id}/messages', params=params)
 
+        assert isinstance(data, list)
         return [MessageModel.from_dict(msg) for msg in data]
 
-    async def fetch_pins(self, limit: int = 50, before: str = None) -> list[PinnedMessageModel]:
+    async def fetch_pins(self, limit: int = 50, before: str | None = None) -> list[PinnedMessageModel]:
         """Get this channel's pinned messages.
 
         !!! important "Permissions"
@@ -140,6 +141,7 @@ class Channel(BaseResource):
 
         data = await self.http.request('GET', f'/channels/{self.id}/pins', params=params)
 
+        assert isinstance(data, list)
         return [PinnedMessageModel.from_dict(item) for item in data]
 
     async def send(self, message: str | MessagePart) -> MessageModel:
@@ -155,21 +157,22 @@ class Channel(BaseResource):
         Returns:
             (MessageModel): created message
         """
-        if isinstance(message, str):
-            message = MessagePart(content=message)
+        # normalize to MessagePart
+        msg = MessagePart(content=message) if isinstance(message, str) else message
 
-        if message.attachments:
-            message = message._prepare()
+        msg = msg._prepare()
+
+        files = [str(f.path) for f in msg.attachments] if msg.attachments else None
         
         data = await self.http.request(
             "POST", 
             f"/channels/{self.id}/messages", 
-            data=message.to_dict(),
-            files=[fp.path for fp in message.attachments] if message.attachments else None
+            data=msg.to_dict(),
+            files=files
         )
 
         return MessageModel.from_dict(data)
-
+    
     async def bulk_delete_messages(self, message_ids: list[Snowflake]) -> None:
         """Delete multiple messages in a single request.
         Fires [`BulkMessageDeleteEvent`][scurrypy.events.message_events.BulkMessageDeleteEvent].
@@ -207,6 +210,7 @@ class Channel(BaseResource):
         """
         data = await self.http.request('GET', f'/channels/{self.id}/invites')
 
+        assert isinstance(data, list)
         return [InviteWithMetadataModel.from_dict(i) for i in data]
 
     async def create_invite(self, invite: InvitePart) -> InviteModel:
@@ -244,7 +248,7 @@ class Channel(BaseResource):
 
         return ThreadMemberModel.from_dict(data)
     
-    async def fetch_thread_members(self, limit: int = 100, after: Snowflake = None, with_member: bool = False) -> list[ThreadMemberModel]:
+    async def fetch_thread_members(self, limit: int = 100, after: Snowflake | None = None, with_member: bool | None = False) -> list[ThreadMemberModel]:
         """Fetch all members of this thread.
 
         !!! warning
@@ -267,6 +271,7 @@ class Channel(BaseResource):
 
         data = await self.http.request('GET', f"/channels/{self.id}/thread-members", params=params)
 
+        assert isinstance(data, list)
         return [ThreadMemberModel.from_dict(n) for n in data]
 
     async def create_thread_from_message(self, message_id: Snowflake, thread: ThreadFromMessagePart) -> ChannelModel:
@@ -318,7 +323,9 @@ class Channel(BaseResource):
             (ChannelModel): updated channel
         """
 
-        data = await self.http.request('PATCH', f'/channels/{self.id}', data=options)
+        opts = dict(options)
+
+        data = await self.http.request('PATCH', f'/channels/{self.id}', data=opts)
 
         return ChannelModel.from_dict(data)
 
@@ -359,7 +366,7 @@ class Channel(BaseResource):
         """
         await self.http.request('DELETE', f'/channels/{self.id}/thread-members/{user_id}')
 
-    async def fetch_public_archived_threads(self, before: str = None, limit: int = None) -> ArchivedThreadsModel:
+    async def fetch_public_archived_threads(self, before: str | None = None, limit: int | None = None) -> ArchivedThreadsModel:
         """Fetch archived public threads in this channel.
 
         !!! important "Permissions"
@@ -390,7 +397,7 @@ class Channel(BaseResource):
 
         return ArchivedThreadsModel.from_dict(data)
     
-    async def fetch_private_archived_threads(self, before: str = None, limit: int = None) -> ArchivedThreadsModel:
+    async def fetch_private_archived_threads(self, before: str | None = None, limit: int | None = None) -> ArchivedThreadsModel:
         """Fetch archived private threads in this channel.
 
         !!! important "Permissions"
@@ -417,7 +424,7 @@ class Channel(BaseResource):
 
         return ArchivedThreadsModel.from_dict(data)
     
-    async def fetch_joined_private_archived_threads(self, before: str = None, limit: int = None) -> ArchivedThreadsModel:
+    async def fetch_joined_private_archived_threads(self, before: str | None = None, limit: int | None = None) -> ArchivedThreadsModel:
         """Fetch archived private threads in this channel the bot has joined.
 
         !!! important "Permissions"

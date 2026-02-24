@@ -18,6 +18,7 @@ alt="Fire-breathing squirrel"
 ## Features
 
 * Lightweight core
+* Strictly typed
 * Rate limit handling
 * Automatic session & gateway management
 * Automatic sharding

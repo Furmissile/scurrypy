@@ -8,3 +8,4 @@ notes/
 *.egg-info
 *.bash
 mkdocs.yaml
+.mypy_cache/

@@ -5,12 +5,15 @@ from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
+from ..enums.events import EventType
+
 from ..api.user import UserModel, GuildMemberModel
 
 @dataclass
 class UserUpdateEvent(Event, UserModel):
     """Received when a user's settings are updated."""
-    pass
+    
+    dispatch_name = EventType.USER_UPDATE
 
 @dataclass
 class GuildMemberAddEvent(Event, GuildMemberModel):
@@ -19,6 +22,8 @@ class GuildMemberAddEvent(Event, GuildMemberModel):
     !!! warning
         Requires privileged `GUILD_MEMBERS` intent.
     """
+
+    dispatch_name = EventType.GUILD_MEMBER_ADD
 
     guild_id: Snowflake
     """ID of the guild."""
@@ -30,6 +35,9 @@ class GuildMemberUpdateEvent(Event, DataModel):
     !!! warning
         Requires privileged `GUILD_MEMBERS` intent.
     """
+
+    dispatch_name = EventType.GUILD_MEMBER_UPDATE
+
     guild_id: Snowflake
     """ID of the guild."""
 
@@ -55,6 +63,8 @@ class GuildMemberRemoveEvent(Event, DataModel):
     !!! warning
         Requires privileged `GUILD_MEMBERS` intent.
     """
+
+    dispatch_name = EventType.GUILD_MEMBER_REMOVE
 
     guild_id: Snowflake
     """ID of the guild."""

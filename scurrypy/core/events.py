@@ -1,7 +1,9 @@
-from ..events import *
 from ..enums.events import EventType
 
-EVENTS = {
+from ..events import *
+
+
+EVENTS: dict[EventType, type[Event]] = {
     # startup events
     EventType.READY: ReadyEvent,
 

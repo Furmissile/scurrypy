@@ -33,8 +33,8 @@ class Interaction(BaseResource, _EditMessageMixin):
         message: str | MessagePart, 
         *, 
         with_response: bool = False, 
-        ephemeral: bool = None, 
-        suppress_embeds: bool = None
+        ephemeral: bool | None = None, 
+        suppress_embeds: bool | None = None
     ) -> InteractionCallbackModel | None:
         """Create a message in response to an interaction.
         Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent]
@@ -49,37 +49,40 @@ class Interaction(BaseResource, _EditMessageMixin):
         Returns:
             (InteractionCallbackModel | None): interaction callback object (if `with_response` is toggled) else None
         """
-        if isinstance(message, str):
-            message = MessagePart(content=message)
+        msg = MessagePart(content=message) if isinstance(message, str) else message
 
-        message.flags = MessageFlags.NO_FLAGS
+        msg.flags = MessageFlags.NO_FLAGS
 
         if ephemeral:
-            message.flags |= MessageFlags.EPHEMERAL
+            msg.flags |= MessageFlags.EPHEMERAL
 
         if suppress_embeds:
-            message.flags |= MessageFlags.SUPPRESS_EMBEDS
+            msg.flags |= MessageFlags.SUPPRESS_EMBEDS
 
         content = {
             'type': InteractionCallbackType.CHANNEL_MESSAGE_WITH_SOURCE, 
-            'data': message._prepare().to_dict()
+            'data': msg._prepare().to_dict()
         }
-        
+
+        files = [str(f.path) for f in msg.attachments] if msg.attachments else None
+
         data = await self.http.request(
             'POST', 
             f'/interactions/{self.id}/{self.token}/callback', 
             data=content, 
-            files=[fp.path for fp in message.attachments] if message.attachments else None,
+            files=files,
             params={'with_response': with_response}
         )
 
         if with_response:
             return InteractionCallbackModel.from_dict(data)
         
+        return None
+        
     async def update(
         self,
         *,
-        suppress_embeds: bool = None,
+        suppress_embeds: bool | None = None,
         **options: Unpack[EditMessageParams]
     ) -> None:
         """Edits the initial Interaction response.
@@ -88,13 +91,13 @@ class Interaction(BaseResource, _EditMessageMixin):
             options (EditMessageParams): fields to edit
             suppress_embeds (optional, bool): whether the response's embeds should be removed
         """
-        options = serialize(options)
-        self._apply_suppress_embeds(options, suppress_embeds)
-        files = self._prepare_attachments(options)
+        opts = serialize(dict(options))
+        self._apply_suppress_embeds(opts, suppress_embeds)
+        files = self._prepare_attachments(opts)
 
         content = {
             "type": InteractionCallbackType.UPDATE_MESSAGE,
-            "data": options,
+            "data": opts,
         }
 
         await self.http.request(
@@ -141,7 +144,7 @@ class Interaction(BaseResource, _EditMessageMixin):
             data=content
         )
 
-    async def defer_respond(self, ephemeral: bool = None) -> None:
+    async def defer_respond(self, ephemeral: bool | None = None) -> None:
         """Defer creating a message in response to an interaction.
         Fires [`InteractionEvent`][scurrypy.events.interaction_events.InteractionEvent].
 
@@ -179,8 +182,8 @@ class Interaction(BaseResource, _EditMessageMixin):
         self, 
         application_id: Snowflake, 
         message: str | MessagePart, 
-        ephemeral: bool = None,
-        suppress_embeds: bool = None
+        ephemeral: bool | None = None,
+        suppress_embeds: bool | None = None
     ) -> None:
         """Create a new message to respond to a deferred interaction.
         Fires [`MessageCreateEvent`][scurrypy.events.message_events.MessageCreateEvent].
@@ -217,7 +220,7 @@ class Interaction(BaseResource, _EditMessageMixin):
         self,
         application_id: Snowflake,
         *,
-        suppress_embeds: bool = None,
+        suppress_embeds: bool | None = None,
         **options: Unpack[EditMessageParams]
     ) -> None:
         """Edits the initial Interaction response.
@@ -227,13 +230,13 @@ class Interaction(BaseResource, _EditMessageMixin):
             options (EditMessageParams): fields to edit
             suppress_embeds (optional, bool): whether the response's embeds should be removed
         """
-        options = serialize(options)
-        self._apply_suppress_embeds(options, suppress_embeds)
-        files = self._prepare_attachments(options)
+        opts = serialize(dict(options))
+        self._apply_suppress_embeds(opts, suppress_embeds)
+        files = self._prepare_attachments(opts)
 
         await self.http.request(
             "PATCH",
             f"/webhooks/{application_id}/{self.token}/messages/@original",
-            data=options,
+            data=opts,
             files=files
         )

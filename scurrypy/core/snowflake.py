@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+from typing import Self
 
 DISCORD_EPOCH = 1420070400000
 
@@ -36,5 +37,13 @@ class Snowflake(int):
         return self & 0xFFF
 
     @classmethod
-    def from_dict(cls, v):
+    def from_dict(cls, v: str) -> Self:
+        """Deserialize this snowflake.
+
+        Args:
+            v (str): serialized value
+
+        Returns:
+            (Snowflake): snowflake object   
+        """
         return cls(int(v))

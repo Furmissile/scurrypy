@@ -6,13 +6,39 @@ from .core.http import HTTPClient, HTTPClientProtocol
 from .core.gateway import GatewayClient, GatewayClientProtocol
 from .core.error import DiscordError
 from .core.snowflake import Snowflake
+from .core.exceptions import MissingIntents, InvalidCallbackSignature
+from .core.events import EVENTS
+
+from .enums.events import EventType
 
 from .events.gateway_events import GatewayEvent
+
+from .resources.application import Application
+from .resources.emoji import ApplicationEmoji, GuildEmoji
+from .resources.channel import Channel
+from .resources.command import GlobalCommand, GuildCommand
+from .resources.guild import Guild
+from .resources.interaction import Interaction
+from .resources.invite import Invite
+from .resources.message import Message
+from .resources.sticker import Sticker
+from .resources.user import User
 
 import logging
 
 logger = logging.getLogger("scurrypy.client")
 logger.addHandler(logging.NullHandler())
+
+from collections.abc import Callable, Awaitable
+from typing import TypeAlias, TypeVar, Any
+from .events.base_event import Event
+
+E = TypeVar("E", bound=Event)
+
+CoreHandler: TypeAlias = Callable[[E], Awaitable[None]]
+
+MaybeAwaitable: TypeAlias = Awaitable[None] | None
+HookHandler: TypeAlias = Callable[[], MaybeAwaitable]
 
 class Client:
     """Main entry point for Discord bots.
@@ -28,25 +54,26 @@ class Client:
     http: HTTPClientProtocol
     """Public HTTP session for requests."""
 
-    shards: GatewayClientProtocol
+    shards: list[GatewayClientProtocol]
     """Shards as a list of gateways."""
 
-    events: dict[str: list[callable]]
+    events: dict[EventType, list[CoreHandler[Any]]]
     """Events for the client to listen to."""
 
-    startup_hooks: list[callable]
+    startup_hooks: list[HookHandler]
     """Handlers to call once before the bot starts."""
 
-    shutdown_hooks: list[callable]
+    shutdown_hooks: list[HookHandler]
     """Handlers to call once after the bot shuts down."""
 
-    def __init__(self,
+    def __init__(
+        self,
         *,
         token: str,
         intents: Intents = Intents.DEFAULT,
         shard_count: int = 0,
-        http: HTTPClientProtocol = None,
-        gateway_impl: GatewayClientProtocol = None
+        http: HTTPClientProtocol | None = None,
+        gateway_impl: type[GatewayClientProtocol] | None = None,
     ):
         """
         Args:
@@ -57,13 +84,13 @@ class Client:
             gateway_impl (GatewayClientProtocol, optional): Gateway protocol implementation. Leave blank for default client.
         """
         if not isinstance(intents, Intents):
-            raise ValueError("Invalid intents type.")
+            raise MissingIntents("Invalid intents type.")
         
         self.token = token
         self.intents = intents
         self.shard_count = shard_count
         
-        self.http = http or HTTPClient()
+        self.http: HTTPClientProtocol = http or HTTPClient()
 
         self.shards: list[GatewayClientProtocol] = []
         self.shard_type = gateway_impl or GatewayClient
@@ -72,65 +99,70 @@ class Client:
         self.startup_hooks = []
         self.shutdown_hooks = []
 
-    def add_event_listener(self, event: str, handler):
+    def add_event_listener(self, event: EventType, handler: CoreHandler[Any]) -> None:
         """Helper function to register listener functions.
 
         Args:
-            event (str): name of the event to listen
-            handler (callable): listener function
+            event (EventType): name of the event to listen
+            handler (CoreHandler): listener function
         """
-        if not callable(handler):
-            raise TypeError(f"{handler} is not a callable function.")
+        if not inspect.iscoroutinefunction(handler):
+            raise InvalidCallbackSignature(f"{handler.__name__} must be async")
         
-        params_len = len(inspect.signature(handler).parameters)
+        sig = inspect.signature(handler)
+        params = list(sig.parameters.values())
 
-        if params_len != 1:
-            raise TypeError(
-                f"Event listener '{handler.__name__}' must accept exactly one parameter (event)."
-            )
-    
+        if len(params) != 1:
+            raise InvalidCallbackSignature(f"{handler.__name__} must accept exactly 1 parameter (event: {EVENTS[event].__name__})")
+        
         self.events.setdefault(event, []).append(handler)
 
-    def add_startup_hook(self, handler):
-        """Helper function to register startup functions.
+    def _check_hook_signature(self, handler: HookHandler) -> None:
+        """Helper function for checking hook signatures.
+
+        Args:
+            handler (HookHandler): hook callback
+
+        Raises:
+            (InvalidCallbackSignature): invalid signature
+        """
+        sig = inspect.signature(handler)
+        params = list(sig.parameters.values())
+
+        if len(params) != 0:
+            raise InvalidCallbackSignature(f"{handler.__name__} must accept exactly no parameters")
+
+    def add_startup_hook(self, handler: HookHandler) -> None:
+        """Register a startup function.
             Runs once on startup BEFORE READY event.
 
-        Args:
-            handler (callable): startup function
-        """
-        if not callable(handler):
-            raise TypeError(f"{handler} is not a callable function.")
-        
-        params_len = len(inspect.signature(handler).parameters)
+        Raises:
+            (InvalidCallbackSignature): invalid signature
 
-        if params_len != 0:
-            raise TypeError(
-                f"Startup hook '{handler.__name__}' must accept no parameters."
-            )
-        
+        Args:
+            handler (HookHandler): startup function
+        """
+        self._check_hook_signature(handler)
         self.startup_hooks.append(handler)
 
-    def add_shutdown_hook(self, handler):
-        """Helper function to register shutdown functions.
+    def add_shutdown_hook(self, handler: HookHandler) -> None:
+        """Register a shutdown function.
             Runs once on shutdown.
 
+        Raises:
+            (InvalidCallbackSignature): invalid signature
+
         Args:
-            handler (callable): shutdown function
+            handler (HookHandler): shutdown function
         """
-        if not callable(handler):
-            raise TypeError(f"{handler} is not a callable function.")
-        
-        params_len = len(inspect.signature(handler).parameters)
-
-        if params_len != 0:
-            raise TypeError(
-                f"Shutdown hook '{handler.__name__}' must accept no parameters."
-            )
-
+        self._check_hook_signature(handler)
         self.shutdown_hooks.append(handler)
 
-    def application(self, application_id: Snowflake):
+    def application(self, application_id: Snowflake) -> Application:
         """Creates an interactable application resource.
+
+        Raises:
+            (InvalidCallbackSignature): invalid signature
 
         Args:
             application_id (Snowflake): ID of target application
@@ -138,11 +170,9 @@ class Client:
         Returns:
             (Application): the Application resource
         """
-        from .resources.application import Application
-
         return Application(self.http, application_id)
     
-    def application_emoji(self, application_id: Snowflake):
+    def application_emoji(self, application_id: Snowflake) -> ApplicationEmoji:
         """Creates an interactable application emoji resource.
 
         Args:
@@ -151,37 +181,9 @@ class Client:
         Returns:
             (ApplicationEmoji): the ApplicationEmoji resource
         """
-        from .resources.emoji import ApplicationEmoji
-
         return ApplicationEmoji(self.http, application_id)
-    
-    def guild_emoji(self, guild_id: Snowflake):
-        """Creates an interactable emoji resource.
 
-        Args:
-            guild_id (Snowflake): guild ID of target emojis
-
-        Returns:
-            (GuildEmoji): the GuildEmoji resource
-        """
-        from .resources.emoji import GuildEmoji
-
-        return GuildEmoji(self.http, guild_id)
-
-    def guild(self, guild_id: Snowflake):
-        """Creates an interactable guild resource.
-
-        Args:
-            guild_id (Snowflake): ID of target guild
-
-        Returns:
-            (Guild): the Guild resource
-        """
-        from .resources.guild import Guild
-
-        return Guild(self.http, guild_id)
-
-    def channel(self, channel_id: Snowflake):
+    def channel(self, channel_id: Snowflake) -> Channel:
         """Creates an interactable channel resource.
 
         Args:
@@ -190,21 +192,9 @@ class Client:
         Returns:
             (Channel): the Channel resource
         """
-        from .resources.channel import Channel
-
         return Channel(self.http, channel_id)
-    
-    def invite(self, code: str):
-        """Creates an interactable invite resource.
 
-        Args:
-            code (str): unique invite code
-        """
-        from .resources.invite import Invite
-
-        return Invite(self.http, code)
-    
-    def global_command(self, application_id: Snowflake):
+    def global_command(self, application_id: Snowflake) -> GlobalCommand:
         """Creates an interactable command resource.
 
         Args:
@@ -213,11 +203,9 @@ class Client:
         Returns:
             (GlobalCommand): the GlobalCommand resource
         """
-        from .resources.command import GlobalCommand
-
         return GlobalCommand(self.http, application_id)
     
-    def guild_command(self, application_id: Snowflake, guild_id: Snowflake = None):
+    def guild_command(self, application_id: Snowflake, guild_id: Snowflake) -> GuildCommand:
         """Creates an interactable command resource.
 
         Args:
@@ -227,25 +215,31 @@ class Client:
         Returns:
             (GuildCommand): the GuildCommand resource
         """
-        from .resources.command import GuildCommand
-
         return GuildCommand(self.http, application_id, guild_id)
 
-    def message(self, channel_id: Snowflake, message_id: Snowflake):
-        """Creates an interactable message resource.
+    def guild_emoji(self, guild_id: Snowflake) -> GuildEmoji:
+        """Creates an interactable emoji resource.
 
         Args:
-            message_id (Snowflake): ID of target message
-            channel_id (Snowflake): channel ID of target message
+            guild_id (Snowflake): guild ID of target emojis
 
         Returns:
-            (Message): the Message resource
+            (GuildEmoji): the GuildEmoji resource
         """
-        from .resources.message import Message
+        return GuildEmoji(self.http, guild_id)
 
-        return Message(self.http, message_id, channel_id)
-    
-    def interaction(self, id: Snowflake, token: str):
+    def guild(self, guild_id: Snowflake) -> Guild:
+        """Creates an interactable guild resource.
+
+        Args:
+            guild_id (Snowflake): ID of target guild
+
+        Returns:
+            (Guild): the Guild resource
+        """
+        return Guild(self.http, guild_id)
+
+    def interaction(self, id: Snowflake, token: str) -> Interaction:
         """Creates an interactable interaction resource.
 
         Args:
@@ -255,62 +249,74 @@ class Client:
         Returns:
             (Interaction): the Interaction resource
         """
-        from .resources.interaction import Interaction
-
         return Interaction(self.http, id, token)
-    
-    def sticker(self):
+
+    def invite(self, code: str) -> Invite:
+        """Creates an interactable invite resource.
+
+        Args:
+            code (str): unique invite code
+        """
+        return Invite(self.http, code)
+
+    def message(self, channel_id: Snowflake, message_id: Snowflake) -> Message:
+        """Creates an interactable message resource.
+
+        Args:
+            message_id (Snowflake): ID of target message
+            channel_id (Snowflake): channel ID of target message
+
+        Returns:
+            (Message): the Message resource
+        """
+        return Message(self.http, message_id, channel_id)
+
+    def sticker(self) -> Sticker:
         """Creates an interactable sticker resource
 
         Returns:
             (Sticker): the Sticker resource
         """
-        from .resources.sticker import Sticker
-
         return Sticker(self.http)
     
-    def user(self):
+    def user(self) -> User:
         """Creates an interactable user resource.
 
         Returns:
             (User): the User resource
         """
-        from .resources.user import User
-
         return User(self.http)
 
-    async def listen_shard(self, shard: GatewayClient):
-        """Consume a GatewayClient's event queue.
+    async def listen_shard(self, shard: GatewayClientProtocol) -> None:
+        """Consume a gateway client's event queue.
 
         Args:
-            shard (GatewayClient): gateway to listen on
+            shard (GatewayClientProtocol): gateway to listen on
         """
 
         while True:
             try:
                 dispatch_type, event_data = await shard.event_queue.get()
 
-                if dispatch_type not in self.events.keys():
+                event_type = EventType.from_dict(str(dispatch_type))
+
+                if event_type not in self.events.keys():
                     logger.debug(f"SHARD ID {shard.shard_id} DISPATCH -> {dispatch_type}")
                 else:
                     logger.info(f"SHARD ID {shard.shard_id} DISPATCH -> {dispatch_type}")
 
-                from .core.events import EVENTS
-                event_model = EVENTS.get(dispatch_type)
+                event_model = EVENTS.get(event_type)
                 if not event_model:
                     logger.warning(f"Event {dispatch_type} is not implemented.")
                     continue
 
                 obj = event_model.from_dict(event_data)
-                obj.name = dispatch_type
                 obj.raw = event_data
 
-                handlers = self.events.get(dispatch_type, [])
+                handlers = self.events.get(event_type, [])
                 for handler in handlers:
                     try:
-                        result = handler(obj)
-                        if inspect.isawaitable(result):
-                            await result
+                        await handler(obj)
                     except DiscordError as e:
                         logger.error(e)
                         continue
@@ -320,8 +326,15 @@ class Client:
                 logger.exception(f"SHARD ID {shard.shard_id}: Dispatcher error")
                 continue
 
-    async def start_shards(self, gateway: GatewayEvent):
-        """Starts all shards batching by max_concurrency."""
+    async def start_shards(self, gateway: GatewayEvent) -> list[asyncio.Task[Any]]:
+        """Starts all shards batching by max_concurrency.
+
+        Args:
+            gateway (GatewayEvent): gatewway info event data
+
+        Returns:
+            list[asyncio.Task]: list of gateway connection tasks
+        """
 
         # pull important values for easier access
         total_shards = self.shard_count or gateway.shards
@@ -346,20 +359,9 @@ class Client:
             await asyncio.sleep(5)
 
         return tasks
-    
-    async def run_startup_hooks(self):
-        for hook in self.startup_hooks:
-            try:
-                logger.debug(f"Running hook {hook.__qualname__}...")
-                result = hook()
-                if inspect.isawaitable(result):
-                    await asyncio.wait_for(result, timeout=60)
-            except Exception:
-                logger.exception("Error in shartup hook")
-    
-    async def start(self):
+
+    async def start(self) -> None:
         """Starts the HTTP/Websocket client, run startup logic, and registers commands."""
-        
         try:
             await self.http.start(self.token)
 
@@ -385,17 +387,31 @@ class Client:
         finally:
             await self.close()
 
-    async def run_shutdown_hooks(self):
+    async def run_startup_hooks(self) -> None:
+        """Runs registered startup hooks."""
+
+        for hook in self.startup_hooks:
+            try:
+                logger.debug(f"Running hook {hook}...")
+                result = hook()
+                if result is not None:
+                    await asyncio.wait_for(result, timeout=60)
+            except Exception:
+                logger.exception("Error in shartup hook")
+
+    async def run_shutdown_hooks(self) -> None:
+        """Runs registered shutdown hooks."""
+
         for hook in self.shutdown_hooks:
             try:
-                logger.debug(f"Running hook {hook.__qualname__}...")
+                logger.debug(f"Running hook {hook}...")
                 result = hook()
-                if inspect.isawaitable(result):
+                if result is not None:
                     await asyncio.wait_for(result, timeout=60)
             except Exception:
                 logger.exception("Error in shutdown hook")
 
-    async def close(self):
+    async def close(self) -> None:
         """Gracefully close HTTP session, websocket connections, and run shutdown logic."""  
 
         await self.run_shutdown_hooks()
@@ -409,9 +425,8 @@ class Client:
         logger.info("Closing HTTP session...")
         await self.http.close()
     
-    def run(self):
-        """User-facing entry point for starting the client."""  
-
+    def run(self) -> None:
+        """User-facing entry point for starting the client."""
         try:
             asyncio.run(self.start())
         except Exception as e:

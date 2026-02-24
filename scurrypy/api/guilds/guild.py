@@ -46,10 +46,7 @@ class GuildModel(DataModel):
     """If the member is the owner."""
 
     owner_id: Snowflake
-    """OD of the owner of the guild."""
-
-    roles: list[int]
-    """List of IDs registered in the guild."""
+    """ID of the owner of the guild."""
 
     emojis: list[EmojiModel]
     """List of emojis registered in the guild."""

@@ -2,6 +2,8 @@ from dataclasses import dataclass, field
 
 from ...core.model import DataModel
 from ...core.snowflake import Snowflake
+from ...core.exceptions import MissingField
+from ...core.types import Serialized
 
 @dataclass
 class AttachmentModel(DataModel):
@@ -53,10 +55,21 @@ class AttachmentPart(DataModel):
     description: str | None = None
     """Description of the file."""
 
-    id: int = field(init=False, default=None)
+    id: int | None = field(init=False, default=None)
     """ID of the attachment (internally set)."""
 
-    def to_dict(self):
+    def to_dict(self) -> Serialized:
+        """Serialize this attachment.
+
+        Raises:
+            (MissingField): _description_
+
+        Returns:
+            (Serialized): serialized attachment
+        """
+        if self.path is None:
+            raise MissingField("AttachmentPart.path must be set before serialization")
+        
         return {
             'id': self.id,
             'filename': self.path.split('/')[-1],

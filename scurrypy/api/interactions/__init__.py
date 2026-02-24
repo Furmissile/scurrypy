@@ -12,6 +12,8 @@ from .interaction import (
     MessageComponentDataModel, 
     ModalComponentDataModel, 
     ModalComponentModel, 
+    ModalComponentInputDataModel,
+    ModalComponentSelectDataModel,
     ModalDataModel,
     AutocompleteApplicationCommandDataModel
 )
@@ -31,6 +33,8 @@ __all__ = [
     "MessageComponentDataModel", 
     "ModalComponentDataModel", 
     "ModalComponentModel", 
+    "ModalComponentInputDataModel",
+    "ModalComponentSelectDataModel",
     "ModalDataModel",
 
     "ModalPart",

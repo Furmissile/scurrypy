@@ -1,19 +1,23 @@
+from .types import HTTPResponse
+
 class DiscordError(Exception):
     """Represents a Discord API error."""
 
-    def __init__(self, status: int, data: dict):
+    def __init__(self, status: int, data: HTTPResponse):
         """Initialize the error with Discord's response.
             Extracts reason, code, and walks the nested errors.
 
         Args:
-            data (dict): Discord's error JSON
+            data (JSON): Discord's error JSON
         """
         self.data = data
         self.status = status
+
+        assert isinstance(data, dict)
         self.reason = data.get('message', data)
         self.code = data.get('code', 'Unknown Code')
+        self.error_data: HTTPResponse = data.get('errors', {})
 
-        self.error_data = data.get('errors', {})
         self.details = self.walk(self.error_data)
 
         self.is_fatal = status in (401, 403)
@@ -25,15 +29,15 @@ class DiscordError(Exception):
 
         super().__init__(self.full_message)
 
-    def walk(self, node: dict, path=None):
+    def walk(self, node: HTTPResponse, path: list[str] | None = None) -> list[tuple[str, str]]:
         """Recursively traverses errors field to flatten nested validation errors into (path, message).
 
         Args:
-            node (dict): current error level
-            path (tuple[str, str], optional): path to this error level
+            node (HTTPResponse): current error level
+            path (list[str], optional): path to this error level
 
         Returns:
-            (list): list of errors
+            (list[tuple[str, str]]): list of errors
         """
         if path is None:
             path = []

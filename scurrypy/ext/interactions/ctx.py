@@ -1,5 +1,7 @@
 from scurrypy import Client
-from scurrypy.resources import Interaction
+from scurrypy.core import MissingField
+from scurrypy.api.user import UserModel, GuildMemberModel
+from scurrypy.resources import Interaction, Message, Channel, Guild
 from scurrypy.events import InteractionEvent
 
 class InteractionContext(Interaction):
@@ -12,26 +14,32 @@ class InteractionContext(Interaction):
         self.data = event.data
 
     @property
-    def user(self):
+    def user(self) -> UserModel:
         """The invoking user."""
         return self.event.member.user
 
     @property
-    def member(self):
+    def member(self) -> GuildMemberModel:
         """The invoking user's member."""
         return self.event.member
     
     @property
-    def channel(self):
+    def channel(self) -> Channel:
         """Channel resource of the interaction."""
         return self.bot.channel(self.event.channel_id)
     
     @property
-    def guild(self):
+    def guild(self) -> Guild:
         """Guild resource of the interaction."""
+        if not self.event.guild_id:
+            raise MissingField("This event has no associated guild ID.")
+        
         return self.bot.guild(self.event.guild_id)
 
     @property
-    def message(self):
+    def message(self) -> Message:
         """Message resource of the interaction."""
+        if not self.event.message:
+            raise MissingField("This event has no associated message.")
+        
         return self.bot.message(self.event.channel_id, self.event.message.id)

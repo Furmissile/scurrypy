@@ -21,7 +21,7 @@ class GuildRoleCacheAddon(Addon):
         client.add_event_listener(EventType.ROLE_UPDATE, self.on_role_update)
         client.add_event_listener(EventType.ROLE_DELETE, self.on_role_delete)
 
-    def on_guild_create(self, event: GuildCreateEvent):
+    async def on_guild_create(self, event: GuildCreateEvent) -> None:
         """Append new guild roles to cache. Also add roles to index.
 
         Args:
@@ -33,7 +33,7 @@ class GuildRoleCacheAddon(Addon):
             guild_dict[role.id] = role
             self.role_index[role.id] = role
 
-    def on_guild_delete(self, event: GuildDeleteEvent):
+    async def on_guild_delete(self, event: GuildDeleteEvent) -> None:
         """Remove guild roles from cache. Also remove roles from index
 
         Args:
@@ -44,7 +44,7 @@ class GuildRoleCacheAddon(Addon):
         for role in removed_roles.values():
             self.role_index.pop(role.id, None)
 
-    def on_role_create(self, event: RoleCreateEvent):
+    async def on_role_create(self, event: RoleCreateEvent) -> None:
         """Append role to guild key. Also append role to index.
 
         Args:
@@ -56,7 +56,7 @@ class GuildRoleCacheAddon(Addon):
         guild_dict[event.role.id] = model
         self.role_index[event.role.id] = model
 
-    def on_role_update(self, event: RoleUpdateEvent):
+    async def on_role_update(self, event: RoleUpdateEvent) -> None:
         """Replace role in guild key. Also replace role in index.
 
         Args:
@@ -68,7 +68,7 @@ class GuildRoleCacheAddon(Addon):
         guild_dict[event.role.id] = model
         self.role_index[event.role.id] = model
 
-    def on_role_delete(self, event: RoleDeleteEvent):
+    async def on_role_delete(self, event: RoleDeleteEvent) -> None:
         """Remove role from guild key. Also remove role from index.
 
         Args:
@@ -77,19 +77,8 @@ class GuildRoleCacheAddon(Addon):
         model = self.role_index.pop(event.role_id, None)
         if model:
             self.roles.get(event.guild_id, {}).pop(event.role_id, None)
-
-    def get_role(self, role_id: Snowflake):
-        """Get a role from the cache.
-
-        Args:
-            role_id (Snowflake): ID of the role
-
-        Returns:
-            (GuildRoleModel | None): the role object if found else None
-        """
-        return self.role_index.get(role_id)
     
-    async def get_role(self, guild_id: Snowflake, role_id: Snowflake):
+    async def get_role(self, guild_id: Snowflake, role_id: Snowflake) -> GuildRoleModel | None:
         """Fetch a guild role. If not found, request and store it.
 
         Args:
@@ -111,7 +100,7 @@ class GuildRoleCacheAddon(Addon):
         self.put(guild_id, role)
         return role
 
-    def put(self, guild_id: Snowflake, role: GuildRoleModel):
+    def put(self, guild_id: Snowflake, role: GuildRoleModel) -> None:
         """Put a new role into the cache.
 
         Args:

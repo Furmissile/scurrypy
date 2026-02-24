@@ -15,7 +15,7 @@ from ...enums.components import (
 )
 
 @dataclass
-class ActionRow(DataModel, Component):
+class ActionRow(Component):
     """Represents a container of interactable components."""
 
     components: list[Component] | None = None
@@ -25,7 +25,7 @@ class ActionRow(DataModel, Component):
     """Component type."""
 
 @dataclass
-class Section(DataModel, Component, ContainerChild):
+class Section(Component, ContainerChild):
     """Represents the Section component.
     
     A Section contextually associates content with an accessory component.
@@ -48,7 +48,7 @@ class Section(DataModel, Component, ContainerChild):
 
 
 @dataclass
-class TextDisplay(DataModel, Component, ContainerChild, SectionChild):
+class TextDisplay(Component, ContainerChild, SectionChild):
     """Represents the Text Display component.
     
     A Text Display adds markdown formatted text, including mentions (users, roles, etc) and emojis.
@@ -61,7 +61,7 @@ class TextDisplay(DataModel, Component, ContainerChild, SectionChild):
     """Component type. Always `ComponentType.TEXT_DISPLAY` for this class."""
 
 @dataclass
-class Thumbnail(DataModel, Component, SectionAccessoryChild):
+class Thumbnail(Component, SectionAccessoryChild):
     """Represents the Thumbnail component.
     
     A Thumbnail displays visual media in a small form-factor.
@@ -93,7 +93,7 @@ class MediaGalleryItem(DataModel):
     """Whether the thumbnail should be a spoiler (or blurred out). Discord defaults to `False`."""
 
 @dataclass
-class MediaGallery(DataModel, Component, ContainerChild):
+class MediaGallery(Component, ContainerChild):
     """Represents the Media Gallery component.
     
     A Media Gallery displays 1-10 media attachments in an organized gallery format.
@@ -106,7 +106,7 @@ class MediaGallery(DataModel, Component, ContainerChild):
     """Component type. Always `ComponentType.MEDIA_GALLERY` for this class."""
 
 @dataclass
-class File(DataModel, Component, ContainerChild):
+class File(Component, ContainerChild):
     """Represents the File component.
     
     A File displays an uploaded file as an attachment to the message and reference it in the component.
@@ -122,7 +122,7 @@ class File(DataModel, Component, ContainerChild):
     """Component type. Always `ComponentType.FILE` for this class."""
 
 @dataclass
-class Separator(DataModel, Component, ContainerChild):
+class Separator(Component, ContainerChild):
     """Represents the Separator component.
     
     A Separator adds vertical padding and visual division between other components.
@@ -138,7 +138,7 @@ class Separator(DataModel, Component, ContainerChild):
     """Component type. Always `ComponentType.SEPARATOR` for this class."""
 
 @dataclass
-class Container(DataModel, Component):
+class Container(Component):
     """Represents a container of display and interactable components.
     
     A Container visually encapsulates a collection of components.
@@ -160,7 +160,7 @@ class Container(DataModel, Component):
     """Component type. Always `ComponentType.CONTAINER` for this class."""
 
 @dataclass
-class Label(DataModel, Component):
+class Label(Component):
     """Represents the Discord Label component.
     
     Labels wrap modal components with text as a label and optional description.

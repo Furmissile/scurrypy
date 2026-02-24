@@ -38,7 +38,7 @@ class GuildRoleModel(DataModel):
     position: int
     """Position of the role."""
 
-    permissions: int
+    permissions: Permissions
     """Permission bit set. [INT_LIMIT]"""
 
     managed: bool
@@ -52,9 +52,6 @@ class GuildRoleModel(DataModel):
 
     icon: str | None
     """Icon hash of the role."""
-
-    permissions: str
-    """permission bits set."""
 
     unicode_emoji: str | None
     """Unicode emoji of the role."""

@@ -1,6 +1,8 @@
-class Component:
+from ..core.model import DataModel
+
+class Component(DataModel):
     """Marker class for all interaction components and containers."""
-    ...
+    pass
 
 class ActionRowChild: 
     """Marker class for all components that go into an action row.

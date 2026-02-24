@@ -2,6 +2,12 @@
 
 This changelog documents all notable and breaking changes to the ScurryPy PyPi package.
 
+# [2.3] - 21 Feb 2026
+
+* Sanitized field types
+    * ScurryPy now passes mypy --strict
+* Added customized exceptions for easier debugging
+
 ## [2.2] - 20 Feb 2026
 
 * Associated enum imports are also available under `scurrypy.api`

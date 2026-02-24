@@ -26,14 +26,14 @@ class TagModel(DataModel):
 class TagPart(DataModel):
     """Represents the tag object found in `GUILD_FORUM` channels."""
     
-    name: str = None
+    name: str | None = None
     """Name of the tag."""
 
-    moderated: bool = None
+    moderated: bool | None = None
     """Whether the tag can only be added/removed by a member with `MANAGE_THREADS`."""
     
-    emoji_id: Snowflake = None
+    emoji_id: Snowflake | None = None
     """ID of a guild's custom emoji."""
     
-    emoji_name: str = None
+    emoji_name: str | None = None
     """Unicode character of the emoji."""

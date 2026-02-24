@@ -14,14 +14,14 @@ class ApplicationEmojisCacheAddon(Addon):
 
         client.add_startup_hook(self.load_bot_emojis)
 
-    async def load_bot_emojis(self):
+    async def load_bot_emojis(self) -> None:
         """Fetch all bot's emojis and add them to the cache."""
         emojis = await self.bot.application_emoji(self.application_id).fetch_all()
 
         for emoji in emojis:
             self.emojis[emoji.name] = emoji
 
-    def get_emoji(self, name: str):
+    def get_emoji(self, name: str) -> EmojiModel | None:
         """Get an emoji from the cache.
 
         Args:

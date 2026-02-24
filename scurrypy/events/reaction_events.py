@@ -5,12 +5,16 @@ from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
+from ..enums.events import EventType
+
 from ..api.user import GuildMemberModel
 from ..api.emoji import EmojiModel
 
 @dataclass
 class ReactionAddEvent(Event, DataModel):
     """Reaction added event."""
+
+    dispatch_name = EventType.MESSAGE_REACTION_ADD
 
     type: int
     """Type of reaction added."""
@@ -43,6 +47,8 @@ class ReactionAddEvent(Event, DataModel):
 class ReactionRemoveEvent(Event, DataModel):
     """Reaction removed event."""
 
+    dispatch_name = EventType.MESSAGE_REACTION_REMOVE
+
     type: int
     """Type of reaction removed."""
 
@@ -68,6 +74,8 @@ class ReactionRemoveEvent(Event, DataModel):
 class ReactionRemoveEmojiEvent(Event, DataModel):
     """All reactions of a specific emoji removed."""
 
+    dispatch_name = EventType.MESSAGE_REACTION_REMOVE_EMOJI
+
     emoji: EmojiModel
     """Emoji data of the removed reaction emoji."""
 
@@ -83,6 +91,8 @@ class ReactionRemoveEmojiEvent(Event, DataModel):
 @dataclass
 class ReactionRemoveAllEvent(Event, DataModel):
     """Remove all reactions event."""
+
+    dispatch_name = EventType.MESSAGE_REACTION_REMOVE_ALL
 
     channel_id: Snowflake
     """ID of the channel where all reaction were removed."""

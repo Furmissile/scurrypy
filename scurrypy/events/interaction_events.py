@@ -5,22 +5,29 @@ from .base_event import Event
 from ..bases.interaction import InteractionData
 
 from ..enums.interaction import InteractionType
+from ..enums.events import EventType
 
 from ..api.interactions.interaction import InteractionModel, ApplicationCommandDataModel, MessageComponentDataModel, ModalDataModel
+
+from ..core.types import HTTPResponse
+from typing import Self
 
 @dataclass
 class InteractionEvent(Event, InteractionModel):
 
-    data: InteractionData = field(init=False, default=None)
+    dispatch_name = EventType.INTERACTION_CREATE
+
+    data: InteractionData = field(init=False)
     """Interaction response data. Can be one of `InteractionData`[scurrypy.bases.InteractionData]'s variants."""
 
     @classmethod
-    def from_dict(cls, data: dict):
+    def from_dict(cls, data: HTTPResponse) -> Self:
+        assert isinstance(data, dict)
 
         obj = super().from_dict(data) # InteractionModel's DataModel
 
-        interaction_data = data.get("data")
-        interaction_type = data.get("type")
+        interaction_data = data["data"]
+        interaction_type = data["type"]
 
         match interaction_type:
             case InteractionType.APPLICATION_COMMAND | InteractionType.APPLICATION_COMMAND_AUTOCOMPLETE:

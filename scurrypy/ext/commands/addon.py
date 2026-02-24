@@ -5,7 +5,7 @@ logger = logging.getLogger('scurrypy')
 from scurrypy import Client
 from scurrypy.bases import Addon
 from scurrypy.enums import EventType, InteractionDataType
-from scurrypy.core import DiscordError, Snowflake
+from scurrypy.core import DiscordError, Snowflake, InvalidCallbackSignature, DataModelTypeError
 from scurrypy.api.commands import (
     SlashCommandPart, 
     UserCommandPart, 
@@ -19,18 +19,37 @@ from scurrypy.api.interactions import (
 
 from scurrypy.events import InteractionEvent
 
-from .ctx import ApplicationCommandContext, AutocompleteApplicationCommandContext
+from .ctx import CommandContext, ApplicationCommandContext, AutocompleteApplicationCommandContext
 
-def _check_func_params(func: callable):
+from collections.abc import Callable, Awaitable
+from typing import TypeAlias, TypeVar, Any
+
+C = TypeVar("C", bound=CommandContext)
+
+_AddonHandler: TypeAlias = Callable[[C], Awaitable[None]]
+
+AddonHandler: TypeAlias = _AddonHandler[Any]
+
+AddonDecorator: TypeAlias = Callable[[AddonHandler], AddonHandler]
+
+def _check_func_params(func: AddonHandler) -> None:
+    """Inspect a user-defined function callback for command interactions.
+
+    Args:
+        func (AddonHandler): function callback
+
+    Raises:
+        (InvalidCallbackSignature): invalid signature
+    """
     import inspect
 
     if not inspect.iscoroutinefunction(func):
-        raise TypeError(f"Command handler '{func.__name__}' must be async.")
+        raise InvalidCallbackSignature(f"Command handler '{func.__name__}' must be async.")
     
     params_len = len(inspect.signature(func).parameters)
 
     if params_len != 1:
-        raise TypeError(f"Command handler '{func.__name__}' must accept exactly one parameter (ctx).")
+        raise InvalidCallbackSignature(f"Command handler '{func.__name__}' must accept exactly one parameter (ctx).")
 
 class CommandsAddon(Addon):
     """Addon that implements automatic registering and decorating command interactions."""
@@ -47,27 +66,27 @@ class CommandsAddon(Addon):
 
         self.sync_commands = sync_commands
 
-        self._global_commands = []
+        self._global_commands: list[SlashCommandPart | MessageCommandPart | UserCommandPart] = []
         """List of all Global commands."""
 
-        self._guild_commands = {}
+        self._guild_commands: dict[Snowflake, list[SlashCommandPart | MessageCommandPart | UserCommandPart]] = {}
         """Guild commands mapped by guild ID."""
 
-        self.slash_handlers = {}
+        self.slash_handlers: dict[str, AddonHandler] = {}
         """Mapping of command names to handler."""
 
-        self.message_handlers = {}
+        self.message_handlers: dict[str, AddonHandler] = {}
         """Mapping of message command names to handler."""
 
-        self.user_handlers = {}
+        self.user_handlers: dict[str, AddonHandler] = {}
         """Mapping of user command names to handler."""
 
-        self.autocomplete_handlers = {}
+        self.autocomplete_handlers: dict[str, AddonHandler] = {}
         """Mapping of autocomplete keys to handler."""
 
         client.add_startup_hook(self.on_startup) # wait until start to register commands
 
-    def on_startup(self):
+    def on_startup(self) -> None:
         """Sets up the addon with the client."""
 
         self.bot.add_event_listener(EventType.INTERACTION_CREATE, self.dispatch)
@@ -78,96 +97,119 @@ class CommandsAddon(Addon):
         name: str, 
         description: str, 
         *, 
-        handler: callable = None,
-        options: list[CommandOptionPart] = None, 
-        guild_ids: list[Snowflake] = None
-    ):
+        handler: AddonHandler | None = None,
+        options: list[CommandOptionPart] | None = None, 
+        guild_ids: list[Snowflake] | None = None
+    ) -> AddonDecorator | None:
         """Register and route a slash command.
 
         Args:
             name (str): command name
             description (str): command description
-            handler (callable, optional): callback for the command (if not a decorator)
+            handler (AddonHandler, optional): callback for the command (if not a decorator)
             options (list[CommandOptionPart], optional): list of command options
             guild_ids (list[Snowflake], optional): list of guild IDs for guild commands or omit for global
         """
         self._queue_command(SlashCommandPart(name, description, options), guild_ids)
 
-        if handler is not None:
-                _check_func_params(handler)
-                self.slash_handlers[name] = handler
-                logger.info(f"Slash command '/{name}' registered.")
-        else:
-            def decorator(func):
+        if handler is None:
+            def decorator(func: AddonHandler) -> AddonHandler:
                 _check_func_params(func)
                 self.slash_handlers[name] = func
                 logger.info(f"Slash command '/{name}' registered.")
+                return func
             return decorator
+        
+        _check_func_params(handler)
+        self.slash_handlers[name] = handler
+        logger.info(f"Slash command '/{name}' registered.")
+        return None
     
-    def user_command(self, name: str, *, handler: callable = None, guild_ids: list[Snowflake] = None):
+    def user_command(self, 
+        name: str, 
+        *, 
+        handler: AddonHandler | None = None, 
+        guild_ids: list[Snowflake] | None = None
+    ) -> AddonDecorator | None:
         """Register and route a user command.
 
         Args:
             name (str): command name
-            handler (callable, optional): callback for the command (if not a decorator)
+            handler (AddonHandler, optional): callback for the command (if not a decorator)
             guild_ids (list[Snowflake], optional): list of guild IDs for guild commands or omit for global
         """
         self._queue_command(UserCommandPart(name), guild_ids)
 
-        if handler is not None:
-            _check_func_params(handler)
-            self.user_handlers[name] = handler
-            logger.info(f"User command '{name}' registered.")
-        else:
-            def decorator(func):
+        if handler is None:
+            def decorator(func: AddonHandler) -> AddonHandler:
                 _check_func_params(func)
                 self.user_handlers[name] = func
                 logger.info(f"User command '{name}' registered.")
+                return func
             return decorator
+        
+        _check_func_params(handler)
+        self.user_handlers[name] = handler
+        logger.info(f"User command '{name}' registered.")
+        return None
 
-    def message_command(self, name: str, handler: callable = None, *, guild_ids: list[Snowflake] = None):
+    def message_command(self, 
+        name: str, 
+        *, 
+        handler: AddonHandler | None = None, 
+        guild_ids: list[Snowflake] | None = None
+    ) -> AddonDecorator | None:
         """Register and route a message command.
 
         Args:
             name (str): command name
-            handler (callable, optional): callback for the command (if not a decorator)
+            handler (AddonHandler, optional): callback for the command (if not a decorator)
             guild_ids (list[Snowflake], optional): list of guild IDs for guild commands or omit for global
         """
         self._queue_command(MessageCommandPart(name), guild_ids)
 
-        if handler is not None:
-            _check_func_params(handler)
-            self.message_handlers[name] = handler
-            logger.info(f"Message command '{name}' registered.")
-        else:
-            def decorator(func):
+        if handler is None:
+            def decorator(func: AddonHandler) -> AddonHandler:
                 _check_func_params(func)
                 self.message_handlers[name] = func
                 logger.info(f"Message command '{name}' registered.")
+                return func
             return decorator
-    
-    def autocomplete(self, command_name: str, option_name: str, *, handler: callable = None):
+        
+        _check_func_params(handler)
+        self.message_handlers[name] = handler
+        logger.info(f"Message command '{name}' registered.")
+        return None
+
+    def autocomplete(self, 
+        command_name: str, 
+        option_name: str, 
+        *, 
+        handler: AddonHandler | None = None
+    ) -> AddonDecorator | None:
         """Register and route an autocomplete interaction.
 
         Args:
             command_name (str): name of command to autocomplete
             option_name (str): name of option to autocomplete
-            handler (callable, optional): callback for the command (if not a decorator)
+            handler (AddonHandler, optional): callback for the command (if not a decorator)
         """
         key = f"{command_name}:{option_name}"
 
-        if handler is not None:
-                _check_func_params(handler)
-                self.autocomplete_handlers[key] = handler
-                logger.info(f"Autocomplete '{key}' registered.")
-        else:
-            def decorator(func):
+        if handler is None:
+            def decorator(func: AddonHandler) -> AddonHandler:
                 _check_func_params(func)
                 self.autocomplete_handlers[key] = func
                 logger.info(f"Autocomplete '{key}' registered.")
+                return func
             return decorator
-    
-    async def _register_commands(self):
+        
+        _check_func_params(handler)
+        self.autocomplete_handlers[key] = handler
+        logger.info(f"Autocomplete '{key}' registered.")
+        return None
+
+    async def _register_commands(self) -> None:
         """Register both guild and global commands to the client."""
 
         # global registry
@@ -185,16 +227,16 @@ class CommandsAddon(Addon):
             _guild_commands = self.bot.guild_command(self.application_id, guild_id)
             commands_ = await _guild_commands.fetch_all()
 
-            for cmd in commands_:
-                await _guild_commands.delete(cmd.id)
+            for delete_cmd in commands_:
+                await _guild_commands.delete(delete_cmd.id)
 
-            for cmd in cmds:
-                await _guild_commands.create(cmd)
+            for create_cmd in cmds:
+                await _guild_commands.create(create_cmd)
     
     def _queue_command(self, 
         command: SlashCommandPart | MessageCommandPart | UserCommandPart, 
-        guild_ids: list[Snowflake] = None
-    ):
+        guild_ids: list[Snowflake] | None = None
+    ) -> None:
         """Queue a decorated command to be registered on startup.
 
         Args:
@@ -210,13 +252,16 @@ class CommandsAddon(Addon):
         else:
             self._global_commands.append(command)
 
-    def clear_commands(self, guild_ids: list[Snowflake] = None):
+    def clear_commands(self, guild_ids: list[Snowflake] | None = None) -> None:
         """Clear a guild's or global commands (slash, message, and user).
 
         Args:
             guild_ids (list[Snowflake], optional): list of guild IDs for guild commands or omit for global
         """
-        if guild_ids:
+        if guild_ids is None:
+            self._global_commands.clear()
+            logger.info("Global commands have been cleared.")
+        else:
             gids = [guild_ids] if isinstance(guild_ids, (Snowflake, int)) else guild_ids
             for gid in gids:
                 removed = self._guild_commands.pop(gid, None)
@@ -224,12 +269,12 @@ class CommandsAddon(Addon):
                     logger.warning(f"Guild ID {gid} not found; skipping...")
                 else:
                     logger.info(f"Guild commands for ID {gid} have been cleared.")
-        else:
-            self._global_commands.clear()
-            logger.info("Global commands have been cleared.")
 
-    async def dispatch(self, event: InteractionEvent):
+    async def dispatch(self, event: InteractionEvent) -> None:
         """Dispatch a response to an `INTERACTION_CREATE` event.
+
+        Raises:
+            (DataModelTypeError): no command context
 
         Args:
             event (InteractionEvent): interaction event object
@@ -239,10 +284,11 @@ class CommandsAddon(Addon):
         
         handler = None
         name = None
-        ctx = None
 
         data = event.data
         name = data.name # name is present in CommandDataModel
+
+        ctx: CommandContext
 
         if isinstance(data, ApplicationCommandDataModel): # command types are NOT structurally identical
             match data.type:
@@ -269,6 +315,9 @@ class CommandsAddon(Addon):
 
             ctx = AutocompleteApplicationCommandContext(self.bot, event)
 
+        else:
+            raise DataModelTypeError("Command context could not be resolved.")
+        
         if not handler:
             logger.warning(f"No handler registered for interaction '{name}'")
             return

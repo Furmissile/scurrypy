@@ -5,6 +5,8 @@ from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
+from ..enums.events import EventType
+
 from ..api.messages.message import MessageModel
 
 from ..api.user import GuildMemberModel
@@ -17,6 +19,8 @@ class MessageCreateEvent(Event, MessageModel):
         `member` may be missing on `MESSAGE_CREATE` and `MESSAGE_UPDATE`. Use `author` when you need the user.
     """
 
+    dispatch_name = EventType.MESSAGE_CREATE
+
     guild_id: Snowflake | None
     """Guild ID of the updated message (if in a guild channel)."""
 
@@ -27,6 +31,8 @@ class MessageCreateEvent(Event, MessageModel):
 class MessageUpdateEvent(Event, MessageModel):
     """Received when a message is updated."""
 
+    dispatch_name = EventType.MESSAGE_UPDATE
+
     guild_id: Snowflake | None
     """Guild ID of the updated message (if in a guild channel)."""
 
@@ -36,6 +42,8 @@ class MessageUpdateEvent(Event, MessageModel):
 @dataclass
 class MessageDeleteEvent(Event, DataModel):
     """Received when a message is deleted."""
+
+    dispatch_name = EventType.MESSAGE_DELETE
 
     id: Snowflake
     """ID of the deleted message."""
@@ -49,6 +57,8 @@ class MessageDeleteEvent(Event, DataModel):
 @dataclass
 class BulkMessageDeleteEvent(Event, DataModel):
     """Received when bulk deleting messages."""
+
+    dispatch_name = EventType.BULK_MESSAGE_DELETE
 
     ids: list[Snowflake]
     """IDs of the messages that were deleted."""

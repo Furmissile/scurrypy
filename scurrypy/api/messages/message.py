@@ -4,6 +4,7 @@ from ...bases.components import Component
 
 from ...core.model import DataModel
 from ...core.snowflake import Snowflake
+from ...core.types import Serialized
 
 from ...enums.message import MessageType, MessageFlags, MessageReferenceType
 
@@ -15,6 +16,8 @@ from ..channels.channel import ChannelModel
 from ..guilds.role import GuildRoleModel
 
 from ..user import UserModel
+
+from typing import Self
 
 @dataclass
 class MessageModel(DataModel):
@@ -123,7 +126,7 @@ class MessagePart(DataModel):
     message_reference: MessageReferencePart | None = None
     """Message reference if reply."""
 
-    def _prepare(self):
+    def _prepare(self) -> Self:
         """Prepares MessagePart for ANY internally set attributes.
 
         Returns:
@@ -133,10 +136,12 @@ class MessagePart(DataModel):
         if self.attachments:
             for idx, file in enumerate(self.attachments):
                 file.id = idx
+        else:
+            self.attachments = []
         
         return self
 
-    def to_dict(self):
+    def to_dict(self) -> Serialized:
         if self.components:
             for component in self.components:
                 if not isinstance(component, Container):

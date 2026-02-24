@@ -13,15 +13,19 @@ class EmojiModel(DataModel):
     name: str
     """Name of emoji."""
 
-    id: Snowflake = None
+    id: Snowflake | None = None
     """ID of the emoji (if custom)."""
 
     animated: bool = False
     """If the emoji is animated. Defaults to `False`."""
 
     @property
+    def is_custom(self) -> bool:
+        return self.id is not None
+
+    @property
     def mention(self) -> str:
-        """For use in message content."""
+        """Mention this emoji in a message."""
         if self.id is None: # standard emoji
             return self.name
         if self.animated:
@@ -31,8 +35,8 @@ class EmojiModel(DataModel):
 
     @property
     def api_code(self) -> str:
-        """Return the correct API code for this emoji (URL-safe)."""
-        if not self.id:
+        """API code for this emoji (URL-safe)."""
+        if self.id is None:
             # unicode emoji
             return quote(self.name)
 
@@ -43,13 +47,12 @@ class EmojiModel(DataModel):
         return quote(f"{self.name}:{self.id}")
 
     @property
-    def url(self) -> str:
-        """
-            Return the full qualifying link for this emoji.
+    def url(self) -> str | None:
+        """Full qualifying link for this emoji.
 
-            !!! warning "Important"
-                This only works for custom Discord emojis (those with an ID). 
-                Unicode emojis will return `None`.
+        !!! warning "Important"
+            This only works for custom Discord emojis (those with an ID). 
+            Unicode emojis will return `None`.
         """
         if not self.id:
             return None
@@ -62,21 +65,21 @@ class EmojiModel(DataModel):
 class ApplicationEmojiPart(DataModel):
     """Represents fields for creating a bot emoji."""
     
-    name: str = None
+    name: str | None = None
     """Name of the emoji."""
     
-    image: ImageDataPart = None
+    image: ImageDataPart | None = None
     """Image data for the icon of the emoji."""
 
 @dataclass
 class GuildEmojiPart(DataModel):
     """Represents fields for creating a guild emoji."""
     
-    name: str = None
+    name: str | None = None
     """Name of the emoji."""
     
-    image: ImageDataPart = None
+    image: ImageDataPart | None = None
     """Image data for the icon of the emoji."""
     
-    roles: list[Snowflake] = None
+    roles: list[Snowflake] | None = None
     """Roles able to use the emoji."""

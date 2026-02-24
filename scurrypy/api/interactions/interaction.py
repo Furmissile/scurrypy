@@ -1,7 +1,9 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from ...core.model import DataModel
 from ...core.snowflake import Snowflake
+from ...core.exceptions import OptionNotFound
+from ...core.types import HTTPResponse
 
 from ...bases.interaction import InteractionData
 
@@ -17,6 +19,8 @@ from ..messages.message import MessageModel
 from ..user import GuildMemberModel
 
 from .resolved import ResolvedDataModel
+
+from typing import Any, Self
 
 @dataclass
 class InteractionCallbackDataModel(DataModel):
@@ -112,7 +116,7 @@ class ApplicationCommandOptionDataModel(DataModel):
     """Whether this option is the currently focused option for autocomplete."""
 
 @dataclass
-class CommandDataModel(DataModel, InteractionData):
+class CommandDataModel(InteractionData):
     """Represents common command interaction data fields."""
     
     id: Snowflake
@@ -133,22 +137,30 @@ class CommandDataModel(DataModel, InteractionData):
     resolved: ResolvedDataModel | None
     """Converted users + roles + channels + attachments."""
 
-    options: list[ApplicationCommandOptionDataModel] | None
+    options: list[ApplicationCommandOptionDataModel] = field(default_factory=list)
     """Options of the command (slash command only)."""
 
-    def get_focused_value(self):
-        opt = next((opt for opt in self.options if opt), None)
-        
+    def get_focused_value(self) -> str:
+        """Get the next focused value in options.
+
+        Returns:
+            (str): next focused value or an empty string if no values are focused
+        """
+        if not self.options:
+            return ""
+
+        opt = next((o for o in self.options if o.focused), None)
+
         return opt.value if opt else ""
 
-    def get_option(self, option_name: str, default = None):
+    def get_option(self, option_name: str) -> int | float | bool | str | None:
         """Get the input for a command option by name and convert it to its proper type.
 
         Args:
             option_name (str): option to fetch input from
 
         Returns:
-            (int | float | bool | str | Any): converted input data of specified option
+            (int | float | bool | str | None): converted input data of specified option
         """
         for option in self.options:
             if option.name != option_name:
@@ -171,7 +183,7 @@ class CommandDataModel(DataModel, InteractionData):
             
             return option.value
         
-        return default
+        return None
 
 @dataclass
 class ApplicationCommandDataModel(CommandDataModel):
@@ -187,13 +199,13 @@ class AutocompleteApplicationCommandDataModel(CommandDataModel):
 # ----- Component Interaction -----
 
 @dataclass
-class MessageComponentDataModel(DataModel, InteractionData):
+class MessageComponentDataModel(InteractionData):
     """Represents the select response from a select component."""
 
     custom_id: str
     """Unique ID associated with the component."""
 
-    component_type: int
+    component_type: ComponentType
     """Type of component."""
 
     resolved: ResolvedDataModel | None
@@ -211,7 +223,14 @@ class ModalComponentDataModel(DataModel):
     type: ComponentType
     """Type of component."""
     
-    value: str | None
+    custom_id: str
+    """Unique ID associated with the component."""
+
+@dataclass
+class ModalComponentInputDataModel(ModalComponentDataModel):
+    """Represents modal component variants with the value field."""
+
+    value: str
     """Text input value.
     
     Convert based on option type:
@@ -220,24 +239,47 @@ class ModalComponentDataModel(DataModel):
     otherwise the value is expected to be str
     """
 
-    custom_id: str
-    """Unique ID associated with the component."""
-
-    values: list[str] | None
+@dataclass 
+class ModalComponentSelectDataModel(ModalComponentDataModel):
+    """Represents modal component variants with the values field."""
+    
+    values: list[str]
     """String select values."""
 
 @dataclass
 class ModalComponentModel(DataModel):
     """Represents the modal component response from a modal."""
 
-    type: ComponentType
-    """Type of component."""
-
-    component: ModalComponentDataModel
+    component: ModalComponentDataModel = field(init=False)
     """Data associated with the component."""
 
+    @classmethod
+    def from_dict(cls, data: HTTPResponse) -> Self:
+        assert isinstance(data, dict)
+
+        obj = super().from_dict(data)
+
+        component_data = data.get("component")
+        assert isinstance(component_data, dict)
+        component_type = component_data.get("type")
+
+        if component_type in {
+            ComponentType.STRING_SELECT, 
+            ComponentType.USER_SELECT, 
+            ComponentType.ROLE_SELECT, 
+            ComponentType.MENTIONABLE_SELECT, 
+            ComponentType.CHANNEL_SELECT,
+            ComponentType.FILE_UPLOAD,
+            ComponentType.CHECKBOX_GROUP
+        }:
+            obj.component = ModalComponentSelectDataModel.from_dict(component_data)
+        else:
+            obj.component = ModalComponentInputDataModel.from_dict(component_data)
+
+        return obj
+
 @dataclass
-class ModalDataModel(DataModel, InteractionData):
+class ModalDataModel(InteractionData):
     """Represents the modal response from a modal."""
     
     custom_id: str
@@ -249,41 +291,29 @@ class ModalDataModel(DataModel, InteractionData):
     components: list[ModalComponentModel]
     """Components on the modal."""
 
-    def get_modal_data(self, custom_id: str):
+    def get_modal_data(self, custom_id: str) -> bool | str | list[str]:
         """Fetch a modal field's data by its custom ID
 
         Args:
             custom_id (str): custom ID of field to fetch
 
         Raises:
-            (ValueError): invalid custom ID
+            (OptionNotFound): invalid custom ID
 
         Returns:
-            (str, list[str], bool): component values (if select component) or value or bool if checkbox
+            (bool | str | list[str]): component values (if select component) or value or bool if checkbox
         """
-        from ...enums.components import ComponentType
-        
+
         for component in self.components:
             if custom_id != component.component.custom_id:
                 continue
 
-            t = component.component.type
-
-            if t in [
-                ComponentType.STRING_SELECT, 
-                ComponentType.USER_SELECT, 
-                ComponentType.ROLE_SELECT, 
-                ComponentType.MENTIONABLE_SELECT, 
-                ComponentType.CHANNEL_SELECT,
-                ComponentType.FILE_UPLOAD,
-                ComponentType.CHECKBOX_GROUP
-            ]:
+            if isinstance(component.component, ModalComponentInputDataModel):
+                if component.component.type == ComponentType.CHECKBOX:
+                    return component.component.value.lower() == 'true'
+                return component.component.value
+        
+            if isinstance(component.component, ModalComponentSelectDataModel):
                 return component.component.values
-            
-            if t == ComponentType.CHECKBOX: # value is bool for checkboxes
-                return component.component.value.lower() == 'true'
-            
-            # text input
-            return component.component.value
 
-        raise ValueError(f"Component custom ID '{custom_id}' not found.")
+        raise OptionNotFound(f"Component custom ID '{custom_id}' not found.")

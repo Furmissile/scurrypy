@@ -2,13 +2,16 @@ import asyncio
 import aiohttp
 import aiofiles
 import json
-from typing import Any
 
 from dataclasses import dataclass
 
 from ..config import USER_AGENT
 
 from .error import DiscordError
+from .exceptions import NoSession
+
+from typing import Any
+from .types import HTTPResponse, JSON, Serialized
 
 import logging
 
@@ -19,61 +22,61 @@ logger.addHandler(logging.NullHandler())
 class RequestItem:
     method: str
     endpoint: str
-    data: dict = None
-    params: dict = None
-    files: dict = None
-    assets: dict = None
-    future: asyncio.Future = None
+    data: Serialized
+    params: JSON | None
+    files: list[str] | None
+    assets: Serialized | None
+    future: asyncio.Future[HTTPResponse]
 
 @dataclass
 class Bucket:
     remaining: int
     reset_after: float
     reset_on: float
-    sleep_task: asyncio.Task = None
+    sleep_task: asyncio.Task[Any] | None = None
 
-from typing import Protocol
+from typing import Protocol, cast
 
 class HTTPClientProtocol(Protocol):
     """Internal contract for the HTTPClient used by the Client. Meant for testing."""
-    async def start(self, token: str): ...
-    async def close(self): ...
+    async def start(self, token: str) -> None: ...
+    async def close(self) -> None: ...
     async def request(
         self,
         method: str,
         endpoint: str,
         *,
-        data: dict | None = None,
-        params: dict | None = None,
-        files: Any | None = None,
-        assets: dict | None = None
-    ) -> Any: ...
+        data: Serialized = None,
+        params: JSON | None = None,
+        files: list[str] | None = None,
+        assets: Serialized = None
+    ) -> HTTPResponse: ...
 
 class HTTPClient(HTTPClientProtocol):
     BASE = "https://discord.com/api/v10"
     MAX_RETRIES = 3
 
-    def __init__(self):
-        self.session = None
+    def __init__(self) -> None:
+        self.session: aiohttp.ClientSession | None = None
 
         # PRE-REQUEST
-        self.queues: dict[str, asyncio.Queue] = {}  # maps EP -> Q
+        self.queues: dict[str, asyncio.Queue[Any]] = {}  # maps EP -> Q
         self.queues_lock = asyncio.Lock() # locks queues dict for editing
 
-        self.workers: dict[str, asyncio.Task] = {}  # maps EP -> worker
+        self.workers: dict[str, asyncio.Task[Any]] = {}  # maps EP -> worker
 
         # POST-REQUEST
         self.buckets: dict[str, Bucket] = {}  # maps B -> Bucket
         self.bucket_lock: dict[str, asyncio.Lock] = {} # maps B to Lock
         self.buckets_lock = asyncio.Lock() # locks buckets dict for editing
 
-        self.global_lock = asyncio.Lock()
-        self.global_reset = 0.0
+        self.global_lock: asyncio.Lock = asyncio.Lock()
+        self.global_reset: float = 0.0
 
-    async def start(self, token: str):
+    async def start(self, token: str) -> None:
         """Start the HTTP session."""
 
-        if not self.session:
+        if self.session is None:
             self.session = aiohttp.ClientSession(headers={
                 "Authorization": f"Bot {token}",
                 "User-Agent": USER_AGENT
@@ -82,7 +85,7 @@ class HTTPClient(HTTPClientProtocol):
         else:
             logger.warning("HTTP session already initialized.")
 
-    async def close(self):
+    async def close(self) -> None:
         """Gracefully stop all workers and close the HTTP session."""
 
         if self.session: # just the session that needs to close!
@@ -94,22 +97,26 @@ class HTTPClient(HTTPClientProtocol):
         method: str,
         endpoint: str,
         *,
-        data: dict | None = None,
-        params: dict | None = None,
-        files: Any | None = None,
-        assets: dict | None = None
-    ):
+        data: Serialized = None,
+        params: JSON | None = None,
+        files: list[str] | None = None,
+        assets: Serialized = None
+    ) -> HTTPResponse:
         """Queue a request for the given endpoint.
 
         Args:
             method (str): HTTP method (e.g., POST, GET, DELETE, PATCH, etc.)
             endpoint (str): Discord endpoint (e.g., /channels/123/messages)
-            data (dict | None, optional): relevant data
-            params (dict | None, optional): relevant query params
-            files (Any | None, optional): relevant files
+            data (Serialized, optional): relevant data
+            params (JSON | None, optional): relevant query params
+            files (list[str] | None, optional): relevant files
+            assets (Serialized, optional): relevant assets
+
+        Raises:
+            (DiscordError): something went wrong
 
         Returns:
-            (Future | None): result or promise of request or None if failed
+            (HTTPResponse): result or promise of request or None if failed
         """
         # ensure a queue is in place for the requested endpoint
         async with self.queues_lock:
@@ -121,14 +128,14 @@ class HTTPClient(HTTPClientProtocol):
         # set promise
         future = asyncio.get_event_loop().create_future()
 
-        def sanitize_query_params(params: dict | None) -> dict | None:
+        def sanitize_query_params(params: JSON | None) -> JSON | None:
             """Sanitize a request's params for session.request
 
             Args:
-                params (dict | None): query params (if any)
+                params (JSON | None): query params (if any)
 
             Returns:
-                (dict | None): the session.request-friendly version of params
+                (JSON | None): the session.request-friendly version of params
             """
             if not params:
                 return None
@@ -143,7 +150,7 @@ class HTTPClient(HTTPClientProtocol):
         except DiscordError:
             raise # surface the error
 
-    async def _worker(self, endpoint: str):
+    async def _worker(self, endpoint: str) -> None:
         """Background worker that processes requests for this endpoint.
 
         Args:
@@ -169,7 +176,7 @@ class HTTPClient(HTTPClientProtocol):
             finally:
                 queue.task_done()
 
-    async def _sleep_endpoint(self, endpoint: str, bucket: Bucket):
+    async def _sleep_endpoint(self, endpoint: str, bucket: Bucket) -> None:
         """Let an endpoint sleep for the designated reset_after seconds.
 
         Args:
@@ -181,7 +188,7 @@ class HTTPClient(HTTPClientProtocol):
         bucket.sleep_task = None
         logger.info(f"Bucket {endpoint} reset after {bucket.reset_after}s.")
 
-    async def _check_global_rate_limit(self):
+    async def _check_global_rate_limit(self) -> None:
         """Checks if the global rate limit is after now (active)."""
         now = asyncio.get_event_loop().time()
         if self.global_reset > now:
@@ -190,17 +197,17 @@ class HTTPClient(HTTPClientProtocol):
                 await asyncio.sleep(self.global_reset - now)
                 logger.info(f"Global has reset after {self.global_reset - now}s.")
 
-    async def _parse_response(self, resp: aiohttp.ClientResponse):
+    async def _parse_response(self, resp: aiohttp.ClientResponse) -> HTTPResponse | None:
         """Parse the request's response for response details.
 
         Args:
             resp (aiohttp.ClientResponse): the response object
 
         Raises:
-            DiscordError: Error object for pretty printing if an error is returned.
+            (DiscordError): Error object for pretty printing if an error is returned.
 
         Returns:
-            (str | dict | None): request info (if any)
+            (JSON | None): request info (if any)
         """
         match resp.status:
             case 204:
@@ -210,19 +217,21 @@ class HTTPClient(HTTPClientProtocol):
             case 200 | 201:
                 # JSON body is guaranteed if successful
                 try:
-                    return await resp.json()
+                    data: HTTPResponse = await resp.json()
+                    return data
                 except aiohttp.ContentTypeError:
-                    return await resp.text()
+                    data = await resp.text()
+                    return data
 
             case _:
                 # error handling
                 try:
-                    body = await resp.json()
+                    body: HTTPResponse = await resp.json()
                 except aiohttp.ContentTypeError:
                     body = await resp.text()
                 raise DiscordError(resp.status, body)
             
-    async def _update_bucket_rate_limit(self, resp: aiohttp.ClientResponse, bucket_id: str, endpoint: str):
+    async def _update_bucket_rate_limit(self, resp: aiohttp.ClientResponse, bucket_id: str, endpoint: str) -> None:
         """Update the bucket for this endpoint and sleep if necessary.
 
         Args:
@@ -260,7 +269,7 @@ class HTTPClient(HTTPClientProtocol):
             elif bucket.sleep_task and not bucket.sleep_task.done():
                 await bucket.sleep_task
 
-    async def _prepare_payload(self, item: RequestItem):
+    async def _prepare_payload(self, item: RequestItem) -> JSON:
         """Prepares the payload based on `RequestItem`.
 
         Args:
@@ -288,25 +297,31 @@ class HTTPClient(HTTPClientProtocol):
         if item.assets:
             form = aiohttp.FormData()
 
-            for k, v in item.data.items():
-                form.add_field(k, v)
+            if item.data is not None:
+                iterable = item.data.items() if isinstance(item.data, dict) else item.data
+                assert isinstance(iterable, dict)
+                for k, v in iterable:
+                    form.add_field(k, v)
             
+            assert isinstance(item.assets, dict)
             form.add_field('file', **item.assets)
 
             return {"data": form}
 
         return {"json": item.data}
 
-    async def _send(self, item: RequestItem):
+    async def _send(self, item: RequestItem) -> str | JSON | None:
         """Core HTTP request executor.
 
         Args:
             item (RequestItem): request object
 
         Returns:
-            (dict | str | None): Parsed JSON response if available, raw text if the
+            (str | dict | None): Parsed JSON response if available, raw text if the
                 response is not JSON, or None for HTTP 204 responses.
         """
+        if self.session is None:
+            raise NoSession("Session not started")
         await self._check_global_rate_limit()
 
         kwargs = await self._prepare_payload(item)
@@ -314,7 +329,7 @@ class HTTPClient(HTTPClientProtocol):
         url = f"{self.BASE.rstrip('/')}/{item.endpoint.lstrip('/')}"
         
         async with self.session.request(
-            method=item.method, url=url, params=item.params, timeout=15, **kwargs
+            method=item.method, url=url, params=item.params, **kwargs
         ) as resp:
             
             if resp.headers.get("X-RateLimit-Global") == "true":

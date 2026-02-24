@@ -5,11 +5,15 @@ from ..core.snowflake import Snowflake
 
 from .base_event import Event
 
+from ..enums.events import EventType
+
 from ..api.guilds.role import GuildRoleModel
 
 @dataclass
 class RoleCreateEvent(Event, DataModel):
     """Received when a guild role is created."""
+
+    dispatch_name = EventType.ROLE_CREATE
 
     guild_id: Snowflake
     """Guild ID of the role."""
@@ -21,6 +25,8 @@ class RoleCreateEvent(Event, DataModel):
 class RoleUpdateEvent(Event, DataModel):
     """Received when a guild role is updated."""
 
+    dispatch_name = EventType.ROLE_UPDATE
+
     guild_id: Snowflake
     """Guild ID of the role."""
 
@@ -30,6 +36,8 @@ class RoleUpdateEvent(Event, DataModel):
 @dataclass
 class RoleDeleteEvent(Event, DataModel):
     """Received when a guild role is deleted."""
+
+    dispatch_name = EventType.ROLE_DELETE
 
     guild_id: Snowflake
     """Guild ID of the role."""

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 
 from ...core.model import DataModel
+from ...core.types import JSON
 
 from ...enums.command import CommandOptionType, CommandType
 
@@ -14,7 +15,7 @@ class CommandOptionChoicePart(DataModel):
     value: str | int | float | None = None
     """Value for the user to select (same as option type)."""
 
-    name_localizations: dict | None = None
+    name_localizations: JSON | None = None
     """Dictionary with keys in available locales."""
 
 @dataclass

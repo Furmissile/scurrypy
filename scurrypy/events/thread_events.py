@@ -6,6 +6,7 @@ from ..core.snowflake import Snowflake
 from .base_event import Event
 
 from ..enums.channel import ChannelType
+from ..enums.events import EventType
 
 from ..api.channels.channel import ChannelModel
 from ..api.channels.threads import ThreadMemberModel
@@ -13,6 +14,8 @@ from ..api.channels.threads import ThreadMemberModel
 @dataclass
 class ThreadCreateEvent(Event, ChannelModel):
     """Received when a thread is created."""
+
+    dispatch_name = EventType.THREAD_CREATE
 
     newly_created: bool
     """Whether the thread has just been created."""
@@ -24,11 +27,14 @@ class ThreadUpdateEvent(Event, ChannelModel):
     !!! note
         Not send when `last_message_id` is changed.
     """
-    pass
+
+    dispatch_name = EventType.THREAD_UPDATE
 
 @dataclass
 class ThreadDeleteEvent(Event, DataModel):
     """Received when a thread is deleted."""
+
+    dispatch_name = EventType.THREAD_DELETE
 
     id: Snowflake
     """ID of the thread."""
@@ -46,6 +52,8 @@ class ThreadDeleteEvent(Event, DataModel):
 class ThreadMemberUpdateEvent(Event, ThreadMemberModel):
     """Received when a thread member for the bot is updated."""
 
+    dispatch_name = EventType.THREAD_MEMBER_UPDATE
+
     guild_id: Snowflake
     """ID of the guild."""
 
@@ -57,6 +65,8 @@ class ThreadMembersUpdateEvent(Event, DataModel):
         Without the `GUILD_MEMBERS` privileged intent, this event only fires if the 
         bot was added or removed from a thread.
     """
+
+    dispatch_name = EventType.THREAD_MEMBERS_UPDATE
 
     id: Snowflake
     """ID of the thread."""
@@ -76,6 +86,8 @@ class ThreadMembersUpdateEvent(Event, DataModel):
 @dataclass
 class ThreadListSyncEvent(Event, DataModel):
     """Received when the bot gains access to a channel."""
+
+    dispatch_name = EventType.THREAD_LIST_SYNC
 
     guild_id: Snowflake
     """ID of the guild."""
