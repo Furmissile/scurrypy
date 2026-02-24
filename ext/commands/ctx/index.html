@@ -1030,6 +1030,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/primitives/types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/primitives/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2970,6 +3016,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#scurrypy.ext.commands.ctx.CommandContext" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;CommandContext
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.ext.commands.ctx.ApplicationCommandContext" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ApplicationCommandContext
@@ -3839,6 +3894,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#scurrypy.ext.commands.ctx.CommandContext" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;CommandContext
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.ext.commands.ctx.ApplicationCommandContext" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ApplicationCommandContext
@@ -3949,6 +4013,109 @@
 
 
 
+<h3 id="scurrypy.ext.commands.ctx.CommandContext" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">CommandContext</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#scurrypy.ext.commands.ctx.CommandContext" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext">InteractionContext</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              CommandContext
+
+  
+      dataclass
+   (scurrypy.ext.commands.ctx.CommandContext)" href="#scurrypy.ext.commands.ctx.CommandContext" id="mermaid-link-scurrypy.ext.commands.ctx.CommandContext"></a>
+                  <a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext" id="mermaid-link-scurrypy.ext.interactions.ctx.InteractionContext"></a>
+                  <a class="autorefs autorefs-internal" title="              Interaction
+
+  
+      dataclass
+   (scurrypy.resources.interaction.Interaction)" href="../../../api/interactions/resources/#scurrypy.resources.interaction.Interaction" id="mermaid-link-scurrypy.resources.interaction.Interaction"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+                  <span title="scurrypy.resources.message._EditMessageMixin"></span>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.commands.ctx.CommandContext">
+              flowchart TD
+              scurrypy.ext.commands.ctx.CommandContext[CommandContext]
+              scurrypy.ext.interactions.ctx.InteractionContext[InteractionContext]
+              scurrypy.resources.interaction.Interaction[Interaction]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+              scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
+
+                              scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.commands.ctx.CommandContext
+                                scurrypy.resources.interaction.Interaction --> scurrypy.ext.interactions.ctx.InteractionContext
+                                scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.interaction.Interaction
+                
+                scurrypy.resources.message._EditMessageMixin --> scurrypy.resources.interaction.Interaction
+                
+
+
+
+
+              click scurrypy.ext.commands.ctx.CommandContext href "" "scurrypy.ext.commands.ctx.CommandContext"
+              click scurrypy.ext.interactions.ctx.InteractionContext href "" "scurrypy.ext.interactions.ctx.InteractionContext"
+              click scurrypy.resources.interaction.Interaction href "" "scurrypy.resources.interaction.Interaction"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+              click scurrypy.resources.message._EditMessageMixin href "" "scurrypy.resources.message._EditMessageMixin"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.ext.commands.ctx.CommandContext');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
 <h3 id="scurrypy.ext.commands.ctx.ApplicationCommandContext" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">ApplicationCommandContext</span></code>
 
@@ -3961,7 +4128,11 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext">InteractionContext</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="              CommandContext
+
+  
+      dataclass
+   (scurrypy.ext.commands.ctx.CommandContext)" href="#scurrypy.ext.commands.ctx.CommandContext">CommandContext</a></code></p>
 
             <div style="display: none">
               <a class="autorefs autorefs-internal" title="              ApplicationCommandContext
@@ -3969,6 +4140,11 @@
   
       dataclass
    (scurrypy.ext.commands.ctx.ApplicationCommandContext)" href="#scurrypy.ext.commands.ctx.ApplicationCommandContext" id="mermaid-link-scurrypy.ext.commands.ctx.ApplicationCommandContext"></a>
+                  <a class="autorefs autorefs-internal" title="              CommandContext
+
+  
+      dataclass
+   (scurrypy.ext.commands.ctx.CommandContext)" href="#scurrypy.ext.commands.ctx.CommandContext" id="mermaid-link-scurrypy.ext.commands.ctx.CommandContext"></a>
                   <a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext" id="mermaid-link-scurrypy.ext.interactions.ctx.InteractionContext"></a>
                   <a class="autorefs autorefs-internal" title="              Interaction
 
@@ -3985,12 +4161,14 @@
             <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.commands.ctx.ApplicationCommandContext">
               flowchart TD
               scurrypy.ext.commands.ctx.ApplicationCommandContext[ApplicationCommandContext]
+              scurrypy.ext.commands.ctx.CommandContext[CommandContext]
               scurrypy.ext.interactions.ctx.InteractionContext[InteractionContext]
               scurrypy.resources.interaction.Interaction[Interaction]
               scurrypy.resources.base_resource.BaseResource[BaseResource]
               scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
 
-                              scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.commands.ctx.ApplicationCommandContext
+                              scurrypy.ext.commands.ctx.CommandContext --> scurrypy.ext.commands.ctx.ApplicationCommandContext
+                                scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.commands.ctx.CommandContext
                                 scurrypy.resources.interaction.Interaction --> scurrypy.ext.interactions.ctx.InteractionContext
                                 scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.interaction.Interaction
                 
@@ -4000,7 +4178,9 @@
 
 
 
+
               click scurrypy.ext.commands.ctx.ApplicationCommandContext href "" "scurrypy.ext.commands.ctx.ApplicationCommandContext"
+              click scurrypy.ext.commands.ctx.CommandContext href "" "scurrypy.ext.commands.ctx.CommandContext"
               click scurrypy.ext.interactions.ctx.InteractionContext href "" "scurrypy.ext.interactions.ctx.InteractionContext"
               click scurrypy.resources.interaction.Interaction href "" "scurrypy.resources.interaction.Interaction"
               click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
@@ -4084,7 +4264,11 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext">InteractionContext</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="              CommandContext
+
+  
+      dataclass
+   (scurrypy.ext.commands.ctx.CommandContext)" href="#scurrypy.ext.commands.ctx.CommandContext">CommandContext</a></code></p>
 
             <div style="display: none">
               <a class="autorefs autorefs-internal" title="              AutocompleteApplicationCommandContext
@@ -4092,6 +4276,11 @@
   
       dataclass
    (scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext)" href="#scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext" id="mermaid-link-scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext"></a>
+                  <a class="autorefs autorefs-internal" title="              CommandContext
+
+  
+      dataclass
+   (scurrypy.ext.commands.ctx.CommandContext)" href="#scurrypy.ext.commands.ctx.CommandContext" id="mermaid-link-scurrypy.ext.commands.ctx.CommandContext"></a>
                   <a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext" id="mermaid-link-scurrypy.ext.interactions.ctx.InteractionContext"></a>
                   <a class="autorefs autorefs-internal" title="              Interaction
 
@@ -4108,12 +4297,14 @@
             <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext">
               flowchart TD
               scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext[AutocompleteApplicationCommandContext]
+              scurrypy.ext.commands.ctx.CommandContext[CommandContext]
               scurrypy.ext.interactions.ctx.InteractionContext[InteractionContext]
               scurrypy.resources.interaction.Interaction[Interaction]
               scurrypy.resources.base_resource.BaseResource[BaseResource]
               scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
 
-                              scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext
+                              scurrypy.ext.commands.ctx.CommandContext --> scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext
+                                scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.commands.ctx.CommandContext
                                 scurrypy.resources.interaction.Interaction --> scurrypy.ext.interactions.ctx.InteractionContext
                                 scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.interaction.Interaction
                 
@@ -4123,7 +4314,9 @@
 
 
 
+
               click scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext href "" "scurrypy.ext.commands.ctx.AutocompleteApplicationCommandContext"
+              click scurrypy.ext.commands.ctx.CommandContext href "" "scurrypy.ext.commands.ctx.CommandContext"
               click scurrypy.ext.interactions.ctx.InteractionContext href "" "scurrypy.ext.interactions.ctx.InteractionContext"
               click scurrypy.resources.interaction.Interaction href "" "scurrypy.resources.interaction.Interaction"
               click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"

@@ -1038,6 +1038,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3893,14 +3939,58 @@
 
 
 <h3 id="scurrypy.bases.channel.GuildChannelCreate" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>GuildChannelCreate</code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">GuildChannelCreate</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
 
 <a href="#scurrypy.bases.channel.GuildChannelCreate" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
 
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              GuildChannelCreate
+
+  
+      dataclass
+   (scurrypy.bases.channel.GuildChannelCreate)" href="#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.bases.channel.GuildChannelCreate">
+              flowchart TD
+              scurrypy.bases.channel.GuildChannelCreate[GuildChannelCreate]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.bases.channel.GuildChannelCreate
+                
+
+
+              click scurrypy.bases.channel.GuildChannelCreate href "" "scurrypy.bases.channel.GuildChannelCreate"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.bases.channel.GuildChannelCreate');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
 
 
         <p>Marker base for all guild channel creation payloads.</p>

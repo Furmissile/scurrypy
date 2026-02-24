@@ -1030,6 +1030,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/primitives/types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/primitives/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3070,6 +3116,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#scurrypy.ext.components.ctx.ComponentContext" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ComponentContext
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.ext.components.ctx.MessageComponentContext" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageComponentContext
@@ -3839,6 +3894,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#scurrypy.ext.components.ctx.ComponentContext" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ComponentContext
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.ext.components.ctx.MessageComponentContext" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MessageComponentContext
@@ -3949,6 +4013,109 @@
 
 
 
+<h3 id="scurrypy.ext.components.ctx.ComponentContext" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">ComponentContext</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#scurrypy.ext.components.ctx.ComponentContext" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext">InteractionContext</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              ComponentContext
+
+  
+      dataclass
+   (scurrypy.ext.components.ctx.ComponentContext)" href="#scurrypy.ext.components.ctx.ComponentContext" id="mermaid-link-scurrypy.ext.components.ctx.ComponentContext"></a>
+                  <a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext" id="mermaid-link-scurrypy.ext.interactions.ctx.InteractionContext"></a>
+                  <a class="autorefs autorefs-internal" title="              Interaction
+
+  
+      dataclass
+   (scurrypy.resources.interaction.Interaction)" href="../../../api/interactions/resources/#scurrypy.resources.interaction.Interaction" id="mermaid-link-scurrypy.resources.interaction.Interaction"></a>
+                  <a class="autorefs autorefs-internal" title="              BaseResource
+
+  
+      dataclass
+   (scurrypy.resources.base_resource.BaseResource)" href="../../../internals/model/#scurrypy.resources.base_resource.BaseResource" id="mermaid-link-scurrypy.resources.base_resource.BaseResource"></a>
+                  <span title="scurrypy.resources.message._EditMessageMixin"></span>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.components.ctx.ComponentContext">
+              flowchart TD
+              scurrypy.ext.components.ctx.ComponentContext[ComponentContext]
+              scurrypy.ext.interactions.ctx.InteractionContext[InteractionContext]
+              scurrypy.resources.interaction.Interaction[Interaction]
+              scurrypy.resources.base_resource.BaseResource[BaseResource]
+              scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
+
+                              scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.components.ctx.ComponentContext
+                                scurrypy.resources.interaction.Interaction --> scurrypy.ext.interactions.ctx.InteractionContext
+                                scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.interaction.Interaction
+                
+                scurrypy.resources.message._EditMessageMixin --> scurrypy.resources.interaction.Interaction
+                
+
+
+
+
+              click scurrypy.ext.components.ctx.ComponentContext href "" "scurrypy.ext.components.ctx.ComponentContext"
+              click scurrypy.ext.interactions.ctx.InteractionContext href "" "scurrypy.ext.interactions.ctx.InteractionContext"
+              click scurrypy.resources.interaction.Interaction href "" "scurrypy.resources.interaction.Interaction"
+              click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
+              click scurrypy.resources.message._EditMessageMixin href "" "scurrypy.resources.message._EditMessageMixin"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.ext.components.ctx.ComponentContext');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
 <h3 id="scurrypy.ext.components.ctx.MessageComponentContext" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">MessageComponentContext</span></code>
 
@@ -3961,7 +4128,11 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext">InteractionContext</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="              ComponentContext
+
+  
+      dataclass
+   (scurrypy.ext.components.ctx.ComponentContext)" href="#scurrypy.ext.components.ctx.ComponentContext">ComponentContext</a></code></p>
 
             <div style="display: none">
               <a class="autorefs autorefs-internal" title="              MessageComponentContext
@@ -3969,6 +4140,11 @@
   
       dataclass
    (scurrypy.ext.components.ctx.MessageComponentContext)" href="#scurrypy.ext.components.ctx.MessageComponentContext" id="mermaid-link-scurrypy.ext.components.ctx.MessageComponentContext"></a>
+                  <a class="autorefs autorefs-internal" title="              ComponentContext
+
+  
+      dataclass
+   (scurrypy.ext.components.ctx.ComponentContext)" href="#scurrypy.ext.components.ctx.ComponentContext" id="mermaid-link-scurrypy.ext.components.ctx.ComponentContext"></a>
                   <a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext" id="mermaid-link-scurrypy.ext.interactions.ctx.InteractionContext"></a>
                   <a class="autorefs autorefs-internal" title="              Interaction
 
@@ -3985,12 +4161,14 @@
             <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.components.ctx.MessageComponentContext">
               flowchart TD
               scurrypy.ext.components.ctx.MessageComponentContext[MessageComponentContext]
+              scurrypy.ext.components.ctx.ComponentContext[ComponentContext]
               scurrypy.ext.interactions.ctx.InteractionContext[InteractionContext]
               scurrypy.resources.interaction.Interaction[Interaction]
               scurrypy.resources.base_resource.BaseResource[BaseResource]
               scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
 
-                              scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.components.ctx.MessageComponentContext
+                              scurrypy.ext.components.ctx.ComponentContext --> scurrypy.ext.components.ctx.MessageComponentContext
+                                scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.components.ctx.ComponentContext
                                 scurrypy.resources.interaction.Interaction --> scurrypy.ext.interactions.ctx.InteractionContext
                                 scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.interaction.Interaction
                 
@@ -4000,7 +4178,9 @@
 
 
 
+
               click scurrypy.ext.components.ctx.MessageComponentContext href "" "scurrypy.ext.components.ctx.MessageComponentContext"
+              click scurrypy.ext.components.ctx.ComponentContext href "" "scurrypy.ext.components.ctx.ComponentContext"
               click scurrypy.ext.interactions.ctx.InteractionContext href "" "scurrypy.ext.interactions.ctx.InteractionContext"
               click scurrypy.resources.interaction.Interaction href "" "scurrypy.resources.interaction.Interaction"
               click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"
@@ -4084,7 +4264,11 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext">InteractionContext</a></code></p>
+              Bases: <code><a class="autorefs autorefs-internal" title="              ComponentContext
+
+  
+      dataclass
+   (scurrypy.ext.components.ctx.ComponentContext)" href="#scurrypy.ext.components.ctx.ComponentContext">ComponentContext</a></code></p>
 
             <div style="display: none">
               <a class="autorefs autorefs-internal" title="              ComponentModalContext
@@ -4092,6 +4276,11 @@
   
       dataclass
    (scurrypy.ext.components.ctx.ComponentModalContext)" href="#scurrypy.ext.components.ctx.ComponentModalContext" id="mermaid-link-scurrypy.ext.components.ctx.ComponentModalContext"></a>
+                  <a class="autorefs autorefs-internal" title="              ComponentContext
+
+  
+      dataclass
+   (scurrypy.ext.components.ctx.ComponentContext)" href="#scurrypy.ext.components.ctx.ComponentContext" id="mermaid-link-scurrypy.ext.components.ctx.ComponentContext"></a>
                   <a class="autorefs autorefs-internal" title="              InteractionContext (scurrypy.ext.interactions.ctx.InteractionContext)" href="../../interactions/ctx/#scurrypy.ext.interactions.ctx.InteractionContext" id="mermaid-link-scurrypy.ext.interactions.ctx.InteractionContext"></a>
                   <a class="autorefs autorefs-internal" title="              Interaction
 
@@ -4108,12 +4297,14 @@
             <pre class="mermaid"><code id="mermaid-diagram-scurrypy.ext.components.ctx.ComponentModalContext">
               flowchart TD
               scurrypy.ext.components.ctx.ComponentModalContext[ComponentModalContext]
+              scurrypy.ext.components.ctx.ComponentContext[ComponentContext]
               scurrypy.ext.interactions.ctx.InteractionContext[InteractionContext]
               scurrypy.resources.interaction.Interaction[Interaction]
               scurrypy.resources.base_resource.BaseResource[BaseResource]
               scurrypy.resources.message._EditMessageMixin[_EditMessageMixin]
 
-                              scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.components.ctx.ComponentModalContext
+                              scurrypy.ext.components.ctx.ComponentContext --> scurrypy.ext.components.ctx.ComponentModalContext
+                                scurrypy.ext.interactions.ctx.InteractionContext --> scurrypy.ext.components.ctx.ComponentContext
                                 scurrypy.resources.interaction.Interaction --> scurrypy.ext.interactions.ctx.InteractionContext
                                 scurrypy.resources.base_resource.BaseResource --> scurrypy.resources.interaction.Interaction
                 
@@ -4123,7 +4314,9 @@
 
 
 
+
               click scurrypy.ext.components.ctx.ComponentModalContext href "" "scurrypy.ext.components.ctx.ComponentModalContext"
+              click scurrypy.ext.components.ctx.ComponentContext href "" "scurrypy.ext.components.ctx.ComponentContext"
               click scurrypy.ext.interactions.ctx.InteractionContext href "" "scurrypy.ext.interactions.ctx.InteractionContext"
               click scurrypy.resources.interaction.Interaction href "" "scurrypy.resources.interaction.Interaction"
               click scurrypy.resources.base_resource.BaseResource href "" "scurrypy.resources.base_resource.BaseResource"

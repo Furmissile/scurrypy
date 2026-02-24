@@ -1030,6 +1030,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/primitives/types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/primitives/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4191,6 +4237,10 @@
 <h4 id="scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_guild_create" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">on_guild_create</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
 <a href="#scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_guild_create" class="headerlink" title="Permanent link">&para;</a></h4>
 
 
@@ -4225,6 +4275,10 @@
 
 <h4 id="scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_guild_delete" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">on_guild_delete</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
 
 <a href="#scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_guild_delete" class="headerlink" title="Permanent link">&para;</a></h4>
 
@@ -4261,12 +4315,28 @@
 <h4 id="scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_channel_create" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">on_channel_create</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
 <a href="#scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_channel_create" class="headerlink" title="Permanent link">&para;</a></h4>
 
 
     <div class="doc doc-contents ">
 
         <p>Append channel to guild key. Also append channel to index.</p>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-internal" title="            MissingField (scurrypy.core.MissingField)" href="../../../api/primitives/exceptions/#scurrypy.core.exceptions.MissingField">MissingField</a></code>
+            –
+          <div class="doc-md-description">
+            <p>no associated guild ID</p>
+          </div>
+        </li>
+    </ul>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -4292,12 +4362,28 @@
 <h4 id="scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_channel_update" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">on_channel_update</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
 <a href="#scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_channel_update" class="headerlink" title="Permanent link">&para;</a></h4>
 
 
     <div class="doc doc-contents ">
 
         <p>Replace channel in guild key. Also replace channel in index.</p>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-internal" title="            MissingField (scurrypy.core.MissingField)" href="../../../api/primitives/exceptions/#scurrypy.core.exceptions.MissingField">MissingField</a></code>
+            –
+          <div class="doc-md-description">
+            <p>no associated guild ID</p>
+          </div>
+        </li>
+    </ul>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -4323,12 +4409,28 @@
 <h4 id="scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_channel_delete" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">on_channel_delete</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
 <a href="#scurrypy.ext.cache.channels.GuildChannelCacheAddon.on_channel_delete" class="headerlink" title="Permanent link">&para;</a></h4>
 
 
     <div class="doc doc-contents ">
 
         <p>Remove channel from guild key. Also remove channel from index.</p>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <ul>
+        <li class="doc-section-item field-body">
+              <code><a class="autorefs autorefs-internal" title="            MissingField (scurrypy.core.MissingField)" href="../../../api/primitives/exceptions/#scurrypy.core.exceptions.MissingField">MissingField</a></code>
+            –
+          <div class="doc-md-description">
+            <p>no associated guild ID</p>
+          </div>
+        </li>
+    </ul>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -4433,10 +4535,10 @@
 <p><span class="doc-section-title">Raises:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-              <code><span title="ValueError">ValueError</span></code>
+              <code><a class="autorefs autorefs-internal" title="            MissingField (scurrypy.core.MissingField)" href="../../../api/primitives/exceptions/#scurrypy.core.exceptions.MissingField">MissingField</a></code>
             –
           <div class="doc-md-description">
-            <p>missing <code>guild_id</code></p>
+            <p>no associated guild ID</p>
           </div>
         </li>
     </ul>

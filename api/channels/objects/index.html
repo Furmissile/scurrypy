@@ -1038,6 +1038,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../primitives/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1469,6 +1515,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scurrypy.api.channels.channel.ChannelModel.flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;flags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.api.channels.channel.ChannelModel.guild_id" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;guild_id
@@ -1553,15 +1608,6 @@
   <a href="#scurrypy.api.channels.channel.ChannelModel.permissions" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;permissions
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.api.channels.channel.ChannelModel.flags" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;flags
     </span>
   </a>
   
@@ -5277,6 +5323,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scurrypy.api.channels.channel.ChannelModel.flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;flags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scurrypy.api.channels.channel.ChannelModel.guild_id" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;guild_id
@@ -5361,15 +5416,6 @@
   <a href="#scurrypy.api.channels.channel.ChannelModel.permissions" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;permissions
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scurrypy.api.channels.channel.ChannelModel.flags" class="md-nav__link">
-    <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;flags
     </span>
   </a>
   
@@ -6540,11 +6586,11 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
+              Bases: <code><a class="autorefs autorefs-internal" title="              GuildChannelCreate
 
   
       dataclass
-   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate">GuildChannelCreate</a></code></p>
+   (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate">GuildChannelCreate</a></code></p>
 
             <div style="display: none">
               <a class="autorefs autorefs-internal" title="              GuildAnnouncementChannelPart
@@ -6552,28 +6598,32 @@
   
       dataclass
    (scurrypy.api.channels.announcement.GuildAnnouncementChannelPart)" href="#scurrypy.api.channels.announcement.GuildAnnouncementChannelPart" id="mermaid-link-scurrypy.api.channels.announcement.GuildAnnouncementChannelPart"></a>
+                  <a class="autorefs autorefs-internal" title="              GuildChannelCreate
+
+  
+      dataclass
+   (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
                   <a class="autorefs autorefs-internal" title="              DataModel
 
   
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
-                  <a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
             </div>
             <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.announcement.GuildAnnouncementChannelPart">
               flowchart TD
               scurrypy.api.channels.announcement.GuildAnnouncementChannelPart[GuildAnnouncementChannelPart]
-              scurrypy.core.model.DataModel[DataModel]
               scurrypy.bases.channel.GuildChannelCreate[GuildChannelCreate]
+              scurrypy.core.model.DataModel[DataModel]
 
-                              scurrypy.core.model.DataModel --> scurrypy.api.channels.announcement.GuildAnnouncementChannelPart
+                              scurrypy.bases.channel.GuildChannelCreate --> scurrypy.api.channels.announcement.GuildAnnouncementChannelPart
+                                scurrypy.core.model.DataModel --> scurrypy.bases.channel.GuildChannelCreate
                 
-                scurrypy.bases.channel.GuildChannelCreate --> scurrypy.api.channels.announcement.GuildAnnouncementChannelPart
-                
+
 
 
               click scurrypy.api.channels.announcement.GuildAnnouncementChannelPart href "" "scurrypy.api.channels.announcement.GuildAnnouncementChannelPart"
-              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
               click scurrypy.bases.channel.GuildChannelCreate href "" "scurrypy.bases.channel.GuildChannelCreate"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
             </code></pre>
             <script>
               var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.announcement.GuildAnnouncementChannelPart');
@@ -6954,6 +7004,28 @@
 
 
 
+<h4 id="scurrypy.api.channels.channel.ChannelModel.flags" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">flags</span><span class="p">:</span> <span class="n">ChannelFlags</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#scurrypy.api.channels.channel.ChannelModel.flags" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Channel flags combined as a bitfield.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
 <h4 id="scurrypy.api.channels.channel.ChannelModel.guild_id" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">guild_id</span><span class="p">:</span> <span class="n">Snowflake</span> <span class="o">|</span> <span class="kc">None</span></code>
 
@@ -7166,28 +7238,6 @@
 
         <p>Permissions for the invoking user in this channel.
 Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h4 id="scurrypy.api.channels.channel.ChannelModel.flags" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">flags</span><span class="p">:</span> <span class="n">ChannelFlags</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#scurrypy.api.channels.channel.ChannelModel.flags" class="headerlink" title="Permanent link">&para;</a></h4>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Channel flags combined as a bitfield.</p>
 
     </div>
 
@@ -8188,11 +8238,11 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
+              Bases: <code><a class="autorefs autorefs-internal" title="              GuildChannelCreate
 
   
       dataclass
-   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate">GuildChannelCreate</a></code></p>
+   (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate">GuildChannelCreate</a></code></p>
 
             <div style="display: none">
               <a class="autorefs autorefs-internal" title="              GuildForumChannelPart
@@ -8200,28 +8250,32 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
   
       dataclass
    (scurrypy.api.channels.forum.GuildForumChannelPart)" href="#scurrypy.api.channels.forum.GuildForumChannelPart" id="mermaid-link-scurrypy.api.channels.forum.GuildForumChannelPart"></a>
+                  <a class="autorefs autorefs-internal" title="              GuildChannelCreate
+
+  
+      dataclass
+   (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
                   <a class="autorefs autorefs-internal" title="              DataModel
 
   
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
-                  <a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
             </div>
             <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.forum.GuildForumChannelPart">
               flowchart TD
               scurrypy.api.channels.forum.GuildForumChannelPart[GuildForumChannelPart]
-              scurrypy.core.model.DataModel[DataModel]
               scurrypy.bases.channel.GuildChannelCreate[GuildChannelCreate]
+              scurrypy.core.model.DataModel[DataModel]
 
-                              scurrypy.core.model.DataModel --> scurrypy.api.channels.forum.GuildForumChannelPart
+                              scurrypy.bases.channel.GuildChannelCreate --> scurrypy.api.channels.forum.GuildForumChannelPart
+                                scurrypy.core.model.DataModel --> scurrypy.bases.channel.GuildChannelCreate
                 
-                scurrypy.bases.channel.GuildChannelCreate --> scurrypy.api.channels.forum.GuildForumChannelPart
-                
+
 
 
               click scurrypy.api.channels.forum.GuildForumChannelPart href "" "scurrypy.api.channels.forum.GuildForumChannelPart"
-              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
               click scurrypy.bases.channel.GuildChannelCreate href "" "scurrypy.bases.channel.GuildChannelCreate"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
             </code></pre>
             <script>
               var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.forum.GuildForumChannelPart');
@@ -8628,11 +8682,11 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
+              Bases: <code><a class="autorefs autorefs-internal" title="              GuildChannelCreate
 
   
       dataclass
-   (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel">DataModel</a></code>, <code><a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate">GuildChannelCreate</a></code></p>
+   (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate">GuildChannelCreate</a></code></p>
 
             <div style="display: none">
               <a class="autorefs autorefs-internal" title="              GuildTextChannelPart
@@ -8640,28 +8694,32 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
   
       dataclass
    (scurrypy.api.channels.guild_text.GuildTextChannelPart)" href="#scurrypy.api.channels.guild_text.GuildTextChannelPart" id="mermaid-link-scurrypy.api.channels.guild_text.GuildTextChannelPart"></a>
+                  <a class="autorefs autorefs-internal" title="              GuildChannelCreate
+
+  
+      dataclass
+   (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
                   <a class="autorefs autorefs-internal" title="              DataModel
 
   
       dataclass
    (scurrypy.core.model.DataModel)" href="../../../internals/model/#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
-                  <a class="autorefs autorefs-internal" title="            GuildChannelCreate (scurrypy.bases.channel.GuildChannelCreate)" href="../bases/#scurrypy.bases.channel.GuildChannelCreate" id="mermaid-link-scurrypy.bases.channel.GuildChannelCreate"></a>
             </div>
             <pre class="mermaid"><code id="mermaid-diagram-scurrypy.api.channels.guild_text.GuildTextChannelPart">
               flowchart TD
               scurrypy.api.channels.guild_text.GuildTextChannelPart[GuildTextChannelPart]
-              scurrypy.core.model.DataModel[DataModel]
               scurrypy.bases.channel.GuildChannelCreate[GuildChannelCreate]
+              scurrypy.core.model.DataModel[DataModel]
 
-                              scurrypy.core.model.DataModel --> scurrypy.api.channels.guild_text.GuildTextChannelPart
+                              scurrypy.bases.channel.GuildChannelCreate --> scurrypy.api.channels.guild_text.GuildTextChannelPart
+                                scurrypy.core.model.DataModel --> scurrypy.bases.channel.GuildChannelCreate
                 
-                scurrypy.bases.channel.GuildChannelCreate --> scurrypy.api.channels.guild_text.GuildTextChannelPart
-                
+
 
 
               click scurrypy.api.channels.guild_text.GuildTextChannelPart href "" "scurrypy.api.channels.guild_text.GuildTextChannelPart"
-              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
               click scurrypy.bases.channel.GuildChannelCreate href "" "scurrypy.bases.channel.GuildChannelCreate"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
             </code></pre>
             <script>
               var diagram = document.getElementById('mermaid-diagram-scurrypy.api.channels.guild_text.GuildTextChannelPart');
@@ -9244,7 +9302,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 <h4 id="scurrypy.api.channels.tag.TagPart.name" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -9267,7 +9325,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 <h4 id="scurrypy.api.channels.tag.TagPart.moderated" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">moderated</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">moderated</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -9290,7 +9348,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 <h4 id="scurrypy.api.channels.tag.TagPart.emoji_id" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">emoji_id</span><span class="p">:</span> <span class="n">Snowflake</span> <span class="o">=</span> <span class="kc">None</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">emoji_id</span><span class="p">:</span> <span class="n">Snowflake</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -9313,7 +9371,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 <h4 id="scurrypy.api.channels.tag.TagPart.emoji_name" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">emoji_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">emoji_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -9468,7 +9526,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 <h4 id="scurrypy.api.channels.threads.ThreadFromMessagePart.name" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
@@ -9627,7 +9685,7 @@ Includes role and overwrite calculations. [<code>INT_LIMIT</code>]</p>
 
 
 <h4 id="scurrypy.api.channels.threads.ThreadWithoutMessagePart.name" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>

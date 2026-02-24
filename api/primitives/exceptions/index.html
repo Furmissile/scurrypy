@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://furmissile.github.io/scurrypy/api/addon/">
+        <link rel="canonical" href="https://furmissile.github.io/scurrypy/api/primitives/exceptions/">
       
       
-        <link rel="prev" href="../intents/">
+        <link rel="prev" href="../types/">
       
       
-        <link rel="next" href="../primitives/event_types/">
+        <link rel="next" href="../../applications/enums/">
       
       
-      <link rel="icon" href="../../assets/wizard.svg">
+      <link rel="icon" href="../../../assets/wizard.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>Addon - ScurryPy</title>
+        <title>Exceptions - ScurryPy</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,15 +48,15 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../css/custom_color.css">
+      <link rel="stylesheet" href="../../../css/custom_color.css">
     
-      <link rel="stylesheet" href="../../css/header.css">
+      <link rel="stylesheet" href="../../../css/header.css">
     
-      <link rel="stylesheet" href="../../css/text_alignment.css">
+      <link rel="stylesheet" href="../../../css/text_alignment.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#addon" class="md-skip">
+        <a href="#exceptions-api" class="md-skip">
           Skip to content
         </a>
       
@@ -98,9 +98,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="ScurryPy" class="md-header__button md-logo" aria-label="ScurryPy" data-md-component="logo">
+    <a href="../../.." title="ScurryPy" class="md-header__button md-logo" aria-label="ScurryPy" data-md-component="logo">
       
-  <img src="../../assets/wizard.svg" alt="logo">
+  <img src="../../../assets/wizard.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Addon
+              Exceptions
             
           </span>
         </div>
@@ -222,7 +222,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -241,7 +241,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../faq/" class="md-tabs__link">
+      <a href="../../../faq/" class="md-tabs__link">
         
   
   
@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../getting_started/start_here/" class="md-tabs__link">
+        <a href="../../../getting_started/start_here/" class="md-tabs__link">
           
   
   
@@ -280,7 +280,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../coverage/" class="md-tabs__link">
+      <a href="../../../coverage/" class="md-tabs__link">
         
   
   
@@ -299,7 +299,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../structure/" class="md-tabs__link">
+      <a href="../../../structure/" class="md-tabs__link">
         
   
   
@@ -318,7 +318,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../manifesto/" class="md-tabs__link">
+      <a href="../../../manifesto/" class="md-tabs__link">
         
   
   
@@ -341,7 +341,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="../../" class="md-tabs__link">
           
   
   
@@ -361,7 +361,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../ext/" class="md-tabs__link">
+        <a href="../../../ext/" class="md-tabs__link">
           
   
   
@@ -379,7 +379,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../doc_notes/" class="md-tabs__link">
+      <a href="../../../doc_notes/" class="md-tabs__link">
         
   
   
@@ -400,7 +400,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../internals/" class="md-tabs__link">
+        <a href="../../../internals/" class="md-tabs__link">
           
   
   
@@ -440,9 +440,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="ScurryPy" class="md-nav__button md-logo" aria-label="ScurryPy" data-md-component="logo">
+    <a href="../../.." title="ScurryPy" class="md-nav__button md-logo" aria-label="ScurryPy" data-md-component="logo">
       
-  <img src="../../assets/wizard.svg" alt="logo">
+  <img src="../../../assets/wizard.svg" alt="logo">
 
     </a>
     ScurryPy
@@ -469,7 +469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -491,7 +491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../faq/" class="md-nav__link">
+      <a href="../../../faq/" class="md-nav__link">
         
   
   
@@ -556,7 +556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/start_here/" class="md-nav__link">
+      <a href="../../../getting_started/start_here/" class="md-nav__link">
         
   
   
@@ -579,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/quickstart/" class="md-nav__link">
+      <a href="../../../getting_started/quickstart/" class="md-nav__link">
         
   
   
@@ -602,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/addons/" class="md-nav__link">
+      <a href="../../../getting_started/addons/" class="md-nav__link">
         
   
   
@@ -625,7 +625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/mindset/" class="md-nav__link">
+      <a href="../../../getting_started/mindset/" class="md-nav__link">
         
   
   
@@ -648,7 +648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/advanced/" class="md-nav__link">
+      <a href="../../../getting_started/advanced/" class="md-nav__link">
         
   
   
@@ -671,7 +671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting_started/core_examples/" class="md-nav__link">
+      <a href="../../../getting_started/core_examples/" class="md-nav__link">
         
   
   
@@ -701,7 +701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../coverage/" class="md-nav__link">
+      <a href="../../../coverage/" class="md-nav__link">
         
   
   
@@ -723,7 +723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../structure/" class="md-nav__link">
+      <a href="../../../structure/" class="md-nav__link">
         
   
   
@@ -745,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../manifesto/" class="md-nav__link">
+      <a href="../../../manifesto/" class="md-nav__link">
         
   
   
@@ -815,7 +815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -838,7 +838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../client/" class="md-nav__link">
+      <a href="../../client/" class="md-nav__link">
         
   
   
@@ -861,12 +861,198 @@
   
   
     <li class="md-nav__item">
-      <a href="../intents/" class="md-nav__link">
+      <a href="../../intents/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Intents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../addon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Addon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Primitives
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            Primitives
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../event_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Event Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../snowflake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Snowflake
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../image_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Image Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
     
   </span>
   
@@ -898,7 +1084,7 @@
   
   
   <span class="md-ellipsis">
-    Addon
+    Exceptions
     
   </span>
   
@@ -911,7 +1097,7 @@
   
   
   <span class="md-ellipsis">
-    Addon
+    Exceptions
     
   </span>
   
@@ -934,19 +1120,100 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#scurrypy.bases.addon" class="md-nav__link">
+  <a href="#scurrypy.core.exceptions" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;addon
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;exceptions
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" addon">
+    <nav class="md-nav" aria-label=" exceptions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scurrypy.bases.addon.Addon" class="md-nav__link">
+  <a href="#scurrypy.core.exceptions.ScurrypyError" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Addon
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ScurrypyError
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.InvalidCallbackSignature" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;InvalidCallbackSignature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.NotCallable" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;NotCallable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.DispatchError" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;DispatchError
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.DataModelTypeError" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;DataModelTypeError
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.InvalidFile" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;InvalidFile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.OptionNotFound" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;OptionNotFound
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.MissingField" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MissingField
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.MissingIntents" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MissingIntents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.NoSession" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;NoSession
     </span>
   </a>
   
@@ -961,190 +1228,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Primitives
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_5">
-            <span class="md-nav__icon md-icon"></span>
-            Primitives
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../primitives/event_types/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Event Types
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../primitives/permissions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Permissions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../primitives/snowflake/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Snowflake
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../primitives/image_data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Image Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../primitives/types/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Types
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../primitives/exceptions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Exceptions
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1211,7 +1294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../applications/enums/" class="md-nav__link">
+      <a href="../../applications/enums/" class="md-nav__link">
         
   
   
@@ -1234,7 +1317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../applications/objects/" class="md-nav__link">
+      <a href="../../applications/objects/" class="md-nav__link">
         
   
   
@@ -1257,7 +1340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../applications/resources/" class="md-nav__link">
+      <a href="../../applications/resources/" class="md-nav__link">
         
   
   
@@ -1334,7 +1417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../channels/bases/" class="md-nav__link">
+      <a href="../../channels/bases/" class="md-nav__link">
         
   
   
@@ -1357,7 +1440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../channels/enums/" class="md-nav__link">
+      <a href="../../channels/enums/" class="md-nav__link">
         
   
   
@@ -1380,7 +1463,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../channels/objects/" class="md-nav__link">
+      <a href="../../channels/objects/" class="md-nav__link">
         
   
   
@@ -1403,7 +1486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../channels/resources/" class="md-nav__link">
+      <a href="../../channels/resources/" class="md-nav__link">
         
   
   
@@ -1426,7 +1509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../channels/params/" class="md-nav__link">
+      <a href="../../channels/params/" class="md-nav__link">
         
   
   
@@ -1449,7 +1532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../channels/events/" class="md-nav__link">
+      <a href="../../channels/events/" class="md-nav__link">
         
   
   
@@ -1526,7 +1609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../commands/enums/" class="md-nav__link">
+      <a href="../../commands/enums/" class="md-nav__link">
         
   
   
@@ -1549,7 +1632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../commands/objects/" class="md-nav__link">
+      <a href="../../commands/objects/" class="md-nav__link">
         
   
   
@@ -1572,7 +1655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../commands/resources/" class="md-nav__link">
+      <a href="../../commands/resources/" class="md-nav__link">
         
   
   
@@ -1595,7 +1678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../commands/params/" class="md-nav__link">
+      <a href="../../commands/params/" class="md-nav__link">
         
   
   
@@ -1672,7 +1755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../components/bases/" class="md-nav__link">
+      <a href="../../components/bases/" class="md-nav__link">
         
   
   
@@ -1695,7 +1778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../components/enums/" class="md-nav__link">
+      <a href="../../components/enums/" class="md-nav__link">
         
   
   
@@ -1718,7 +1801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../components/objects/" class="md-nav__link">
+      <a href="../../components/objects/" class="md-nav__link">
         
   
   
@@ -1795,7 +1878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../emojis/enums/" class="md-nav__link">
+      <a href="../../emojis/enums/" class="md-nav__link">
         
   
   
@@ -1818,7 +1901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../emojis/objects/" class="md-nav__link">
+      <a href="../../emojis/objects/" class="md-nav__link">
         
   
   
@@ -1841,7 +1924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../emojis/resources/" class="md-nav__link">
+      <a href="../../emojis/resources/" class="md-nav__link">
         
   
   
@@ -1864,7 +1947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../emojis/params/" class="md-nav__link">
+      <a href="../../emojis/params/" class="md-nav__link">
         
   
   
@@ -1941,7 +2024,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gateway/events/" class="md-nav__link">
+      <a href="../../gateway/events/" class="md-nav__link">
         
   
   
@@ -2018,7 +2101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guilds/enums/" class="md-nav__link">
+      <a href="../../guilds/enums/" class="md-nav__link">
         
   
   
@@ -2041,7 +2124,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guilds/objects/" class="md-nav__link">
+      <a href="../../guilds/objects/" class="md-nav__link">
         
   
   
@@ -2064,7 +2147,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guilds/resources/" class="md-nav__link">
+      <a href="../../guilds/resources/" class="md-nav__link">
         
   
   
@@ -2087,7 +2170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guilds/params/" class="md-nav__link">
+      <a href="../../guilds/params/" class="md-nav__link">
         
   
   
@@ -2110,7 +2193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guilds/events/" class="md-nav__link">
+      <a href="../../guilds/events/" class="md-nav__link">
         
   
   
@@ -2187,7 +2270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/enums/" class="md-nav__link">
+      <a href="../../integrations/enums/" class="md-nav__link">
         
   
   
@@ -2210,7 +2293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/objects/" class="md-nav__link">
+      <a href="../../integrations/objects/" class="md-nav__link">
         
   
   
@@ -2233,7 +2316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/events/" class="md-nav__link">
+      <a href="../../integrations/events/" class="md-nav__link">
         
   
   
@@ -2310,7 +2393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../interactions/bases/" class="md-nav__link">
+      <a href="../../interactions/bases/" class="md-nav__link">
         
   
   
@@ -2333,7 +2416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../interactions/enums/" class="md-nav__link">
+      <a href="../../interactions/enums/" class="md-nav__link">
         
   
   
@@ -2356,7 +2439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../interactions/objects/" class="md-nav__link">
+      <a href="../../interactions/objects/" class="md-nav__link">
         
   
   
@@ -2379,7 +2462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../interactions/resources/" class="md-nav__link">
+      <a href="../../interactions/resources/" class="md-nav__link">
         
   
   
@@ -2402,7 +2485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../interactions/events/" class="md-nav__link">
+      <a href="../../interactions/events/" class="md-nav__link">
         
   
   
@@ -2479,7 +2562,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../invites/enums/" class="md-nav__link">
+      <a href="../../invites/enums/" class="md-nav__link">
         
   
   
@@ -2502,7 +2585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../invites/objects/" class="md-nav__link">
+      <a href="../../invites/objects/" class="md-nav__link">
         
   
   
@@ -2525,7 +2608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../invites/resources/" class="md-nav__link">
+      <a href="../../invites/resources/" class="md-nav__link">
         
   
   
@@ -2548,7 +2631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../invites/events/" class="md-nav__link">
+      <a href="../../invites/events/" class="md-nav__link">
         
   
   
@@ -2625,7 +2708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../messages/enums/" class="md-nav__link">
+      <a href="../../messages/enums/" class="md-nav__link">
         
   
   
@@ -2648,7 +2731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../messages/objects/" class="md-nav__link">
+      <a href="../../messages/objects/" class="md-nav__link">
         
   
   
@@ -2671,7 +2754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../messages/resources/" class="md-nav__link">
+      <a href="../../messages/resources/" class="md-nav__link">
         
   
   
@@ -2694,7 +2777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../messages/params/" class="md-nav__link">
+      <a href="../../messages/params/" class="md-nav__link">
         
   
   
@@ -2717,7 +2800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../messages/events/" class="md-nav__link">
+      <a href="../../messages/events/" class="md-nav__link">
         
   
   
@@ -2794,7 +2877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../users/enums/" class="md-nav__link">
+      <a href="../../users/enums/" class="md-nav__link">
         
   
   
@@ -2817,7 +2900,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../users/objects/" class="md-nav__link">
+      <a href="../../users/objects/" class="md-nav__link">
         
   
   
@@ -2840,7 +2923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../users/resources/" class="md-nav__link">
+      <a href="../../users/resources/" class="md-nav__link">
         
   
   
@@ -2863,7 +2946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../users/params/" class="md-nav__link">
+      <a href="../../users/params/" class="md-nav__link">
         
   
   
@@ -2886,7 +2969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../users/events/" class="md-nav__link">
+      <a href="../../users/events/" class="md-nav__link">
         
   
   
@@ -2967,7 +3050,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/" class="md-nav__link">
+      <a href="../../../ext/" class="md-nav__link">
         
   
   
@@ -3033,7 +3116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/commands/addon/" class="md-nav__link">
+      <a href="../../../ext/commands/addon/" class="md-nav__link">
         
   
   
@@ -3056,7 +3139,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/commands/ctx/" class="md-nav__link">
+      <a href="../../../ext/commands/ctx/" class="md-nav__link">
         
   
   
@@ -3130,7 +3213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/components/addon/" class="md-nav__link">
+      <a href="../../../ext/components/addon/" class="md-nav__link">
         
   
   
@@ -3153,7 +3236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/components/ctx/" class="md-nav__link">
+      <a href="../../../ext/components/ctx/" class="md-nav__link">
         
   
   
@@ -3227,7 +3310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/events/addon/" class="md-nav__link">
+      <a href="../../../ext/events/addon/" class="md-nav__link">
         
   
   
@@ -3301,7 +3384,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/interactions/ctx/" class="md-nav__link">
+      <a href="../../../ext/interactions/ctx/" class="md-nav__link">
         
   
   
@@ -3375,7 +3458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/prefixes/addon/" class="md-nav__link">
+      <a href="../../../ext/prefixes/addon/" class="md-nav__link">
         
   
   
@@ -3398,7 +3481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/prefixes/ctx/" class="md-nav__link">
+      <a href="../../../ext/prefixes/ctx/" class="md-nav__link">
         
   
   
@@ -3472,7 +3555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/caching/application_emojis/" class="md-nav__link">
+      <a href="../../../ext/caching/application_emojis/" class="md-nav__link">
         
   
   
@@ -3495,7 +3578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/caching/channels/" class="md-nav__link">
+      <a href="../../../ext/caching/channels/" class="md-nav__link">
         
   
   
@@ -3518,7 +3601,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/caching/guild_emojis/" class="md-nav__link">
+      <a href="../../../ext/caching/guild_emojis/" class="md-nav__link">
         
   
   
@@ -3541,7 +3624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ext/caching/guild_roles/" class="md-nav__link">
+      <a href="../../../ext/caching/guild_roles/" class="md-nav__link">
         
   
   
@@ -3579,7 +3662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../doc_notes/" class="md-nav__link">
+      <a href="../../../doc_notes/" class="md-nav__link">
         
   
   
@@ -3644,7 +3727,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../internals/" class="md-nav__link">
+      <a href="../../../internals/" class="md-nav__link">
         
   
   
@@ -3667,7 +3750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../internals/model/" class="md-nav__link">
+      <a href="../../../internals/model/" class="md-nav__link">
         
   
   
@@ -3690,7 +3773,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../internals/enum_types/" class="md-nav__link">
+      <a href="../../../internals/enum_types/" class="md-nav__link">
         
   
   
@@ -3713,7 +3796,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../internals/error/" class="md-nav__link">
+      <a href="../../../internals/error/" class="md-nav__link">
         
   
   
@@ -3736,7 +3819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../internals/serialization/" class="md-nav__link">
+      <a href="../../../internals/serialization/" class="md-nav__link">
         
   
   
@@ -3759,7 +3842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../internals/gateway/" class="md-nav__link">
+      <a href="../../../internals/gateway/" class="md-nav__link">
         
   
   
@@ -3782,7 +3865,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../internals/http/" class="md-nav__link">
+      <a href="../../../internals/http/" class="md-nav__link">
         
   
   
@@ -3805,7 +3888,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../internals/technical_writeup/" class="md-nav__link">
+      <a href="../../../internals/technical_writeup/" class="md-nav__link">
         
   
   
@@ -3855,19 +3938,100 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#scurrypy.bases.addon" class="md-nav__link">
+  <a href="#scurrypy.core.exceptions" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;addon
+      <code class="doc-symbol doc-symbol-toc doc-symbol-module"></code>&nbsp;exceptions
     </span>
   </a>
   
-    <nav class="md-nav" aria-label=" addon">
+    <nav class="md-nav" aria-label=" exceptions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scurrypy.bases.addon.Addon" class="md-nav__link">
+  <a href="#scurrypy.core.exceptions.ScurrypyError" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Addon
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ScurrypyError
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.InvalidCallbackSignature" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;InvalidCallbackSignature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.NotCallable" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;NotCallable
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.DispatchError" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;DispatchError
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.DataModelTypeError" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;DataModelTypeError
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.InvalidFile" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;InvalidFile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.OptionNotFound" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;OptionNotFound
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.MissingField" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MissingField
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.MissingIntents" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;MissingIntents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scurrypy.core.exceptions.NoSession" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;NoSession
     </span>
   </a>
   
@@ -3897,7 +4061,7 @@
   
 
 
-<h1 id="addon">Addon<a class="headerlink" href="#addon" title="Permanent link">&para;</a></h1>
+<h1 id="exceptions-api">Exceptions API<a class="headerlink" href="#exceptions-api" title="Permanent link">&para;</a></h1>
 <hr />
 
 
@@ -3905,11 +4069,11 @@
 
 
 
-<h2 id="scurrypy.bases.addon" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <code>addon</code>
+<h2 id="scurrypy.core.exceptions" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-module"></code>            <code>exceptions</code>
 
 
-<a href="#scurrypy.bases.addon" class="headerlink" title="Permanent link">&para;</a></h2>
+<a href="#scurrypy.core.exceptions" class="headerlink" title="Permanent link">&para;</a></h2>
 
     <div class="doc doc-contents first">
 
@@ -3936,20 +4100,100 @@
 
 
 
-<h3 id="scurrypy.bases.addon.Addon" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>Addon</code>
+<h3 id="scurrypy.core.exceptions.ScurrypyError" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>ScurrypyError</code>
 
 
-<a href="#scurrypy.bases.addon.Addon" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#scurrypy.core.exceptions.ScurrypyError" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="Exception">Exception</span></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.ScurrypyError">
+              flowchart TD
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+              
+
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.ScurrypyError');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Base exception for all scurrypy-specific errors.</p>
 
 
 
-        <p>Base class for writing addons.</p>
-<p>This class does not enforce structure; it only exists
-to give your addons a shared identity and future extension point.</p>
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="scurrypy.core.exceptions.InvalidCallbackSignature" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>InvalidCallbackSignature</code>
+
+
+<a href="#scurrypy.core.exceptions.InvalidCallbackSignature" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError">ScurrypyError</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            InvalidCallbackSignature (scurrypy.core.exceptions.InvalidCallbackSignature)" href="#scurrypy.core.exceptions.InvalidCallbackSignature" id="mermaid-link-scurrypy.core.exceptions.InvalidCallbackSignature"></a>
+                  <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.InvalidCallbackSignature">
+              flowchart TD
+              scurrypy.core.exceptions.InvalidCallbackSignature[InvalidCallbackSignature]
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+                              scurrypy.core.exceptions.ScurrypyError --> scurrypy.core.exceptions.InvalidCallbackSignature
+                
+
+
+              click scurrypy.core.exceptions.InvalidCallbackSignature href "" "scurrypy.core.exceptions.InvalidCallbackSignature"
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.InvalidCallbackSignature');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Raised when a callback is applied to an event with an invalid signature.</p>
 
 
 
@@ -3959,22 +4203,469 @@ to give your addons a shared identity and future extension point.</p>
 
 
 
+    </div>
 
+</div>
 
-<div class="doc doc-children">
-
-
-
-
-
+<div class="doc doc-object doc-class">
 
 
 
+<h3 id="scurrypy.core.exceptions.NotCallable" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>NotCallable</code>
+
+
+<a href="#scurrypy.core.exceptions.NotCallable" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError">ScurrypyError</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            NotCallable (scurrypy.core.exceptions.NotCallable)" href="#scurrypy.core.exceptions.NotCallable" id="mermaid-link-scurrypy.core.exceptions.NotCallable"></a>
+                  <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.NotCallable">
+              flowchart TD
+              scurrypy.core.exceptions.NotCallable[NotCallable]
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+                              scurrypy.core.exceptions.ScurrypyError --> scurrypy.core.exceptions.NotCallable
+                
+
+
+              click scurrypy.core.exceptions.NotCallable href "" "scurrypy.core.exceptions.NotCallable"
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.NotCallable');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Raised when an object expected to be callable is not.</p>
 
 
 
 
-  </div>
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="scurrypy.core.exceptions.DispatchError" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>DispatchError</code>
+
+
+<a href="#scurrypy.core.exceptions.DispatchError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError">ScurrypyError</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            DispatchError (scurrypy.core.exceptions.DispatchError)" href="#scurrypy.core.exceptions.DispatchError" id="mermaid-link-scurrypy.core.exceptions.DispatchError"></a>
+                  <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.DispatchError">
+              flowchart TD
+              scurrypy.core.exceptions.DispatchError[DispatchError]
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+                              scurrypy.core.exceptions.ScurrypyError --> scurrypy.core.exceptions.DispatchError
+                
+
+
+              click scurrypy.core.exceptions.DispatchError href "" "scurrypy.core.exceptions.DispatchError"
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.DispatchError');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Raised when an event dispatch fails.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="scurrypy.core.exceptions.DataModelTypeError" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>DataModelTypeError</code>
+
+
+<a href="#scurrypy.core.exceptions.DataModelTypeError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError">ScurrypyError</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            DataModelTypeError (scurrypy.core.exceptions.DataModelTypeError)" href="#scurrypy.core.exceptions.DataModelTypeError" id="mermaid-link-scurrypy.core.exceptions.DataModelTypeError"></a>
+                  <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.DataModelTypeError">
+              flowchart TD
+              scurrypy.core.exceptions.DataModelTypeError[DataModelTypeError]
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+                              scurrypy.core.exceptions.ScurrypyError --> scurrypy.core.exceptions.DataModelTypeError
+                
+
+
+              click scurrypy.core.exceptions.DataModelTypeError href "" "scurrypy.core.exceptions.DataModelTypeError"
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.DataModelTypeError');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Raised when an unexpected type is passed to a DataModel.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="scurrypy.core.exceptions.InvalidFile" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>InvalidFile</code>
+
+
+<a href="#scurrypy.core.exceptions.InvalidFile" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError">ScurrypyError</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            InvalidFile (scurrypy.core.exceptions.InvalidFile)" href="#scurrypy.core.exceptions.InvalidFile" id="mermaid-link-scurrypy.core.exceptions.InvalidFile"></a>
+                  <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.InvalidFile">
+              flowchart TD
+              scurrypy.core.exceptions.InvalidFile[InvalidFile]
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+                              scurrypy.core.exceptions.ScurrypyError --> scurrypy.core.exceptions.InvalidFile
+                
+
+
+              click scurrypy.core.exceptions.InvalidFile href "" "scurrypy.core.exceptions.InvalidFile"
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.InvalidFile');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Raised when a file name is invalid.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="scurrypy.core.exceptions.OptionNotFound" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>OptionNotFound</code>
+
+
+<a href="#scurrypy.core.exceptions.OptionNotFound" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError">ScurrypyError</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            OptionNotFound (scurrypy.core.exceptions.OptionNotFound)" href="#scurrypy.core.exceptions.OptionNotFound" id="mermaid-link-scurrypy.core.exceptions.OptionNotFound"></a>
+                  <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.OptionNotFound">
+              flowchart TD
+              scurrypy.core.exceptions.OptionNotFound[OptionNotFound]
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+                              scurrypy.core.exceptions.ScurrypyError --> scurrypy.core.exceptions.OptionNotFound
+                
+
+
+              click scurrypy.core.exceptions.OptionNotFound href "" "scurrypy.core.exceptions.OptionNotFound"
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.OptionNotFound');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Raised when a specified option could not be found.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="scurrypy.core.exceptions.MissingField" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>MissingField</code>
+
+
+<a href="#scurrypy.core.exceptions.MissingField" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError">ScurrypyError</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            MissingField (scurrypy.core.exceptions.MissingField)" href="#scurrypy.core.exceptions.MissingField" id="mermaid-link-scurrypy.core.exceptions.MissingField"></a>
+                  <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.MissingField">
+              flowchart TD
+              scurrypy.core.exceptions.MissingField[MissingField]
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+                              scurrypy.core.exceptions.ScurrypyError --> scurrypy.core.exceptions.MissingField
+                
+
+
+              click scurrypy.core.exceptions.MissingField href "" "scurrypy.core.exceptions.MissingField"
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.MissingField');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Raised when an optional field is not present.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="scurrypy.core.exceptions.MissingIntents" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>MissingIntents</code>
+
+
+<a href="#scurrypy.core.exceptions.MissingIntents" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError">ScurrypyError</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            MissingIntents (scurrypy.core.exceptions.MissingIntents)" href="#scurrypy.core.exceptions.MissingIntents" id="mermaid-link-scurrypy.core.exceptions.MissingIntents"></a>
+                  <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.MissingIntents">
+              flowchart TD
+              scurrypy.core.exceptions.MissingIntents[MissingIntents]
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+                              scurrypy.core.exceptions.ScurrypyError --> scurrypy.core.exceptions.MissingIntents
+                
+
+
+              click scurrypy.core.exceptions.MissingIntents href "" "scurrypy.core.exceptions.MissingIntents"
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.MissingIntents');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Raised when an intent is missing for the client.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="scurrypy.core.exceptions.NoSession" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>NoSession</code>
+
+
+<a href="#scurrypy.core.exceptions.NoSession" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError">ScurrypyError</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="            NoSession (scurrypy.core.exceptions.NoSession)" href="#scurrypy.core.exceptions.NoSession" id="mermaid-link-scurrypy.core.exceptions.NoSession"></a>
+                  <a class="autorefs autorefs-internal" title="            ScurrypyError (scurrypy.core.exceptions.ScurrypyError)" href="#scurrypy.core.exceptions.ScurrypyError" id="mermaid-link-scurrypy.core.exceptions.ScurrypyError"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.core.exceptions.NoSession">
+              flowchart TD
+              scurrypy.core.exceptions.NoSession[NoSession]
+              scurrypy.core.exceptions.ScurrypyError[ScurrypyError]
+
+                              scurrypy.core.exceptions.ScurrypyError --> scurrypy.core.exceptions.NoSession
+                
+
+
+              click scurrypy.core.exceptions.NoSession href "" "scurrypy.core.exceptions.NoSession"
+              click scurrypy.core.exceptions.ScurrypyError href "" "scurrypy.core.exceptions.ScurrypyError"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.core.exceptions.NoSession');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
+
+
+        <p>Raised when a session is not active.</p>
+
+
+
+
+
+
+
+
 
     </div>
 
@@ -4048,10 +4739,10 @@ to give your addons a shared identity and future extension point.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.sections", "header.repo", "content.tabs.link", "navigation.top", "navigation.tabs", "navigation.tabs.sticky"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.sections", "header.repo", "content.tabs.link", "navigation.top", "navigation.tabs", "navigation.tabs.sticky"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>

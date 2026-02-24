@@ -1030,6 +1030,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/primitives/types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/primitives/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3609,9 +3655,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scurrypy.events.base_event.Event.name" class="md-nav__link">
+  <a href="#scurrypy.events.base_event.Event.dispatch_name" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;name
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;dispatch_name
     </span>
   </a>
   
@@ -3855,9 +3901,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#scurrypy.events.base_event.Event.name" class="md-nav__link">
+  <a href="#scurrypy.events.base_event.Event.dispatch_name" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;name
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;dispatch_name
     </span>
   </a>
   
@@ -3999,7 +4045,7 @@ hydration from raw dicts, and optional field defaults.</p>
 
 
 <h3 id="scurrypy.resources.base_resource.BaseResource.http" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">http</span><span class="p">:</span> <span class="n">HTTPClient</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">http</span><span class="p">:</span> <span class="n">HTTPClientProtocol</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -4033,14 +4079,58 @@ hydration from raw dicts, and optional field defaults.</p>
 
 
 <h2 id="scurrypy.events.base_event.Event" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>Event</code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>              <code class="highlight language-python"><span class="n">Event</span></code>
 
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
 
 <a href="#scurrypy.events.base_event.Event" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
     <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="              DataModel
 
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="#scurrypy.core.model.DataModel">DataModel</a></code></p>
+
+            <div style="display: none">
+              <a class="autorefs autorefs-internal" title="              Event
+
+  
+      dataclass
+   (scurrypy.events.base_event.Event)" href="#scurrypy.events.base_event.Event" id="mermaid-link-scurrypy.events.base_event.Event"></a>
+                  <a class="autorefs autorefs-internal" title="              DataModel
+
+  
+      dataclass
+   (scurrypy.core.model.DataModel)" href="#scurrypy.core.model.DataModel" id="mermaid-link-scurrypy.core.model.DataModel"></a>
+            </div>
+            <pre class="mermaid"><code id="mermaid-diagram-scurrypy.events.base_event.Event">
+              flowchart TD
+              scurrypy.events.base_event.Event[Event]
+              scurrypy.core.model.DataModel[DataModel]
+
+                              scurrypy.core.model.DataModel --> scurrypy.events.base_event.Event
+                
+
+
+              click scurrypy.events.base_event.Event href "" "scurrypy.events.base_event.Event"
+              click scurrypy.core.model.DataModel href "" "scurrypy.core.model.DataModel"
+            </code></pre>
+            <script>
+              var diagram = document.getElementById('mermaid-diagram-scurrypy.events.base_event.Event');
+              diagram.innerHTML = diagram.innerHTML.replace(/click ([\w.]+) href "" "\1"/g, function(match, nodeID, offset) {
+                try {
+                  const link = document.getElementById("mermaid-link-" + nodeID).href;
+                  return `click ${nodeID} href "${link}" "${nodeID}"`
+                } catch (e) {
+                  return '';
+                }
+              });
+            </script>
 
 
         <p>Marker class for all gateway events.</p>
@@ -4067,14 +4157,14 @@ hydration from raw dicts, and optional field defaults.</p>
 
 
 
-<h3 id="scurrypy.events.base_event.Event.name" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">name</span><span class="p">:</span> <span class="nb">str</span></code>
+<h3 id="scurrypy.events.base_event.Event.dispatch_name" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">dispatch_name</span><span class="p">:</span> <span class="n">EventType</span></code>
 
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
-<a href="#scurrypy.events.base_event.Event.name" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#scurrypy.events.base_event.Event.dispatch_name" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -4090,7 +4180,7 @@ hydration from raw dicts, and optional field defaults.</p>
 
 
 <h3 id="scurrypy.events.base_event.Event.raw" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">raw</span><span class="p">:</span> <span class="nb">dict</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">raw</span><span class="p">:</span> <span class="n">JSON</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>

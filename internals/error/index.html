@@ -1030,6 +1030,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/primitives/types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/primitives/exceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exceptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4074,7 +4120,7 @@
     <ul>
         <li class="doc-section-item field-body">
             <b><code>data</code></b>
-              (<code><span title="dict">dict</span></code>)
+              (<code><span title="JSON">JSON</span></code>)
           –
           <div class="doc-md-description">
             <p>Discord's error JSON</p>
@@ -4185,7 +4231,7 @@
 
 
 <h4 id="scurrypy.core.error.DiscordError.error_data" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">error_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;errors&#39;</span><span class="p">,</span> <span class="p">{})</span></code>
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">error_data</span><span class="p">:</span> <span class="n">HTTPResponse</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;errors&#39;</span><span class="p">,</span> <span class="p">{})</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
@@ -4281,7 +4327,11 @@
     <ul>
         <li class="doc-section-item field-body">
             <b><code>node</code></b>
-              (<code><span title="dict">dict</span></code>)
+              (<code><a class="autorefs autorefs-internal" title="            HTTPResponse = JSON | str | Any | None
+
+  
+      module-attribute
+   (scurrypy.core.types.HTTPResponse)" href="../../api/primitives/types/#scurrypy.core.types.HTTPResponse">HTTPResponse</a></code>)
           –
           <div class="doc-md-description">
             <p>current error level</p>
@@ -4289,7 +4339,7 @@
         </li>
         <li class="doc-section-item field-body">
             <b><code>path</code></b>
-              (<code><span title="tuple">tuple</span>[<span title="str">str</span>, <span title="str">str</span>]</code>, default:
+              (<code><span title="list">list</span>[<span title="str">str</span>]</code>, default:
                   <code>None</code>
 )
           –
@@ -4303,7 +4353,7 @@
 <p><span class="doc-section-title">Returns:</span></p>
     <ul>
         <li class="doc-section-item field-body">
-              <code><span title="list">list</span></code>
+              <code><span title="list">list</span>[<span title="tuple">tuple</span>[<span title="str">str</span>, <span title="str">str</span>]]</code>
           –
           <div class="doc-md-description">
             <p>list of errors</p>
