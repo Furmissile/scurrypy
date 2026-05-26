@@ -15,6 +15,8 @@ alt="Fire-breathing squirrel"
 
 </div>
 
+> **Development Note:** While ScurryPy has not received an update in a while, it is still actively maintained!
+
 ## Features
 
 * Lightweight core
@@ -25,6 +27,8 @@ alt="Fire-breathing squirrel"
 * Predictable event models and resource classes
 
 Your focus is building what you want instead of fighting a framework.
+
+ScurryPy is a stability-first Discord runtime built around explicit API coverage and strict scope boundaries to minimize long-term breakage.
 
 ## Installation
 

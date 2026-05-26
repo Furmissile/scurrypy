@@ -8,7 +8,7 @@ It doesn’t enforce how users must build bots, only how the library itself stay
 
 ## What's Needed
 
-ScurryPy is officially in its "maintenance" stage, meaning add and modify only with Discord's API changes.
+ScurryPy is in a stability-focused development phase: no feature expansion, only alignment with Discord API changes.
 
 **Not Accepting:**
 
