@@ -3991,7 +3991,7 @@
 <h2 id="no-circular-imports">No Circular Imports<a class="headerlink" href="#no-circular-imports" title="Permanent link">&para;</a></h2>
 <hr />
 <div class="reading-paragraph">
-<p>There is not one mention of <code>from future import __annotations__</code>. Even though the intent of this import was for type completion and IDE support, this import is often used to cover up circular imports because the internals are too tightly coupled. How does this benefit users and maintainers alike? ScurryPy has a flow to its design making it easier to follow. This segues into the next section.</p>
+<p>All classes are loosely coupled and therefore do not have codependency or circular dependency. How does this benefit users and maintainers alike? ScurryPy has a flow to its design, making it easier to follow. This segues into the next section.</p>
 </div>
 <h2 id="consistent-patterns">Consistent Patterns<a class="headerlink" href="#consistent-patterns" title="Permanent link">&para;</a></h2>
 <hr />
