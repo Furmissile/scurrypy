@@ -379,6 +379,25 @@
   
   
     <li class="md-tabs__item">
+      <a href="../TODO/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  TODO
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../doc_notes/" class="md-tabs__link">
         
   
@@ -815,9 +834,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#no-circular-imports" class="md-nav__link">
+  <a href="#no-codependency" class="md-nav__link">
     <span class="md-ellipsis">
-      No Circular Imports
+      No Codependency
     </span>
   </a>
   
@@ -854,15 +873,6 @@
   <a href="#emergent-extensibility" class="md-nav__link">
     <span class="md-ellipsis">
       Emergent Extensibility
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#not-sold-yet" class="md-nav__link">
-    <span class="md-ellipsis">
-      Not sold yet?
     </span>
   </a>
   
@@ -3594,6 +3604,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../TODO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TODO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../doc_notes/" class="md-nav__link">
         
   
@@ -3629,10 +3661,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
             
   
   
@@ -3645,8 +3677,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             Internals
           </label>
@@ -3890,9 +3922,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#no-circular-imports" class="md-nav__link">
+  <a href="#no-codependency" class="md-nav__link">
     <span class="md-ellipsis">
-      No Circular Imports
+      No Codependency
     </span>
   </a>
   
@@ -3935,15 +3967,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#not-sold-yet" class="md-nav__link">
-    <span class="md-ellipsis">
-      Not sold yet?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#quick-summary" class="md-nav__link">
     <span class="md-ellipsis">
       Quick Summary
@@ -3976,56 +3999,50 @@
 <h1 id="why-scurrypy">Why ScurryPy?<a class="headerlink" href="#why-scurrypy" title="Permanent link">&para;</a></h1>
 <hr />
 <div class="reading-paragraph">
-<p>This page explores <em>why</em> ScurryPy's technical accomplishments are beneficial to not only contributors, but most importantly, its users.</p>
+<p>This page explores <em>why</em> ScurryPy's technical accomplishments are beneficial to contributors and its users.</p>
 </div>
 <h2 id="no-magic">No Magic<a class="headerlink" href="#no-magic" title="Permanent link">&para;</a></h2>
 <hr />
 <div class="reading-paragraph">
-<p>Scurrypy does not require decorators for wiring logic. Both decorator and manual registration are available, retaining flexibility without assuming how a user wants to structure code. What's the gain for users? <em>Flexibility, composability, and control</em>. Yes, all three. Without decorators, users are not fighting expected parameters for their functions, and maintainers are not developing dependency injection just to have flexible parameters. This offers composibility: beyond ScurryPy's simple contract, you are free to compose your code how <em>you want</em>, not how maintainers expect you to compose code. This offers control: build what you want, how you want, when you want.</p>
+<p>Scurrypy does not require decorators for wiring logic. Both decorators and manual registration are available, retaining flexibility without assuming how a user wants to structure code. What's the gain for users? <em>Flexibility, composability, and control</em>. Without decorators, users are not fighting expected parameters for their functions, and maintainers are not developing dependency injection just to have flexible parameters. This offers composability: beyond ScurryPy's simple contract, you are free to compose your code how <em>you want</em>, not how maintainers expect you to compose code. This offers control: build what you want, how you want, when you want.</p>
 </div>
 <h2 id="self-documenting">Self-documenting<a class="headerlink" href="#self-documenting" title="Permanent link">&para;</a></h2>
 <hr />
 <div class="reading-paragraph">
-<p>ScurryPy takes pride in its thorough documentation and is always looking for ways to improve it. All fields (with the exception of some self-explanatory types) are documented either from Discord's docs directly or paraphrased for easier understanding. How does this benefit users and maintainers alike? You shouldn't need to keep Discord's docs open while using ScurryPy. One less tab to keep up with!</p>
+<p>ScurryPy has thorough documentation. All fields (with the exception of some self-explanatory types) are documented either from Discord's docs directly or paraphrased for easier understanding. How does this benefit users and maintainers alike? You shouldn't need to keep Discord's docs open while using ScurryPy. One less tab to keep up with!</p>
 </div>
-<h2 id="no-circular-imports">No Circular Imports<a class="headerlink" href="#no-circular-imports" title="Permanent link">&para;</a></h2>
+<h2 id="no-codependency">No Codependency<a class="headerlink" href="#no-codependency" title="Permanent link">&para;</a></h2>
 <hr />
 <div class="reading-paragraph">
-<p>All classes are loosely coupled and therefore do not have codependency or circular dependency. How does this benefit users and maintainers alike? ScurryPy has a flow to its design, making it easier to follow. This segues into the next section.</p>
+<p>All classes are loosely coupled and therefore do not have codependency or circular dependency. How does this benefit users and maintainers alike? The source code is easier to read and follow.</p>
 </div>
 <h2 id="consistent-patterns">Consistent Patterns<a class="headerlink" href="#consistent-patterns" title="Permanent link">&para;</a></h2>
 <hr />
 <div class="reading-paragraph">
-<p>The main core objects that will be used by users and maintainers is the <a class="autorefs autorefs-internal" title="              HTTPClient" href="../internals/http/#scurrypy.core.http.HTTPClient"><code>HTTPClient</code></a>. Whether you are using the wrapped resources or using an endpoint directly, you will certainly be using <code>HTTPClient</code>. Unlike other libraries, ScurryPy as flow in its requests. See the following mental map for how ScurryPy imagines its request system.</p>
+<p>The main core objects that will be used by users and maintainers is the <a class="autorefs autorefs-internal" title="              HTTPClient" href="../internals/http/#scurrypy.core.http.HTTPClient"><code>HTTPClient</code></a>. Whether you are using the wrapped resources or using an endpoint directly, you will certainly be using <code>HTTPClient</code>. ScurryPy as flow in its requests. See the following mental map for how ScurryPy imagines its request system.</p>
 </div>
 <div class="center">
 <p><img alt="Request Mental Map" src="../assets/request_mental_map.png" title="Request Mental Map" /></p>
 <p><em>Figure 1: Request Client Mental Map</em></p>
 </div>
 <div class="reading-paragraph">
-<p>How does this benefit users and maintainers? Patterns in ScurryPy are simple, predictable, and easy to reason about. Can you do this with other libraries?</p>
+<p>How does this benefit users and maintainers? Patterns in ScurryPy are simple, predictable, and easy to reason about.</p>
 </div>
 <h2 id="lightweight-core">Lightweight Core<a class="headerlink" href="#lightweight-core" title="Permanent link">&para;</a></h2>
 <hr />
 <div class="reading-paragraph">
-<p>ScurryPy's core is minimal and understandable. This is a selling point because it means you can understand ScurryPy in an afternoon! No sprawling codebase to navigate, no hidden surprises, just clean, traceable code. Or you can read the <a href="../internals/technical_writeup/">technical writeup</a> to get a more thorough explanation. How does this benefit users and maintainers? For maintainers, the faster you understand a library, the faster you can get to work! For users, especially power users, this gives you quick access to Flexibility, composability, and control without burning out on learning how ScurryPy works.</p>
+<p>ScurryPy's core is minimal and understandable. It means you can understand ScurryPy in an afternoon! No sprawling codebase to navigate or hidden surprises; just clean, traceable code. Or you can read the <a href="../internals/technical_writeup/">technical writeup</a> to get a more thorough explanation. How does this benefit users and maintainers? For maintainers, the faster you understand a library, the faster you can get to work! For users, especially power users, this gives you quick access to Flexibility, composability, and control without burning out on learning how ScurryPy works.</p>
 </div>
 <h2 id="easy-to-maintain-docs">Easy-to-maintain Docs<a class="headerlink" href="#easy-to-maintain-docs" title="Permanent link">&para;</a></h2>
 <hr />
 <div class="reading-paragraph">
-<p>The docs are always up to date with ScurryPy's rapid development. With every great project comes a great set of docs that is honest, comprehensive, and most importantly, <em>correct</em>.</p>
+<p>The docs are always up to date with ScurryPy's rapid development. With every great project comes a great set of docs that is honest, comprehensive, and correct.</p>
 </div>
 <h2 id="emergent-extensibility">Emergent Extensibility<a class="headerlink" href="#emergent-extensibility" title="Permanent link">&para;</a></h2>
 <hr />
 <div class="reading-paragraph">
-<p>ScurryPy introduced an Addon system that's less of a system and more of an acknowledgement. This system leverages classes that subscribe to the client with callbacks to its own methods. That's all an addon is!
+<p>ScurryPy introduced Addon patterns. Addons are classes that subscribe to the client with callbacks to its own methods. That's all an addon is!
 See the <a href="../getting_started/addons/">addons pattern page</a> for more!</p>
-</div>
-<h2 id="not-sold-yet">Not sold yet?<a class="headerlink" href="#not-sold-yet" title="Permanent link">&para;</a></h2>
-<hr />
-<div class="reading-paragraph">
-<p>ScurryPy may not have widespread visibility yet, but it has a clear vision and hasn't wavered since day one. And that's more than many libraries can say at this stage.</p>
-</div>
 <h2 id="quick-summary">Quick Summary<a class="headerlink" href="#quick-summary" title="Permanent link">&para;</a></h2>
 <hr />
 <div class="reading-paragraph">
@@ -4068,6 +4085,7 @@ See the <a href="../getting_started/addons/">addons pattern page</a> for more!</
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 
 
